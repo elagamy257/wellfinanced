@@ -1,102 +1,119 @@
-import Image from "next/image";
+import React from 'react';
+import Link from 'next/link';
+import { ArrowRight, Sparkles, Compass } from 'lucide-react';
+import { Button } from '@/components/ui/Button';
 
-export default function Home() {
+export default function LandingPage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen bg-background flex flex-col justify-between overflow-hidden relative">
+      {/* Background Decorative Gradients */}
+      <div className="absolute top-[-20%] left-[-20%] w-[60%] h-[60%] rounded-full bg-primary/10 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-20%] right-[-20%] w-[60%] h-[60%] rounded-full bg-secondary/10 blur-[120px] pointer-events-none" />
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Header Navbar */}
+      <header className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between relative z-10">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary to-secondary flex items-center justify-center font-bold text-background text-lg">
+            W
+          </div>
+          <span className="font-extrabold text-lg bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+            WellFinanced
+          </span>
+        </div>
+
+        <div className="flex items-center gap-4">
+          <Link href="/login">
+            <Button variant="ghost" size="sm">
+              Log In
+            </Button>
+          </Link>
+          <Link href="/register">
+            <Button variant="primary" size="sm">
+              Get Started
+            </Button>
+          </Link>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <main className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-20 flex-1 flex flex-col justify-center items-center text-center relative z-10">
+        {/* Tagline */}
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold uppercase tracking-wider mb-6 animate-fade-in">
+          <Sparkles className="w-3.5 h-3.5" />
+          <span>AI-Powered Financial Stability Platform</span>
+        </div>
+
+        {/* Hero Title */}
+        <h1 className="text-4xl sm:text-6xl font-extrabold text-text tracking-tight max-w-4xl mb-6 leading-tight">
+          Irregular Income. <br className="hidden sm:block" />
+          <span className="bg-gradient-to-r from-primary via-secondary to-success bg-clip-text text-transparent">
+            Regular Peace of Mind.
+          </span>
+        </h1>
+
+        {/* Hero Description */}
+        <p className="text-base sm:text-lg text-muted max-w-2xl mb-8 leading-relaxed">
+          The smart financial workspace engineered specifically for freelancers, creators, solopreneurs, and independent builders.
+        </p>
+
+        {/* CTA Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center w-full max-w-md">
+          <Link href="/register" className="w-full sm:w-auto">
+            <Button variant="primary" size="lg" className="w-full sm:w-auto group">
+              Start Your Journey
+              <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            </Button>
+          </Link>
+          <Link href="/dashboard" className="w-full sm:w-auto">
+            <Button variant="outline" size="lg" className="w-full sm:w-auto">
+              Explore Demo Workspace
+            </Button>
+          </Link>
+        </div>
+
+        {/* Structural Info Pillars (SOLID placeholders, no fake data, just core values) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mt-24">
+          <div className="p-6 rounded-xl border border-border bg-surface/50 text-left">
+            <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-4">
+              <Compass className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-text mb-2">Volatility Management</h3>
+            <p className="text-xs text-muted leading-relaxed">
+              Calculate baseline stability index metrics to navigate irregular income flow pipelines.
+            </p>
+          </div>
+
+          <div className="p-6 rounded-xl border border-border bg-surface/50 text-left">
+            <div className="w-10 h-10 rounded-lg bg-secondary/10 text-secondary flex items-center justify-center mb-4">
+              <Sparkles className="w-5 h-5" />
+            </div>
+            <h3 className="text-base font-bold text-text mb-2">Predictive AI Modeling</h3>
+            <p className="text-xs text-muted leading-relaxed">
+              Forecast cash flow variations and automate tax allocations based on irregular payment patterns.
+            </p>
+          </div>
+
+          <div className="p-6 rounded-xl border border-border bg-surface/50 text-left">
+            <div className="w-10 h-10 rounded-lg bg-success/10 text-success flex items-center justify-center mb-4">
+              <div className="w-5 h-5 flex items-center justify-center font-bold">T</div>
+            </div>
+            <h3 className="text-base font-bold text-text mb-2">Tax Optimization</h3>
+            <p className="text-xs text-muted leading-relaxed">
+              Allocate and optimize estimated quarterly tax obligations dynamically.
+            </p>
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      {/* Footer */}
+      <footer className="border-t border-border/40 py-8 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted">
+          <span>&copy; {new Date().getFullYear()} WellFinanced. All rights reserved.</span>
+          <div className="flex gap-4">
+            <span className="hover:text-text cursor-pointer">Security Protocol</span>
+            <span className="hover:text-text cursor-pointer">Architectural Blueprint</span>
+          </div>
+        </div>
       </footer>
     </div>
   );
