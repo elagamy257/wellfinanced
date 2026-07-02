@@ -6,7 +6,7 @@ export interface TableProps extends React.HTMLAttributes<HTMLTableElement> {
 
 export function Table({ children, className = '', ...props }: TableProps) {
   return (
-    <div className="w-full overflow-x-auto rounded-card border border-white/10 bg-white/[0.02] backdrop-blur-[10px]">
+    <div className="w-full overflow-x-auto rounded-card border border-white/10 bg-white/2 backdrop-blur-[10px]">
       <table className={`w-full border-collapse text-left ${className}`} {...props}>
         {children}
       </table>
@@ -16,7 +16,7 @@ export function Table({ children, className = '', ...props }: TableProps) {
 
 export function TableHeader({ children, className = '', ...props }: React.HTMLAttributes<HTMLTableSectionElement>) {
   return (
-    <thead className={`border-b border-white/10 bg-white/[0.02] ${className}`} {...props}>
+    <thead className={`border-b border-white/10 bg-white/2 ${className}`} {...props}>
       {children}
     </thead>
   );
@@ -33,7 +33,7 @@ export function TableBody({ children, className = '', ...props }: React.HTMLAttr
 export function TableRow({ children, className = '', ...props }: React.HTMLAttributes<HTMLTableRowElement>) {
   return (
     <tr 
-      className={`transition-colors hover:bg-white/[0.04] ${className}`} 
+      className={`transition-colors hover:bg-white/4 ${className}`} 
       {...props}
     >
       {children}
@@ -65,7 +65,7 @@ export function TableCell({ children, className = '', ...props }: React.TdHTMLAt
 
 export function TableFooter({ children, className = '', ...props }: React.HTMLAttributes<HTMLTableSectionElement>) {
   return (
-    <tfoot className={`border-t border-white/10 bg-white/[0.02] ${className}`} {...props}>
+    <tfoot className={`border-t border-white/10 bg-white/2 ${className}`} {...props}>
       {children}
     </tfoot>
   );

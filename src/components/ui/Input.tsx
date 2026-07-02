@@ -29,7 +29,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             id={id}
             aria-invalid={!!error}
             aria-describedby={errorId}
-            className={`w-full h-[58px] bg-white/[0.08] backdrop-blur-[20px] border border-white/10 rounded-[18px] px-5 text-sm text-text placeholder-muted/50 transition-all duration-250 ease-in-out outline-none focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/30 focus:shadow-glow disabled:opacity-50 disabled:pointer-events-none ${
+            className={`w-full h-[58px] bg-white/8 backdrop-blur-[20px] border border-white/10 rounded-input px-5 text-sm text-text placeholder-muted/50 transition-all duration-250 ease-in-out outline-none focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/30 focus:shadow-glow disabled:opacity-50 disabled:pointer-events-none ${
               error ? 'border-danger focus:border-danger focus:ring-danger/30' : ''
             } ${className}`}
             {...props}

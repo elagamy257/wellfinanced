@@ -15,7 +15,7 @@ export function SectionTitle({ title, subtitle, action }: SectionTitleProps) {
         </h1>
         {subtitle && <p className="text-caption text-muted mt-2 leading-relaxed max-w-2xl">{subtitle}</p>}
       </div>
-      {action && <div className="flex-shrink-0">{action}</div>}
+      {action && <div className="shrink-0">{action}</div>}
     </div>
   );
 }

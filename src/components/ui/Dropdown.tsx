@@ -54,7 +54,7 @@ export function Dropdown({ trigger, items, align = 'right' }: DropdownProps) {
             transition={{ duration: 0.2, ease: 'easeInOut' }}
             className={`absolute ${
               align === 'right' ? 'right-0' : 'left-0'
-            } mt-2 w-52 rounded-[18px] bg-bg-2/95 border border-white/10 shadow-neon z-50 overflow-hidden py-2 backdrop-blur-[20px]`}
+            } mt-2 w-52 rounded-input bg-bg-2/95 border border-white/10 shadow-neon z-50 overflow-hidden py-2 backdrop-blur-[20px]`}
           >
             {items.map((item, index) => {
               const Icon = item.icon;

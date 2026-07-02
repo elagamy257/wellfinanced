@@ -11,7 +11,7 @@ export function Card({ children, variant = 'default', interactive = false, class
   
   const variants = {
     default: 'glass-panel text-text border-border',
-    glass: 'bg-white/[0.1] backdrop-blur-[20px] text-text border-white/10',
+    glass: 'bg-white/10 backdrop-blur-[20px] text-text border-white/10',
     solid: 'bg-bg-2 border-border text-text',
     purple: 'bg-gradient-purple text-text border-white/10 shadow-glow',
     cyan: 'bg-gradient-cyan text-text border-white/10 shadow-glow',
@@ -19,7 +19,7 @@ export function Card({ children, variant = 'default', interactive = false, class
   };
 
   const hoverStyles = interactive 
-    ? 'hover:scale-[1.02] hover:border-white/15 hover:bg-white/[0.12] hover:shadow-glow-strong cursor-pointer' 
+    ? 'hover:scale-[1.02] hover:border-white/15 hover:bg-white/12 hover:shadow-glow-strong cursor-pointer' 
     : '';
 
   return (
@@ -66,7 +66,7 @@ export function CardContent({ children, className = '', ...props }: React.HTMLAt
 
 export function CardFooter({ children, className = '', ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={`p-6 border-t border-border/40 bg-white/[0.02] flex items-center justify-end gap-3 ${className}`} {...props}>
+    <div className={`p-6 border-t border-border/40 bg-white/2 flex items-center justify-end gap-3 ${className}`} {...props}>
       {children}
     </div>
   );
