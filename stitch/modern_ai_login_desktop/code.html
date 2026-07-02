@@ -1,0 +1,373 @@
+<!DOCTYPE html><html class="dark" lang="en" style="width: 1280px; height: 984px; overflow: hidden; position: relative;"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#10b981",
+                    "primary-fixed-dim": "#34d399",
+                    "tertiary-fixed-dim": "#ffb59b",
+                    "on-primary-fixed": "#064e3b",
+                    "secondary": "#2dd4bf",
+                    "inverse-on-surface": "#2e303a",
+                    "on-error-container": "#ffdad6",
+                    "inverse-surface": "#e2e1ef",
+                    "secondary-fixed": "#99f6e4",
+                    "on-secondary-fixed": "#0f172a",
+                    "error-container": "#93000a",
+                    "on-tertiary-fixed": "#380d00",
+                    "outline": "#64748b",
+                    "on-secondary": "#134e4a",
+                    "surface-container": "#0f172a",
+                    "surface-container-highest": "#1e293b",
+                    "on-error": "#690005",
+                    "on-secondary-container": "#ccfbf1",
+                    "primary-container": "#064e3b",
+                    "surface-tint": "#10b981",
+                    "on-surface-variant": "#94a3b8",
+                    "on-tertiary-container": "#ffece6",
+                    "on-primary-container": "#ecfdf5",
+                    "tertiary-container": "#c24100",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#334155",
+                    "on-background": "#f8fafc",
+                    "on-surface": "#f1f5f9",
+                    "surface-container-lowest": "#020617",
+                    "on-tertiary": "#5b1a00",
+                    "surface-container-high": "#1e293b",
+                    "secondary-fixed-dim": "#2dd4bf",
+                    "background": "#020617",
+                    "secondary-container": "#134e4a",
+                    "primary-fixed": "#d1fae5",
+                    "error": "#ef4444",
+                    "surface-container-low": "#0f172a",
+                    "surface": "#020617",
+                    "surface-dim": "#020617",
+                    "on-tertiary-fixed-variant": "#812800",
+                    "on-secondary-fixed-variant": "#115e59",
+                    "tertiary-fixed": "#ffdbcf",
+                    "surface-bright": "#1e293b",
+                    "on-primary-fixed-variant": "#059669",
+                    "inverse-primary": "#10b981",
+                    "tertiary": "#fb923c",
+                    "surface-variant": "#1e293b",
+                    "emerald-accent": "#10b981",
+                    "deep-teal": "#0d9488"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.375rem",
+                    "lg": "0.75rem",
+                    "xl": "1rem",
+                    "2xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Outfit", "Inter", "sans-serif"],
+                    "display": ["Outfit", "Inter", "sans-serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Inter", "sans-serif"]
+            }
+          }
+        }
+      }
+    }catch(_e){}</script></head><body class="bg-background text-on-surface font-body selection:bg-primary/30 min-h-screen flex flex-col overflow-x-hidden mesh-bg-animated">```html
+
+
+
+    <meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Login | Cyber Freelance AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=Outfit:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#10b981",
+                    "primary-fixed-dim": "#34d399",
+                    "tertiary-fixed-dim": "#ffb59b",
+                    "on-primary-fixed": "#064e3b",
+                    "secondary": "#2dd4bf",
+                    "inverse-on-surface": "#2e303a",
+                    "on-error-container": "#ffdad6",
+                    "inverse-surface": "#e2e1ef",
+                    "secondary-fixed": "#99f6e4",
+                    "on-secondary-fixed": "#0f172a",
+                    "error-container": "#93000a",
+                    "on-tertiary-fixed": "#380d00",
+                    "outline": "#64748b",
+                    "on-secondary": "#134e4a",
+                    "surface-container": "#0f172a",
+                    "surface-container-highest": "#1e293b",
+                    "on-error": "#690005",
+                    "on-secondary-container": "#ccfbf1",
+                    "primary-container": "#064e3b",
+                    "surface-tint": "#10b981",
+                    "on-surface-variant": "#94a3b8",
+                    "on-tertiary-container": "#ffece6",
+                    "on-primary-container": "#ecfdf5",
+                    "tertiary-container": "#c24100",
+                    "on-primary": "#ffffff",
+                    "outline-variant": "#334155",
+                    "on-background": "#f8fafc",
+                    "on-surface": "#f1f5f9",
+                    "surface-container-lowest": "#020617",
+                    "on-tertiary": "#5b1a00",
+                    "surface-container-high": "#1e293b",
+                    "secondary-fixed-dim": "#2dd4bf",
+                    "background": "#020617",
+                    "secondary-container": "#134e4a",
+                    "primary-fixed": "#d1fae5",
+                    "error": "#ef4444",
+                    "surface-container-low": "#0f172a",
+                    "surface": "#020617",
+                    "surface-dim": "#020617",
+                    "on-tertiary-fixed-variant": "#812800",
+                    "on-secondary-fixed-variant": "#115e59",
+                    "tertiary-fixed": "#ffdbcf",
+                    "surface-bright": "#1e293b",
+                    "on-primary-fixed-variant": "#059669",
+                    "inverse-primary": "#10b981",
+                    "tertiary": "#fb923c",
+                    "surface-variant": "#1e293b",
+                    "emerald-accent": "#10b981",
+                    "deep-teal": "#0d9488"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.375rem",
+                    "lg": "0.75rem",
+                    "xl": "1rem",
+                    "2xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Outfit", "Inter", "sans-serif"],
+                    "display": ["Outfit", "Inter", "sans-serif"],
+                    "body": ["Inter", "sans-serif"],
+                    "label": ["Inter", "sans-serif"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+      .ultra-glass {
+        background: rgba(15, 23, 42, 0.4);
+        backdrop-filter: blur(40px) saturate(180%);
+        -webkit-backdrop-filter: blur(40px) saturate(180%);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+      }
+      
+      .input-ai-glow:focus-within {
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+        border-color: rgba(16, 185, 129, 0.4);
+      }
+
+      .btn-premium {
+        background: linear-gradient(135deg, #10b981 0%, #0d9488 100%);
+        transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .btn-premium:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.5);
+        filter: brightness(1.1);
+      }
+
+      .btn-premium::after {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: linear-gradient(transparent, rgba(255, 255, 255, 0.1), transparent);
+        transform: rotate(45deg);
+        transition: 0.8s;
+      }
+
+      .btn-premium:hover::after {
+        left: 120%;
+      }
+
+      .mesh-bg-animated {
+        background-color: #020617;
+        background-image: 
+          radial-gradient(at 0% 0%, rgba(16, 185, 129, 0.12) 0px, transparent 50%),
+          radial-gradient(at 100% 100%, rgba(13, 148, 136, 0.1) 0px, transparent 50%),
+          radial-gradient(at 50% 50%, rgba(2, 6, 23, 1) 0px, transparent 80%);
+      }
+
+      .scan-line {
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #10b981, transparent);
+        top: 0;
+        left: 0;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .input-ai-glow:focus-within .scan-line {
+        animation: scan 2s linear infinite;
+        opacity: 0.5;
+      }
+
+      @keyframes scan {
+        0% { top: 0%; }
+        100% { top: 100%; }
+      }
+
+      .status-dot {
+        width: 8px;
+        height: 8px;
+        background-color: #10b981;
+        border-radius: 50%;
+        box-shadow: 0 0 10px #10b981;
+        animation: pulse-dot 2s infinite;
+      }
+
+      @keyframes pulse-dot {
+        0% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.5); opacity: 0.5; }
+        100% { transform: scale(1); opacity: 1; }
+      }
+
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 20;
+      }
+    </style>
+<!-- Particle Overlay -->
+<canvas class="fixed inset-0 pointer-events-none -z-10 opacity-30" id="neuralCanvas"></canvas>
+<header class="w-full h-20 flex items-center px-8 md:px-12 z-50">
+<div class="flex items-center gap-4">
+<div class="relative">
+<div class="w-11 h-11 bg-primary/10 border border-primary/20 rounded-xl flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="hub">hub</span>
+</div>
+<div class="absolute -top-1 -right-1 status-dot"></div>
+</div>
+<span class="text-xl font-semibold tracking-tight text-on-surface font-headline">
+            Cyber Freelance <span class="text-primary">AI</span>
+</span>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center px-6 relative z-10 py-12">
+<!-- Center Glow -->
+<div class="absolute w-[800px] h-[800px] bg-primary/5 rounded-full blur-[150px] -z-10 pointer-events-none"></div>
+<!-- Login Card -->
+<div class="ultra-glass w-full max-w-[440px] rounded-2xl p-8 md:p-12 relative overflow-hidden border border-white/5">
+<!-- Subtle gradient border overlay -->
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-deep-teal/5 pointer-events-none"></div>
+<div class="mb-12 text-center relative z-10">
+<h1 class="text-3xl font-bold tracking-tight mb-3 font-headline bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent">Welcome Back</h1>
+<p class="text-on-surface-variant text-sm font-light">Access your intelligent income dashboard.</p>
+</div>
+<!-- Login Form -->
+<form class="space-y-7 relative z-10" onsubmit="event.preventDefault()">
+<div class="space-y-2.5">
+<label class="font-medium text-[11px] text-primary/70 tracking-[0.15em] uppercase px-1">Identity Node</label>
+<div class="relative input-ai-glow transition-all duration-300">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline/60 text-lg" data-icon="alternate_email">alternate_email</span>
+<input class="w-full bg-surface-container-low/50 border border-outline-variant/40 rounded-xl py-4 pl-12 pr-4 text-on-surface text-sm placeholder:text-outline/40 focus:outline-none transition-all focus:bg-surface-container-low" placeholder="freelancer@neural.ai" type="email">
+<div class="scan-line"></div>
+</div>
+</div>
+<div class="space-y-2.5">
+<div class="flex justify-between items-center px-1">
+<label class="font-medium text-[11px] text-primary/70 tracking-[0.15em] uppercase">Access Key</label>
+<a class="text-[11px] text-on-surface-variant hover:text-primary transition-colors font-medium" href="#">LOST KEY?</a>
+</div>
+<div class="relative input-ai-glow transition-all duration-300">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline/60 text-lg" data-icon="key">key</span>
+<input class="w-full bg-surface-container-low/50 border border-outline-variant/40 rounded-xl py-4 pl-12 pr-12 text-on-surface text-sm placeholder:text-outline/40 focus:outline-none transition-all focus:bg-surface-container-low" placeholder="••••••••••••" type="password">
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-outline/60 hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined text-lg" data-icon="visibility_off">visibility_off</span>
+</button>
+<div class="scan-line"></div>
+</div>
+</div>
+<div class="flex items-center gap-3 px-1 group cursor-pointer">
+<div class="relative flex items-center">
+<input class="w-4 h-4 rounded border-outline-variant/40 bg-surface-container-high/50 text-primary focus:ring-primary/20 focus:ring-offset-0 cursor-pointer transition-colors" id="remember" type="checkbox">
+</div>
+<label class="text-xs text-on-surface-variant cursor-pointer group-hover:text-on-surface transition-colors" for="remember">Maintain persistent authentication (30 days)</label>
+</div>
+<button class="w-full btn-premium text-white font-bold py-4.5 rounded-xl flex items-center justify-center gap-3 text-xs tracking-[0.15em] shadow-lg">
+<span class="material-symbols-outlined text-lg" data-icon="bolt">bolt</span>
+                LOGIN
+            </button>
+</form>
+<!-- Divider -->
+<div class="relative my-10">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-outline-variant/20"></div>
+</div>
+<div class="relative flex justify-center text-[10px] uppercase tracking-widest">
+<span class="ultra-glass px-4 text-outline/80 rounded-full border border-outline-variant/20">Gateway Options</span>
+</div>
+</div>
+<!-- Social Logins -->
+<div class="grid grid-cols-2 gap-4 relative z-10">
+<button class="flex items-center justify-center gap-2.5 bg-white/5 border border-white/10 py-3.5 rounded-xl hover:bg-white/10 hover:border-white/20 transition-all duration-300 active:scale-[0.98]">
+<img class="w-4 h-4 opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzb4dmZFHJdybrf5zMPonpKEELWz46KVfAnb_9ndF42pdstrwJ4K4xu76iL20xDVFW8Ugl7Ef_afjXhMQzjgjaY1HkRc2TvDRdA3KgmZgdCrTEuLUZYqnoILAwXCx9Xpay6W14NwBjzt92TMZnfjxt5W7DoxL3GOBWFvvwBCacDmHPY9EnIcS4Z0zjU1VASex1H68ehAHGM6aRO78HqVAVv-NPJwXSAoPaQ00M13_2_A6AXLWP1kBEcVXSqjJTREM8pIMWCR-7OgU">
+<span class="text-xs font-medium text-on-surface/80">Google</span>
+</button>
+<button class="flex items-center justify-center gap-2.5 bg-white/5 border border-white/10 py-3.5 rounded-xl hover:bg-white/10 hover:border-white/20 transition-all duration-300 active:scale-[0.98]">
+<img class="w-4 h-4 opacity-80 invert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFo4Gu_ZeoF5u631741yITgPrDHUJYlvHkVBlEowHrdz159dFxdinuZPSEUiJceGMytKGnZnxpmJIUisghYcaHdN1MsGjiunx71llNtG7xkuL-WSbTs8f6nyd6CQtxDU34hVDdLGDhROF7WzewJAEx_wdCYk0NXPfW9GHKfQjcvOg83oBre-bOJq5Pa8grzs7wNYaYS6hsk3xqI_3O7GbHUBCHwKJ-2UclxOaVNVbo0i-5XS8pMt4MynxCHz_8l0uo38XRePX4FJU">
+<span class="text-xs font-medium text-on-surface/80">GitHub</span>
+</button>
+</div>
+<!-- Sign Up Footer -->
+<div class="mt-10 text-center relative z-10">
+<p class="text-[11px] text-on-surface-variant font-medium">
+                New to the AI economy? 
+                <a class="text-primary hover:text-primary-fixed-dim transition-colors ml-1 font-bold underline underline-offset-4" href="#">Create Account</a>
+</p>
+</div>
+</div>
+</main>
+<footer class="w-full py-8 mt-auto flex flex-col md:flex-row justify-between items-center px-10 gap-6 bg-transparent border-t border-white/5 text-[10px] tracking-wider font-medium text-on-surface-variant/60 uppercase z-10">
+<div class="flex items-center gap-6">
+<span>© 2024 Cyber Freelance AI. Secured by Neural Encryption.</span>
+</div>
+<div class="flex items-center gap-8">
+<a class="hover:text-primary transition-colors" href="#">Privacy Protocol</a>
+<a class="hover:text-primary transition-colors" href="#">Service Terms</a>
+<a class="hover:text-primary transition-colors" href="#">Neural Status</a>
+</div>
+</footer>
+<script>
+    const canvas = document.getElementById('neuralCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    const particleCount = 70;
+    const connectionDistance = 150;
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    class Particle {
+        constructor() {
+            this.reset();
+        }
+        reset() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.vx = (Math.random() - 0.5) * 0.4;
+            this.vy = (Math.random() - 0.5) * 0.4;
+            this.radius = Math.random() * 1.5 + 0.5;
+        }
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            if (this.x < 0 || this.x > canvas.width) this.vx</script><div id="snapdom-sandbox" data-snapdom-sandbox="true" aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div></body></html>

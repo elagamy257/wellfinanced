@@ -1,0 +1,411 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Savings &amp; Goals Hub | FinAdvisor AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#b8c3ff",
+                        "background": "#11131c",
+                        "on-primary-fixed": "#001356",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary": "#5b1a00",
+                        "secondary-container": "#7701d0",
+                        "on-primary-fixed-variant": "#0035be",
+                        "on-tertiary-fixed-variant": "#812800",
+                        "on-background": "#e2e1ef",
+                        "surface-container-high": "#282933",
+                        "surface": "#11131c",
+                        "on-surface": "#e2e1ef",
+                        "primary-container": "#2e5bff",
+                        "outline": "#8e90a2",
+                        "on-error": "#690005",
+                        "on-tertiary-container": "#ffece6",
+                        "primary-fixed-dim": "#b8c3ff",
+                        "surface-container-highest": "#33343e",
+                        "on-secondary-fixed": "#2c0051",
+                        "surface-bright": "#373943",
+                        "inverse-on-surface": "#2e303a",
+                        "secondary": "#dcb8ff",
+                        "on-tertiary-fixed": "#380d00",
+                        "error": "#ffb4ab",
+                        "inverse-surface": "#e2e1ef",
+                        "tertiary-fixed-dim": "#ffb59b",
+                        "surface-container": "#1d1f29",
+                        "primary-fixed": "#dde1ff",
+                        "secondary-fixed-dim": "#dcb8ff",
+                        "on-primary-container": "#efefff",
+                        "tertiary-fixed": "#ffdbcf",
+                        "on-primary": "#002388",
+                        "tertiary": "#ffb59b",
+                        "surface-container-lowest": "#0c0e17",
+                        "outline-variant": "#434656",
+                        "on-secondary-container": "#dcb7ff",
+                        "tertiary-container": "#c24100",
+                        "on-secondary-fixed-variant": "#6700b5",
+                        "surface-dim": "#11131c",
+                        "surface-container-low": "#191b24",
+                        "on-secondary": "#480081",
+                        "inverse-primary": "#124af0",
+                        "error-container": "#93000a",
+                        "surface-tint": "#b8c3ff",
+                        "secondary-fixed": "#efdbff",
+                        "surface-variant": "#33343e",
+                        "on-surface-variant": "#c4c5d9"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "display": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"],
+                        "mono": ["Space Grotesk"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background: rgba(29, 31, 41, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        .ai-gradient-card {
+            background: linear-gradient(135deg, #2e5bff 0%, #7701d0 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        .ai-gradient-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .inner-glow {
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #434656;
+            border-radius: 10px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen selection:bg-primary selection:text-on-primary overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-slate-950/60 backdrop-blur-xl border-b border-white/10 shadow-2xl">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full overflow-hidden border border-primary/20 bg-surface-container-high">
+<img class="w-full h-full object-cover" data-alt="A futuristic 3D rendered AI assistant character with a friendly expression. The character is composed of sleek metallic surfaces and glowing fiber-optic hair, set against a dark, minimalist laboratory background with deep blue and purple ambient lighting. High-gloss finish and cinematic lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCM3Hsjk_nnPtEXZ6AMEfi-uIhDReDDccOPJRJn5UlxFzhyB-VjFQ29LYogHbgAz7o-wQ9NAh-cCFLrFPyju1ZEP1HWnUKFJ4AQTCIyAtSBxj2S4HNMuu1lEdAldI_UfaUEVaM26F3_pCMv4U4eCrRK-UZDLkG3tefcS8lHI3UAEFGQ0H5nJhPiZjmWGngnwLnqL_RrUOKIjoiLs92E3CmlIbNpzAzh_Pek9aLPa5vkl4iHJHtgOTeHv-ZwF_I07KWO9cRui-ee0QY">
+</div>
+<h1 class="text-xl font-black bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">FinAdvisor AI</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-slate-400 font-medium hover:text-blue-300 transition-colors" href="#">Dashboard</a>
+<a class="text-slate-400 font-medium hover:text-blue-300 transition-colors" href="#">Cashflow</a>
+<a class="text-blue-400 font-bold border-b-2 border-blue-400 pb-1" href="#">Savings Hub</a>
+<a class="text-slate-400 font-medium hover:text-blue-300 transition-colors" href="#">Advisor</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-blue-500 dark:text-blue-400 hover:bg-white/5 p-2 rounded-xl transition-all">info</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-white/5 p-2 rounded-xl transition-all">notifications</button>
+</div>
+</header>
+<!-- Main Content Grid -->
+<main class="pt-24 pb-12 px-6 max-w-7xl mx-auto grid grid-cols-12 gap-6">
+<!-- Background Animation -->
+
+<!-- 1. Hero Card: Total Savings Balance -->
+<section class="col-span-12 lg:col-span-8">
+<div class="ai-gradient-card p-8 rounded-[32px] flex flex-col md:flex-row justify-between items-center gap-6 inner-glow shadow-primary/20">
+<div class="relative z-10 space-y-2">
+<p class="text-on-primary-container/80 font-semibold tracking-wider uppercase text-xs">Total Savings Assets</p>
+<div class="flex items-baseline gap-3">
+<span class="font-mono text-5xl font-bold text-white tracking-tighter">$142,509.42</span>
+<span class="flex items-center text-emerald-400 text-sm font-bold bg-emerald-500/20 px-2 py-0.5 rounded-full">
+<span class="material-symbols-outlined text-xs mr-1">trending_up</span>+12.4%
+                        </span>
+</div>
+<p class="text-on-primary-container/60 text-sm max-w-md">Your savings grew by $4,201 this month. AI predicts you'll reach your 2024 milestones 2 months ahead of schedule.</p>
+</div>
+<button class="relative z-10 flex items-center gap-2 bg-white text-primary-container font-bold px-8 py-4 rounded-2xl shadow-xl hover:scale-105 active:scale-95 transition-all">
+<span class="material-symbols-outlined">add_circle</span>
+                    New Savings Goal
+                </button>
+</div>
+</section>
+<!-- Side Activity Feed -->
+<aside class="col-span-12 lg:col-span-4 lg:row-span-2">
+<div class="glass-card h-full rounded-[32px] p-6 flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-xl font-bold tracking-tight">Recent Activity</h3>
+<button class="text-primary text-sm font-bold hover:underline">View All</button>
+</div>
+<div class="flex-1 space-y-6 overflow-y-auto custom-scrollbar pr-2">
+<!-- Activity Item 1 -->
+<div class="flex items-start gap-4 p-3 rounded-2xl hover:bg-white/5 transition-colors group">
+<div class="w-10 h-10 rounded-xl bg-emerald-500/20 flex items-center justify-center text-emerald-400 border border-emerald-500/20">
+<span class="material-symbols-outlined">savings</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<span class="font-bold text-sm">Emergency Fund</span>
+<span class="text-emerald-400 font-mono text-sm">+$500.00</span>
+</div>
+<p class="text-xs text-on-surface-variant">Automated Monthly Deposit</p>
+<p class="text-[10px] text-outline mt-1">2 hours ago</p>
+</div>
+</div>
+<!-- Activity Item 2 -->
+<div class="flex items-start gap-4 p-3 rounded-2xl hover:bg-white/5 transition-colors group">
+<div class="w-10 h-10 rounded-xl bg-blue-500/20 flex items-center justify-center text-blue-400 border border-blue-500/20">
+<span class="material-symbols-outlined">computer</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<span class="font-bold text-sm">New Laptop</span>
+<span class="text-blue-400 font-mono text-sm">+$125.40</span>
+</div>
+<p class="text-xs text-on-surface-variant">Freelance Gig Bonus (Round-up)</p>
+<p class="text-[10px] text-outline mt-1">Yesterday</p>
+</div>
+</div>
+<!-- Activity Item 3 -->
+<div class="flex items-start gap-4 p-3 rounded-2xl hover:bg-white/5 transition-colors group">
+<div class="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center text-purple-400 border border-purple-500/20">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between">
+<span class="font-bold text-sm">Q3 Tax Liability</span>
+<span class="text-purple-400 font-mono text-sm">+$2,100.00</span>
+</div>
+<p class="text-xs text-on-surface-variant">Calculated Income Reserve</p>
+<p class="text-[10px] text-outline mt-1">Sep 15, 2023</p>
+</div>
+</div>
+<!-- AI Insight in Sidebar -->
+<div class="bg-primary/5 border border-primary/20 rounded-2xl p-4 mt-6">
+<div class="flex items-center gap-2 mb-2 text-primary">
+<span class="material-symbols-outlined text-sm">auto_awesome</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">AI Intelligence</span>
+</div>
+<p class="text-xs leading-relaxed text-on-surface-variant">Based on your current freelance velocity, you can increase your "New Laptop" contribution by 15% without impacting your lifestyle.</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- 2. Active Goals Grid -->
+<section class="col-span-12 lg:col-span-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+<!-- Goal 1: Emergency Fund -->
+<div class="glass-card p-6 rounded-[24px] flex flex-col gap-4 border-l-4 border-l-emerald-500 group hover:translate-y-[-4px] transition-transform duration-300">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 rounded-2xl bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-emerald-400" data-weight="fill">shield</span>
+</div>
+<span class="text-[10px] font-bold px-2 py-1 bg-emerald-500/10 text-emerald-400 rounded-full">ACTIVE</span>
+</div>
+<div>
+<h4 class="font-bold text-lg">Emergency Fund</h4>
+<p class="text-xs text-on-surface-variant">6 months of expenses</p>
+</div>
+<div class="space-y-2 mt-2">
+<div class="flex justify-between text-xs font-mono">
+<span class="text-on-surface-variant">$24,500</span>
+<span class="text-outline">/ $30,000</span>
+</div>
+<div class="h-2.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-emerald-500 to-emerald-300 rounded-full" style="width: 82%"></div>
+</div>
+</div>
+<div class="pt-2 border-t border-white/5 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-blue-400">event_available</span>
+<span class="text-[10px] text-blue-400 font-bold uppercase">Proj: Oct 2024</span>
+</div>
+</div>
+<!-- Goal 2: New Laptop -->
+<div class="glass-card p-6 rounded-[24px] flex flex-col gap-4 border-l-4 border-l-blue-500 group hover:translate-y-[-4px] transition-transform duration-300">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 rounded-2xl bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-blue-400" data-weight="fill">laptop_mac</span>
+</div>
+<span class="text-[10px] font-bold px-2 py-1 bg-blue-500/10 text-blue-400 rounded-full">NEAR GOAL</span>
+</div>
+<div>
+<h4 class="font-bold text-lg">New Laptop</h4>
+<p class="text-xs text-on-surface-variant">MacBook Pro M3 Max</p>
+</div>
+<div class="space-y-2 mt-2">
+<div class="flex justify-between text-xs font-mono">
+<span class="text-on-surface-variant">$3,200</span>
+<span class="text-outline">/ $3,500</span>
+</div>
+<div class="h-2.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-blue-500 to-blue-300 rounded-full" style="width: 91%"></div>
+</div>
+</div>
+<div class="pt-2 border-t border-white/5 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-blue-400">event_available</span>
+<span class="text-[10px] text-blue-400 font-bold uppercase">Proj: Next Month</span>
+</div>
+</div>
+<!-- Goal 3: Q3 Tax -->
+<div class="glass-card p-6 rounded-[24px] flex flex-col gap-4 border-l-4 border-l-purple-500 group hover:translate-y-[-4px] transition-transform duration-300">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 rounded-2xl bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-purple-400" data-weight="fill">account_balance</span>
+</div>
+<span class="text-[10px] font-bold px-2 py-1 bg-purple-500/10 text-purple-400 rounded-full">CRITICAL</span>
+</div>
+<div>
+<h4 class="font-bold text-lg">Q3 Tax Liability</h4>
+<p class="text-xs text-on-surface-variant">IRS estimated payment</p>
+</div>
+<div class="space-y-2 mt-2">
+<div class="flex justify-between text-xs font-mono">
+<span class="text-on-surface-variant">$18,400</span>
+<span class="text-outline">/ $22,000</span>
+</div>
+<div class="h-2.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-purple-500 to-purple-300 rounded-full" style="width: 84%"></div>
+</div>
+</div>
+<div class="pt-2 border-t border-white/5 flex items-center gap-2">
+<span class="material-symbols-outlined text-[16px] text-pink-400">warning</span>
+<span class="text-[10px] text-pink-400 font-bold uppercase">Due in 15 days</span>
+</div>
+</div>
+</section>
+<!-- 3. Projected Growth Chart Section -->
+<section class="col-span-12 lg:col-span-8">
+<div class="glass-card rounded-[32px] p-8">
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+<div>
+<h3 class="text-2xl font-bold tracking-tight">Projected Wealth Growth</h3>
+<p class="text-sm text-on-surface-variant">Comparison between actual savings and AI-optimized projections.</p>
+</div>
+<div class="flex items-center gap-6 text-xs font-bold uppercase tracking-widest">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-blue-500"></span>
+<span class="text-on-surface">Actual</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-emerald-400 border border-emerald-400/50 shadow-[0_0_8px_rgba(52,211,153,0.4)]"></span>
+<span class="text-emerald-400">Projected</span>
+</div>
+</div>
+</div>
+<!-- Custom Chart Visualization -->
+<div class="h-[300px] w-full relative">
+<!-- Chart Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between opacity-5">
+<div class="border-t border-white h-0"></div>
+<div class="border-t border-white h-0"></div>
+<div class="border-t border-white h-0"></div>
+<div class="border-t border-white h-0"></div>
+</div>
+<!-- SVG Path for Graph -->
+<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 1000 300">
+<!-- Projected Path (Green Glow) -->
+<path class="drop-shadow-[0_0_8px_rgba(52,211,153,0.3)]" d="M0,280 Q100,260 200,245 T400,200 T600,140 T800,80 T1000,30" fill="none" stroke="url(#gradient-green)" stroke-linecap="round" stroke-width="4"></path>
+<!-- Actual Path (Blue) -->
+<path d="M0,280 Q100,265 200,250 T400,215 T500,195" fill="none" stroke="url(#gradient-blue)" stroke-linecap="round" stroke-width="5"></path>
+<!-- Gradient Definitions -->
+<defs>
+<linearGradient id="gradient-blue" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#2e5bff"></stop>
+<stop offset="100%" stop-color="#b8c3ff"></stop>
+</linearGradient>
+<linearGradient id="gradient-green" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#10b981"></stop>
+<stop offset="100%" stop-color="#34d399"></stop>
+</linearGradient>
+</defs>
+</svg>
+<!-- Chart Data Points / Tooltips (Absolute positioned markers) -->
+<div class="absolute left-[50%] bottom-[105px] -translate-x-1/2 group">
+<div class="w-4 h-4 bg-white rounded-full ring-4 ring-blue-500/20 shadow-lg cursor-pointer"></div>
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 hidden group-hover:block transition-all">
+<div class="bg-surface-container-highest border border-white/10 rounded-xl p-3 shadow-2xl min-w-[120px] backdrop-blur-md">
+<p class="text-[10px] text-outline font-bold uppercase mb-1">Today</p>
+<p class="text-sm font-mono font-bold">$142,509</p>
+</div>
+</div>
+</div>
+</div>
+<!-- X-Axis Labels -->
+<div class="flex justify-between mt-6 px-2 text-[10px] font-bold text-outline tracking-widest uppercase">
+<span>JAN</span>
+<span>MAR</span>
+<span>MAY</span>
+<span>JUL</span>
+<span class="text-primary-container">SEP (Current)</span>
+<span>NOV</span>
+<span>JAN</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar (Mobile & Semantic Anchor) -->
+<footer class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-slate-950/80 backdrop-blur-2xl border-t border-white/10 shadow-[0_-8px_30px_rgb(0,0,0,0.5)] md:hidden rounded-t-[24px]">
+<div class="flex flex-col items-center justify-center text-slate-500 opacity-70 hover:text-blue-300 transition-colors active:scale-90 duration-200">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-widest">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 opacity-70 hover:text-blue-300 transition-colors active:scale-90 duration-200">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-widest">Cashflow</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-blue-500/10 text-blue-400 rounded-2xl px-4 py-1.5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] active:scale-90 duration-200">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-widest">AI Advisor</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 opacity-70 hover:text-blue-300 transition-colors active:scale-90 duration-200">
+<span class="material-symbols-outlined">person</span>
+<span class="font-['Inter'] text-[10px] font-semibold uppercase tracking-widest">Profile</span>
+</div>
+</footer>
+<script>
+        // Micro-interactions for buttons and hover states
+        document.querySelectorAll('button, a').forEach(elem => {
+            elem.addEventListener('mouseenter', () => {
+                // Potential sound effect or haptic trigger placeholder
+            });
+        });
+
+        // Initialize any specific UI logic for charts or indicators
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log("FinAdvisor AI Savings Hub Initialized");
+        });
+    </script>
+</body></html>

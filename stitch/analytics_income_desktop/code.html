@@ -1,0 +1,437 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>FinAI Intelligence | Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "secondary-fixed": "#efdbff",
+                        "on-primary": "#002388",
+                        "secondary": "#dcb8ff",
+                        "surface-container": "#1d1f29",
+                        "secondary-container": "#7701d0",
+                        "inverse-on-surface": "#2e303a",
+                        "primary": "#b8c3ff",
+                        "on-tertiary-container": "#ffece6",
+                        "on-tertiary": "#5b1a00",
+                        "on-secondary-fixed": "#2c0051",
+                        "on-primary-fixed": "#001356",
+                        "inverse-primary": "#124af0",
+                        "on-secondary-fixed-variant": "#6700b5",
+                        "surface-container-high": "#282933",
+                        "on-secondary": "#480081",
+                        "surface-variant": "#33343e",
+                        "outline": "#8e90a2",
+                        "secondary-fixed-dim": "#dcb8ff",
+                        "primary-fixed-dim": "#b8c3ff",
+                        "on-background": "#e2e1ef",
+                        "background": "#11131c",
+                        "surface-container-highest": "#33343e",
+                        "tertiary-fixed-dim": "#ffb59b",
+                        "surface": "#11131c",
+                        "on-secondary-container": "#dcb7ff",
+                        "primary-container": "#2e5bff",
+                        "on-surface": "#e2e1ef",
+                        "surface-container-lowest": "#0c0e17",
+                        "surface-container-low": "#191b24",
+                        "on-primary-container": "#efefff",
+                        "tertiary-container": "#c24100",
+                        "surface-dim": "#11131c",
+                        "tertiary-fixed": "#ffdbcf",
+                        "surface-bright": "#373943",
+                        "error-container": "#93000a",
+                        "tertiary": "#ffb59b",
+                        "on-surface-variant": "#c4c5d9",
+                        "primary-fixed": "#dde1ff",
+                        "on-primary-fixed-variant": "#0035be",
+                        "on-tertiary-fixed": "#380d00",
+                        "error": "#ffb4ab",
+                        "inverse-surface": "#e2e1ef",
+                        "outline-variant": "#434656",
+                        "on-error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#812800",
+                        "on-error": "#690005",
+                        "surface-tint": "#b8c3ff"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "display": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"],
+                        "mono": ["Space Grotesk"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(29, 31, 41, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glow-blue {
+            box-shadow: 0 0 20px rgba(46, 91, 255, 0.15);
+        }
+        .inner-glow {
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #11131c;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #33343e;
+            border-radius: 10px;
+        }
+        .chart-gradient {
+            background: linear-gradient(180deg, rgba(46, 91, 255, 0.2) 0%, rgba(46, 91, 255, 0) 100%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30 min-h-screen overflow-x-hidden">
+<!-- Top Navigation Anchor (Desktop only logic applied via classes) -->
+<header class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.3)] flex items-center justify-between px-5 h-16 w-full">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">FinAI Intelligence</span>
+</div>
+<div class="hidden md:flex items-center gap-8">
+<nav class="flex gap-6 font-inter text-sm font-semibold tracking-tight">
+<a class="text-blue-400 hover:bg-white/5 transition-colors active:scale-95 duration-150 py-2 px-3 rounded-lg" href="#">Dashboard</a>
+<a class="text-slate-400 hover:bg-white/5 transition-colors active:scale-95 duration-150 py-2 px-3 rounded-lg" href="#">Marketplace</a>
+<a class="text-slate-400 hover:bg-white/5 transition-colors active:scale-95 duration-150 py-2 px-3 rounded-lg" href="#">Contracts</a>
+</nav>
+<div class="h-8 w-px bg-white/10"></div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400 cursor-pointer">search</span>
+<img class="w-8 h-8 rounded-full border border-primary/20" data-alt="A professional high-end headshot of a Hispanic male freelancer in his late 20s, Alex Rivera, wearing a dark turtleneck against a clean, moody studio background. The lighting is dramatic and cinematic, using a teal and purple rim light to match the Cyber Freelance AI brand aesthetic. High-quality 8k photography style with soft bokeh." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDNC3y84bcsSi_21FMNPKQ7x6FUxBNRUDS4OIUHVy-2srflif8zb4uZRhKRvnbLGuGantaqeSxLu5yy4V77OltEcmXD68olN86d-rQJB8eKn1Unlpuw8QJWI0A3Pt3kvFqQressj2hLuR4OT976I9bnamz1UMWBjmiQFgf4QwVQv6mdQJdmxkxDhyT5VhPyi0mpAxMuh_MiiibKNGZ_OH6qusWi-gckZn3bAJXv1e8jARhfe7hDcNE1xar70IYWJxJu6qYFHQnb8CY">
+</div>
+</div>
+</header>
+<div class="flex pt-16 min-h-screen">
+<!-- Sidebar Navigation Drawer -->
+<aside class="hidden md:flex flex-col h-[calc(100vh-64px)] w-80 bg-slate-900 border-r border-white/5 shadow-2xl sticky top-16 py-8 px-6">
+<div class="flex items-center gap-4 mb-10 px-2">
+<img class="w-12 h-12 rounded-xl bg-surface-container shadow-inner" data-alt="A high-tech digital avatar icon representing a Pro Freelancer tier. The avatar is an abstract geometric mesh with glowing electric blue nodes against a deep navy background. The style is futuristic and intelligent, mimicking a neural network structure. Clean 3D render with soft glass textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzswM7FWqcG2xF7NEujawHsGYq1A5RcS2jYboarpOeNUVSsqZ49Q8572LyhtXfBDkdDDfjP8sqYR4T86kRZQ2_0Ume45wg23iuY3FVO_O8YKO1PSGgC2LhtuoFf0vI73tEMNoE1AUBxpvnT89knOjO38w2V_UjN7_xnIF8u7fb81Nv-jZq4IpPSBcoU2Xx3VWJMR62kDgQYt-kcO3urBZns5sBjrIhY2c9lV-NP970lD18Jtd7U7vD_g3Q9b5Kskd-JqJ_0OWStLw">
+<div>
+<h3 class="text-white font-black text-lg leading-tight">Alex Rivera</h3>
+<p class="text-slate-400 text-xs font-inter">Pro Freelancer Tier</p>
+</div>
+<span class="ml-auto bg-primary-container text-on-primary-container text-[10px] font-bold px-2 py-1 rounded-full">AI Active</span>
+</div>
+<nav class="space-y-2 flex-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-blue-600/20 text-blue-400 border-l-4 border-blue-500 font-inter text-sm hover:translate-x-1 duration-200 tap-highlight-transparent" href="#">
+<span class="material-symbols-outlined">shield</span> Account Security
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 font-inter text-sm hover:translate-x-1 duration-200 tap-highlight-transparent" href="#">
+<span class="material-symbols-outlined">settings_input_component</span> API Settings
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 font-inter text-sm hover:translate-x-1 duration-200 tap-highlight-transparent" href="#">
+<span class="material-symbols-outlined">cloud_download</span> Export History
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 font-inter text-sm hover:translate-x-1 duration-200 tap-highlight-transparent" href="#">
+<span class="material-symbols-outlined">lock</span> Privacy Policy
+                </a>
+</nav>
+<div class="mt-auto pt-6 border-t border-white/5">
+<div class="glass-panel p-4 rounded-xl">
+<p class="text-xs text-slate-400 mb-2">Platform Health</p>
+<div class="h-1.5 w-full bg-white/10 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-secondary w-[85%]"></div>
+</div>
+<p class="text-[10px] text-primary mt-2">All systems operational</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 p-6 md:p-10 max-w-7xl mx-auto w-full">
+<!-- Hero Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div>
+<h1 class="text-3xl md:text-4xl font-bold font-headline tracking-tight text-white mb-2">Analytics Overview</h1>
+<p class="text-on-surface-variant max-w-lg">Your AI-driven financial projection for the next quarter. Currently tracking 8 active project streams.</p>
+</div>
+<div class="flex gap-3">
+<button class="bg-surface-container-high hover:bg-surface-bright text-on-surface px-4 py-2.5 rounded-xl text-sm font-semibold transition-all border border-white/5 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">download</span> Export PDF
+                    </button>
+<button class="bg-primary-container hover:shadow-[0_0_20px_rgba(46,91,255,0.4)] text-on-primary-container px-6 py-2.5 rounded-xl text-sm font-bold transition-all inner-glow">
+                        Refresh Insights
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Main Chart Card (Wide) -->
+<div class="md:col-span-8 glass-panel rounded-2xl p-6 glow-blue relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-8 opacity-10 pointer-events-none group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-8xl">trending_up</span>
+</div>
+<div class="flex items-center justify-between mb-8">
+<div>
+<h2 class="text-xl font-bold text-white mb-1">Earnings Forecast</h2>
+<p class="text-sm text-on-surface-variant">Actual vs. Predicted Income (USD)</p>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span class="text-xs font-semibold text-slate-400">Actual</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-secondary border border-white/20"></div>
+<span class="text-xs font-semibold text-slate-400">AI Predicted</span>
+</div>
+</div>
+</div>
+<!-- Simplified Chart Visualization -->
+<div class="h-64 w-full relative flex items-end gap-2 px-2">
+<!-- Chart Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between py-2 pointer-events-none opacity-20">
+<div class="w-full h-px bg-white"></div>
+<div class="w-full h-px bg-white"></div>
+<div class="w-full h-px bg-white"></div>
+<div class="w-full h-px bg-white"></div>
+</div>
+<!-- Visual Area Representation -->
+<div class="absolute inset-0 flex items-end overflow-hidden pointer-events-none">
+<svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 800 200">
+<path d="M0,180 L100,160 L200,140 L300,150 L400,100 L500,120 L600,60 L700,80 L800,40 V200 H0 Z" fill="url(#grad1)" fill-opacity="0.2"></path>
+<path d="M0,180 L100,160 L200,140 L300,150 L400,100 L500,120 L600,60 L700,80 L800,40" fill="none" stroke="#b8c3ff" stroke-width="3"></path>
+<defs>
+<linearGradient id="grad1" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:#2e5bff;stop-opacity:0.8"></stop>
+<stop offset="100%" style="stop-color:#2e5bff;stop-opacity:0"></stop>
+</linearGradient>
+</defs>
+</svg>
+</div>
+<!-- Data Points Labels (Bottom) -->
+<div class="w-full flex justify-between pt-4 mt-auto">
+<span class="text-[10px] font-mono text-slate-500">JAN</span>
+<span class="text-[10px] font-mono text-slate-500">FEB</span>
+<span class="text-[10px] font-mono text-slate-500">MAR</span>
+<span class="text-[10px] font-mono text-slate-500">APR</span>
+<span class="text-[10px] font-mono text-slate-500">MAY</span>
+<span class="text-[10px] font-mono text-slate-500">JUN</span>
+<span class="text-[10px] font-mono text-slate-500">JUL</span>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4 mt-8 pt-6 border-t border-white/5">
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Projected Total</p>
+<p class="text-2xl font-bold font-mono text-white">$142,500</p>
+</div>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Growth Index</p>
+<p class="text-2xl font-bold font-mono text-primary">+22.4%</p>
+</div>
+<div>
+<p class="text-[10px] text-on-surface-variant uppercase tracking-widest mb-1">Confidence</p>
+<p class="text-2xl font-bold font-mono text-secondary">94%</p>
+</div>
+</div>
+</div>
+<!-- Salary Configuration Tool (Side) -->
+<div class="md:col-span-4 bg-gradient-to-br from-surface-container to-surface-container-high rounded-2xl p-6 border border-white/5 shadow-xl flex flex-col">
+<div class="flex items-center gap-3 mb-6">
+<div class="bg-secondary/20 p-2 rounded-lg">
+<span class="material-symbols-outlined text-secondary">account_balance_wallet</span>
+</div>
+<h2 class="font-bold text-lg text-white">Stable Salary</h2>
+</div>
+<p class="text-sm text-on-surface-variant mb-8">Adjust your monthly withdrawal amount. Our AI calculates the impact on your runway.</p>
+<div class="flex-1 space-y-8">
+<div>
+<div class="flex justify-between items-center mb-4">
+<span class="text-xs font-semibold text-slate-400">Monthly Target</span>
+<span class="text-xl font-bold font-mono text-primary">$8,500</span>
+</div>
+<input class="w-full h-2 bg-white/5 rounded-lg appearance-none cursor-pointer accent-primary" max="15000" min="2000" type="range" value="8500">
+</div>
+<div class="bg-black/20 rounded-xl p-4 border border-white/5">
+<div class="flex items-start justify-between mb-4">
+<div>
+<p class="text-[10px] text-slate-500 uppercase font-bold tracking-wider mb-1">Runway Metric</p>
+<p class="text-3xl font-bold text-white">18.4 <span class="text-sm font-normal text-slate-400">Months</span></p>
+</div>
+<span class="material-symbols-outlined text-primary text-3xl">hourglass_bottom</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[14px] text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<p class="text-[10px] text-slate-400">Exceeds safety threshold (12m)</p>
+</div>
+</div>
+<div class="space-y-3">
+<div class="flex justify-between text-xs">
+<span class="text-slate-400">Tax Reservation (Est.)</span>
+<span class="text-white font-mono">$1,275.00</span>
+</div>
+<div class="flex justify-between text-xs">
+<span class="text-slate-400">Reinvestment Fund</span>
+<span class="text-white font-mono">$850.00</span>
+</div>
+</div>
+</div>
+<button class="w-full mt-8 py-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-sm font-bold transition-all">
+                        Update Configuration
+                    </button>
+</div>
+<!-- Active Pipeline Cards (Bottom Grid) -->
+<div class="md:col-span-12">
+<div class="flex items-center justify-between mb-6">
+<h2 class="text-xl font-bold text-white">Active Pipeline</h2>
+<a class="text-primary text-sm font-bold flex items-center gap-1 hover:underline" href="#">
+                            View All Projects <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Pipeline Card 1 -->
+<div class="glass-panel p-5 rounded-2xl hover:scale-[1.02] transition-transform duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="bg-blue-500/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-blue-400">code</span>
+</div>
+<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-green-500/20 text-green-400">ON TRACK</span>
+</div>
+<h3 class="font-bold text-white mb-1">Quantum UI Library</h3>
+<p class="text-xs text-on-surface-variant mb-4">Metaverse Systems Inc.</p>
+<div class="flex items-center justify-between text-[10px] font-bold text-slate-400 mb-2">
+<span>PROGRESS</span>
+<span>75%</span>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full">
+<div class="h-full bg-primary rounded-full" style="width: 75%"></div>
+</div>
+<div class="mt-4 pt-4 border-t border-white/5 flex justify-between items-center">
+<p class="text-xs font-mono text-white">$12,400</p>
+<p class="text-[10px] text-slate-500">Due in 4d</p>
+</div>
+</div>
+<!-- Pipeline Card 2 -->
+<div class="glass-panel p-5 rounded-2xl hover:scale-[1.02] transition-transform duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="bg-purple-500/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-purple-400">psychology</span>
+</div>
+<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-yellow-500/20 text-yellow-400">REVIEW</span>
+</div>
+<h3 class="font-bold text-white mb-1">Neural Branding</h3>
+<p class="text-xs text-on-surface-variant mb-4">Synthetix Labs</p>
+<div class="flex items-center justify-between text-[10px] font-bold text-slate-400 mb-2">
+<span>PROGRESS</span>
+<span>92%</span>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full">
+<div class="h-full bg-secondary rounded-full" style="width: 92%"></div>
+</div>
+<div class="mt-4 pt-4 border-t border-white/5 flex justify-between items-center">
+<p class="text-xs font-mono text-white">$8,900</p>
+<p class="text-[10px] text-slate-500">Final Audit</p>
+</div>
+</div>
+<!-- Pipeline Card 3 -->
+<div class="glass-panel p-5 rounded-2xl hover:scale-[1.02] transition-transform duration-300">
+<div class="flex justify-between items-start mb-4">
+<div class="bg-pink-500/10 p-2 rounded-lg">
+<span class="material-symbols-outlined text-pink-400">bolt</span>
+</div>
+<span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-400">PLANNING</span>
+</div>
+<h3 class="font-bold text-white mb-1">FastAPI Backend</h3>
+<p class="text-xs text-on-surface-variant mb-4">Velocity Core</p>
+<div class="flex items-center justify-between text-[10px] font-bold text-slate-400 mb-2">
+<span>PROGRESS</span>
+<span>15%</span>
+</div>
+<div class="h-1.5 w-full bg-white/5 rounded-full">
+<div class="h-full bg-tertiary rounded-full" style="width: 15%"></div>
+</div>
+<div class="mt-4 pt-4 border-t border-white/5 flex justify-between items-center">
+<p class="text-xs font-mono text-white">$24,000</p>
+<p class="text-[10px] text-slate-500">Kickoff</p>
+</div>
+</div>
+<!-- Pipeline Card 4 (Add New) -->
+<div class="border-2 border-dashed border-white/10 p-5 rounded-2xl flex flex-col items-center justify-center text-center hover:bg-white/5 transition-colors cursor-pointer group">
+<div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-slate-400">add</span>
+</div>
+<h3 class="font-bold text-slate-300">New Contract</h3>
+<p class="text-xs text-slate-500">Link with AI Sourcing</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Mobile Bottom Navigation (Platform responsiveness logic) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-slate-950/90 backdrop-blur-2xl border-t border-white/10 rounded-t-2xl z-50 flex justify-around items-center px-4 pb-6 pt-3 shadow-[0_-8px_30px_rgba(0,0,0,0.5)]">
+<a class="flex flex-col items-center justify-center text-blue-400 bg-blue-500/10 rounded-xl px-3 py-1.5 shadow-[inset_0_0_10px_rgba(46,91,255,0.2)] scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-medium font-inter mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-blue-300 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="text-[10px] font-medium font-inter mt-1">History</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-blue-300 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="text-[10px] font-medium font-inter mt-1">AI Insights</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-blue-300 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<span class="text-[10px] font-medium font-inter mt-1">Reports</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-blue-300 active:scale-90 transition-transform" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="text-[10px] font-medium font-inter mt-1">Support</span>
+</a>
+</nav>
+<!-- Background Elements -->
+<div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
+<div class="absolute top-[-10%] right-[-10%] w-[50%] h-[50%] bg-primary/5 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-secondary/5 rounded-full blur-[100px]"></div>
+</div>
+<script>
+        // Interactive Micro-interactions
+        document.querySelectorAll('.glass-panel').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
+
+        // Simple Range Slider Update
+        const range = document.querySelector('input[type="range"]');
+        const rangeValue = document.querySelector('.font-mono.text-primary');
+        
+        if (range && rangeValue) {
+            range.addEventListener('input', (e) => {
+                const val = parseInt(e.target.value).toLocaleString();
+                rangeValue.textContent = `$${val}`;
+            });
+        }
+    </script>
+</body></html>

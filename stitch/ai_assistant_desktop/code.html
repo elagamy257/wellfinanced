@@ -1,0 +1,369 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>FinAdvisor AI | Professional Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#b8c3ff",
+                        "outline-variant": "#434656",
+                        "tertiary-fixed": "#ffdbcf",
+                        "inverse-on-surface": "#2e303a",
+                        "primary-fixed": "#dde1ff",
+                        "on-primary-fixed-variant": "#0035be",
+                        "primary-container": "#2e5bff",
+                        "on-error": "#690005",
+                        "secondary-fixed": "#efdbff",
+                        "primary": "#b8c3ff",
+                        "surface-container-lowest": "#0c0e17",
+                        "outline": "#8e90a2",
+                        "background": "#11131c",
+                        "secondary": "#dcb8ff",
+                        "on-secondary-fixed-variant": "#6700b5",
+                        "on-surface": "#e2e1ef",
+                        "on-secondary": "#480081",
+                        "secondary-container": "#7701d0",
+                        "inverse-surface": "#e2e1ef",
+                        "surface-variant": "#33343e",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed": "#001356",
+                        "surface-tint": "#b8c3ff",
+                        "tertiary-container": "#c24100",
+                        "on-tertiary-fixed": "#380d00",
+                        "surface": "#11131c",
+                        "error-container": "#93000a",
+                        "surface-container": "#1d1f29",
+                        "on-secondary-container": "#dcb7ff",
+                        "tertiary-fixed-dim": "#ffb59b",
+                        "on-primary": "#002388",
+                        "tertiary": "#ffb59b",
+                        "on-background": "#e2e1ef",
+                        "inverse-primary": "#124af0",
+                        "surface-bright": "#373943",
+                        "on-primary-container": "#efefff",
+                        "on-surface-variant": "#c4c5d9",
+                        "on-tertiary-container": "#ffece6",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#33343e",
+                        "secondary-fixed-dim": "#dcb8ff",
+                        "on-secondary-fixed": "#2c0051",
+                        "surface-container-high": "#282933",
+                        "on-tertiary-fixed-variant": "#812800",
+                        "surface-container-low": "#191b24",
+                        "surface-dim": "#11131c",
+                        "on-tertiary": "#5b1a00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #11131c;
+            color: #e2e1ef;
+            overflow: hidden;
+        }
+        .glass-panel {
+            background: rgba(29, 31, 41, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .ai-gradient-text {
+            background: linear-gradient(135deg, #b8c3ff 0%, #dcb8ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .mono-data {
+            font-family: 'Space Grotesk', monospace;
+        }
+        .scroll-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .chart-glow {
+            filter: drop-shadow(0 0 8px rgba(184, 195, 255, 0.3));
+        }
+    </style>
+</head>
+<body class="h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-slate-950/60 backdrop-blur-xl border-b border-white/10 shadow-2xl flex justify-between items-center px-6 h-16 w-full z-50">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/30">
+<img class="w-full h-full object-cover" data-alt="A stylized 3D avatar of a friendly AI assistant character with glowing circuitry patterns on a sleek metallic surface. The character has an intelligent and approachable expression, rendered in a high-gloss digital art style with vibrant blue and purple neon lighting against a dark navy background, embodying the Cyber Freelance AI brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEmMysLjq7FyXTmxAKolqUHUDG5T0EmXlCSEoWwIZCXvgR_HmeencT1W7O4d-IatvkFvtZ19KEjymPyvH5DHN4HhCdSIbQh3XUqPJ189Q2ijlC4iEaoD2l_yPCAJx-T_Yx2GYW2Me3YBdvdoQFF0iFtHrYjLgdoi2VqOiuXOJL3CfopZfsP64m5RsTggafZ2WAW2sMMgQTtAL-E6_dMMWyxrX1Gx6JI2TrR6F_dlQfbLA9Cz9AYXzE-L6wE4tsGtENpAoFezDLZKw">
+</div>
+<span class="text-xl font-black bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">FinAdvisor AI</span>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<button class="text-blue-400 font-bold transition-all hover:bg-white/5 px-3 py-1 rounded-lg">Dashboard</button>
+<button class="text-slate-400 hover:text-blue-300 transition-all hover:bg-white/5 px-3 py-1 rounded-lg">Cashflow</button>
+<button class="text-slate-400 hover:text-blue-300 transition-all hover:bg-white/5 px-3 py-1 rounded-lg">AI Advisor</button>
+<button class="text-slate-400 hover:text-blue-300 transition-all hover:bg-white/5 px-3 py-1 rounded-lg">Profile</button>
+</nav>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-slate-400 hover:text-white transition-colors">info</button>
+<button class="material-symbols-outlined text-slate-400 hover:text-white transition-colors">settings</button>
+</div>
+</header>
+<main class="flex-1 flex overflow-hidden">
+<!-- Left Section: Conversational AI & Personal Profile -->
+<section class="w-full md:w-[450px] flex flex-col border-r border-outline-variant/30 bg-surface-container-lowest">
+<!-- User Identity Mini-Card -->
+<div class="p-6 border-b border-outline-variant/20 flex items-center gap-4">
+<div class="relative">
+<img class="w-14 h-14 rounded-xl border border-primary/20 object-cover" data-alt="Close up portrait of Alex, a professional modern freelancer with a focused and creative expression. The lighting is dramatic and cinematic, with soft rim lights in shades of electric blue and violet highlighting their features. The aesthetic is sophisticated and high-tech, fitting the intelligent and premium personality of the Cyber Freelance AI brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDlImvGTSVWh_YPCLF-ltp7th0d55nQ5BgcVfZ3-8OLu3df3IyBRnd2lZnBcrwlRQ218oRhliVnRqtbgvwWqdVxoQBSm8OzkF14PiTMQyG_hXeQycdsSpsqcUSTYX-iKY9neIYYeQIOJaWPhgIztmFpFV-Sne_5dv4KmXrW8JSpkpVRBDQb9Z7AzXKb1wtiZ8S_Ilgek7aZPUh_ICIQ7OOJIS4JXBSEwt0dobtLODpuSS8DblZIKQ_3jUFjr6TZu2-u1dWsqAOkvPc">
+<div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-surface-container-lowest rounded-full"></div>
+</div>
+<div>
+<h2 class="text-on-surface font-semibold text-lg leading-tight">Alex Rivera</h2>
+<p class="text-on-surface-variant text-xs font-medium uppercase tracking-widest opacity-70">Senior Product Designer</p>
+</div>
+</div>
+<!-- Chat Interface -->
+<div class="flex-1 overflow-y-auto p-6 space-y-6 scroll-hide">
+<!-- AI Message -->
+<div class="flex flex-col gap-2 max-w-[90%]">
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold text-primary-fixed-dim uppercase tracking-tighter">FinAdvisor AI</span>
+<span class="text-[10px] text-outline opacity-50">10:24 AM</span>
+</div>
+<div class="glass-panel p-4 rounded-2xl rounded-tl-none border-l-2 border-l-primary">
+<p class="text-sm leading-relaxed">Good morning, Alex. I've analyzed your recent Q3 revenue. You've hit <span class="text-primary font-bold">$12,450</span> this month, which is 15% above your target.</p>
+<div class="mt-4 grid grid-cols-2 gap-3">
+<div class="bg-white/5 p-3 rounded-xl border border-white/5">
+<p class="text-[10px] text-outline uppercase">Current Runway</p>
+<p class="mono-data text-lg text-primary">8.2 Mo</p>
+</div>
+<div class="bg-white/5 p-3 rounded-xl border border-white/5">
+<p class="text-[10px] text-outline uppercase">Tax Liability</p>
+<p class="mono-data text-lg text-tertiary">$3,735</p>
+</div>
+</div>
+</div>
+</div>
+<!-- User Message -->
+<div class="flex flex-col gap-2 max-w-[85%] self-end items-end">
+<div class="flex items-center gap-2">
+<span class="text-[10px] text-outline opacity-50">10:25 AM</span>
+<span class="text-[10px] font-bold text-outline uppercase tracking-tighter">You</span>
+</div>
+<div class="bg-primary-container/20 p-4 rounded-2xl rounded-tr-none border border-primary/20">
+<p class="text-sm text-on-primary-container">That's great. What happens if I set aside 30% for taxes now? Show me the impact on my runway.</p>
+</div>
+</div>
+<!-- AI Message (Typing) -->
+<div class="flex flex-col gap-2 max-w-[90%] animate-pulse">
+<div class="flex items-center gap-2">
+<span class="text-[10px] font-bold text-primary-fixed-dim uppercase tracking-tighter">FinAdvisor AI</span>
+</div>
+<div class="glass-panel p-4 rounded-2xl rounded-tl-none border-l-2 border-l-secondary opacity-70">
+<p class="text-sm italic">Simulating scenario... recalculating tax reserves and runway projection...</p>
+</div>
+</div>
+</div>
+<!-- Input Box -->
+<div class="p-6 bg-surface-container-low border-t border-outline-variant/20">
+<div class="relative flex items-center">
+<input class="w-full bg-surface-container-lowest border border-outline-variant/50 rounded-xl px-4 py-3 text-sm focus:ring-2 focus:ring-primary focus:border-transparent transition-all pr-12 text-on-surface" placeholder="Ask about your finances..." type="text">
+<button class="absolute right-2 p-2 bg-primary text-on-primary rounded-lg active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Right Section: Simulation & Insight Panel -->
+<section class="flex-1 bg-surface relative overflow-y-auto scroll-hide">
+<!-- Background Decoration -->
+<div class="absolute top-0 right-0 w-96 h-96 bg-primary/5 blur-[120px] rounded-full -z-10"></div>
+<div class="absolute bottom-0 left-0 w-64 h-64 bg-secondary/5 blur-[100px] rounded-full -z-10"></div>
+<div class="p-8 space-y-8 max-w-6xl mx-auto">
+<!-- Header Stats -->
+<div class="flex justify-between items-end">
+<div>
+<h1 class="headline-md text-on-surface mb-1">Financial Simulation</h1>
+<p class="text-on-surface-variant text-sm">Real-time impact of your financial decisions.</p>
+</div>
+<div class="flex gap-4">
+<div class="text-right">
+<p class="text-[10px] text-outline uppercase tracking-widest">Active Scenario</p>
+<p class="text-sm font-bold text-secondary">30% Tax Reserve Plan</p>
+</div>
+</div>
+</div>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Main Chart: Runway Projection -->
+<div class="col-span-12 lg:col-span-8 glass-panel p-6 rounded-3xl relative overflow-hidden group">
+<div class="flex justify-between items-start mb-6">
+<div>
+<h3 class="text-lg font-semibold text-on-surface">Runway Projection</h3>
+<p class="text-xs text-on-surface-variant">Predicted cash-on-hand sustainability</p>
+</div>
+<span class="px-3 py-1 bg-green-500/10 text-green-400 text-[10px] font-bold rounded-full border border-green-500/20 uppercase">Growth Mode</span>
+</div>
+<div class="h-64 flex items-end justify-between gap-2 px-2">
+<!-- Simple Bar Chart Visualization -->
+<div class="w-full bg-white/5 rounded-t-lg relative group/bar" style="height: 40%;">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 text-[10px] font-mono text-outline opacity-0 group-hover/bar:opacity-100 transition-opacity">JAN</div>
+<div class="absolute bottom-0 w-full bg-primary-container/40 rounded-t-lg transition-all duration-700" style="height: 60%"></div>
+</div>
+<div class="w-full bg-white/5 rounded-t-lg relative group/bar" style="height: 45%;">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 text-[10px] font-mono text-outline opacity-0 group-hover/bar:opacity-100 transition-opacity">FEB</div>
+<div class="absolute bottom-0 w-full bg-primary-container/50 rounded-t-lg transition-all duration-700" style="height: 75%"></div>
+</div>
+<div class="w-full bg-white/5 rounded-t-lg relative group/bar" style="height: 55%;">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 text-[10px] font-mono text-outline opacity-0 group-hover/bar:opacity-100 transition-opacity">MAR</div>
+<div class="absolute bottom-0 w-full bg-primary-container/60 rounded-t-lg transition-all duration-700" style="height: 85%"></div>
+</div>
+<div class="w-full bg-white/5 rounded-t-lg relative group/bar" style="height: 50%;">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 text-[10px] font-mono text-outline opacity-0 group-hover/bar:opacity-100 transition-opacity">APR</div>
+<div class="absolute bottom-0 w-full bg-primary-container/70 rounded-t-lg transition-all duration-700" style="height: 70%"></div>
+</div>
+<div class="w-full bg-white/5 rounded-t-lg relative group/bar" style="height: 65%;">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 text-[10px] font-mono text-outline opacity-0 group-hover/bar:opacity-100 transition-opacity">MAY</div>
+<div class="absolute bottom-0 w-full bg-primary-container/80 rounded-t-lg transition-all duration-700" style="height: 95%"></div>
+</div>
+<div class="w-full bg-white/5 rounded-t-lg relative group/bar" style="height: 80%;">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 text-[10px] font-mono text-outline opacity-0 group-hover/bar:opacity-100 transition-opacity">JUN</div>
+<div class="absolute bottom-0 w-full bg-primary rounded-t-lg transition-all duration-700 shadow-[0_0_20px_rgba(46,91,255,0.3)]" style="height: 100%"></div>
+</div>
+</div>
+</div>
+<!-- Side Stat: Tax Reserve Action -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-6">
+<div class="flex-1 glass-panel p-6 rounded-3xl border-t-2 border-t-tertiary overflow-hidden flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-tertiary">account_balance_wallet</span>
+<h3 class="text-sm font-bold uppercase tracking-wider text-outline">Set Aside Reserve</h3>
+</div>
+<p class="mono-data text-4xl font-bold text-on-surface">$3,735.00</p>
+<p class="text-xs text-outline-variant mt-2 leading-relaxed">We recommend moving this amount to your tax sub-account based on your income this month.</p>
+</div>
+<button class="mt-6 w-full bg-tertiary-container hover:bg-tertiary transition-colors text-on-tertiary-container font-bold py-3 rounded-xl flex items-center justify-center gap-2 group active:scale-95">
+                                Execute Transfer
+                                <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+<!-- Mini Stat: Quarterly Progress -->
+<div class="glass-panel p-6 rounded-3xl bg-gradient-to-br from-secondary/10 to-transparent">
+<h3 class="text-[10px] font-bold text-outline uppercase tracking-widest mb-4">Q3 Target Progress</h3>
+<div class="flex items-center justify-between mb-2">
+<span class="mono-data text-xl text-on-surface">78%</span>
+<span class="text-[10px] text-green-400 font-bold">+4.2% today</span>
+</div>
+<div class="w-full h-2 bg-white/5 rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 78%"></div>
+</div>
+</div>
+</div>
+<!-- Row 2: Expense Insights & Actionables -->
+<div class="col-span-12 lg:col-span-6 glass-panel p-8 rounded-3xl flex flex-col justify-between group">
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20">
+<span class="material-symbols-outlined text-primary">auto_awesome</span>
+</div>
+<div>
+<h3 class="text-lg font-semibold text-on-surface">Optimization Tip</h3>
+<p class="text-xs text-outline">Identified by FinAdvisor AI</p>
+</div>
+</div>
+</div>
+<p class="text-on-surface-variant mb-8 italic">"You've paid for 3 redundant design subscriptions this month. Canceling these would extend your runway by <span class="text-primary font-bold">12 days</span> annually."</p>
+<div class="flex gap-3">
+<button class="flex-1 bg-white/5 hover:bg-white/10 text-on-surface text-sm font-semibold py-2.5 rounded-xl border border-white/10 transition-all active:scale-95">View Subscriptions</button>
+<button class="flex-1 bg-primary text-on-primary text-sm font-semibold py-2.5 rounded-xl transition-all shadow-lg shadow-primary/20 hover:shadow-primary/40 active:scale-95">Automate Cancel</button>
+</div>
+</div>
+<!-- Row 2: Future Outlook Card -->
+<div class="col-span-12 lg:col-span-6 bg-slate-900/40 border border-white/5 rounded-3xl p-8 flex gap-8 items-center group overflow-hidden relative">
+<div class="relative z-10 space-y-4">
+<h3 class="text-2xl font-bold ai-gradient-text">Projected Q4 Exit</h3>
+<p class="text-sm text-outline-variant max-w-[200px]">Based on current trends, your end-of-year cash position is estimated at:</p>
+<div class="mono-data text-4xl font-bold text-on-surface">$54,280.00</div>
+</div>
+<div class="flex-1 h-full relative">
+<!-- Abstract AI Visualizer -->
+<div class="absolute inset-0 flex items-center justify-center opacity-30 group-hover:opacity-50 transition-opacity">
+<div class="w-32 h-32 rounded-full border-2 border-primary/30 animate-[ping_3s_infinite] absolute"></div>
+<div class="w-32 h-32 rounded-full border-2 border-secondary/30 animate-[ping_4s_infinite_1s] absolute"></div>
+<span class="material-symbols-outlined text-6xl text-primary/50" style="font-variation-settings: 'FILL' 1;">insights</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Visible only on mobile but included for shell consistency) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-slate-950/80 backdrop-blur-2xl border-t border-white/10 rounded-t-[24px] shadow-[0_-8px_30px_rgb(0,0,0,0.5)]">
+<div class="flex flex-col items-center justify-center text-slate-500 opacity-70">
+<span class="material-symbols-outlined">grid_view</span>
+<span class="text-[10px] font-semibold uppercase tracking-widest mt-1">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 opacity-70">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-[10px] font-semibold uppercase tracking-widest mt-1">Cashflow</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-blue-500/10 text-blue-400 rounded-2xl px-4 py-1.5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)]">
+<span class="material-symbols-outlined">auto_awesome</span>
+<span class="text-[10px] font-semibold uppercase tracking-widest mt-1">AI Advisor</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 opacity-70">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-semibold uppercase tracking-widest mt-1">Profile</span>
+</div>
+</nav>
+<script>
+        // Micro-interactions for input focus
+        const chatInput = document.querySelector('input');
+        const chatContainer = document.querySelector('.scroll-hide');
+
+        chatInput.addEventListener('focus', () => {
+            chatInput.parentElement.classList.add('scale-[1.01]');
+            chatInput.parentElement.classList.add('transition-transform');
+        });
+
+        chatInput.addEventListener('blur', () => {
+            chatInput.parentElement.classList.remove('scale-[1.01]');
+        });
+
+        // Simple mock for "sending" a message
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' && chatInput.value.trim() !== '') {
+                const val = chatInput.value;
+                const userMsg = `
+                    <div class="flex flex-col gap-2 max-w-[85%] self-end items-end animate-in slide-in-from-right-4 duration-300">
+                        <div class="flex items-center gap-2">
+                            <span class="text-[10px] text-outline opacity-50">Just now</span>
+                            <span class="text-[10px] font-bold text-outline uppercase tracking-tighter">You</span>
+                        </div>
+                        <div class="bg-primary-container/20 p-4 rounded-2xl rounded-tr-none border border-primary/20">
+                            <p class="text-sm text-on-primary-container">${val}</p>
+                        </div>
+                    </div>
+                `;
+                chatContainer.insertAdjacentHTML('beforeend', userMsg);
+                chatInput.value = '';
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }
+        });
+    </script>
+</body></html>

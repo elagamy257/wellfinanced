@@ -1,0 +1,335 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Asset Registry | FinAI Intelligence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-fixed-dim": "#b8c3ff",
+                    "outline-variant": "#434656",
+                    "tertiary-fixed": "#ffdbcf",
+                    "inverse-on-surface": "#2e303a",
+                    "primary-fixed": "#dde1ff",
+                    "on-primary-fixed-variant": "#0035be",
+                    "primary-container": "#2e5bff",
+                    "on-error": "#690005",
+                    "secondary-fixed": "#efdbff",
+                    "primary": "#b8c3ff",
+                    "surface-container-lowest": "#0c0e17",
+                    "outline": "#8e90a2",
+                    "background": "#11131c",
+                    "secondary": "#dcb8ff",
+                    "on-secondary-fixed-variant": "#6700b5",
+                    "on-surface": "#e2e1ef",
+                    "on-secondary": "#480081",
+                    "secondary-container": "#7701d0",
+                    "inverse-surface": "#e2e1ef",
+                    "surface-variant": "#33343e",
+                    "error": "#ffb4ab",
+                    "on-primary-fixed": "#001356",
+                    "surface-tint": "#b8c3ff",
+                    "tertiary-container": "#c24100",
+                    "on-tertiary-fixed": "#380d00",
+                    "surface": "#11131c",
+                    "error-container": "#93000a",
+                    "surface-container": "#1d1f29",
+                    "on-secondary-container": "#dcb7ff",
+                    "tertiary-fixed-dim": "#ffb59b",
+                    "on-primary": "#002388",
+                    "tertiary": "#ffb59b",
+                    "on-background": "#e2e1ef",
+                    "inverse-primary": "#124af0",
+                    "surface-bright": "#373943",
+                    "on-primary-container": "#efefff",
+                    "on-surface-variant": "#c4c5d9",
+                    "on-tertiary-container": "#ffece6",
+                    "on-error-container": "#ffdad6",
+                    "surface-container-highest": "#33343e",
+                    "secondary-fixed-dim": "#dcb8ff",
+                    "on-secondary-fixed": "#2c0051",
+                    "surface-container-high": "#282933",
+                    "on-tertiary-fixed-variant": "#812800",
+                    "surface-container-low": "#191b24",
+                    "surface-dim": "#11131c",
+                    "on-tertiary": "#5b1a00"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "display": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"],
+                    "mono": ["Space Grotesk"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #11131c;
+            color: #e2e1ef;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+        .glass-panel {
+            background: rgba(29, 31, 41, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.2);
+        }
+        .glass-card-hover:hover {
+            background: rgba(46, 91, 255, 0.05);
+            border: 1px solid rgba(46, 91, 255, 0.3);
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+        .inner-glow {
+            box-shadow: inset 0 0 20px rgba(46, 91, 255, 0.1);
+        }
+        .neon-border-primary {
+            border-left: 4px solid #2e5bff;
+        }
+        .sparkline {
+            fill: none;
+            stroke: #b8c3ff;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-icon {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-xl border-b border-white/10 flex items-center justify-between px-5 h-16 shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+<img class="w-full h-full object-cover" data-alt="A professional high-contrast portrait of a tech-focused freelancer with sharp lighting against a dark navy digital backdrop, echoing a premium cyber-aesthetic with subtle purple and blue rim lights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoozHICTy15XbCWVjcRtBGO2Kx3kEaOSnZgYo4eVNH37MfbKwpJKMO-Lay-P8t1xBXrp-LZF4UX_Kcd-MHvL5dY-QLboSWSwnR_E-qC-z3kIZkzbkOCbu9mynXG2dLunodd9XuMrWUi5iJcrV-HyoiuNU0ylbksTBvpkYJJNWYm7EVoI6gILDyAgMdSLoFbr34UiwwsvRMY5OFSwIP2sHhYm7IoBABTv1Kzqf9x-_JIrXRKa2QwuDdPPWdN3HD7blg0IZPNnDCToM">
+</div>
+<h1 class="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">FinAI Intelligence</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8 font-inter text-sm font-semibold tracking-tight">
+<a class="text-blue-400 hover:bg-white/5 transition-colors active:scale-95 duration-150 px-3 py-1 rounded-md" href="#">Reports</a>
+<a class="text-slate-400 hover:bg-white/5 transition-colors active:scale-95 duration-150 px-3 py-1 rounded-md" href="#">History</a>
+<a class="text-slate-400 hover:bg-white/5 transition-colors active:scale-95 duration-150 px-3 py-1 rounded-md" href="#">Support</a>
+</nav>
+<div class="flex items-center gap-3">
+<button class="p-2 text-blue-500 hover:bg-white/5 transition-colors rounded-full material-symbols-outlined">search</button>
+<button class="md:hidden p-2 text-blue-500 hover:bg-white/5 transition-colors rounded-full material-symbols-outlined">menu</button>
+</div>
+</header>
+<div class="flex flex-1 pt-16 h-screen overflow-hidden">
+<!-- Sidebar Navigation Drawer -->
+<aside class="hidden lg:flex flex-col w-80 bg-slate-900 h-full py-8 px-6 border-r border-white/5 shadow-2xl overflow-y-auto">
+<div class="mb-10 flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-container to-secondary-container flex items-center justify-center shadow-lg">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">analytics</span>
+</div>
+<div>
+<h2 class="text-lg font-black text-white leading-none">Alex Rivera</h2>
+<p class="text-xs text-slate-400 mt-1">Pro Freelancer Tier</p>
+</div>
+</div>
+<!-- Precision Wealth Tracking Section -->
+<div class="mb-10 p-5 rounded-2xl bg-surface-container-high/50 border border-white/10 inner-glow">
+<p class="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-1">Total Registry Value</p>
+<div class="text-2xl font-mono text-white">$1,420,950.00</div>
+<div class="mt-4 flex items-center justify-between">
+<div class="text-xs text-slate-400">Yield Progress</div>
+<div class="text-xs font-bold text-green-400">+12.4%</div>
+</div>
+<div class="mt-2 w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+<div class="bg-gradient-to-r from-blue-500 to-purple-500 h-full w-3/4 rounded-full"></div>
+</div>
+</div>
+<button class="w-full py-4 rounded-xl bg-primary-container text-white font-bold flex items-center justify-center gap-2 mb-8 hover:brightness-110 active:scale-95 transition-all shadow-lg shadow-primary-container/20">
+<span class="material-symbols-outlined">add_circle</span>
+                Register New Asset
+            </button>
+<nav class="space-y-2">
+<div class="flex items-center gap-3 px-4 py-3 bg-blue-600/20 text-blue-400 border-l-4 border-blue-500 rounded-r-lg font-inter text-sm">
+<span class="material-symbols-outlined">inventory_2</span>
+                    Asset Registry
+                </div>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 hover:translate-x-1 transition-all rounded-lg font-inter text-sm" href="#">
+<span class="material-symbols-outlined">shield</span>
+                    Account Security
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 hover:translate-x-1 transition-all rounded-lg font-inter text-sm" href="#">
+<span class="material-symbols-outlined">settings_input_component</span>
+                    API Settings
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 hover:translate-x-1 transition-all rounded-lg font-inter text-sm" href="#">
+<span class="material-symbols-outlined">cloud_download</span>
+                    Export History
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:bg-white/5 hover:translate-x-1 transition-all rounded-lg font-inter text-sm" href="#">
+<span class="material-symbols-outlined">lock</span>
+                    Privacy Policy
+                </a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 overflow-y-auto bg-slate-950 p-6 md:p-10 pb-32">
+<div class="max-w-6xl mx-auto">
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+<div>
+<h2 class="text-4xl font-black text-white tracking-tight mb-2">Portfolio Overview</h2>
+<p class="text-slate-400">Centralized management of your premium registered holdings.</p>
+</div>
+<div class="flex gap-3">
+<div class="px-4 py-2 bg-surface-container-high rounded-full border border-white/5 flex items-center gap-2 text-sm text-slate-300">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                            AI Analysis Live
+                        </div>
+</div>
+</div>
+<!-- Asset Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6">
+<!-- Asset Card: Real Estate -->
+<div class="glass-panel glass-card-hover rounded-2xl p-6 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-blue-500"></div>
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-blue-400">
+<span class="material-symbols-outlined text-3xl">apartment</span>
+</div>
+<div>
+<h3 class="text-lg font-bold text-white">Austin Tech Loft</h3>
+<p class="text-xs text-slate-500 font-mono">RE-442-901</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-green-500/10 text-green-400 text-[10px] font-bold uppercase tracking-wider">Active</span>
+</div>
+<div class="flex items-end justify-between">
+<div>
+<p class="text-xs text-slate-500 mb-1">Current Value</p>
+<div class="text-2xl font-black text-white">$840,000</div>
+</div>
+<div class="w-32 h-12">
+<svg class="sparkline w-full h-full" viewBox="0 0 100 30">
+<path d="M0,25 L10,22 L20,24 L30,15 L40,18 L50,10 L60,12 L70,5 L80,8 L90,2 L100,0" stroke="#4ade80"></path>
+</svg>
+</div>
+</div>
+</div>
+<!-- Asset Card: Securities -->
+<div class="glass-panel glass-card-hover rounded-2xl p-6 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-purple-500"></div>
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-purple-400">
+<span class="material-symbols-outlined text-3xl">show_chart</span>
+</div>
+<div>
+<h3 class="text-lg font-bold text-white">Index Portfolio Alpha</h3>
+<p class="text-xs text-slate-500 font-mono">SEC-881-X</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-green-500/10 text-green-400 text-[10px] font-bold uppercase tracking-wider">Active</span>
+</div>
+<div class="flex items-end justify-between">
+<div>
+<p class="text-xs text-slate-500 mb-1">Current Value</p>
+<div class="text-2xl font-black text-white">$312,450</div>
+</div>
+<div class="w-32 h-12">
+<svg class="sparkline w-full h-full" viewBox="0 0 100 30">
+<path d="M0,15 L20,20 L40,10 L60,15 L80,5 L100,2" stroke="#a855f7"></path>
+</svg>
+</div>
+</div>
+</div>
+<!-- Asset Card: Equipment -->
+<div class="glass-panel glass-card-hover rounded-2xl p-6 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-yellow-500"></div>
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-yellow-400">
+<span class="material-symbols-outlined text-3xl">precision_manufacturing</span>
+</div>
+<div>
+<h3 class="text-lg font-bold text-white">GPU Render Farm V2</h3>
+<p class="text-xs text-slate-500 font-mono">EQ-551-77</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-yellow-500/10 text-yellow-400 text-[10px] font-bold uppercase tracking-wider">Impaired</span>
+</div>
+<div class="flex items-end justify-between">
+<div>
+<p class="text-xs text-slate-500 mb-1">Current Value</p>
+<div class="text-2xl font-black text-white">$145,000</div>
+</div>
+<div class="w-32 h-12">
+<svg class="sparkline w-full h-full" viewBox="0 0 100 30">
+<path d="M0,5 L20,8 L40,15 L60,20 L80,25 L100,28" stroke="#eab308"></path>
+</svg>
+</div>
+</div>
+</div>
+<!-- Asset Card: IP/Software -->
+<div class="glass-panel glass-card-hover rounded-2xl p-6 relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-pink-500"></div>
+<div class="flex justify-between items-start mb-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-slate-800 flex items-center justify-center text-pink-400">
+<span class="material-symbols-outlined text-3xl">terminal</span>
+</div>
+<div>
+<h3 class="text-lg font-bold text-white">Neural Engine IP</h3>
+<p class="text-xs text-slate-500 font-mono">SW-IP-009</p>
+</div>
+</div>
+<span class="px-2.5 py-1 rounded-full bg-slate-500/10 text-slate-400 text-[10px] font-bold uppercase tracking-wider">Disposed</span>
+</div>
+<div class="flex items-end justify-between">
+<div>
+<p class="text-xs text-slate-500 mb-1">Current Value</p>
+<div class="text-2xl font-black text-white">$123,500</div>
+</div>
+<div class="w-32 h-12 opacity-50">
+<svg class="sparkline w-full h-full" viewBox="0 0 100 30">
+<path d="M0,10 L25,10 L50,10 L75,10 L100,10" stroke="#ec4899"></path>
+</svg>
+</div>
+</div>
+</div>
+</div>
+<!-- Bento Style Insights -->
+<div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="col-span-1 md:col-span-2 glass-panel rounded-2xl p-8 overflow-hidden relative">
+
+<div class="relative z-10">
+<h4 class="text-xl font-bold text-white mb-4">AI Market Forecasting</h4>
+<p class="text-slate-400 max-w-md mb-6">Based on your portfolio diversity, the AI suggests rebalancing Equipment holdings into liquid Securities before Q3 depreciation cycles begin.</p>
+<button class="px-6 py-2 bg-blue-500/10 border border-blue-500/30 text-blue-400 rounded-full font-bold text-sm hover:bg-blue-500/20 transition-all">View Strategy</button>
+</div>
+</div>
+<div class="glass-panel rounded-2xl p-8 flex flex-col justify-between">
+<div>
+<h4 class="text-lg font-bold text-white mb-2">Liquidity Score</h4>
+<p class="text-xs text-slate-500">Current registry convertibility rating</p>
+</div>
+<div class="flex items-center justify-center py-4">
+<div class="relative w-24 h-24">
+<svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+<path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#1e293b" stroke-width="3"></path>
+</svg></div></div></div></div></div></main></div></body></html>

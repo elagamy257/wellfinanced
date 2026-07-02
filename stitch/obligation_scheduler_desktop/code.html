@@ -1,0 +1,319 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Obligation Scheduler | FinAI Intelligence</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#b8c3ff",
+                        "outline-variant": "#434656",
+                        "tertiary-fixed": "#ffdbcf",
+                        "inverse-on-surface": "#2e303a",
+                        "primary-fixed": "#dde1ff",
+                        "on-primary-fixed-variant": "#0035be",
+                        "primary-container": "#2e5bff",
+                        "on-error": "#690005",
+                        "secondary-fixed": "#efdbff",
+                        "primary": "#b8c3ff",
+                        "surface-container-lowest": "#0c0e17",
+                        "outline": "#8e90a2",
+                        "background": "#11131c",
+                        "secondary": "#dcb8ff",
+                        "on-secondary-fixed-variant": "#6700b5",
+                        "on-surface": "#e2e1ef",
+                        "on-secondary": "#480081",
+                        "secondary-container": "#7701d0",
+                        "inverse-surface": "#e2e1ef",
+                        "surface-variant": "#33343e",
+                        "error": "#ffb4ab",
+                        "on-primary-fixed": "#001356",
+                        "surface-tint": "#b8c3ff",
+                        "tertiary-container": "#c24100",
+                        "on-tertiary-fixed": "#380d00",
+                        "surface": "#11131c",
+                        "error-container": "#93000a",
+                        "surface-container": "#1d1f29",
+                        "on-secondary-container": "#dcb7ff",
+                        "tertiary-fixed-dim": "#ffb59b",
+                        "on-primary": "#002388",
+                        "tertiary": "#ffb59b",
+                        "on-background": "#e2e1ef",
+                        "inverse-primary": "#124af0",
+                        "surface-bright": "#373943",
+                        "on-primary-container": "#efefff",
+                        "on-surface-variant": "#c4c5d9",
+                        "on-tertiary-container": "#ffece6",
+                        "on-error-container": "#ffdad6",
+                        "surface-container-highest": "#33343e",
+                        "secondary-fixed-dim": "#dcb8ff",
+                        "on-secondary-fixed": "#2c0051",
+                        "surface-container-high": "#282933",
+                        "on-tertiary-fixed-variant": "#812800",
+                        "surface-container-low": "#191b24",
+                        "surface-dim": "#11131c",
+                        "on-tertiary": "#5b1a00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "display": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"],
+                        "mono": ["Space Grotesk"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(29, 31, 41, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        .ai-gradient-text {
+            background: linear-gradient(to right, #b8c3ff, #dcb8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .inner-glow {
+            box-shadow: inset 0 0 20px rgba(46, 91, 255, 0.15);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .rim-light {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        input:focus, select:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #2e5bff;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen selection:bg-primary-container selection:text-white">
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 w-full z-50 bg-slate-950/80 backdrop-blur-xl border-b border-white/10 flex items-center justify-between px-8 h-16 shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
+<div class="flex items-center gap-4">
+<span class="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">FinAI Intelligence</span>
+<nav class="hidden md:flex gap-6 ml-8">
+<a class="text-blue-400 font-inter text-sm font-semibold tracking-tight hover:bg-white/5 transition-colors px-3 py-1 rounded-lg" href="#">Home</a>
+<a class="text-slate-400 font-inter text-sm font-semibold tracking-tight hover:bg-white/5 transition-colors px-3 py-1 rounded-lg" href="#">History</a>
+<a class="text-slate-400 font-inter text-sm font-semibold tracking-tight hover:bg-white/5 transition-colors px-3 py-1 rounded-lg" href="#">AI Insights</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-slate-400 hover:text-white transition-colors">search</button>
+<div class="w-8 h-8 rounded-full overflow-hidden border border-primary/20">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a high-tech freelancer in a dimly lit studio with subtle blue neon backlighting. The person has a focused expression, representing an intelligent and tech-forward partner. The overall aesthetic is premium and modern, matching the Cyber Freelance AI brand's deep navy and electric blue palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmhSoSoljwqWppSXk0gbUxKZtRZbz1F6A0F4W4ejwxMbR-vN0KCpO8BQ8scZgNy4m_Yy49alK9zpc53YiUJgkr7QwxSh_8WdrurYvLiTMLPqIT__HOwTJOw7XANPWNnuHKSeprpQNJdTYT2MmQu24_e6MJ-_XfPzMpvno7cuBV4wdzQV26K2cXNN3NIxgcVgDJtnLp3ETTRhBSxElzQ_D9ZNhwmOseK-B6Dr5k20F0QMm6gQ-6aL4ORvDyX-huimy-TNPHHiRH-qY">
+</div>
+</div>
+</header>
+<main class="pt-24 pb-12 px-6 lg:px-12 max-w-[1600px] mx-auto">
+<!-- Header Section -->
+<div class="mb-10">
+<h1 class="text-4xl md:text-5xl font-black tracking-tighter mb-2 ai-gradient-text">Obligation Scheduler</h1>
+<p class="text-on-surface-variant max-w-2xl text-lg">Define and automate your financial commitments with our neural-optimized sequencing engine.</p>
+</div>
+<!-- Main Workspace: Bento Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- Left Column: Obligation Details -->
+<section class="lg:col-span-4 space-y-6">
+<div class="glass-panel p-8 rounded-xl rim-light">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary">description</span>
+<h2 class="text-xl font-bold">Obligation Details</h2>
+</div>
+<div class="space-y-5">
+<div class="flex flex-col gap-2">
+<label class="text-xs font-bold uppercase tracking-widest text-outline">Obligation Name</label>
+<input class="bg-surface-container-lowest border-outline-variant text-on-surface p-4 rounded-lg focus:ring-2 focus:ring-primary-container transition-all" placeholder="e.g., Cloud Infrastructure Retainer" type="text">
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-xs font-bold uppercase tracking-widest text-outline">Amount ($)</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 text-primary font-mono">$</span>
+<input class="w-full bg-surface-container-lowest border-outline-variant text-on-surface p-4 pl-10 rounded-lg font-mono text-xl focus:ring-2 focus:ring-primary-container transition-all" placeholder="0.00" type="number">
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-xs font-bold uppercase tracking-widest text-outline">Priority Level</label>
+<div class="grid grid-cols-3 gap-2">
+<button class="px-4 py-3 rounded-lg bg-surface-container-high text-sm font-semibold border border-transparent hover:border-primary-container transition-all active:scale-95">Low</button>
+<button class="px-4 py-3 rounded-lg bg-primary-container text-white text-sm font-bold border border-primary/50 shadow-[0_0_15px_rgba(46,91,255,0.3)] active:scale-95">Medium</button>
+<button class="px-4 py-3 rounded-lg bg-surface-container-high text-sm font-semibold border border-transparent hover:border-error transition-all active:scale-95">Critical</button>
+</div>
+</div>
+</div>
+</div>
+<div class="glass-panel p-8 rounded-xl rim-light overflow-hidden relative group h-64">
+<div class="absolute inset-0 bg-gradient-to-br from-primary-container/20 to-transparent opacity-50"></div>
+<div class="relative z-10">
+<h3 class="font-bold text-lg mb-2">Smart Allocation</h3>
+<p class="text-sm text-on-surface-variant mb-4">AI suggests prioritizing this obligation to maintain a 98% liquidity health score.</p>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="h-full bg-gradient-to-r from-primary to-secondary w-3/4 rounded-full shadow-[0_0_10px_rgba(184,195,255,0.5)]"></div>
+</div>
+</div>
+<!-- Decorative Element -->
+<div class="absolute bottom-[-20px] right-[-20px] w-40 h-40 opacity-20 pointer-events-none">
+<span class="material-symbols-outlined text-[120px] text-primary">monitoring</span>
+</div>
+</div>
+</section>
+<!-- Right Column: Recursive Logic -->
+<section class="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Logic Controls -->
+<div class="glass-panel p-8 rounded-xl rim-light md:col-span-2">
+<div class="flex items-center justify-between mb-8">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">autorenew</span>
+<h2 class="text-xl font-bold">Recursive Logic</h2>
+</div>
+<div class="flex bg-surface-container-lowest p-1 rounded-xl">
+<button class="px-6 py-2 rounded-lg bg-surface-container-high text-sm font-bold shadow-sm">Monthly</button>
+<button class="px-6 py-2 rounded-lg text-sm font-semibold text-outline hover:text-on-surface transition-all">Weekly</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+<div class="space-y-6">
+<div>
+<label class="text-xs font-bold uppercase tracking-widest text-outline mb-4 block">Weekday Selection</label>
+<div class="flex flex-wrap gap-2">
+<button class="w-12 h-12 rounded-xl bg-surface-container-high border border-outline-variant/30 flex items-center justify-center font-bold text-sm hover:border-primary-container transition-all">M</button>
+<button class="w-12 h-12 rounded-xl bg-surface-container-high border border-outline-variant/30 flex items-center justify-center font-bold text-sm hover:border-primary-container transition-all">T</button>
+<button class="w-12 h-12 rounded-xl bg-primary-container/20 border-2 border-primary-container flex items-center justify-center font-bold text-sm text-primary shadow-[0_0_10px_rgba(46,91,255,0.2)]">W</button>
+<button class="w-12 h-12 rounded-xl bg-surface-container-high border border-outline-variant/30 flex items-center justify-center font-bold text-sm hover:border-primary-container transition-all">T</button>
+<button class="w-12 h-12 rounded-xl bg-primary-container/20 border-2 border-primary-container flex items-center justify-center font-bold text-sm text-primary shadow-[0_0_10px_rgba(46,91,255,0.2)]">F</button>
+<button class="w-12 h-12 rounded-xl bg-surface-container-high border border-outline-variant/30 flex items-center justify-center font-bold text-sm opacity-40">S</button>
+<button class="w-12 h-12 rounded-xl bg-surface-container-high border border-outline-variant/30 flex items-center justify-center font-bold text-sm opacity-40">S</button>
+</div>
+</div>
+<div>
+<label class="text-xs font-bold uppercase tracking-widest text-outline mb-4 block">Fulfillment Window</label>
+<div class="flex items-center gap-4">
+<select class="bg-surface-container-lowest border-outline-variant text-on-surface px-4 py-3 rounded-lg flex-1">
+<option>09:00 AM</option>
+<option>12:00 PM</option>
+<option>03:00 PM</option>
+</select>
+<span class="text-outline">to</span>
+<select class="bg-surface-container-lowest border-outline-variant text-on-surface px-4 py-3 rounded-lg flex-1">
+<option>05:00 PM</option>
+<option>08:00 PM</option>
+<option>11:59 PM</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Neural Preview -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 border border-white/5 flex flex-col relative overflow-hidden group">
+<div class="absolute inset-0 pointer-events-none opacity-20 group-hover:opacity-40 transition-opacity">
+
+</div>
+<div class="relative z-10 flex flex-col h-full">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-secondary animate-pulse" style="font-variation-settings: 'FILL' 1;">psychology</span>
+<h3 class="text-sm font-bold uppercase tracking-tight text-on-surface-variant">Neural Sequence Preview</h3>
+</div>
+<div class="space-y-3 flex-grow font-mono text-[11px] text-primary-fixed-dim/80">
+<p class="animate-pulse">Analyzing liquidity flow...</p>
+<p class="pl-2 border-l border-primary/30">&gt; Optimized gap found: Wednesday Q3</p>
+<p class="pl-2 border-l border-primary/30">&gt; Fulfillment risk: <span class="text-green-400">Low (2.4%)</span></p>
+<p class="pl-2 border-l border-primary/30">&gt; Priority index: 0.887</p>
+</div>
+<div class="mt-4 pt-4 border-t border-white/10">
+<div class="flex justify-between items-end">
+<span class="text-xs text-outline">Confidence Score</span>
+<span class="text-xl font-bold text-on-surface">98.4%</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Summary & CTA -->
+<div class="glass-panel p-8 rounded-xl rim-light flex flex-col justify-between h-full">
+<div>
+<h3 class="text-sm font-bold text-outline uppercase tracking-widest mb-4">Schedule Impact</h3>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">Annual Total</span>
+<span class="font-mono font-bold text-lg">$14,200.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-on-surface-variant">Next Execution</span>
+<span class="font-bold text-primary">Oct 25, 2023</span>
+</div>
+</div>
+</div>
+<div class="mt-8 flex items-center gap-2 text-xs text-outline italic">
+<span class="material-symbols-outlined text-[14px]">info</span>
+                        AI will automatically adjust timing for public holidays.
+                    </div>
+</div>
+<div class="glass-panel p-8 rounded-xl rim-light border-primary-container/30 bg-primary-container/5 flex flex-col justify-center items-center text-center">
+<button class="w-full bg-gradient-to-r from-primary-container to-secondary-container text-white py-5 px-8 rounded-xl font-black text-lg tracking-tight shadow-[0_10px_30px_rgba(46,91,255,0.4)] hover:shadow-[0_15px_40px_rgba(119,1,208,0.5)] transform hover:-translate-y-1 active:scale-95 transition-all duration-300">
+                        Generate Obligation Schedule
+                    </button>
+<p class="mt-4 text-sm text-on-surface-variant">Finalize parameters to deploy to ledger.</p>
+</div>
+</section>
+</div>
+</main>
+<!-- Side Navigation Shell (Hidden on Mobile) -->
+<aside class="fixed left-0 top-0 h-full w-20 hidden xl:flex flex-col items-center py-20 bg-slate-950/40 backdrop-blur-md border-r border-white/5 z-40">
+<div class="flex flex-col gap-8">
+<button class="w-12 h-12 rounded-2xl flex items-center justify-center text-primary-fixed-dim bg-white/5 hover:bg-white/10 transition-all">
+<span class="material-symbols-outlined">dashboard</span>
+</button>
+<button class="w-12 h-12 rounded-2xl flex items-center justify-center text-primary bg-primary-container/20 border border-primary/30 shadow-[inset_0_0_10px_rgba(46,91,255,0.2)]">
+<span class="material-symbols-outlined">event_repeat</span>
+</button>
+<button class="w-12 h-12 rounded-2xl flex items-center justify-center text-slate-500 hover:text-on-surface hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</button>
+<button class="w-12 h-12 rounded-2xl flex items-center justify-center text-slate-500 hover:text-on-surface hover:bg-white/5 transition-all">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</aside>
+<!-- Footer Identity -->
+<footer class="mt-12 py-8 border-t border-white/5 text-center px-6">
+<div class="flex flex-col md:flex-row items-center justify-center gap-8 text-xs font-bold text-outline uppercase tracking-[0.2em]">
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-primary">security</span> AES-256 Encrypted</span>
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-primary">token</span> Neural Network Verified</span>
+<span class="flex items-center gap-2"><span class="material-symbols-outlined text-[14px] text-primary">hub</span> Multi-Ledger Compatible</span>
+</div>
+<p class="mt-6 text-[10px] text-slate-600 font-mono tracking-widest">© 2024 FINAI INTELLIGENCE SYSTEMS. ALL RIGHTS RESERVED.</p>
+</footer>
+<script>
+        // Simple Interaction Logic
+        document.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if(this.innerText !== "Generate Obligation Schedule") {
+                    this.parentElement.querySelectorAll('button').forEach(b => {
+                        b.classList.remove('bg-primary-container', 'text-white', 'shadow-[0_0_15px_rgba(46,91,255,0.3)]', 'border-primary-container', 'border-2', 'bg-primary-container/20', 'text-primary');
+                        b.classList.add('bg-surface-container-high', 'text-outline');
+                    });
+                    this.classList.add('bg-primary-container', 'text-white', 'shadow-[0_0_15px_rgba(46,91,255,0.3)]');
+                    this.classList.remove('bg-surface-container-high', 'text-outline');
+                }
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-fixed": "#efdbff",
+                    "on-primary": "#002388",
+                    "secondary": "#dcb8ff",
+                    "surface-container": "#1d1f29",
+                    "secondary-container": "#7701d0",
+                    "inverse-on-surface": "#2e303a",
+                    "primary": "#b8c3ff",
+                    "on-tertiary-container": "#ffece6",
+                    "on-tertiary": "#5b1a00",
+                    "on-secondary-fixed": "#2c0051",
+                    "on-primary-fixed": "#001356",
+                    "inverse-primary": "#124af0",
+                    "on-secondary-fixed-variant": "#6700b5",
+                    "surface-container-high": "#282933",
+                    "on-secondary": "#480081",
+                    "surface-variant": "#33343e",
+                    "outline": "#8e90a2",
+                    "secondary-fixed-dim": "#dcb8ff",
+                    "primary-fixed-dim": "#b8c3ff",
+                    "on-background": "#e2e1ef",
+                    "background": "#11131c",
+                    "surface-container-highest": "#33343e",
+                    "tertiary-fixed-dim": "#ffb59b",
+                    "surface": "#11131c",
+                    "on-secondary-container": "#dcb7ff",
+                    "primary-container": "#2e5bff",
+                    "on-surface": "#e2e1ef",
+                    "surface-container-lowest": "#0c0e17",
+                    "surface-container-low": "#191b24",
+                    "on-primary-container": "#efefff",
+                    "tertiary-container": "#c24100",
+                    "surface-dim": "#11131c",
+                    "tertiary-fixed": "#ffdbcf",
+                    "surface-bright": "#373943",
+                    "error-container": "#93000a",
+                    "tertiary": "#ffb59b",
+                    "on-surface-variant": "#c4c5d9",
+                    "primary-fixed": "#dde1ff",
+                    "on-primary-fixed-variant": "#0035be",
+                    "on-tertiary-fixed": "#380d00",
+                    "error": "#ffb4ab",
+                    "inverse-surface": "#e2e1ef",
+                    "outline-variant": "#434656",
+                    "on-error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#812800",
+                    "on-error": "#690005",
+                    "surface-tint": "#b8c3ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Inter"],
+                    "display": ["Inter"],
+                    "body": ["Inter"],
+                    "label": ["Inter"],
+                    "mono": ["Space Grotesk"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(29, 31, 41, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .ai-gradient-glow {
+            background: linear-gradient(135deg, #2e5bff 0%, #7701d0 100%);
+            box-shadow: 0 0 20px rgba(46, 91, 255, 0.3);
+        }
+        .node-pulse {
+            position: relative;
+        }
+        .node-pulse::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: inherit;
+            border: 1px solid #b8c3ff;
+            opacity: 0;
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.05); opacity: 0; }
+        }
+        .scroll-hide::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body min-h-screen flex overflow-hidden">
+<!-- NAVIGATION DRAWER (Persistent Sidebar) -->
+<aside class="hidden md:flex flex-col h-screen w-80 bg-slate-900 border-r border-white/5 shadow-2xl z-50">
+<div class="flex flex-col h-full py-8 px-6">
+<!-- Brand Logo -->
+<div class="mb-12">
+<h1 class="text-lg font-black text-white tracking-tighter">FIN<span class="text-primary">AI</span></h1>
+</div>
+<!-- Profile Header -->
+<div class="flex items-center space-x-4 mb-10">
+<div class="w-12 h-12 rounded-xl overflow-hidden ring-2 ring-primary/20">
+<img class="w-full h-full object-cover" data-alt="Close up professional portrait of a tech-savvy freelancer with short hair, wearing a modern dark turtleneck, set against a blurred background of a high-tech home office with blue ambient neon lighting. The aesthetic is clean, professional, and cinematic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuByH2jZxRgi13Dv0YvV_yYsNoQI41qwZN_syL29qjyR1Vg7hRaiqy2PvoL6abPYHs3aJnJq-PyWy8tIg7hZF_bdTR4E8YSAF_ZWPdjQZQJF8tH9FGRbOLQpUiWUb2y9v2BkQOSEmJBjhBlpmETBK68NkznyUAp7jWqgK3VMnemhxFG2Bkd4rbxC_SXpmrjJNkJ3BMac0yE3DfBXghDyfcyEPiOAZ0jSQrQnzB0JvhTTx6zZdrneUJCwvrH1P2UK0zcaY98D4GtVWeU"/>
+</div>
+<div>
+<p class="text-sm font-inter font-bold text-white">Alex Rivera</p>
+<p class="text-xs text-slate-400">Pro Freelancer Tier</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 space-y-2">
+<a class="flex items-center space-x-3 px-4 py-3 rounded-xl bg-blue-600/20 text-blue-400 border-l-4 border-blue-500 hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">account_balance</span>
+<span class="font-inter text-sm font-medium">Linked Accounts</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">shield</span>
+<span class="font-inter text-sm">Account Security</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">settings_input_component</span>
+<span class="font-inter text-sm">API Settings</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">cloud_download</span>
+<span class="font-inter text-sm">Export History</span>
+</a>
+<a class="flex items-center space-x-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined">lock</span>
+<span class="font-inter text-sm">Privacy Policy</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 border-t border-white/5">
+<div class="flex items-center justify-between px-2">
+<span class="text-xs font-semibold text-slate-500 uppercase tracking-widest">Status</span>
+<div class="flex items-center space-x-2">
+<span class="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
+<span class="text-xs text-white">AI Active</span>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- MAIN CONTENT CANVAS -->
+<main class="flex-1 flex flex-col relative overflow-hidden">
+<!-- TOP APP BAR -->
+<header class="fixed top-0 w-full z-40 bg-slate-950/80 backdrop-blur-xl border-b border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.3)]">
+<div class="flex items-center justify-between px-8 h-16 w-full">
+<div class="flex items-center space-x-4">
+<h2 class="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-500 bg-clip-text text-transparent">FinAI Intelligence</h2>
+</div>
+<div class="flex items-center space-x-6">
+<div class="hidden lg:flex items-center space-x-1 text-slate-400 font-inter text-sm font-semibold tracking-tight">
+<span class="material-symbols-outlined text-blue-500 text-lg">bolt</span>
+<span>Real-time Syncing</span>
+</div>
+<button class="text-slate-400 hover:bg-white/5 p-2 rounded-full transition-colors active:scale-95 duration-150">
+<span class="material-symbols-outlined">search</span>
+</button>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-xl text-xs font-bold shadow-[0_0_15px_rgba(184,195,255,0.3)] hover:brightness-110 active:scale-95 transition-all">
+                        UPGRADE
+                    </button>
+</div>
+</div>
+</header>
+<!-- CONTENT SCROLL AREA -->
+<section class="flex-1 mt-16 overflow-y-auto scroll-hide p-8 pb-32">
+<!-- AI FINANCIAL SUMMARY BANNER -->
+<div class="ai-gradient-glow rounded-3xl p-8 mb-10 relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-4 opacity-20 pointer-events-none transform group-hover:scale-110 transition-transform duration-700">
+<span class="material-symbols-outlined text-[160px]">psychology</span>
+</div>
+<div class="relative z-10 grid md:grid-cols-2 gap-8 items-center">
+<div>
+<div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full mb-4 border border-white/10">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="text-[10px] font-bold tracking-widest uppercase text-white/90">AI Intelligence Insight</span>
+</div>
+<h3 class="text-4xl font-display font-extrabold text-white mb-2 leading-tight">Total Liquidity Focus</h3>
+<p class="text-white/80 max-w-md text-sm font-medium">Your combined assets show a 12.4% growth potential this month. AI suggests rebalancing your Coinbase holdings into USD for upcoming tax liabilities.</p>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-white/10 backdrop-blur-xl p-5 rounded-2xl border border-white/10">
+<p class="text-[10px] font-bold text-white/60 uppercase tracking-widest mb-1">Total Balance</p>
+<p class="text-2xl font-mono text-white">$142,850.40</p>
+</div>
+<div class="bg-white/10 backdrop-blur-xl p-5 rounded-2xl border border-white/10">
+<p class="text-[10px] font-bold text-white/60 uppercase tracking-widest mb-1">Weekly Delta</p>
+<p class="text-2xl font-mono text-green-400">+ $4,210.00</p>
+</div>
+</div>
+</div>
+</div>
+<!-- SECTION HEADER -->
+<div class="flex items-center justify-between mb-8">
+<div>
+<h4 class="text-2xl font-headline font-semibold text-white">Linked Account Nodes</h4>
+<p class="text-on-surface-variant text-sm mt-1">Manage and monitor your decentralized financial network.</p>
+</div>
+<button class="flex items-center space-x-2 bg-primary-container text-on-primary-container px-6 py-3 rounded-xl font-bold hover:brightness-110 active:scale-95 transition-all shadow-lg group">
+<span class="material-symbols-outlined">add_link</span>
+<span>Link New Account</span>
+</button>
+</div>
+<!-- BENTO GRID OF NODES -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- NODE: CHASE -->
+<div class="glass-card p-6 rounded-3xl group hover:border-primary/40 transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center ring-1 ring-white/10 group-hover:ring-primary/50 transition-all">
+<img class="w-10 h-10 object-contain" data-alt="Minimalist abstract bank logo icon with blue geometric shapes and clean professional banking aesthetic on a dark background, high resolution digital render." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1Dy0Hzhn7SXlf06KWC3r6BjK8zdp4KnNiuHND_UiCQ0B2U511axuoiRiYuVP0Oid9UmCSFvM3zBQPRozHfdOSvKZccePbOMd1eMSYehQg3nNZ7ar0dnBE2U_aZufsIkj6ggk5AEpONK5t8mWwmsCH50dcVHwelxTnFB-xJvt5Li8qpzKTeIW-qwfvbE3F8fApO3SiWfEwS21_E-Orn9dskMj5uhe44Y9OOtHwzFKNyrl_WlHuvIIdqipAgs-ipiuctPPr7Q_JgqQ"/>
+</div>
+<span class="bg-green-500/10 text-green-400 text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-widest">Active</span>
+</div>
+<div class="mb-6">
+<h5 class="text-white text-lg font-bold">Chase Bank</h5>
+<p class="text-on-surface-variant text-sm">Business Premier Checking</p>
+</div>
+<div class="flex items-end justify-between">
+<div>
+<p class="text-xs text-on-surface-variant mb-1">Available Balance</p>
+<p class="text-2xl font-mono text-white">$64,230.12</p>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-on-surface-variant mb-1 uppercase tracking-tighter">Last Sync</p>
+<p class="text-xs font-semibold text-white">2m ago</p>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
+<button class="text-xs font-bold text-primary hover:text-white transition-colors">View Transactions</button>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">arrow_forward_ios</span>
+</div>
+</div>
+<!-- NODE: PAYPAL -->
+<div class="glass-card p-6 rounded-3xl group hover:border-primary/40 transition-all duration-300">
+<div class="flex justify-between items-start mb-6">
+<div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center ring-1 ring-white/10 group-hover:ring-primary/50 transition-all">
+<img class="w-10 h-10 object-contain" data-alt="Abstract payment processor icon with blue and indigo flowing curves, modern fintech branding aesthetic, dark studio lighting, sleek digital art style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQiP9n6YB1VmDXGnp73zJk3v4An3y0OyB4JDgbmgnoVkXsddtNwN4hzpRKY1tdbTWR2fk6dzfFGzoZQmlv9zBTHtUnIVO34eLzitmSMVQ-Bshigreb5apiwnb0JaVyuQN2pN3Vsxs0AvoZ9ht-F7q5TRPtWlgr4dq0uVnMTy4CjkM_5VJhaKKq5PXL0dJ-e2iTGZTjiyXMS7L_tisZgfg7gXfVgBiv5Ko_XTZghiDx5c8sRrsg_GeFqKp75pxzoJ6R7YOqH_X5cBo"/>
+</div>
+<span class="bg-green-500/10 text-green-400 text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-widest">Active</span>
+</div>
+<div class="mb-6">
+<h5 class="text-white text-lg font-bold">PayPal</h5>
+<p class="text-on-surface-variant text-sm">Main Merchant Account</p>
+</div>
+<div class="flex items-end justify-between">
+<div>
+<p class="text-xs text-on-surface-variant mb-1">Available Balance</p>
+<p class="text-2xl font-mono text-white">$12,410.88</p>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-on-surface-variant mb-1 uppercase tracking-tighter">Last Sync</p>
+<p class="text-xs font-semibold text-white">14m ago</p>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-white/5 flex justify-between items-center">
+<button class="text-xs font-bold text-primary hover:text-white transition-colors">Payout History</button>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">arrow_forward_ios</span>
+</div>
+</div>
+<!-- NODE: COINBASE -->
+<div class="glass-card p-6 rounded-3xl group border-primary/20 bg-primary/5 transition-all duration-300 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4">
+<div class="node-pulse w-2 h-2 bg-primary rounded-full"></div>
+</div>
+<div class="flex justify-between items-start mb-6">
+<div class="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center ring-1 ring-white/10 group-hover:ring-primary/50 transition-all">
+<img class="w-10 h-10 object-contain" data-alt="Futuristic cryptocurrency exchange logo with geometric circular forms and electric blue glowing accents, 3D rendered with high gloss finish on dark navy background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBS9cbdOcOl9JTPbsFSQrAOn6pu1z_lBvDbaZAir5VtXABhjWOAIJHFnMZ2F3HqapdfV4V1DfoMwQvlTOcpKeP5jo3VqblOVGFpbybrZ0zgfOq1A0ygVSmxNud2uy_cukKS7XIDOZ4kgHYbLy2N4jz9EngHtTqFlElylppkl9m26_K5tvZIWnAdHy6rBavcTdUAe5HokSNF5A38pwYhWdLaXtuQau7Us_3dRq1GEDzdJopd2EMAHTWIj2GSuNjdtYuz2DhLyJUsaLs"/>
+</div>
+<span class="bg-primary/20 text-primary text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-widest">Syncing...</span>
+</div>
+<div class="mb-6">
+<h5 class="text-white text-lg font-bold">Coinbase Pro</h5>
+<p class="text-on-surface-variant text-sm">Crypto Portfolio (ETH/BTC)</p>
+</div>
+<div class="flex items-end justify-between">
+<div>
+<p class="text-xs text-on-surface-variant mb-1">Current Value</p>
+<p class="text-2xl font-mono text-white">$66,209.40</p>
+</div>
+<div class="text-right">
+<p class="text-[10px] text-on-surface-variant mb-1 uppercase tracking-tighter">Real-time</p>
+<p class="text-xs font-semibold text-green-400">+4.2%</p>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-white/10 flex justify-between items-center">
+<button class="text-xs font-bold text-primary hover:text-white transition-colors">Trade History</button>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">arrow_forward_ios</span>
+</div>
+</div>
+<!-- ADD NEW CARD PLACEHOLDER -->
+<button class="border-2 border-dashed border-white/10 rounded-3xl p-6 flex flex-col items-center justify-center space-y-4 hover:border-primary/40 hover:bg-white/5 transition-all group">
+<div class="w-16 h-16 rounded-full bg-white/5 flex items-center justify-center group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl text-on-surface-variant group-hover:text-primary transition-colors">add</span>
+</div>
+<div class="text-center">
+<p class="text-white font-bold">Connect Portfolio</p>
+<p class="text-xs text-on-surface-variant">Add Robinhood, Binance, or Wise</p>
+</div>
+</button>
+</div>
+<!-- RECENT SYSTEM LOGS (Asymmetric detail) -->
+<div class="mt-12 grid grid-cols-1 lg:grid-cols-4 gap-8">
+<div class="lg:col-span-3">
+<h4 class="text-lg font-headline font-semibold text-white mb-4">Security Activity</h4>
+<div class="glass-card rounded-2xl divide-y divide-white/5 overflow-hidden">
+<div class="p-4 flex items-center justify-between hover:bg-white/5 transition-colors">
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-blue-400">check_circle</span>
+<div>
+<p class="text-sm font-medium text-white">Chase Bank Sync Successful</p>
+<p class="text-xs text-on-surface-variant">Authenticated via OAuth 2.0</p>
+</div>
+</div>
+<span class="text-xs text-on-surface-variant font-mono">14:22:10 UTC</span>
+</div>
+<div class="p-4 flex items-center justify-between hover:bg-white/5 transition-colors">
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-purple-400">shield</span>
+<div>
+<p class="text-sm font-medium text-white">New API Key Generated</p>
+<p class="text-xs text-on-surface-variant">Alex-MacBook-Pro-M3</p>
+</div>
+</div>
+<span class="text-xs text-on-surface-variant font-mono">11:05:44 UTC</span>
+</div>
+<div class="p-4 flex items-center justify-between hover:bg-white/5 transition-colors">
+<div class="flex items-center space-x-4">
+<span class="material-symbols-outlined text-yellow-400">priority_high</span>
+<div>
+<p class="text-sm font-medium text-white">Re-authorization Required</p>
+<p class="text-xs text-on-surface-variant">Stripe integration needs renewal</p>
+</div>
+</div>
+<span class="text-xs text-on-surface-variant font-mono">09:12:01 UTC</span>
+</div>
+</div>
+</div>
+<div class="lg:col-span-1">
+<h4 class="text-lg font-headline font-semibold text-white mb-4">AI Advisor</h4>
+<div class="bg-surface-container rounded-2xl p-6 border border-white/5 h-full">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-on-secondary-container" style="font-variation-settings: 'FILL' 1;">psychology_alt</span>
+</div>
+<p class="text-sm italic text-on-surface-variant leading-relaxed">
+                            "Alex, I've detected that your Coinbase Pro ETH holdings are over-concentrated. Consider diversifying 15% into your Chase Savings to meet your Q3 tax objective."
+                        </p>
+<button class="mt-6 w-full py-2 rounded-xl bg-white/5 text-xs font-bold text-white hover:bg-white/10 transition-colors">
+                            Review Proposal
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- BOTTOM NAV BAR (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-slate-950/90 backdrop-blur-2xl z-50 rounded-t-2xl border-t border-white/10 shadow-[0_-8px_30px_rgba(0,0,0,0.5)]">
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-blue-300" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-medium font-inter">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-blue-300" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="text-[10px] font-medium font-inter">History</span>
+</a>
+<a class="flex flex-col items-center justify-center text-blue-400 bg-blue-500/10 rounded-xl px-3 py-1.5 shadow-[inset_0_0_10px_rgba(46,91,255,0.2)]" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="text-[10px] font-medium font-inter">AI Insights</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-blue-300" href="#">
+<span class="material-symbols-outlined">assessment</span>
+<span class="text-[10px] font-medium font-inter">Reports</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-blue-300" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="text-[10px] font-medium font-inter">Support</span>
+</a>
+</nav>
+</main>
+<!-- INTERACTION SCRIPTS -->
+<script>
+        // Micro-interaction for numbers incrementing or shimmering
+        document.querySelectorAll('.font-mono').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                el.classList.add('brightness-125', 'transition-all');
+            });
+            el.addEventListener('mouseleave', () => {
+                el.classList.remove('brightness-125');
+            });
+        });
+
+        // Simple mock of a sync process
+        const coinbaseNode = document.querySelector('.node-pulse').closest('.glass-card');
+        setTimeout(() => {
+            const syncLabel = coinbaseNode.querySelector('.bg-primary\\/20');
+            if(syncLabel) {
+                syncLabel.textContent = 'Synced';
+                syncLabel.classList.replace('bg-primary/20', 'bg-green-500/10');
+                syncLabel.classList.replace('text-primary', 'text-green-400');
+            }
+        }, 5000);
+    </script>
+</body></html>
