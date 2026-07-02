@@ -1,0 +1,335 @@
+Primary
+
+Primary Blue      #4F46E5
+Primary Purple    #7C3AED
+Accent Cyan       #06B6D4
+Accent Mint       #7CFFB2
+Accent Pink       #EC4899
+Accent Yellow     #FDE047
+
+Background
+Background 1      #060B1A
+Background 2      #09152E
+Background 3      #0E1F45
+Background 4      #111827
+
+الخلفية عبارة عن Gradient
+#060B1A
+↓
+
+#09152E
+↓
+
+#0F2A5E
+
+Text
+White
+#FFFFFF
+
+Primary Text
+rgba(255,255,255,.95)
+
+Secondary Text
+rgba(255,255,255,.65)
+
+Hint
+rgba(255,255,255,.40)
+
+
+Gradients
+الكروت كلها تقريبًا معمولة Gradient
+
+البنفسجي
+#6D5BFF
+
+↓
+
+#A855F7
+
+↓
+
+#EC4899
+
+السماوي
+#06B6D4
+
+↓
+
+#3B82F6
+
+↓
+
+#7C3AED
+
+الاخضر
+#8BFF7D
+
+↓
+
+#8FFFD2
+
+↓
+
+#A3E635
+
+زراير
+#8BFF7D
+
+↓
+
+#8FFFD2
+
+↓
+
+#A3E635
+
+🌌 Background Effect
+
+background:
+
+radial-gradient(circle at top left,#B026FF 0%,transparent 30%),
+
+radial-gradient(circle at right,#2563EB 0%,transparent 40%),
+
+#050816;
+
+glow 
+box-shadow:
+
+0 0 30px rgba(124,58,237,.45);   0 0 60px #7C3AED55;
+
+glassmorphism 
+
+opacity 
+10%-15%
+blur 20px
+border 0 0 60px #7C3AED55;
+
+border readius 
+20px
+
+-------------------
+
+Card
+
+28px
+
+-------------------
+
+Input
+
+18px
+
+-------------------
+
+Avatar
+
+Full
+
+-------------------
+
+Phone
+
+45px
+
+shadows
+0 25px 60px rgba(0,0,0,.45)
+
+الخط
+
+أفضل خط
+
+Inter
+
+وده المستخدم في معظم تطبيقات
+
+Stripe
+Ramp
+Brex
+Mercury
+Wise
+
+
+لو عربي
+
+IBM Plex Sans Arabic
+
+أو
+
+Alexandria
+
+
+typography 
+Hero
+
+40
+Bold
+
+-----------------
+
+Title
+
+30
+Bold
+
+-----------------
+
+Section
+
+22
+SemiBold
+
+-----------------
+
+Card Title
+
+18
+SemiBold
+
+-----------------
+
+Body
+
+16
+Regular
+
+-----------------
+
+Caption
+
+13
+Regular
+
+-----------------
+
+Small
+
+12
+Medium
+
+الايقونات
+
+
+Huge Icons
+
+أو
+
+Lucide
+
+أو
+
+Phosphor
+
+Stroke Width
+
+2
+
+buttons 
+ألارتفاع : 56 بكسل
+padding :24px
+Radius: 18px
+
+inputs
+Height
+
+58px
+
+Radius
+
+18px
+
+Blur Background
+
+10%
+
+Border
+
+1px
+
+animation
+250ms
+ease in out
+
+hover :
+Scale
+
+1.02
+
+Glow يزيد
+
+10%
+
+الوان ال charts
+
+Purple
+
+#8B5CF6
+
+Pink
+
+#EC4899
+
+Green
+
+#7CFFB2
+
+Cyan
+
+#22D3EE
+
+Yellow
+
+#FACC15
+
+المسافات :
+8
+
+16
+
+24
+
+32
+
+40
+
+48
+
+
+أسلوب التصميم
+
+يسمى:
+
+✅ NeoBank UI
+✅ Neo Financial Design
+✅ Glassmorphism
+✅ Soft Glow
+✅ Dark Gradient UI
+✅ Premium FinTech
+✅ Minimal Futuristic
+
+
+لو هتبني المشروع بـ React + Tailwind
+
+أنصحك تعمل Design Tokens بالشكل ده:
+
+Primary      #4F46E5
+Secondary    #7C3AED
+Cyan         #06B6D4
+Green        #7CFFB2
+Pink         #EC4899
+Yellow       #FDE047
+
+Background   #060B1A
+Surface      rgba(255,255,255,.08)
+Border       rgba(255,255,255,.08)
+
+Text         #FFFFFF
+TextMuted    rgba(255,255,255,.65)
+
+Radius       20px
+Blur         20px
+Shadow       0 25px 60px rgba(0,0,0,.45)
+
+Font         Inter
+Grid         8px
+
