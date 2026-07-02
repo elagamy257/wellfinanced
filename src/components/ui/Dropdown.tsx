@@ -35,7 +35,13 @@ export function Dropdown({ trigger, items, align = 'right' }: DropdownProps) {
 
   return (
     <div className="relative inline-block text-left" ref={containerRef}>
-      <div onClick={() => setIsOpen(!isOpen)} className="cursor-pointer">
+      <div 
+        onClick={() => setIsOpen(!isOpen)} 
+        className="cursor-pointer"
+        role="button"
+        aria-haspopup="true"
+        aria-expanded={isOpen}
+      >
         {trigger}
       </div>
 
@@ -45,10 +51,10 @@ export function Dropdown({ trigger, items, align = 'right' }: DropdownProps) {
             initial={{ opacity: 0, scale: 0.95, y: -5 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: -5 }}
-            transition={{ duration: 0.15 }}
+            transition={{ duration: 0.2, ease: 'easeInOut' }}
             className={`absolute ${
               align === 'right' ? 'right-0' : 'left-0'
-            } mt-2 w-48 rounded-lg bg-surface border border-border shadow-lg z-50 overflow-hidden py-1`}
+            } mt-2 w-52 rounded-[18px] bg-bg-2/95 border border-white/10 shadow-neon z-50 overflow-hidden py-2 backdrop-blur-[20px]`}
           >
             {items.map((item, index) => {
               const Icon = item.icon;
@@ -59,7 +65,7 @@ export function Dropdown({ trigger, items, align = 'right' }: DropdownProps) {
                     if (item.onClick) item.onClick();
                     setIsOpen(false);
                   }}
-                  className={`w-full text-left px-4 py-2 text-xs md:text-sm text-text hover:bg-background transition-colors flex items-center gap-2 font-medium ${
+                  className={`w-full text-left px-4 py-3 text-xs md:text-sm text-text-primary hover:bg-white/10 transition-colors flex items-center gap-2 font-bold cursor-pointer outline-none focus:bg-white/10 ${
                     item.className || ''
                   }`}
                 >

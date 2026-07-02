@@ -12,29 +12,41 @@ export interface ModalProps {
 }
 
 export function Modal({ isOpen, onClose, title, children }: ModalProps) {
-  // Prevent scrolling when modal is open
+  // Prevent scrolling when modal is open and handle Escape key for accessibility
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
     }
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onClose();
+      }
+    };
+
+    if (isOpen) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+
     return () => {
       document.body.style.overflow = 'unset';
+      window.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-modal="true">
           {/* Backdrop Overlay */}
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.6 }}
+            animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 bg-black"
+            className="fixed inset-0 bg-background/60 backdrop-blur-md"
           />
 
           {/* Modal Container */}
@@ -42,17 +54,17 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
             initial={{ opacity: 0, scale: 0.95, y: 15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 15 }}
-            transition={{ type: 'spring', duration: 0.3 }}
-            className="bg-surface border border-border w-full max-w-lg rounded-xl shadow-xl overflow-hidden relative z-10 flex flex-col max-h-[90vh]"
+            transition={{ type: 'spring', duration: 0.35, bounce: 0.1 }}
+            className="bg-bg-2/95 border border-white/10 w-full max-w-lg rounded-card shadow-neon overflow-hidden relative z-10 flex flex-col max-h-[90vh] backdrop-blur-[20px]"
           >
             {/* Header */}
-            <div className="p-5 border-b border-border/50 flex items-center justify-between">
-              <h3 className="font-bold text-base md:text-lg text-text">
+            <div className="p-6 border-b border-white/5 flex items-center justify-between">
+              <h3 className="font-bold text-card-title text-text">
                 {title || 'Dialog'}
               </h3>
               <button
                 onClick={onClose}
-                className="p-1 rounded-lg hover:bg-background text-muted hover:text-text transition-colors"
+                className="p-2 rounded-xl bg-white/5 hover:bg-white/10 text-muted hover:text-text transition-colors cursor-pointer outline-none focus:ring-2 focus:ring-primary-blue"
                 aria-label="Close Dialog"
               >
                 <X className="w-5 h-5" />
@@ -60,7 +72,7 @@ export function Modal({ isOpen, onClose, title, children }: ModalProps) {
             </div>
 
             {/* Scrollable Content */}
-            <div className="p-6 overflow-y-auto flex-1 text-sm md:text-base">
+            <div className="p-6 overflow-y-auto flex-1 text-sm leading-relaxed text-text-primary">
               {children}
             </div>
           </motion.div>

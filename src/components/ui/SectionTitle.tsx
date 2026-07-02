@@ -8,12 +8,12 @@ export interface SectionTitleProps {
 
 export function SectionTitle({ title, subtitle, action }: SectionTitleProps) {
   return (
-    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6 md:mb-8 animate-fade-in">
+    <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8 md:mb-10 animate-fade-in">
       <div>
-        <h1 className="text-xl md:text-2xl font-extrabold text-text tracking-tight uppercase border-b-2 border-primary/20 pb-1.5 inline-block">
+        <h1 className="text-title font-extrabold text-text tracking-tight pb-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-16 after:h-[3px] after:bg-gradient-purple after:rounded-full">
           {title}
         </h1>
-        {subtitle && <p className="text-xs md:text-sm text-muted mt-1.5 leading-relaxed">{subtitle}</p>}
+        {subtitle && <p className="text-caption text-muted mt-2 leading-relaxed max-w-2xl">{subtitle}</p>}
       </div>
       {action && <div className="flex-shrink-0">{action}</div>}
     </div>

@@ -1,54 +1,98 @@
 @import "tailwindcss";
 
 @theme {
-  /* Color Tokens from style.txt */
-  --color-primary: #4F46E5;
-  --color-secondary: #7C3AED;
-  --color-cyan: #06B6D4;
-  --color-mint: #7CFFB2;
-  --color-pink: #EC4899;
-  --color-yellow: #FDE047;
+  /* Design Tokens from style.txt */
+  --color-primary-blue: #4F46E5;
+  --color-primary-purple: #7C3AED;
+  --color-accent-cyan: #06B6D4;
+  --color-accent-mint: #7CFFB2;
+  --color-accent-pink: #EC4899;
+  --color-accent-yellow: #FDE047;
 
+  /* Aliases for remote branch compatibility */
+  --color-cyan: var(--color-accent-cyan);
+  --color-mint: var(--color-accent-mint);
+  --color-pink: var(--color-accent-pink);
+  --color-yellow: var(--color-accent-yellow);
+
+  /* Semantic UI Colors mapped to tokens */
+  --color-primary: var(--color-primary-blue);
+  --color-secondary: var(--color-primary-purple);
   --color-background: #060B1A;
-  --color-bg2: #09152E;
-  --color-bg3: #0E1F45;
-  
-  --color-surface: rgba(255,255,255,.08);
-  --color-border: rgba(255,255,255,.08);
-
+  --color-surface: rgba(255, 255, 255, 0.08);
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-input: rgba(255, 255, 255, 0.08);
+  --color-ring: var(--color-primary-blue);
   --color-text: #FFFFFF;
-  --color-text-sec: rgba(255,255,255,.65);
-  --color-text-hint: rgba(255,255,255,.40);
+  --color-muted: rgba(255, 255, 255, 0.65);
+  --color-hint: rgba(255, 255, 255, 0.40);
+  
+  /* Additional text aliases */
+  --color-text-sec: rgba(255, 255, 255, 0.65);
+  --color-text-hint: rgba(255, 255, 255, 0.40);
+  
+  --color-danger: var(--color-accent-pink);
+  --color-success: var(--color-accent-mint);
+  --color-warning: var(--color-accent-yellow);
+
+  /* Background variations */
+  --color-bg-1: #060B1A;
+  --color-bg-2: #09152E;
+  --color-bg-3: #0E1F45;
+  --color-bg-4: #111827;
+  
+  /* Additional background aliases */
+  --color-bg2: var(--color-bg-2);
+  --color-bg3: var(--color-bg-3);
 
   /* Typography */
-  --font-sans: 'Inter', sans-serif;
+  --font-sans: 'Inter', 'IBM Plex Sans Arabic', 'Alexandria', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
-  /* Spacing Tokens */
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  --spacing-2xl: 3rem;
+  /* Spacing System */
+  --spacing-grid-xs: 8px;
+  --spacing-grid-sm: 16px;
+  --spacing-grid-md: 24px;
+  --spacing-grid-lg: 32px;
+  --spacing-grid-xl: 40px;
+  --spacing-grid-2xl: 48px;
+
+  /* Typography Sizes */
+  --font-size-hero: 40px;
+  --font-size-title: 30px;
+  --font-size-section: 22px;
+  --font-size-card-title: 18px;
+  --font-size-body: 16px;
+  --font-size-caption: 13px;
+  --font-size-small: 12px;
 
   /* Border Radii */
+  --radius-card: 28px;
+  --radius-input: 18px;
+  --radius-avatar: 9999px;
+  --radius-phone: 45px;
+  --radius-standard: 20px;
+  
+  /* Radius aliases */
+  --radius-btn: 18px;
+  --radius-inp: 18px;
   --radius-sm: 0.375rem;
   --radius-md: 0.5rem;
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
   --radius-2xl: 1.5rem;
-  --radius-card: 28px;
-  --radius-btn: 18px;
-  --radius-inp: 18px;
+
+  /* Shadows */
+  --shadow-neon: 0 25px 60px rgba(0, 0, 0, 0.45);
+  --shadow-glow: 0 0 30px rgba(124, 58, 237, 0.45);
+  --shadow-glow-strong: 0 0 60px rgba(124, 58, 237, 0.55);
+  --shadow-neo: 0 25px 60px rgba(0, 0, 0, 0.45);
 
   /* Animations & Transitions */
-  --animate-fade-in: fade-in 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  --animate-slide-in: slide-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  --animate-scale-in: scale-in 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  --animate-fade-in: fade-in 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --animate-slide-in: slide-in 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --animate-scale-in: scale-in 250ms cubic-bezier(0.4, 0, 0.2, 1);
   --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  
-  --shadow-neo: 0 25px 60px rgba(0,0,0,.45);
 }
 
 @keyframes fade-in {
@@ -62,7 +106,7 @@
 }
 
 @keyframes scale-in {
-  from { transform: scale(0.95); opacity: 0; }
+  from { transform: scale(0.98); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
 
@@ -70,10 +114,13 @@
   to { transform: rotate(360deg); }
 }
 
-/* Global Styles and Theme Overrides */
+/* Global Styles */
 html,
 body {
-  background-color: var(--color-background);
+  background: radial-gradient(circle at top left, rgba(176, 38, 255, 0.12) 0%, transparent 35%),
+              radial-gradient(circle at right, rgba(37, 99, 235, 0.15) 0%, transparent 45%),
+              linear-gradient(to bottom, #060B1A, #09152E, #0E1F45);
+  background-attachment: fixed;
   color: var(--color-text);
   font-family: var(--font-sans);
   scroll-behavior: smooth;
@@ -94,10 +141,64 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.1);
-  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-standard);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary);
+  background: var(--color-primary-purple);
+}
+
+/* Glassmorphism Panels */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Glassmorphism with slight hover glow & scale */
+.glass-interactive {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-interactive:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: scale(1.02);
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.25);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Reusable Gradients from style.txt */
+.bg-gradient-purple {
+  background: linear-gradient(135deg, #6D5BFF 0%, #A855F7 50%, #EC4899 100%);
+}
+
+.bg-gradient-cyan {
+  background: linear-gradient(135deg, #06B6D4 0%, #3B82F6 50%, #7C3AED 100%);
+}
+
+.bg-gradient-green {
+  background: linear-gradient(135deg, #8BFF7D 0%, #8FFFD2 50%, #A3E635 100%);
+}
+
+.bg-gradient-button {
+  background: linear-gradient(135deg, #8BFF7D 0%, #8FFFD2 50%, #A3E635 100%);
+}
+
+/* Soft Glow Utilities */
+.glow-primary {
+  box-shadow: 0 0 30px rgba(79, 70, 229, 0.45);
+}
+
+.glow-secondary {
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.45);
+}
+
+.glow-mint {
+  box-shadow: 0 0 30px rgba(124, 255, 178, 0.45);
 }

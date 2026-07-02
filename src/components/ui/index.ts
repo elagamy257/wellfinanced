@@ -11,3 +11,5 @@ export * from './EmptyState';
 export * from './LoadingSpinner';
 export * from './SectionTitle';
 export * from './StatCard';
+export * from './Table';
+export * from './ChartsTheme';

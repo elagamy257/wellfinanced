@@ -31,11 +31,12 @@ export function Tooltip({ children, content, position = 'top' }: TooltipProps) {
       <AnimatePresence>
         {isVisible && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 0.15 }}
-            className={`absolute ${positionStyles[position]} bg-surface border border-border text-text text-xs rounded-md px-2.5 py-1.5 shadow-md z-50 whitespace-nowrap pointer-events-none font-medium`}
+            initial={{ opacity: 0, scale: 0.95, y: position === 'top' ? 4 : position === 'bottom' ? -4 : 0 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: position === 'top' ? 4 : position === 'bottom' ? -4 : 0 }}
+            transition={{ duration: 0.15, ease: 'easeInOut' }}
+            className={`absolute ${positionStyles[position]} bg-bg-2/95 border border-white/10 text-text-primary text-caption rounded-lg px-3 py-2 shadow-neon z-50 whitespace-nowrap pointer-events-none font-bold backdrop-blur-[10px]`}
+            role="tooltip"
           >
             {content}
           </motion.div>

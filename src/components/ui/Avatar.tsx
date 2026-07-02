@@ -8,11 +8,11 @@ export interface AvatarProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export function Avatar({ src, alt = '', fallback, size = 'md', className = '', ...props }: AvatarProps) {
-  const baseStyles = 'relative flex-shrink-0 rounded-full flex items-center justify-center font-bold text-background bg-gradient-to-tr from-primary to-secondary select-none overflow-hidden';
+  const baseStyles = 'relative flex-shrink-0 rounded-full flex items-center justify-center font-bold text-text bg-gradient-cyan border border-white/10 select-none overflow-hidden';
   
   const sizes = {
-    sm: 'w-7 h-7 text-[10px]',
-    md: 'w-10 h-10 text-xs',
+    sm: 'w-8 h-8 text-[11px]',
+    md: 'w-11 h-11 text-xs',
     lg: 'w-14 h-14 text-sm',
   };
 

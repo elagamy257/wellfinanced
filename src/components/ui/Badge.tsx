@@ -1,19 +1,20 @@
 import React from 'react';
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
-  variant?: 'default' | 'secondary' | 'success' | 'warning' | 'danger' | 'outline';
+  variant?: 'blue' | 'purple' | 'cyan' | 'mint' | 'pink' | 'yellow' | 'outline';
 }
 
-export function Badge({ children, variant = 'default', className = '', ...props }: BadgeProps) {
-  const baseStyles = 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold select-none border tracking-wide transition-colors';
+export function Badge({ children, variant = 'blue', className = '', ...props }: BadgeProps) {
+  const baseStyles = 'inline-flex items-center px-3 py-1 rounded-full text-xs font-bold select-none border tracking-wider uppercase transition-colors';
   
   const variants = {
-    default: 'bg-primary/10 text-primary border-primary/20',
-    secondary: 'bg-secondary/10 text-secondary border-secondary/20',
-    success: 'bg-success/10 text-success border-success/20',
-    warning: 'bg-warning/10 text-warning border-warning/20',
-    danger: 'bg-danger/10 text-danger border-danger/20',
-    outline: 'bg-transparent text-muted border-border hover:text-text',
+    blue: 'bg-primary-blue/15 text-primary-blue border-primary-blue/30',
+    purple: 'bg-primary-purple/15 text-primary-purple border-primary-purple/30',
+    cyan: 'bg-accent-cyan/15 text-accent-cyan border-accent-cyan/30',
+    mint: 'bg-accent-mint/15 text-accent-mint border-accent-mint/30',
+    pink: 'bg-accent-pink/15 text-accent-pink border-accent-pink/30',
+    yellow: 'bg-accent-yellow/15 text-accent-yellow border-accent-yellow/30',
+    outline: 'bg-transparent text-muted border-border hover:text-text hover:border-white/30',
   };
 
   return (
