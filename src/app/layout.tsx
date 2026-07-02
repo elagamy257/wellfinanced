@@ -1,14 +1,11 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import { AppLayout } from '@/components/layout/AppLayout';
 import '@/styles/globals.css';
 
-const inter = Inter({
-  subsets: ['latin'],
-  variable: '--font-sans',
-  weight: ['300', '400', '500', '600', '700', '800'],
-  display: 'swap',
-});
+// Local font definition to bypass remote Google Fonts queries during offline compilation.
+const inter = {
+  variable: 'font-sans',
+};
 
 export const metadata: Metadata = {
   title: 'WellFinanced | AI-Powered Financial Stability Platform',
