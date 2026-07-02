@@ -31,4 +31,18 @@ This file tracks the progress of the WellFinanced project, detailing the steps c
 
 ## Next Steps
 - Continue redesigning the remaining screens in the `stitch/` directory to match the `style.txt` design system.
-- *Agent instructions: Update this file after completing significant milestones or styling new screens to maintain a continuous progress log.*
+- Integrate the designed UI into the Next.js codebase.
+
+### 4. Next.js Migration: Sign-Up Page
+- **Status:** ✅ Done
+- **Description:** Converted the plain HTML/CSS sign-up page into a real Next.js application structure using React, Tailwind CSS v4, and Lucide Icons.
+  - Added CSS tokens from `style.txt` to `src/app/globals.css`.
+  - Updated `src/app/layout.tsx` to use the `Inter` font.
+  - Built the modular `src/app/signup/page.tsx` component with exact style mappings.
+- **Git Commit:** Pending
+- **Pushed to GitHub:** Pending
+
+---
+
+## Next Steps
+- Continue converting other mockups (e.g., login, dashboard) into Next.js React components.

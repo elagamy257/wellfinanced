@@ -1,24 +1,27 @@
 @import "tailwindcss";
 
 @theme {
-  /* Color Tokens */
-  --color-background: #0B1020;
-  --color-surface: #151C2F;
-  --color-primary: #22D3A6;
-  --color-secondary: #00F5C3;
-  --color-success: #16C784;
-  --color-warning: #FFB547;
-  --color-danger: #FF5D73;
-  --color-text: #F8FAFC;
-  --color-muted: #94A3B8;
+  /* Color Tokens from style.txt */
+  --color-primary: #4F46E5;
+  --color-secondary: #7C3AED;
+  --color-cyan: #06B6D4;
+  --color-mint: #7CFFB2;
+  --color-pink: #EC4899;
+  --color-yellow: #FDE047;
+
+  --color-background: #060B1A;
+  --color-bg2: #09152E;
+  --color-bg3: #0E1F45;
   
-  /* Semantic UI Colors mapped to tokens */
-  --color-border: #1E293B;
-  --color-input: #151C2F;
-  --color-ring: #22D3A6;
+  --color-surface: rgba(255,255,255,.08);
+  --color-border: rgba(255,255,255,.08);
+
+  --color-text: #FFFFFF;
+  --color-text-sec: rgba(255,255,255,.65);
+  --color-text-hint: rgba(255,255,255,.40);
 
   /* Typography */
-  --font-sans: 'Outfit', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
   /* Spacing Tokens */
@@ -35,12 +38,17 @@
   --radius-lg: 0.75rem;
   --radius-xl: 1rem;
   --radius-2xl: 1.5rem;
+  --radius-card: 28px;
+  --radius-btn: 18px;
+  --radius-inp: 18px;
 
   /* Animations & Transitions */
   --animate-fade-in: fade-in 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   --animate-slide-in: slide-in 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   --animate-scale-in: scale-in 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  
+  --shadow-neo: 0 25px 60px rgba(0,0,0,.45);
 }
 
 @keyframes fade-in {
@@ -58,6 +66,10 @@
   to { transform: scale(1); opacity: 1; }
 }
 
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
 /* Global Styles and Theme Overrides */
 html,
 body {
@@ -71,16 +83,6 @@ body {
   padding: 0;
 }
 
-/* Theme variables override for light mode (if needed, default is dark system background) */
-.light {
-  --color-background: #F8FAFC;
-  --color-surface: #FFFFFF;
-  --color-text: #0F172A;
-  --color-muted: #64748B;
-  --color-border: #E2E8F0;
-  --color-input: #FFFFFF;
-}
-
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
@@ -92,7 +94,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1E293B;
+  background: rgba(255,255,255,0.1);
   border-radius: var(--radius-md);
 }
 
