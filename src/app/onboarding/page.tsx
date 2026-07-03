@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -10,7 +11,13 @@ import {
   Check,
   Zap,
   ArrowLeft,
-  CheckCircle2
+  CheckCircle2,
+  Rocket,
+  TrendingUp,
+  ShieldCheck,
+  BarChart3,
+  Activity,
+  Brain
 } from 'lucide-react';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
@@ -39,7 +46,7 @@ type WorkspaceFormValues = z.infer<typeof workspaceSchema>;
 type PreferencesFormValues = z.infer<typeof preferencesSchema>;
 
 export default function OnboardingPage() {
-  const [step, setStep] = useState<2 | 3 | 4>(2);
+  const [step, setStep] = useState<1 | 2 | 3 | 4>(1);
   const [isLoading, setIsLoading] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
@@ -54,12 +61,15 @@ export default function OnboardingPage() {
   const {
     register: registerWorkspace,
     handleSubmit: handleWorkspaceSubmit,
+    watch: watchWorkspace,
     formState: { errors: workspaceErrors },
   } = useForm<WorkspaceFormValues>({
     resolver: zodResolver(workspaceSchema),
     defaultValues: savedWorkspace,
     mode: 'onTouched',
   });
+
+  const selectedCurrency = watchWorkspace('currency');
 
   // Step 3 Form Hook
   const {
@@ -122,8 +132,163 @@ export default function OnboardingPage() {
       </nav>
 
       {/* Onboarding Wizard Form Body */}
-      <main className="grow flex items-center justify-center px-6 pt-24 pb-20 z-10 relative">
-        <div className="w-full max-w-[500px] bg-surface border border-white/5 rounded-card backdrop-blur-xl shadow-neon p-6 sm:p-10">
+      <main className={`grow flex flex-col px-6 pt-24 pb-20 z-10 relative ${step > 1 ? 'items-center justify-center' : ''}`}>
+        
+        {/* STEP 1: Welcome / Marketing Hero */}
+        {step === 1 && (
+          <div className="w-full max-w-7xl mx-auto flex flex-col gap-24 animate-fade-in">
+            {/* Hero Section */}
+            <section className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="flex flex-col space-y-8 text-center lg:text-left">
+                <div className="inline-flex items-center self-center lg:self-start gap-2 bg-white/5 border border-white/10 px-4 py-2 rounded-full backdrop-blur-md">
+                  <span className="flex h-2 w-2 rounded-full bg-cyan animate-pulse"></span>
+                  <span className="text-xs font-bold uppercase tracking-widest text-cyan">Intelligence v2.4 Now Live</span>
+                </div>
+                <h1 className="text-5xl md:text-7xl font-extrabold leading-tight tracking-tight text-text">
+                  Welcome to your <br />
+                  <span className="bg-gradient-to-r from-primary via-secondary to-pink bg-clip-text text-transparent">Financial Future</span>
+                </h1>
+                <p className="text-lg text-muted max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                  The ultimate AI co-pilot for modern freelancers. Automate your cashflow, predict taxes, and optimize your income with precision engineering.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+                  <Button 
+                    variant="primary" 
+                    size="lg" 
+                    className="font-bold tracking-wider uppercase"
+                    onClick={() => setStep(2)}
+                  >
+                    <span>Initialize AI Partner</span>
+                    <Rocket className="w-5 h-5 ml-2" />
+                  </Button>
+                  <Button variant="outline" size="lg" className="font-bold tracking-wider uppercase">
+                    View Case Studies
+                  </Button>
+                </div>
+                <div className="pt-8 flex flex-wrap gap-8 justify-center lg:justify-start opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                  <span className="font-mono text-sm uppercase tracking-tighter">Powered by GPT-X</span>
+                  <span className="font-mono text-sm uppercase tracking-tighter">SEC Compliant</span>
+                  <span className="font-mono text-sm uppercase tracking-tighter">Zero Trust Security</span>
+                </div>
+              </div>
+
+              {/* AI Head Graphic / Visual */}
+              <div className="relative flex justify-center items-center">
+                <div className="relative w-full max-w-[500px] aspect-square flex justify-center items-center">
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-[80px] animate-pulse"></div>
+                  <div className="relative z-10 w-full h-full animate-[float_6s_ease-in-out_infinite]">
+                    <div className="w-full h-full rounded-full border-2 border-white/5 p-4">
+                      <div className="w-full h-full rounded-full border border-primary/20 overflow-hidden relative bg-surface backdrop-blur-xl shadow-neon group">
+                        <Image 
+                          className="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-[2000ms]" 
+                          alt="AI Core" 
+                          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHKaV64uDFCUd39adHTGiEzuV_oU2zuSCOea4OFXzqDl4nOmT0fDm3IfK76Tb0imHwbgMYdiIE2O-AtwYC5_wd-lIfMB6O7k7sCuu4mfPKIRcA3oadWRDoNVbVQbw_WRRGHOujd5r4N-BxUgeJo384VMqNuSRQc4td3xlCwvV9IbtRarUkSCb7zFHmztGy7MTftTiwumyYuDK26t9zt08SEcxLvJ23TZnza1GQM6mW1MsBwaDn-zozrVUSrBy7Wi54TDyxCMQ9drw"
+                          width={500}
+                          height={500}
+                          unoptimized
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-[#060B1A] via-transparent to-transparent opacity-60"></div>
+                      </div>
+                    </div>
+                  </div>
+                  {/* Floating Data Points */}
+                  <div className="absolute top-[10%] right-[0%] bg-surface border border-white/10 p-4 rounded-2xl backdrop-blur-xl shadow-neon animate-[bounce_4s_infinite]">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-mint/10 flex items-center justify-center text-mint">
+                        <TrendingUp className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <div className="text-[10px] text-muted uppercase font-bold tracking-widest">Growth</div>
+                        <div className="text-sm font-mono font-bold text-text">+24.5%</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="absolute bottom-[20%] left-[-10%] bg-surface border border-white/10 p-4 rounded-2xl backdrop-blur-xl shadow-neon animate-[bounce_5s_infinite]">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-lg bg-cyan/10 flex items-center justify-center text-cyan">
+                        <ShieldCheck className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <div className="text-[10px] text-muted uppercase font-bold tracking-widest">Confidence</div>
+                        <div className="text-sm font-mono font-bold text-text">99.8%</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Bento Value Props */}
+            <section className="text-center pt-12">
+              <h2 className="text-3xl md:text-5xl font-bold mb-4 text-text">Master Your <span className="text-cyan">Capital Flow</span></h2>
+              <p className="text-muted max-w-2xl mx-auto mb-16">Autonomous financial intelligence designed specifically for the unique volatility of freelance careers.</p>
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+                {/* Predictive Income */}
+                <div className="bg-surface border border-white/10 p-8 rounded-card backdrop-blur-xl shadow-[inset_0_0_20px_rgba(46,91,255,0.05)] hover:bg-white/5 transition-all duration-300 flex flex-col h-full">
+                  <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
+                    <BarChart3 className="text-primary w-8 h-8" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4 text-text">Predictive Income</h3>
+                  <p className="text-muted leading-relaxed mb-8 flex-grow">Our proprietary ML models analyze your work history to forecast next month&apos;s earnings with eerie accuracy. Never wonder what your next check looks like.</p>
+                  <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
+                    <div className="h-full bg-primary w-2/3 shadow-[0_0_10px_#4F46E5]"></div>
+                  </div>
+                </div>
+                
+                {/* Cashflow Smoothing */}
+                <div className="bg-surface border border-white/10 p-8 rounded-card backdrop-blur-xl shadow-[inset_0_0_20px_rgba(46,91,255,0.05)] hover:bg-white/5 transition-all duration-300 flex flex-col h-full md:translate-y-8">
+                  <div className="w-14 h-14 rounded-2xl bg-secondary/10 flex items-center justify-center mb-6">
+                    <Activity className="text-secondary w-8 h-8" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4 text-text">Cashflow Smoothing</h3>
+                  <p className="text-muted leading-relaxed mb-8 flex-grow">Eliminate the &quot;feast and famine&quot; cycle. Our AI reallocates surplus during peak months to ensure a consistent, stress-free salary all year round.</p>
+                  <div className="flex gap-2">
+                    <div className="flex-1 h-12 bg-white/5 rounded-lg"></div>
+                    <div className="flex-1 h-12 bg-white/5 rounded-lg"></div>
+                    <div className="flex-1 h-12 bg-white/5 rounded-lg"></div>
+                  </div>
+                </div>
+
+                {/* AI-Powered Prioritization */}
+                <div className="bg-surface border border-white/10 p-8 rounded-card backdrop-blur-xl shadow-[inset_0_0_20px_rgba(46,91,255,0.05)] hover:bg-white/5 transition-all duration-300 flex flex-col h-full">
+                  <div className="w-14 h-14 rounded-2xl bg-pink/10 flex items-center justify-center mb-6">
+                    <Brain className="text-pink w-8 h-8" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-4 text-text">AI Prioritization</h3>
+                  <p className="text-muted leading-relaxed mb-8 flex-grow">Automated bill pay and tax withholding that adapts in real-time. We prioritize high-interest debt and tax compliance so you don&apos;t have to.</p>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="h-2 bg-pink/40 rounded-full"></div>
+                    <div className="h-2 bg-pink/20 rounded-full"></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Stats Section */}
+            <section className="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center pt-16 border-t border-white/5 pb-8">
+              <div>
+                <div className="text-4xl md:text-5xl font-mono font-bold bg-gradient-to-r from-primary to-cyan bg-clip-text text-transparent mb-2">$24M+</div>
+                <div className="text-xs font-bold text-muted uppercase tracking-widest">Managed Annually</div>
+              </div>
+              <div>
+                <div className="text-4xl md:text-5xl font-mono font-bold bg-gradient-to-r from-primary to-cyan bg-clip-text text-transparent mb-2">12.4k</div>
+                <div className="text-xs font-bold text-muted uppercase tracking-widest">Active Freelancers</div>
+              </div>
+              <div>
+                <div className="text-4xl md:text-5xl font-mono font-bold bg-gradient-to-r from-primary to-cyan bg-clip-text text-transparent mb-2">40%</div>
+                <div className="text-xs font-bold text-muted uppercase tracking-widest">Avg. Savings Increase</div>
+              </div>
+              <div>
+                <div className="text-4xl md:text-5xl font-mono font-bold bg-gradient-to-r from-primary to-cyan bg-clip-text text-transparent mb-2">99.9%</div>
+                <div className="text-xs font-bold text-muted uppercase tracking-widest">Uptime Precision</div>
+              </div>
+            </section>
+          </div>
+        )}
+
+        {step > 1 && (
+          <div className="w-full max-w-[500px] bg-surface border border-white/5 rounded-card backdrop-blur-xl shadow-neon p-6 sm:p-10 animate-scale-in">
           
           {/* Steps Progress Indicator */}
           {step < 4 && (
@@ -162,7 +327,7 @@ export default function OnboardingPage() {
                       <label
                         key={item.code}
                         className={`flex items-center justify-center h-14 rounded-input border transition-all duration-200 cursor-pointer select-none ${
-                          savedWorkspace.currency === item.code
+                          selectedCurrency === item.code
                             ? 'bg-primary/10 border-primary text-text shadow-[0_0_15px_rgba(79,70,229,0.2)] font-bold'
                             : 'bg-white/5 border-white/5 text-muted hover:border-white/15'
                         }`}
@@ -172,7 +337,6 @@ export default function OnboardingPage() {
                           value={item.code}
                           className="sr-only"
                           {...registerWorkspace('currency')}
-                          onChange={(e) => setSavedWorkspace({ ...savedWorkspace, currency: e.target.value })}
                         />
                         <span className="text-xs font-semibold">{item.label}</span>
                       </label>
@@ -187,7 +351,7 @@ export default function OnboardingPage() {
                   label="Monthly Target Revenue"
                   placeholder="10000"
                   disabled={isLoading}
-                  leftIcon={<span className="text-sm font-bold text-muted">{getCurrencySymbol(savedWorkspace.currency)}</span>}
+                  leftIcon={<span className="text-sm font-bold text-muted">{getCurrencySymbol(selectedCurrency)}</span>}
                   error={workspaceErrors.monthlyTarget?.message}
                   {...registerWorkspace('monthlyTarget')}
                 />
@@ -276,7 +440,6 @@ export default function OnboardingPage() {
                           value={item.value}
                           className="sr-only"
                           {...registerPref('reserveFrequency')}
-                          onChange={() => setPrefValue('reserveFrequency', item.value as 'transaction' | 'monthly' | 'quarterly')}
                         />
                         <span className="text-xs font-semibold leading-tight">{item.label}</span>
                       </label>
@@ -307,7 +470,6 @@ export default function OnboardingPage() {
                           value={prov.id}
                           className="sr-only"
                           {...registerPref('linkProvider')}
-                          onChange={() => setPrefValue('linkProvider', prov.id)}
                         />
                         <div className="flex items-center justify-between w-full mb-1">
                           <span className="text-xs font-extrabold uppercase tracking-wider">{prov.label}</span>
@@ -397,6 +559,7 @@ export default function OnboardingPage() {
           )}
 
         </div>
+        )}
       </main>
 
       {/* Footer Navigation */}
