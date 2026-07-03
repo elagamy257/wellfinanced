@@ -5,7 +5,10 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { EyeOff, ShieldAlert, CheckCircle2 } from 'lucide-react';
+import { EyeOff, Eye, ShieldAlert, CheckCircle2, User as UserIcon, Mail, Lock } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Input } from '@/components/ui/Input';
+import { Button } from '@/components/ui/Button';
 
 const registerSchema = z.object({
   fullName: z.string().min(1, 'Full name is required').max(60, 'Name must be under 60 characters'),
@@ -19,6 +22,18 @@ export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+  React.useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePos({
+        x: (e.clientX / window.innerWidth - 0.5) * 15,
+        y: (e.clientY / window.innerHeight - 0.5) * 15,
+      });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   const {
     register,
@@ -52,327 +67,205 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="bg-[#060B1A] text-white font-sans overflow-y-auto min-h-screen w-full flex justify-center items-start relative">
-      <style>{`
-        .custom-body-bg {
-          background:
-            radial-gradient(circle at 15% 20%, rgba(124,58,237,.55) 0%, transparent 35%),
-            radial-gradient(circle at 85% 10%, rgba(6,182,212,.40) 0%, transparent 35%),
-            radial-gradient(circle at 70% 80%, rgba(79,70,229,.35) 0%, transparent 30%),
-            linear-gradient(160deg, #060B1A 0%, #09152E 55%, #0F2A5E 100%);
-        }
+    <div className="relative min-h-screen w-full overflow-hidden flex flex-col font-sans text-white bg-background">
+      {/* Decorative Ambient Orbs */}
+      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/10 blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-cyan/10 blur-[120px] pointer-events-none" />
 
-        .card-panel {
-          width: 100%;
-          background: rgba(255, 255, 255, 0.08);
-          border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: 28px;
-          backdrop-filter: blur(20px);
-          box-shadow: 0 25px 60px rgba(0,0,0,.45);
-          padding: 32px 24px 28px;
-        }
+      {/* Global Header Navigation */}
+      <nav className="absolute top-0 left-0 right-0 h-16 flex items-center justify-between px-6 lg:px-10 border-b border-white/5 backdrop-blur-md bg-[#060B1A]/60 z-20">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-lg bg-linear-to-tr from-primary to-secondary flex items-center justify-center text-lg font-bold text-background shadow-[0_0_16px_rgba(124,58,237,0.45)]">
+            W
+          </div>
+          <span className="text-base font-extrabold tracking-tight text-text select-none">WellFinanced</span>
+        </div>
+        <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan/10 border border-cyan/20 text-[10px] font-bold uppercase tracking-widest text-cyan select-none">
+          <span className="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse" />
+          AI Active
+        </div>
+      </nav>
 
-        .step-seg {
-          flex: 1;
-          height: 3px;
-          border-radius: 999px;
-          background: rgba(255,255,255,.12);
-          transition: background 250ms ease-in-out;
-        }
-        .step-seg.active {
-          background: linear-gradient(90deg, #7C3AED, #06B6D4);
-          box-shadow: 0 0 10px rgba(124,58,237,.6);
-        }
+      {/* Main Content Layout */}
+      <main className="flex-1 flex w-full pt-16 pb-16 lg:pb-12 z-10 relative">
+        {/* Left Column Panel (Visible only on desktop lg+) */}
+        <div className="hidden lg:flex lg:w-1/2 flex-col justify-center items-start px-16 py-16 relative border-r border-white/5 overflow-hidden">
+          {/* Internal Ambient Glows */}
+          <div className="absolute w-80 h-80 rounded-full blur-[80px] bg-secondary/20 -top-20 -left-20 pointer-events-none" />
+          <div className="absolute w-64 h-64 rounded-full blur-[80px] bg-cyan/15 bottom-10 -right-16 pointer-events-none" />
+          <div className="absolute w-44 h-44 rounded-full blur-[80px] bg-mint/5 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
-        /* Inputs & Floating Labels */
-        .field { position: relative; margin-bottom: 16px; }
-        .inp-wrap { position: relative; }
-        
-        .field-icon {
-          position: absolute;
-          left: 18px;
-          top: 50%;
-          transform: translateY(-50%);
-          font-size: 18px;
-          color: rgba(255,255,255,.40);
-          pointer-events: none;
-          transition: color 250ms ease-in-out;
-        }
-        .inp {
-          width: 100%;
-          height: 58px;
-          background: rgba(255,255,255,.06);
-          border: 1px solid rgba(255,255,255,.10);
-          border-radius: 18px;
-          padding: 18px 50px 0 50px;
-          font-size: 15px;
-          color: #FFFFFF;
-          outline: none;
-          transition: border-color 250ms ease-in-out, box-shadow 250ms ease-in-out, background 250ms ease-in-out;
-        }
-        .inp::placeholder { color: transparent; }
-        .inp:focus {
-          border-color: rgba(124,58,237,.6);
-          background: rgba(124,58,237,.07);
-          box-shadow: 0 0 0 3px rgba(124,58,237,.18), 0 0 20px rgba(124,58,237,.15);
-        }
-        
-        .field-label {
-          position: absolute;
-          left: 50px;
-          top: 50%;
-          transform: translateY(-50%);
-          font-size: 14px;
-          color: rgba(255,255,255,.40);
-          pointer-events: none;
-          transition: top 200ms ease-in-out, font-size 200ms ease-in-out, color 200ms ease-in-out, letter-spacing 200ms ease-in-out;
-        }
-        
-        .inp:focus ~ .field-label,
-        .inp:not(:placeholder-shown) ~ .field-label {
-          top: 14px;
-          font-size: 10px;
-          letter-spacing: .08em;
-          color: #06B6D4;
-        }
-        .inp-wrap:focus-within .field-icon { color: #06B6D4; }
-
-        .eye-btn {
-          position: absolute;
-          right: 16px;
-          top: 50%;
-          transform: translateY(-50%);
-          background: none;
-          border: none;
-          cursor: pointer;
-          color: rgba(255,255,255,.40);
-          font-size: 19px;
-          line-height: 1;
-          transition: color 250ms ease-in-out;
-          display: flex;
-        }
-        .eye-btn:hover { color: rgba(255,255,255,.65); }
-
-        /* CTA */
-        .btn-primary-shiny {
-          width: 100%;
-          height: 56px;
-          border: none;
-          border-radius: 18px;
-          background: linear-gradient(90deg, #8BFF7D, #8FFFD2, #A3E635);
-          background-size: 200% auto;
-          font-size: 14px;
-          font-weight: 700;
-          letter-spacing: .08em;
-          text-transform: uppercase;
-          color: #0A1A0A;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          transition: transform 250ms ease-in-out, box-shadow 250ms ease-in-out, background-position 250ms ease-in-out;
-          box-shadow: 0 0 24px rgba(124,255,178,.35);
-          margin-bottom: 24px;
-        }
-        .btn-primary-shiny:hover:not(:disabled) {
-          transform: scale(1.02);
-          box-shadow: 0 0 36px rgba(124,255,178,.55);
-          background-position: right center;
-        }
-        .btn-arrow { font-size: 20px; transition: transform 250ms ease-in-out; }
-        .btn-primary-shiny:hover:not(:disabled) .btn-arrow { transform: translateX(4px); }
-
-        .btn-social {
-          height: 48px;
-          border-radius: 14px;
-          background: rgba(255,255,255,.05);
-          border: 1px solid rgba(255,255,255,.08);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
-          font-size: 13px;
-          font-weight: 600;
-          color: rgba(255,255,255,.65);
-          cursor: pointer;
-          transition: border-color 250ms ease-in-out, background 250ms ease-in-out, transform 250ms ease-in-out, box-shadow 250ms ease-in-out;
-        }
-        .btn-social:hover:not(:disabled) {
-          border-color: rgba(124,58,237,.45);
-          background: rgba(124,58,237,.08);
-          transform: scale(1.02);
-          box-shadow: 0 0 16px rgba(124,58,237,.2);
-          color: #FFFFFF;
-        }
-      `}</style>
-
-      {/* Global Background */}
-      <div className="absolute inset-0 custom-body-bg -z-20 pointer-events-none" />
-
-      {/* Centered Mobile Device Viewport */}
-      <div className="w-full max-w-[430px] min-h-screen bg-[#060B1A]/50 border-x border-white/5 flex flex-col relative shadow-2xl overflow-x-hidden">
-        {/* Navbar */}
-        <nav className="w-full h-16 flex items-center justify-between px-6 border-b border-white/5 backdrop-blur-md bg-[#060b1a]/60 z-20 shrink-0">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-linear-to-br from-[#7c3aed] to-[#4f46e5] flex items-center justify-center text-base shadow-[0_0_16px_rgba(124,58,237,.45)] select-none">
-              💎
+          {/* Interactive Spinning Graphics */}
+          <motion.div
+            className="relative w-56 h-56 mb-12 flex items-center justify-center select-none"
+            animate={{ x: mousePos.x, y: mousePos.y }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+          >
+            <div className="absolute inset-0 rounded-full border-[1.5px] border-secondary/50 animate-spin [animation-duration:9s]" />
+            <div className="absolute inset-5 rounded-full border-[1.5px] border-cyan/40 animate-spin [animation-duration:14s] [animation-direction:reverse]" />
+            <div className="absolute inset-11 rounded-full border-[1.5px] border-mint/30 animate-spin [animation-duration:6s]" />
+            <div className="absolute inset-14 rounded-full bg-linear-to-br from-secondary/30 to-cyan/20 backdrop-blur-md flex items-center justify-center shadow-lg">
+              <span className="text-5xl">🔐</span>
             </div>
-            <span className="text-base font-extrabold tracking-tight text-white select-none">WellFinanced</span>
-          </div>
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#06b6d4]/8 border border-[#06b6d4]/20 text-[10px] font-bold uppercase tracking-widest text-[#06b6d4]">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#06b6d4] animate-pulse" />
-            AI Active
-          </div>
-        </nav>
+          </motion.div>
 
-        {/* Form Body */}
-        <main className="grow flex flex-col justify-center px-6 py-8 z-10 relative">
-          <div className="card-panel">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-mint/25 bg-mint/10 text-[10px] font-bold tracking-widest uppercase text-mint mb-6 select-none">
+            <span className="w-1.5 h-1.5 rounded-full bg-mint animate-pulse" />
+            Enterprise Security
+          </div>
+
+          <h2 className="text-4xl lg:text-5xl font-black leading-tight tracking-tight mb-5 text-text">
+            Neural Privacy<br/>
+            <span className="bg-clip-text text-transparent bg-linear-to-r from-primary via-secondary to-pink">
+              Architecture.
+            </span>
+          </h2>
+
+          <p className="text-sm text-muted leading-relaxed max-w-[380px] mb-12">
+            Decentralized intelligence layers keep your financial identity encrypted. Autonomous AI audits protect your earnings 24/7.
+          </p>
+
+          <div className="flex gap-4 flex-wrap select-none">
+            <div className="px-6 py-3.5 rounded-2xl bg-white/5 border border-white/5 backdrop-blur-xl">
+              <div className="text-xl font-extrabold bg-clip-text text-transparent bg-linear-to-r from-mint to-cyan">99.9%</div>
+              <div className="text-[10px] text-muted uppercase tracking-widest mt-0.5">Uptime SLA</div>
+            </div>
+            <div className="px-6 py-3.5 rounded-2xl bg-white/5 border border-white/5 backdrop-blur-xl">
+              <div className="text-xl font-extrabold bg-clip-text text-transparent bg-linear-to-r from-mint to-cyan">AES-256</div>
+              <div className="text-[10px] text-muted uppercase tracking-widest mt-0.5">Encryption</div>
+            </div>
+            <div className="px-6 py-3.5 rounded-2xl bg-white/5 border border-white/5 backdrop-blur-xl">
+              <div className="text-xl font-extrabold bg-clip-text text-transparent bg-linear-to-r from-mint to-cyan">0ms</div>
+              <div className="text-[10px] text-muted uppercase tracking-widest mt-0.5">Latency SLA</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column Panel (Forms card panel - responsive layout) */}
+        <div className="flex-1 lg:w-1/2 flex items-center justify-center p-6 lg:p-14">
+          <div className="w-full max-w-[480px] bg-surface border border-white/5 rounded-card backdrop-blur-xl shadow-neon p-6 sm:p-10">
             
-            {/* Steps bar */}
+            {/* Multi-step progress bar */}
             <div className="flex items-center gap-2 mb-6 select-none">
-              <div className="step-seg active" />
-              <div className="step-seg" />
-              <div className="step-seg" />
-              <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest whitespace-nowrap ml-2">
+              <div className="flex-1 h-[3px] rounded-full bg-linear-to-r from-secondary to-cyan shadow-[0_0_10px_rgba(124,58,237,0.6)]" />
+              <div className="flex-1 h-[3px] rounded-full bg-white/10" />
+              <div className="flex-1 h-[3px] rounded-full bg-white/10" />
+              <span className="text-[10px] font-bold text-muted uppercase tracking-widest whitespace-nowrap ml-2">
                 Step 1 / 3
               </span>
             </div>
 
-            <h1 className="text-2xl font-extrabold tracking-tight mb-1">Create Account</h1>
-            <p className="text-xs text-white/65 mb-6">Join the elite network of AI-augmented freelancers.</p>
+            <h1 className="text-2xl font-extrabold tracking-tight mb-1 text-text">Create Account</h1>
+            <p className="text-xs text-muted mb-6">Join the elite network of AI-augmented freelancers.</p>
 
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
               {submitError && (
-                <div className="flex items-center gap-3 p-3.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-xs font-medium animate-fade-in">
+                <div className="flex items-center gap-3 p-3.5 rounded-xl bg-danger/10 border border-danger/20 text-danger text-xs font-medium animate-fade-in">
                   <ShieldAlert className="w-5 h-5 shrink-0" />
                   <span>{submitError}</span>
                 </div>
               )}
 
               {submitSuccess && (
-                <div className="flex items-center gap-3 p-3.5 rounded-xl bg-green-500/15 border border-green-500/25 text-[#7CFFB2] text-xs font-medium animate-fade-in">
+                <div className="flex items-center gap-3 p-3.5 rounded-xl bg-success/15 border border-success/25 text-mint text-xs font-medium animate-fade-in">
                   <CheckCircle2 className="w-5 h-5 shrink-0" />
                   <span>Workspace registered! Loading step 2...</span>
                 </div>
               )}
 
-              {/* Full Name */}
-              <div className="field">
-                <div className="inp-wrap">
-                  <span className="field-icon">👤</span>
-                  <input
-                    id="fullName"
-                    type="text"
-                    placeholder=" "
-                    disabled={isSubmitting || submitSuccess}
-                    className={`inp ${errors.fullName ? 'border-red-500/40' : ''}`}
-                    {...register('fullName')}
-                  />
-                  <label className="field-label" htmlFor="fullName">Full Name</label>
-                </div>
-                {errors.fullName && (
-                  <span className="text-xs text-red-400 px-1 mt-1 block">{errors.fullName.message}</span>
-                )}
-              </div>
+              {/* Full Name Field */}
+              <Input
+                id="fullName"
+                type="text"
+                label="Full Name"
+                placeholder="John Doe"
+                disabled={isSubmitting || submitSuccess}
+                leftIcon={<UserIcon className="w-4 h-4" />}
+                error={errors.fullName?.message}
+                {...register('fullName')}
+              />
 
-              {/* Email Address */}
-              <div className="field">
-                <div className="inp-wrap">
-                  <span className="field-icon">✉️</span>
-                  <input
-                    id="email"
-                    type="email"
-                    placeholder=" "
-                    disabled={isSubmitting || submitSuccess}
-                    className={`inp ${errors.email ? 'border-red-500/40' : ''}`}
-                    {...register('email')}
-                  />
-                  <label className="field-label" htmlFor="email">Email Address</label>
-                </div>
-                {errors.email && (
-                  <span className="text-xs text-red-400 px-1 mt-1 block">{errors.email.message}</span>
-                )}
-              </div>
+              {/* Email Address Field */}
+              <Input
+                id="email"
+                type="email"
+                label="Email Address"
+                placeholder="name@domain.com"
+                disabled={isSubmitting || submitSuccess}
+                leftIcon={<Mail className="w-4 h-4" />}
+                error={errors.email?.message}
+                {...register('email')}
+              />
 
-              {/* Password */}
-              <div className="field">
-                <div className="inp-wrap">
-                  <span className="field-icon">🔑</span>
-                  <input
-                    id="password"
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder=" "
-                    disabled={isSubmitting || submitSuccess}
-                    className={`inp ${errors.password ? 'border-red-500/40' : ''}`}
-                    {...register('password')}
-                  />
-                  <label className="field-label" htmlFor="password">Password</label>
+              {/* Password Field */}
+              <Input
+                id="password"
+                type={showPassword ? 'text' : 'password'}
+                label="Password"
+                placeholder="••••••••••••"
+                disabled={isSubmitting || submitSuccess}
+                leftIcon={<Lock className="w-4 h-4" />}
+                rightIcon={
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="eye-btn"
+                    className="text-muted hover:text-text transition-colors flex items-center justify-center p-1"
                     aria-label="Toggle password visibility"
                   >
-                    {showPassword ? <EyeOff className="w-[19px] h-[19px]" /> : <span className="select-none">👁</span>}
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                   </button>
-                </div>
-                {errors.password && (
-                  <span className="text-xs text-red-400 px-1 mt-1 block">{errors.password.message}</span>
-                )}
-              </div>
+                }
+                error={errors.password?.message}
+                {...register('password')}
+              />
 
-              {/* Verification Note */}
-              <div className="flex items-center gap-3 p-3 rounded-[16px] bg-[#7cffb2]/5 border border-[#7cffb2]/15 mb-4 select-none">
-                <div className="w-8 h-8 rounded-full bg-[#7cffb2]/10 flex items-center justify-center text-base shrink-0">
+              {/* Verification Info Alert Box */}
+              <div className="flex items-center gap-3 p-3 rounded-2xl bg-mint/5 border border-mint/15 mb-4 select-none">
+                <div className="w-8 h-8 rounded-full bg-mint/10 flex items-center justify-center text-sm shrink-0">
                   ✅
                 </div>
                 <div>
-                  <div className="text-[10px] font-bold text-[#7CFFB2] uppercase tracking-widest">
+                  <div className="text-[10px] font-bold text-mint uppercase tracking-widest">
                     Neural Verification Pending
                   </div>
-                  <div className="text-[10px] text-white/40 mt-0.5">
+                  <div className="text-[10px] text-muted mt-0.5">
                     Identity validated via biometrics on first login.
                   </div>
                 </div>
               </div>
 
-              {/* CTA Button */}
-              <button
+              {/* Submit CTA Button */}
+              <Button
                 type="submit"
+                variant="primary"
+                fullWidth
                 disabled={isSubmitting || submitSuccess}
-                className="btn-primary-shiny disabled:opacity-50 disabled:pointer-events-none cursor-pointer"
+                isLoading={isSubmitting}
+                className="group font-bold text-bg-1 tracking-wider uppercase"
               >
-                {isSubmitting ? (
-                  <span className="flex items-center gap-2">
-                    <span className="w-4 h-4 border-2 border-[#0A1A0A] border-t-transparent rounded-full animate-spin" />
-                    REGISTERING...
-                  </span>
-                ) : (
-                  <>
-                    <span>Create My Account</span>
-                    <span className="btn-arrow">→</span>
-                  </>
-                )}
-              </button>
+                <span>Create My Account</span>
+                <span className="ml-1 group-hover:translate-x-1 transition-transform">→</span>
+              </Button>
             </form>
 
             {/* Divider */}
-            <div className="flex items-center gap-3 my-4">
-              <div className="flex-1 h-px bg-white/8" />
-              <span className="text-[9px] text-white/40 uppercase tracking-widest whitespace-nowrap">
+            <div className="flex items-center gap-3 my-5 select-none">
+              <div className="flex-1 h-px bg-white/5" />
+              <span className="text-[9px] text-muted uppercase tracking-widest whitespace-nowrap">
                 or continue with
               </span>
-              <div className="flex-1 h-px bg-white/8" />
+              <div className="flex-1 h-px bg-white/5" />
             </div>
 
-            {/* Social Logins with SVGs */}
+            {/* Social Authentication */}
             <div className="grid grid-cols-2 gap-3">
-              <button
+              <Button
                 type="button"
+                variant="secondary"
+                size="sm"
+                className="h-12 text-xs flex items-center justify-center gap-2 border border-white/5"
                 disabled={isSubmitting || submitSuccess}
-                className="btn-social cursor-pointer disabled:opacity-50"
+                onClick={() => {}}
               >
                 <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -380,44 +273,47 @@ export default function RegisterPage() {
                   <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
                   <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
                 </svg>
-                Google
-              </button>
-              <button
+                <span>Google</span>
+              </Button>
+              <Button
                 type="button"
+                variant="secondary"
+                size="sm"
+                className="h-12 text-xs flex items-center justify-center gap-2 border border-white/5"
                 disabled={isSubmitting || submitSuccess}
-                className="btn-social cursor-pointer disabled:opacity-50"
+                onClick={() => {}}
               >
                 <svg className="w-4 h-4 fill-current text-white/80 shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.577.688.479C19.138 20.162 22 16.418 22 12c0-5.523-4.477-10-10-10z" />
                 </svg>
-                GitHub
-              </button>
+                <span>GitHub</span>
+              </Button>
             </div>
 
-            {/* Footer link */}
-            <p className="text-center text-xs text-white/40 mt-6">
+            {/* Bottom Redirect Link */}
+            <p className="text-center text-xs text-muted mt-6">
               Already have an account?{' '}
               <Link 
                 href="/login" 
-                className="font-bold bg-clip-text text-transparent bg-linear-to-r from-[#7C3AED] to-[#06B6D4] hover:underline hover:text-[#06B6D4] underline-offset-2 ml-1"
+                className="font-bold bg-clip-text text-transparent bg-linear-to-r from-secondary to-cyan hover:underline hover:text-cyan underline-offset-2 ml-1"
               >
                 Sign In
               </Link>
             </p>
 
           </div>
-        </main>
+        </div>
+      </main>
 
-        {/* Footer */}
-        <footer className="h-16 flex flex-col items-center justify-center px-6 gap-2 border-t border-white/5 bg-[#060b1a]/50 text-[10px] shrink-0 text-center">
-          <span className="text-white/40">© 2025 WellFinanced · Secured by Neural Encryption</span>
-          <div className="flex gap-6">
-            <Link href="/privacy" className="text-white/40 uppercase tracking-widest font-semibold hover:text-[#06b6d4] transition-colors">Privacy</Link>
-            <Link href="/terms" className="text-white/40 uppercase tracking-widest font-semibold hover:text-[#06b6d4] transition-colors">Terms</Link>
-            <Link href="/security" className="text-white/40 uppercase tracking-widest font-semibold hover:text-[#06b6d4] transition-colors">Security</Link>
-          </div>
-        </footer>
-      </div>
+      {/* Footer Navigation */}
+      <footer className="absolute bottom-0 left-0 right-0 h-12 flex items-center justify-between px-6 lg:px-10 border-t border-white/5 bg-[#060B1A]/50 z-20">
+        <span className="text-[10px] text-muted">© {new Date().getFullYear()} WellFinanced · Secured by Neural Encryption</span>
+        <div className="flex gap-4">
+          <Link href="/privacy" className="text-[10px] font-semibold text-muted uppercase tracking-widest hover:text-cyan transition-colors">Privacy</Link>
+          <Link href="/terms" className="text-[10px] font-semibold text-muted uppercase tracking-widest hover:text-cyan transition-colors">Terms</Link>
+          <Link href="/security" className="text-[10px] font-semibold text-muted uppercase tracking-widest hover:text-cyan transition-colors">Security</Link>
+        </div>
+      </footer>
     </div>
   );
 }

@@ -24,6 +24,32 @@ Never leave the project in a broken state.
 
 ---
 
+# design
+The provided HTML from Stitch is a visual reference only.
+
+Never translate it literally.
+
+Rebuild every screen using reusable React components, Tailwind CSS utilities, and the project's design system.
+
+Never embed CSS inside React components.
+
+Never use <style> blocks or custom non-standard CSS classes (e.g. `.inp`, `.field`, `.btn-primary`). Everything must be 100% Tailwind CSS classes mapped to globals.css tokens.
+
+Never copy HTML structure blindly.
+
+Extract repeated UI into reusable components.
+
+### UI Library Reuse
+Always reuse components from `src/components/ui/` (e.g., `Input`, `Button`, `Card`, `Modal`). Do NOT rebuild forms, buttons, or inputs with custom HTML tags if a reusable component already exists in the design system.
+
+### Page Layout Responsiveness
+General pages (such as Login, Register, Landing Page, etc.) must be fully responsive across all viewports:
+- Desktop should render a spacious, proper desktop layout (e.g., dual-pane or full-screen grid).
+- Never wrap general auth/landing pages in a forced mobile-viewport simulator wrapper (like `max-w-[430px] border-x shadow-2xl`) on desktop.
+- Save mobile viewport containment strictly for dashboard/app simulation views if explicitly requested.
+
+Follow production-grade architecture, not prototype code.
+
 # Before Finishing Any Task
 
 Always perform a final review.
@@ -45,16 +71,15 @@ Never finish until the edited files are clean.
 
 ---
 
-# Mobile First
+# Responsive Layout
 
-The application is Mobile First.
+The application must be fully responsive (Mobile & Desktop).
 
 Rules:
 
-- Maximum width: 430px
-- Desktop displays a centered mobile container
-- Never create desktop layouts unless explicitly requested
-- Never allow horizontal scrolling
+- Match the design in the stitch files for both desktop and mobile viewports.
+- Never allow horizontal scrolling.
+- Mobile layout should work perfectly (320px–430px).
 
 ---
 
