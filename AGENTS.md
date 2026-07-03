@@ -1,8 +1,8 @@
-# WellFinanced AI Agent Instructions
+# WellFinanced AI Agent Rules
 
 ## Project Overview
 
-WellFinanced is a Mobile-First AI-powered Financial Assistant for Freelancers.
+WellFinanced is a production-grade Mobile-First AI Financial Assistant for Freelancers.
 
 Tech Stack
 
@@ -10,102 +10,136 @@ Tech Stack
 - React 19
 - TypeScript
 - Tailwind CSS v4
-- Framer Motion
-- React Hook Form
-- Zod
-- Lucide React
+- App Router
 
 ---
 
-# General Rules
+# Core Principle
 
-Always produce production-ready code.
+Every generated code must be production-ready.
 
-Before finishing ANY task:
+Never generate demo-quality code.
 
-- Fix all TypeScript errors.
-- Fix all ESLint errors.
-- Remove unused imports.
-- Remove unused variables.
-- Prefer const over let.
-- Remove dead code.
-- Never leave TODOs unless requested.
-- Never break existing functionality.
+Never leave the project in a broken state.
+
+---
+
+# Before Finishing Any Task
+
+Always perform a final review.
+
+Fix:
+
+- TypeScript errors
+- ESLint errors
+- Build errors
+- Hydration issues
+- Accessibility issues
+- Dead code
+- Unused imports
+- Unused variables
+- Duplicate code
+- Tailwind conflicts
+
+Never finish until the edited files are clean.
+
+---
+
+# Mobile First
+
+The application is Mobile First.
+
+Rules:
+
+- Maximum width: 430px
+- Desktop displays a centered mobile container
+- Never create desktop layouts unless explicitly requested
+- Never allow horizontal scrolling
 
 ---
 
 # Next.js Rules
 
-- Use App Router.
-- Use Server Components by default.
-- Add "use client" only when necessary.
-- Use next/image instead of img.
-- Use next/link instead of anchor tags.
-- Never create unnecessary Client Components.
+- Use Server Components by default
+- Add "use client" only when required
+- Use next/image instead of img
+- Use next/link instead of a
+- Never move client libraries into Server Components
 
 ---
 
-# Tailwind Rules
+# Client Component Rules
 
-Use Tailwind CSS v4 best practices.
+Libraries requiring browser APIs must stay inside Client Components.
+
+Examples:
+
+- React Hooks
+- Framer Motion
+- Zustand
+- React Hook Form
+- Recharts
+- Browser Storage
+- Window / Document APIs
+
+---
+
+# Hydration Safety
+
+Avoid hydration mismatches.
+
+When reading client-only state:
+
+- localStorage
+- sessionStorage
+- persisted Zustand stores
+
+Always wait until mounted.
+
+---
+
+# Tailwind CSS Rules
+
+Use Tailwind CSS v4 canonical utilities.
 
 Prefer:
 
-- grow instead of flex-grow
-- shrink-0 instead of flex-shrink-0
-- h-px instead of h-[1px]
+- grow
+- shrink-0
+- h-px
 
-Avoid conflicting utilities.
+Never:
 
-Never use:
+- duplicate utilities
+- conflicting classes
+- duplicate ring utilities
+- duplicate text colors
 
-ring ring-1
+Use design tokens.
 
-or
-
-text-white text-pink-400
-
-Use only one utility for the same CSS property.
+Never hardcode colors if a token already exists.
 
 ---
 
-# Code Quality
+# Components
 
 Components must be:
 
-- Reusable
-- Small
-- Readable
-- Typed
-- Modular
+- reusable
+- typed
+- modular
+- readable
+- small
 
-Extract repeated UI into reusable components.
+Extract repeated UI.
+
+Avoid giant files.
 
 ---
 
-# Folder Structure
+# Project Structure
 
-Never change the architecture.
-
-Use:
-
-src/
-
-components/
-
-hooks/
-
-lib/
-
-services/
-
-types/
-
-constants/
-
-utils/
-
-app/
+Respect the existing architecture.
 
 Do not create random folders.
 
@@ -113,63 +147,84 @@ Do not create random folders.
 
 # Design System
 
-Follow the project's Design System.
+Follow:
 
-Do NOT invent new colors.
+- style.txt
 
-Do NOT invent spacing.
+Do not invent:
 
-Do NOT invent typography.
-
-Respect existing design tokens.
-
-Mobile First only.
-
-Maximum width:
-
-430px
-
-Desktop should display a centered mobile layout.
-
-Do NOT create desktop pages unless requested.
+- colors
+- typography
+- spacing
+- radius
 
 ---
 
-# User Stories
+# Business Logic
 
-All features must follow the project User Stories.
+Follow:
 
-Never invent business logic.
+- user story.txt
 
-Never add fake features.
+Do not invent features.
+
+Do not change business rules.
 
 ---
 
 # Generated Files
 
-Ignore folders:
+Ignore:
 
-stitch/
-
-generated/
-
-exports/
-
-temp/
+- stitch/
+- generated/
+- exports/
+- temp/
 
 unless explicitly requested.
 
 ---
 
-# Before Every Response
+# Charts
 
-Mentally perform:
+Charts must be responsive.
 
-1. TypeScript check
-2. ESLint check
-3. Tailwind cleanup
-4. Refactor duplicated code
-5. Remove warnings
-6. Ensure build succeeds
+Never use fixed widths.
 
-Only then generate the final code.
+Always prevent overflow.
+
+---
+
+# Images
+
+Always prefer next/image.
+
+Optimize assets.
+
+---
+
+# Final Checklist
+
+Before every response verify:
+
+✓ TypeScript passes
+
+✓ ESLint passes
+
+✓ Build passes
+
+✓ No hydration issues
+
+✓ No Tailwind conflicts
+
+✓ No unused imports
+
+✓ No unused variables
+
+✓ No duplicate code
+
+✓ Mobile layout works (320–430px)
+
+✓ Components are reusable
+
+Only then return the final code.
