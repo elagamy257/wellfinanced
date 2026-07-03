@@ -39,10 +39,26 @@ This file tracks the progress of the WellFinanced project, detailing the steps c
   - Added CSS tokens from `style.txt` to `src/app/globals.css`.
   - Updated `src/app/layout.tsx` to use the `Inter` font.
   - Built the modular `src/app/signup/page.tsx` component with exact style mappings.
-- **Git Commit:** Pending
-- **Pushed to GitHub:** Pending
+- **Git Commit:** Yes
+- **Pushed to GitHub:** Yes
+
+### 5. Onboarding Forms & State Fixes
+- **Status:** ✅ Done
+- **Description:** Fixed React Hook Form state management in `src/app/onboarding/page.tsx` by replacing custom `onChange` handlers with RHF's `watch` and `register` system. Installed missing `@hookform/resolvers/zod` package.
+- **Git Commit:** Yes
+- **Pushed to GitHub:** Yes
+
+### 6. Redesign: Welcome Onboarding (Step 1)
+- **Status:** ✅ Done
+- **Description:** Implemented the `Welcome_Onboarding_Desktop` layout as Step 1 of the onboarding wizard in `src/app/onboarding/page.tsx`.
+  - Applied the NeoBank Glassmorphism design system (gradients, blurs, borders).
+  - Wired the "Initialize AI Partner" button to transition into the workspace configuration wizard (Step 2).
+  - Ensured Next.js compatibility with `<Image />` tags and escaped text elements.
+- **Git Commit:** `27b072c` - "feat(onboarding): implement Step 1 NeoBank UI Welcome layout"
+- **Pushed to GitHub:** Yes
 
 ---
 
 ## Next Steps
 - Continue converting other mockups (e.g., login, dashboard) into Next.js React components.
+- Wire up Zustand store or backend API for onboarding data submission.
