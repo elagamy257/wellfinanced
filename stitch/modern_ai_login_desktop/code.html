@@ -259,15 +259,15 @@
 </span>
 </div>
 </header>
-<main class="flex-grow flex items-center justify-center px-6 relative z-10 py-12">
+<main class="grow flex items-center justify-center px-6 relative z-10 py-12">
 <!-- Center Glow -->
 <div class="absolute w-[800px] h-[800px] bg-primary/5 rounded-full blur-[150px] -z-10 pointer-events-none"></div>
 <!-- Login Card -->
 <div class="ultra-glass w-full max-w-[440px] rounded-2xl p-8 md:p-12 relative overflow-hidden border border-white/5">
 <!-- Subtle gradient border overlay -->
-<div class="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-deep-teal/5 pointer-events-none"></div>
+<div class="absolute inset-0 bg-linear-to-br from-primary/5 via-transparent to-deep-teal/5 pointer-events-none"></div>
 <div class="mb-12 text-center relative z-10">
-<h1 class="text-3xl font-bold tracking-tight mb-3 font-headline bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent">Welcome Back</h1>
+<h1 class="text-3xl font-bold tracking-tight mb-3 font-headline bg-linear-to-b from-white to-white/60 bg-clip-text text-transparent">Welcome Back</h1>
 <p class="text-on-surface-variant text-sm font-light">Access your intelligent income dashboard.</p>
 </div>
 <!-- Login Form -->
@@ -370,4 +370,57 @@
         update() {
             this.x += this.vx;
             this.y += this.vy;
-            if (this.x < 0 || this.x > canvas.width) this.vx</script><div id="snapdom-sandbox" data-snapdom-sandbox="true" aria-hidden="true" style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div></body></html>
+            if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+            if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+        }
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = 'rgba(16, 185, 129, 0.4)';
+            ctx.fill();
+        }
+    }
+
+    function init() {
+        resize();
+        particles = [];
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        // draw connections
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+            
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                
+                if (dist < connectionDistance) {
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(16, 185, 129, ${0.12 * (1 - dist / connectionDistance)})`;
+                    ctx.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(animate);
+    }
+
+    window.addEventListener('resize', () => {
+        resize();
+        init();
+    });
+
+    init();
+    animate();
+</script>
+</body>
+</html>
