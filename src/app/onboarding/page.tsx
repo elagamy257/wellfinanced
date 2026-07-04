@@ -21,6 +21,8 @@ import {
 } from 'lucide-react';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
+import { AuthHeader } from '@/components/layout/AuthHeader';
+import { AuthFooter } from '@/components/layout/AuthFooter';
 
 // STEP 2: Workspace Config Schema
 const workspaceSchema = z.object({
@@ -75,7 +77,6 @@ export default function OnboardingPage() {
   const {
     register: registerPref,
     handleSubmit: handlePrefSubmit,
-    setValue: setPrefValue,
     watch: watchPref,
     formState: { errors: prefErrors },
   } = useForm<PreferencesFormValues>({
@@ -117,19 +118,7 @@ export default function OnboardingPage() {
       <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-primary/10 blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full bg-cyan/10 blur-[120px] pointer-events-none" />
 
-      {/* Global Header Navigation */}
-      <nav className="absolute top-0 left-0 right-0 h-16 flex items-center justify-between px-6 lg:px-10 border-b border-white/5 backdrop-blur-md bg-[#060B1A]/60 z-20">
-        <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary to-secondary flex items-center justify-center text-lg font-bold text-background shadow-[0_0_16px_rgba(124,58,237,0.45)]">
-            W
-          </div>
-          <span className="text-base font-extrabold tracking-tight text-text select-none">WellFinanced</span>
-        </div>
-        <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan/10 border border-cyan/20 text-[10px] font-bold uppercase tracking-widest text-cyan select-none">
-          <span className="w-1.5 h-1.5 rounded-full bg-cyan animate-pulse" />
-          AI Active
-        </div>
-      </nav>
+      <AuthHeader />
 
       {/* Onboarding Wizard Form Body */}
       <main className={`grow flex flex-col px-6 pt-24 pb-20 z-10 relative ${step > 1 ? 'items-center justify-center' : ''}`}>
@@ -562,15 +551,7 @@ export default function OnboardingPage() {
         )}
       </main>
 
-      {/* Footer Navigation */}
-      <footer className="absolute bottom-0 left-0 right-0 h-12 flex items-center justify-between px-6 lg:px-10 border-t border-white/5 bg-[#060B1A]/50 z-20">
-        <span className="text-[10px] text-muted">© {new Date().getFullYear()} WellFinanced · Secured by Neural Encryption</span>
-        <div className="flex gap-4">
-          <Link href="/privacy" className="text-[10px] font-semibold text-muted uppercase tracking-widest hover:text-cyan transition-colors">Privacy</Link>
-          <Link href="/terms" className="text-[10px] font-semibold text-muted uppercase tracking-widest hover:text-cyan transition-colors">Terms</Link>
-          <Link href="/security" className="text-[10px] font-semibold text-muted uppercase tracking-widest hover:text-cyan transition-colors">Security</Link>
-        </div>
-      </footer>
+      <AuthFooter />
     </div>
   );
 }

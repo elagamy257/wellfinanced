@@ -4,7 +4,7 @@ import React from 'react';
 import { motion, HTMLMotionProps } from 'framer-motion';
 
 export interface ButtonProps extends HTMLMotionProps<'button'> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'purple' | 'cyan';
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'purple' | 'cyan' | 'mint';
   size?: 'sm' | 'md' | 'lg';
   isLoading?: boolean;
   fullWidth?: boolean;
@@ -22,6 +22,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       danger: 'bg-danger text-background hover:bg-danger/90 font-extrabold',
       purple: 'bg-gradient-purple text-text hover:brightness-110 shadow-glow hover:shadow-glow-strong border-0',
       cyan: 'bg-gradient-cyan text-text hover:brightness-110 shadow-glow hover:shadow-glow-strong border-0',
+      mint: 'bg-gradient-to-r from-[#10b981] to-[#0d9488] text-white hover:brightness-110 shadow-[0_0_20px_rgba(16,185,129,0.35)] hover:shadow-[0_0_30px_rgba(16,185,129,0.55)] border-0',
     };
 
     const sizes = {

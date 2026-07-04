@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { cn } from '@/utils';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
@@ -37,13 +38,13 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             id={id}
             aria-invalid={!!error}
             aria-describedby={errorId}
-            className={`w-full h-[58px] bg-white/8 backdrop-blur-[20px] border border-white/10 rounded-input px-5 text-sm text-text placeholder-muted/50 transition-all duration-250 ease-in-out outline-none focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/30 focus:shadow-glow disabled:opacity-50 disabled:pointer-events-none ${
-              leftIcon ? 'pl-12' : ''
-            } ${
-              rightIcon ? 'pr-12' : ''
-            } ${
-              error ? 'border-danger focus:border-danger focus:ring-danger/30' : ''
-            } ${className}`}
+            className={cn(
+              "w-full h-[58px] bg-white/8 backdrop-blur-[20px] border border-white/10 rounded-input px-5 text-sm text-text placeholder-muted/50 transition-all duration-250 ease-in-out outline-none focus:border-primary-blue focus:ring-2 focus:ring-primary-blue/30 focus:shadow-glow disabled:opacity-50 disabled:pointer-events-none",
+              leftIcon && "pl-12",
+              rightIcon && "pr-12",
+              error && "border-danger focus:border-danger focus:ring-danger/30",
+              className
+            )}
             {...props}
           />
 
@@ -68,3 +69,4 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
 );
 
 Input.displayName = 'Input';
+

@@ -5,3 +5,5 @@ export * from './Sidebar';
 export * from './TopNavbar';
 export * from './PageContainer';
 export * from './ContentWrapper';
+export * from './AuthHeader';
+export * from './AuthFooter';
