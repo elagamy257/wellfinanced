@@ -85,7 +85,7 @@ export default function LandingPage() {
           </Link>
 
           <Link href="/register">
-            <Button className="bg-gradient-to-r from-indigo-600 to-violet-600 hover:brightness-110 text-white font-semibold h-9.5 px-5 rounded-lg flex items-center justify-center gap-1.5 shadow-[0_0_15px_rgba(99,102,241,0.3)] border-0 text-xs tracking-wider">
+            <Button className="bg-linear-to-r from-indigo-600 to-violet-600 hover:brightness-110 text-white font-semibold h-9.5 px-5 rounded-lg flex items-center justify-center gap-1.5 shadow-[0_0_15px_rgba(99,102,241,0.3)] border-0 text-xs tracking-wider">
               Get Started
             </Button>
           </Link>
@@ -139,7 +139,7 @@ export default function LandingPage() {
             {/* Title */}
             <h1 className="text-4xl sm:text-5xl lg:text-6.5xl font-black leading-[1.1] tracking-tight mb-6 text-white select-none">
               Welcome to your<br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 filter drop-shadow-[0_0_20px_rgba(168,85,247,0.15)]">
+              <span className="bg-clip-text text-transparent bg-linear-to-r from-indigo-400 via-purple-400 to-pink-400 filter drop-shadow-[0_0_20px_rgba(168,85,247,0.15)]">
                 Financial Future
               </span>
             </h1>
@@ -152,7 +152,7 @@ export default function LandingPage() {
             {/* Actions */}
             <div className="flex flex-wrap gap-4 mb-10 w-full sm:w-auto">
               <Link href="/register" className="w-full sm:w-auto">
-                <Button className="w-full bg-gradient-to-r from-indigo-600 to-violet-600 hover:brightness-110 text-white font-bold h-12 px-7 rounded-xl flex items-center justify-center gap-2 border-0 shadow-[0_0_20px_rgba(99,102,241,0.4)] transition-all active:scale-[0.98] select-none text-xs tracking-wider">
+                <Button className="w-full bg-linear-to-r from-indigo-600 to-violet-600 hover:brightness-110 text-white font-bold h-12 px-7 rounded-xl flex items-center justify-center gap-2 border-0 shadow-[0_0_20px_rgba(99,102,241,0.4)] transition-all active:scale-[0.98] select-none text-xs tracking-wider">
                   Initialize AI Partner 🚀
                 </Button>
               </Link>
@@ -233,7 +233,7 @@ export default function LandingPage() {
           {/* Header */}
           <div className="text-center max-w-xl">
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4 text-white">
-              Master Your <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">Capital Flow</span>
+              Master Your <span className="bg-clip-text text-transparent bg-linear-to-r from-indigo-400 via-purple-400 to-pink-400">Capital Flow</span>
             </h2>
             <p className="text-slate-400 text-sm font-light leading-relaxed">
               Autonomous financial intelligence designed specifically for the unique volatility of freelance careers.
@@ -259,7 +259,7 @@ export default function LandingPage() {
                   <span className="text-[#818cf8]">96.4%</span>
                 </div>
                 <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                  <div className="w-[96.4%] h-full bg-gradient-to-r from-indigo-500 to-violet-500 rounded-full" />
+                  <div className="w-[96.4%] h-full bg-linear-to-r from-indigo-500 to-violet-500 rounded-full" />
                 </div>
               </div>
             </div>
@@ -310,7 +310,7 @@ export default function LandingPage() {
         <section className="grid grid-cols-2 md:grid-cols-4 gap-8 py-16 border-y border-white/5 text-center select-none">
           {stats.map((stat, i) => (
             <div key={i} className="flex flex-col gap-1.5">
-              <span className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-b from-white to-slate-400">
+              <span className="text-3xl font-extrabold bg-clip-text text-transparent bg-linear-to-b from-white to-slate-400">
                 {stat.value}
               </span>
               <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">
@@ -337,7 +337,7 @@ export default function LandingPage() {
             
             <div className="flex flex-col sm:flex-row gap-4 relative z-10 w-full md:w-auto shrink-0 select-none">
               <Link href="/register" className="w-full sm:w-auto">
-                <Button className="w-full bg-gradient-to-r from-indigo-500 to-violet-500 hover:brightness-110 text-white font-bold h-12 px-8 rounded-xl flex items-center justify-center gap-2 border-0">
+                <Button className="w-full bg-linear-to-r from-indigo-500 to-violet-500 hover:brightness-110 text-white font-bold h-12 px-8 rounded-xl flex items-center justify-center gap-2 border-0">
                   Create Free Account
                 </Button>
               </Link>
