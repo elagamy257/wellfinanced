@@ -1,12 +1,14 @@
 import React from 'react';
-import { PageContainer, ContentWrapper } from '@/components/layout';
+import { PageContainer, ContentWrapper, Breadcrumb } from '@/components/layout';
 import { SectionTitle, EmptyState } from '@/components/ui';
 import { Settings } from 'lucide-react';
 
 export default function SettingsPage() {
   return (
     <PageContainer>
+      <Breadcrumb />
       <SectionTitle 
+
         title="Settings" 
         subtitle="Configure connections, default tax brackets, and security" 
       />

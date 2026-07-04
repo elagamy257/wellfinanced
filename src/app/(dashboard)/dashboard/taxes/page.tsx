@@ -1,12 +1,14 @@
 import React from 'react';
-import { PageContainer, ContentWrapper } from '@/components/layout';
+import { PageContainer, ContentWrapper, Breadcrumb } from '@/components/layout';
 import { SectionTitle, EmptyState } from '@/components/ui';
 import { Calculator } from 'lucide-react';
 
 export default function TaxesPage() {
   return (
     <PageContainer>
+      <Breadcrumb />
       <SectionTitle 
+
         title="Tax Planner" 
         subtitle="Estimate write-offs and dynamic quarterly tax reserves" 
       />

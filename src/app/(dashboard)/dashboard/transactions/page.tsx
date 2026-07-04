@@ -1,12 +1,14 @@
 import React from 'react';
-import { PageContainer, ContentWrapper } from '@/components/layout';
+import { PageContainer, ContentWrapper, Breadcrumb } from '@/components/layout';
 import { SectionTitle, EmptyState } from '@/components/ui';
 import { Receipt } from 'lucide-react';
 
 export default function TransactionsPage() {
   return (
     <PageContainer>
+      <Breadcrumb />
       <SectionTitle 
+
         title="Transactions" 
         subtitle="Manage irregular payments, invoices, and expense allocations" 
       />

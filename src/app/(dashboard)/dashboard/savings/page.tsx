@@ -1,12 +1,14 @@
 import React from 'react';
-import { PageContainer, ContentWrapper } from '@/components/layout';
+import { PageContainer, ContentWrapper, Breadcrumb } from '@/components/layout';
 import { SectionTitle, EmptyState } from '@/components/ui';
 import { PiggyBank } from 'lucide-react';
 
 export default function SavingsPage() {
   return (
     <PageContainer>
+      <Breadcrumb />
       <SectionTitle 
+
         title="Savings" 
         subtitle="Manage irregular income buffers, reserves, and safety nets" 
       />

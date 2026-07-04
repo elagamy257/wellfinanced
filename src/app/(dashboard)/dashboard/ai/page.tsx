@@ -1,12 +1,14 @@
 import React from 'react';
-import { PageContainer, ContentWrapper } from '@/components/layout';
+import { PageContainer, ContentWrapper, Breadcrumb } from '@/components/layout';
 import { SectionTitle, EmptyState } from '@/components/ui';
 import { Sparkles } from 'lucide-react';
 
 export default function AiAdvisorPage() {
   return (
     <PageContainer>
+      <Breadcrumb />
       <SectionTitle 
+
         title="AI Advisor" 
         subtitle="Intelligent liquidity forecasts and financial stability advice" 
       />
