@@ -2,25 +2,17 @@
 
 import React, { useState } from 'react';
 import { PageContainer, Breadcrumb } from '@/components/layout';
-import { SectionTitle, Button, Card } from '@/components/ui';
+import { Button } from '@/components/ui';
+import { Sparkles, Eye, EyeOff } from 'lucide-react';
 import { 
-  Calendar, 
-  Plus, 
-  Sparkles, 
-  Eye, 
-  EyeOff
-} from 'lucide-react';
-import { 
-  OverviewWidget,
-  FinancialHealthWidget,
   IncomeWidget,
   ExpenseWidget,
   GoalsWidget,
   CashflowWidget,
   AIWidget,
-  UpcomingBillsWidget,
   RecentActivityWidget,
-  QuickActionsWidget
+  DebtWidget,
+  CreditCardWidget
 } from '@/features/dashboard';
 
 export default function DashboardPage() {
@@ -31,114 +23,79 @@ export default function DashboardPage() {
       {/* Dynamic Breadcrumbs */}
       <Breadcrumb />
 
-      {/* Dashboard Top Header */}
-      <SectionTitle 
-        title="Financial Hub" 
-        subtitle="Real-time intelligence for your freelance empire." 
-        action={
-          <div className="flex flex-wrap items-center gap-3">
-            {/* Interactive Toggle for Skeletons vs Empty States */}
-            <Button
-              variant="secondary"
-              size="sm"
-              onClick={() => setIsLoadingState(!isLoadingState)}
-              className="flex items-center gap-2"
-            >
-              {isLoadingState ? (
-                <>
-                  <Eye className="w-4 h-4 text-accent-cyan" />
-                  <span>Show Empty States</span>
-                </>
-              ) : (
-                <>
-                  <EyeOff className="w-4 h-4 text-muted" />
-                  <span>Preview Skeletons</span>
-                </>
-              )}
-            </Button>
-
-            <Button variant="outline" size="sm" className="flex items-center gap-2">
-              <Calendar className="w-4 h-4 text-muted" />
-              <span>Last 30 Days</span>
-            </Button>
-            
-            <Button variant="primary" size="sm" className="flex items-center gap-2">
-              <Plus className="w-4 h-4" />
-              <span>New Invoice</span>
-            </Button>
-          </div>
-        }
-      />
-
-      {/* Grid Layout System */}
-      <div className="space-y-6 md:space-y-8 pb-16">
+      {/* Dashboard Top Header - Welcome Greeting and AI Active State */}
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8 md:mb-10 animate-fade-in select-none">
+        <div>
+          <h1 className="text-3xl font-extrabold text-white tracking-tight">
+            Good Evening, Wafaa
+          </h1>
+          <p className="text-sm text-slate-400 mt-1">
+            Your financial ecosystem is performing optimally today.
+          </p>
+        </div>
         
-        {/* Bento Grid Top Section: Cashflow & Quick Metrics */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {/* Large Cashflow Card */}
-          <div className="lg:col-span-8">
+        <div className="shrink-0 flex items-center gap-3">
+          {/* Debugging helper to test skeleton load state */}
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => setIsLoadingState(!isLoadingState)}
+            className="flex items-center gap-2 h-10 px-3.5 rounded-xl border border-white/5 bg-white/5 hover:bg-white/10"
+          >
+            {isLoadingState ? (
+              <>
+                <Eye className="w-4 h-4 text-accent-cyan" />
+                <span className="text-xs">Show Live Data</span>
+              </>
+            ) : (
+              <>
+                <EyeOff className="w-4 h-4 text-slate-400" />
+                <span className="text-xs">Preview Skeletons</span>
+              </>
+            )}
+          </Button>
+
+          {/* AI Active Status Pill */}
+          <div className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl border border-primary-purple/20 bg-primary-purple/10 text-primary-purple text-xs font-bold tracking-wider select-none animate-pulse-slow">
+            <Sparkles className="w-4 h-4" />
+            <span>AI ASSISTANT ACTIVE</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Bento Grid Layout System */}
+      <div className="space-y-6 pb-16">
+        
+        {/* Row 1: Net Cashflow Balance (2/3) & AI Forecast (1/3) */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2">
             <CashflowWidget isLoading={isLoadingState} />
           </div>
-
-          {/* Quick Stats Column: Income, Expense, Goals */}
-          <div className="lg:col-span-4 flex flex-col gap-6 justify-between">
-            <div className="flex-1">
-              <IncomeWidget isLoading={isLoadingState} />
-            </div>
-            <div className="flex-1">
-              <ExpenseWidget isLoading={isLoadingState} />
-            </div>
-            <div className="flex-1">
-              <GoalsWidget isLoading={isLoadingState} />
-            </div>
-          </div>
-        </div>
-
-        {/* Bento Grid Middle Section: AI Advisor & Recent Activity */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          {/* AI Forecast */}
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-1">
             <AIWidget isLoading={isLoadingState} />
           </div>
+        </div>
 
+        {/* Row 2: Monthly Income, Expenses, and Total Debt Card (Equal Widths) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <IncomeWidget isLoading={isLoadingState} />
+          <ExpenseWidget isLoading={isLoadingState} />
+          <DebtWidget isLoading={isLoadingState} />
+        </div>
+
+        {/* Row 3: Recent Activity (2/3) & Credit Card + Goals Stack (1/3) */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Recent Activity */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-2">
             <RecentActivityWidget isLoading={isLoadingState} />
           </div>
-        </div>
 
-        {/* Bento Grid Bottom Section: Upcoming Liabilities & Quick Calibrations */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <UpcomingBillsWidget isLoading={isLoadingState} />
-          <QuickActionsWidget isLoading={isLoadingState} />
-        </div>
-
-        {/* Full-width Section: Financial Health & Overview Aggregates */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <FinancialHealthWidget isLoading={isLoadingState} />
-          <OverviewWidget isLoading={isLoadingState} />
-        </div>
-
-        {/* Bottom Floating Promotional Asset Card */}
-        <Card variant="glass" className="relative overflow-hidden min-h-[220px] flex flex-col justify-center p-6 md:p-10 border border-white/10">
-          <div className="absolute -bottom-24 -left-24 w-80 h-80 bg-primary/10 rounded-full blur-[90px] pointer-events-none" />
-          <div className="absolute -top-24 -right-24 w-80 h-80 bg-secondary/10 rounded-full blur-[90px] pointer-events-none" />
-          
-          <div className="relative z-10 text-center max-w-2xl mx-auto space-y-4">
-            <h3 className="text-xl md:text-2xl font-extrabold text-white tracking-tight flex items-center justify-center gap-2">
-              <Sparkles className="w-5 h-5 text-accent-yellow animate-pulse-slow" />
-              Secure Your Future with AI Tax Optimization
-            </h3>
-            <p className="text-caption text-muted leading-relaxed">
-              Our advanced neural models will automatically identify tax deduction patterns based on your specific freelance niche. Save up to 15% on IRS set-asides with automated quarterly classifications.
-            </p>
-            <div className="pt-2">
-              <Button variant="purple" size="sm" className="px-8">
-                Enable Smart Tax
-              </Button>
-            </div>
+          {/* Credit Card Widget & Q4 Taxes Goal Widget Stack */}
+          <div className="lg:col-span-1 flex flex-col gap-6">
+            <CreditCardWidget isLoading={isLoadingState} />
+            <GoalsWidget isLoading={isLoadingState} />
           </div>
-        </Card>
+        </div>
 
       </div>
     </PageContainer>

@@ -1,9 +1,8 @@
 'use client';
 
 import React from 'react';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/Card';
+import { Card } from '@/components/ui/Card';
 import { Skeleton } from '@/components/ui/Skeleton';
-import { EmptyState } from '@/components/ui/EmptyState';
 import { TrendingUp } from 'lucide-react';
 
 interface WidgetProps {
@@ -12,26 +11,30 @@ interface WidgetProps {
 
 export function IncomeWidget({ isLoading = false }: WidgetProps) {
   return (
-    <Card variant="default" className="h-full border-l-4 border-accent-mint/50">
-      <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <div className="flex items-center gap-2">
-          <TrendingUp className="w-4.5 h-4.5 text-accent-mint" />
-          <CardTitle className="text-sm font-bold text-white uppercase tracking-wider">Income Tracker</CardTitle>
+    <Card variant="default" className="h-full relative overflow-hidden group">
+      {/* Background glow decoration */}
+      <div className="absolute -top-24 -right-24 w-72 h-72 bg-accent-mint/3 rounded-full blur-[90px] group-hover:bg-accent-mint/5 transition-colors duration-700 pointer-events-none" />
+
+      <div className="p-6 flex items-center gap-5 relative z-10 select-none">
+        {/* Icon Frame */}
+        <div className="w-12 h-12 rounded-xl bg-[#10b981]/10 border border-[#10b981]/15 flex items-center justify-center text-[#10b981] shadow-[0_0_15px_rgba(16,185,129,0.15)] shrink-0">
+          <TrendingUp className="w-5 h-5" />
         </div>
-      </CardHeader>
-      <CardContent className="h-28 flex flex-col justify-center">
-        {isLoading ? (
-          <div className="space-y-2">
-            <Skeleton variant="text" className="w-1/4" />
-            <Skeleton variant="text" className="w-3/4" />
-          </div>
-        ) : (
-          <EmptyState
-            title="Monthly Revenue"
-            description="Linked invoice payments, gig earnings, and autonomous withholding logs will list here."
-          />
-        )}
-      </CardContent>
+
+        {/* Text Details */}
+        <div className="min-w-0 flex-1">
+          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">
+            Monthly Income
+          </span>
+          {isLoading ? (
+            <Skeleton variant="text" className="w-2/3 h-7 mt-1" />
+          ) : (
+            <span className="text-2xl font-extrabold text-white tracking-tight mt-0.5 block">
+              $8,240
+            </span>
+          )}
+        </div>
+      </div>
     </Card>
   );
 }
