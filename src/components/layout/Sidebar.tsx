@@ -59,7 +59,7 @@ export function Sidebar() {
                 : 'text-slate-400 hover:bg-white/5 hover:text-white'
             }`}
           >
-            <Icon className={`w-5 h-5 flex-shrink-0 ${isActive ? 'text-[#8BFF7D]' : 'text-slate-400 group-hover:text-white'}`} />
+            <Icon className={`w-5 h-5 shrink-0 ${isActive ? 'text-[#8BFF7D]' : 'text-slate-400 group-hover:text-white'}`} />
             
             {!isSidebarCollapsed && (
               <motion.span
@@ -97,7 +97,7 @@ export function Sidebar() {
         <div className="h-16 flex items-center justify-between px-4 border-b border-white/5">
           <Link href="/dashboard" className="flex items-center gap-3 overflow-hidden select-none">
             {/* Lime green logo icon */}
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#8BFF7D] to-[#8FFFD2] flex items-center justify-center font-black text-black text-base flex-shrink-0 shadow-[0_0_15px_rgba(139,255,125,0.45)]">
+            <div className="w-8 h-8 rounded-lg bg-linear-to-tr from-[#8BFF7D] to-[#8FFFD2] flex items-center justify-center font-black text-black text-base shrink-0 shadow-[0_0_15px_rgba(139,255,125,0.45)]">
               FF
             </div>
             {!isSidebarCollapsed && (
@@ -128,7 +128,7 @@ export function Sidebar() {
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="mx-2 p-3.5 rounded-2xl bg-gradient-to-tr from-[#8BFF7D] to-[#8FFFD2] text-black shadow-[0_8px_25px_rgba(139,255,125,0.25)] select-none group relative overflow-hidden"
+                className="mx-2 p-3.5 rounded-2xl bg-linear-to-tr from-[#8BFF7D] to-[#8FFFD2] text-black shadow-[0_8px_25px_rgba(139,255,125,0.25)] select-none group relative overflow-hidden"
               >
                 <div className="relative z-10 flex items-center justify-center gap-2">
                   <Zap className="w-4 h-4 fill-black text-black" />
@@ -141,7 +141,7 @@ export function Sidebar() {
               </motion.div>
             ) : (
               <Link href="/dashboard" className="flex justify-center">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#8BFF7D] to-[#8FFFD2] flex items-center justify-center text-black shadow-[0_0_15px_rgba(139,255,125,0.3)] hover:brightness-110 transition-all select-none">
+                <div className="w-10 h-10 rounded-xl bg-linear-to-tr from-[#8BFF7D] to-[#8FFFD2] flex items-center justify-center text-black shadow-[0_0_15px_rgba(139,255,125,0.3)] hover:brightness-110 transition-all select-none">
                   <Zap className="w-4.5 h-4.5 fill-black" />
                 </div>
               </Link>
@@ -211,7 +211,7 @@ export function Sidebar() {
             >
               <div className="h-16 flex items-center justify-between px-4 border-b border-white/5">
                 <Link href="/dashboard" className="flex items-center gap-3" onClick={closeMobileSidebar}>
-                  <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#8BFF7D] to-[#8FFFD2] flex items-center justify-center font-black text-black text-base shadow-[0_0_15px_rgba(139,255,125,0.45)]">
+                  <div className="w-8 h-8 rounded-lg bg-linear-to-tr from-[#8BFF7D] to-[#8FFFD2] flex items-center justify-center font-black text-black text-base shadow-[0_0_15px_rgba(139,255,125,0.45)]">
                     FF
                   </div>
                   <div className="flex flex-col">
@@ -236,7 +236,7 @@ export function Sidebar() {
                 <div className="space-y-1">{renderNavLinks()}</div>
 
                 <div className="space-y-4">
-                  <div className="p-3.5 rounded-2xl bg-gradient-to-tr from-[#8BFF7D] to-[#8FFFD2] text-black shadow-[0_8px_25px_rgba(139,255,125,0.25)] select-none">
+                  <div className="p-3.5 rounded-2xl bg-linear-to-tr from-[#8BFF7D] to-[#8FFFD2] text-black shadow-[0_8px_25px_rgba(139,255,125,0.25)] select-none">
                     <div className="flex items-center justify-center gap-2">
                       <Zap className="w-4 h-4 fill-black text-black" />
                       <span className="text-xs font-black uppercase tracking-wider">

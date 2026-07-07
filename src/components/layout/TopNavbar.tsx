@@ -76,7 +76,7 @@ export function TopNavbar() {
           </div>
 
           {/* Square Profile Picture with rounded corners */}
-          <div className="w-9 h-9 rounded-lg bg-gradient-to-tr from-[#8BFF7D] to-[#8FFFD2] flex items-center justify-center font-black text-black text-xs shadow-[0_0_15px_rgba(139,255,125,0.25)] select-none">
+          <div className="w-9 h-9 rounded-lg bg-linear-to-tr from-[#8BFF7D] to-[#8FFFD2] flex items-center justify-center font-black text-black text-xs shadow-[0_0_15px_rgba(139,255,125,0.25)] select-none">
             WA
           </div>
         </div>

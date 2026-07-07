@@ -12,10 +12,10 @@ export function CreditCardWidget({ isLoading = false }: WidgetProps) {
   return (
     <Card 
       variant="default" 
-      className="h-[185px] relative overflow-hidden group select-none bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 border-none shadow-[0_15px_35px_rgba(124,58,237,0.3)]"
+      className="h-[185px] relative overflow-hidden group select-none bg-linear-to-br from-indigo-600 via-purple-600 to-pink-500 border-none shadow-[0_15px_35px_rgba(124,58,237,0.3)]"
     >
       {/* Gloss reflection overlay */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/5 to-white/10 opacity-70" />
+      <div className="absolute inset-0 bg-linear-to-tr from-white/0 via-white/5 to-white/10 opacity-70" />
       
       {/* Glowing card ring decoration */}
       <div className="absolute -bottom-10 -right-10 w-44 h-44 bg-white/10 rounded-full blur-2xl pointer-events-none" />
