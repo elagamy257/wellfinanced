@@ -1,2 +1,1 @@
-// Feature Module Entry Point
-export {};
+export * from './mocks';

@@ -71,7 +71,7 @@ export function AIWidget({ isLoading = false }: WidgetProps) {
             {/* Insight Alert Box */}
             <div className="bg-primary-purple/5 border border-primary-purple/10 rounded-xl p-3.5 mt-2 shadow-sm">
               <p className="text-xs text-slate-300 font-medium leading-relaxed">
-                &quot;Wafaa, your AWS costs are projected to spike next week. Consider auditing your S3 storage.&quot;
+                &quot;Your cloud hosting costs are projected to spike next week. Consider auditing your storage usage.&quot;
               </p>
             </div>
           </>

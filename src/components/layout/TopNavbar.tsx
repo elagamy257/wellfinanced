@@ -64,20 +64,20 @@ export function TopNavbar() {
         {/* Vertical Divider */}
         <div className="w-px h-6 bg-white/10 hidden md:block" />
 
-        {/* Premium Profile Badge & Name */}
+        {/* Profile Info */}
         <div className="flex items-center gap-3">
           <div className="text-right hidden md:block select-none">
             <span className="text-xs font-black text-white leading-tight block">
-              Wafaa
+              User
             </span>
             <span className="text-[8px] font-black text-accent-cyan tracking-widest uppercase leading-none block mt-0.5">
-              Premium User
+              Active Account
             </span>
           </div>
 
           {/* Square Profile Picture with rounded corners */}
           <div className="w-9 h-9 rounded-lg bg-linear-to-tr from-[#8BFF7D] to-[#8FFFD2] flex items-center justify-center font-black text-black text-xs shadow-[0_0_15px_rgba(139,255,125,0.25)] select-none">
-            WA
+            US
           </div>
         </div>
       </div>

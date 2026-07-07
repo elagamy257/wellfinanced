@@ -46,7 +46,7 @@ export function RecentActivityWidget({ isLoading = false }: WidgetProps) {
                 </div>
                 <div className="min-w-0">
                   <h4 className="text-sm font-bold text-white truncate">
-                    Stripe / UI Design Project
+                    Client Payment / Service Income
                   </h4>
                   <p className="text-xs text-slate-400 truncate mt-0.5">
                     Oct 24, 2023 • Service Revenue
@@ -71,7 +71,7 @@ export function RecentActivityWidget({ isLoading = false }: WidgetProps) {
                 </div>
                 <div className="min-w-0">
                   <h4 className="text-sm font-bold text-white truncate">
-                    AWS / Cloud Hosting
+                    Business Expense / Infrastructure Cost
                   </h4>
                   <p className="text-xs text-slate-400 truncate mt-0.5">
                     Oct 23, 2023 • Infrastructure Cost

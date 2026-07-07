@@ -49,8 +49,8 @@ export function CreditCardWidget({ isLoading = false }: WidgetProps) {
             </svg>
             
             {/* Visa Logo Text */}
-            <span className="text-xl font-black italic text-white tracking-tighter">
-              VISA
+            <span className="text-sm font-black tracking-widest text-white/80">
+              CARD
             </span>
           </div>
 
@@ -71,7 +71,7 @@ export function CreditCardWidget({ isLoading = false }: WidgetProps) {
                 Card Holder
               </span>
               <span className="text-[10px] font-bold text-white uppercase tracking-wider block">
-                Wafaa Al-Sabbagh
+                Current User
               </span>
             </div>
             <div className="text-right space-y-0.5">
