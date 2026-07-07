@@ -7,10 +7,10 @@ import { Plus } from 'lucide-react';
 import { 
   initialSavingsGoals, 
   SavingsGoal, 
-  SavingsInsightBanner, 
+  InsightBanner, 
   SavingsGoalCard, 
-  ProjectedGrowthChart, 
-  NewGoalModal 
+  GrowthChart, 
+  GoalModal 
 } from '@/features/savings';
 
 export default function GoalsPage() {
@@ -50,7 +50,7 @@ export default function GoalsPage() {
       <div className="space-y-6 md:space-y-8 pb-16">
         
         {/* Top: AI Insight Banner */}
-        <SavingsInsightBanner />
+        <InsightBanner />
 
         {/* Bento Grid: Goals & Growth projection chart */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
@@ -73,7 +73,7 @@ export default function GoalsPage() {
             <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest block pl-1 select-none">
               Projected Growth
             </h3>
-            <ProjectedGrowthChart />
+            <GrowthChart />
           </div>
 
         </div>
@@ -81,7 +81,7 @@ export default function GoalsPage() {
       </div>
 
       {/* New Goal Overlay Modal Component */}
-      <NewGoalModal
+      <GoalModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSave={handleSaveGoal}

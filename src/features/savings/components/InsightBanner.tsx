@@ -5,11 +5,11 @@ import { Card } from '@/components/ui';
 import { Sparkles, ArrowRight } from 'lucide-react';
 import { mockSavingsMetrics } from '../mocks';
 
-interface SavingsInsightBannerProps {
+interface InsightBannerProps {
   onOptimize?: () => void;
 }
 
-export function SavingsInsightBanner({ onOptimize }: SavingsInsightBannerProps) {
+export function InsightBanner({ onOptimize }: InsightBannerProps) {
   return (
     <Card 
       variant="glass" 

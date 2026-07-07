@@ -5,13 +5,13 @@ import { Button, Input } from '@/components/ui';
 import { X, Calendar, Sparkles } from 'lucide-react';
 import { SavingsGoal } from '../mocks';
 
-interface NewGoalModalProps {
+interface GoalModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSave: (goal: Omit<SavingsGoal, 'id' | 'percentage'>) => void;
 }
 
-export function NewGoalModal({ isOpen, onClose, onSave }: NewGoalModalProps) {
+export function GoalModal({ isOpen, onClose, onSave }: GoalModalProps) {
   const [goalName, setGoalName] = useState('');
   const [targetAmount, setTargetAmount] = useState('');
   const [savedAmount, setSavedAmount] = useState('');

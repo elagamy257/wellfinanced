@@ -5,7 +5,7 @@ import { Card } from '@/components/ui';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { mockProjectedGrowthData, mockSavingsMetrics } from '../mocks';
 
-export function ProjectedGrowthChart() {
+export function GrowthChart() {
   return (
     <Card variant="default" className="h-full relative overflow-hidden group select-none">
       {/* Background glow decoration */}
