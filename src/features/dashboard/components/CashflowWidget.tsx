@@ -110,8 +110,8 @@ export function CashflowWidget({ isLoading = false }: WidgetProps) {
               >
                 <defs>
                   <linearGradient id="colorCashflow" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#7CFFB2" stopOpacity={0.25} />
-                    <stop offset="95%" stopColor="#7CFFB2" stopOpacity={0} />
+                    <stop offset="5%" stopColor="var(--color-accent-mint)" stopOpacity={0.25} />
+                    <stop offset="95%" stopColor="var(--color-accent-mint)" stopOpacity={0} />
                   </linearGradient>
                 </defs>
                 <CartesianGrid
@@ -126,7 +126,7 @@ export function CashflowWidget({ isLoading = false }: WidgetProps) {
                   content={({ active, payload }) => {
                     if (active && payload && payload.length) {
                       return (
-                        <div className="bg-[#0b0f19] border border-white/10 px-3 py-1.5 rounded-xl shadow-2xl">
+                        <div className="bg-bg-3 border border-white/10 px-3 py-1.5 rounded-xl shadow-2xl">
                           <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">
                             {payload[0].payload.name}
                           </p>
@@ -142,18 +142,18 @@ export function CashflowWidget({ isLoading = false }: WidgetProps) {
                 <Area
                   type="monotone"
                   dataKey="value"
-                  stroke="#7CFFB2"
+                  stroke="var(--color-accent-mint)"
                   strokeWidth={2.5}
                   fillOpacity={1}
                   fill="url(#colorCashflow)"
-                  dot={{ r: 3.5, fill: '#060B1A', stroke: '#7CFFB2', strokeWidth: 2 }}
-                  activeDot={{ r: 5.5, fill: '#7CFFB2', stroke: '#060B1A', strokeWidth: 2 }}
+                  dot={{ r: 3.5, fill: 'var(--color-background)', stroke: 'var(--color-accent-mint)', strokeWidth: 2 }}
+                  activeDot={{ r: 5.5, fill: 'var(--color-accent-mint)', stroke: 'var(--color-background)', strokeWidth: 2 }}
                 />
               </AreaChart>
             </ResponsiveContainer>
 
             {/* Static overlay tooltip for the current node */}
-            <div className="absolute right-6 top-1 px-2.5 py-1 rounded-lg bg-accent-mint text-background text-[10px] font-black uppercase tracking-wider shadow-[0_0_15px_rgba(124,255,178,0.45)] pointer-events-none">
+            <div className="absolute right-6 top-1 px-2.5 py-1 rounded-lg bg-accent-mint text-background text-[10px] font-black uppercase tracking-wider shadow-glow pointer-events-none">
               Current: $12.8k
             </div>
           </div>

@@ -17,7 +17,7 @@ export function IncomeWidget({ isLoading = false }: WidgetProps) {
 
       <div className="p-6 flex items-center gap-5 relative z-10 select-none">
         {/* Icon Frame */}
-        <div className="w-12 h-12 rounded-xl bg-[#10b981]/10 border border-[#10b981]/15 flex items-center justify-center text-[#10b981] shadow-[0_0_15px_rgba(16,185,129,0.15)] shrink-0">
+        <div className="w-12 h-12 rounded-xl bg-success/10 border border-success/15 flex items-center justify-center text-success shadow-glow shrink-0">
           <TrendingUp className="w-5 h-5" />
         </div>
 

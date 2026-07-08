@@ -32,7 +32,7 @@ export function TransactionFilterBar({
           placeholder="Search ledger..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full h-11 pl-10 pr-4 bg-white/5 hover:bg-white/8 focus:bg-[#09152E] border border-white/5 focus:border-primary/20 text-xs font-bold text-white placeholder-slate-400 rounded-xl outline-none transition-all"
+          className="w-full h-11 pl-10 pr-4 bg-white/5 hover:bg-white/8 focus:bg-bg-2 border border-white/5 focus:border-primary/20 text-xs font-bold text-white placeholder-slate-400 rounded-xl outline-none transition-all"
         />
       </div>
 
@@ -43,10 +43,10 @@ export function TransactionFilterBar({
           onChange={(e) => setFilterType(e.target.value)}
           className="h-11 px-4 bg-white/5 border border-white/5 text-xs text-slate-300 font-bold rounded-xl outline-none focus:border-primary/20 cursor-pointer hover:bg-white/8 transition-all"
         >
-          <option value="all" className="bg-[#0b1329]">All Types</option>
-          <option value="income" className="bg-[#0b1329]">Income</option>
-          <option value="expense" className="bg-[#0b1329]">Expenses</option>
-          <option value="debt" className="bg-[#0b1329]">Debt</option>
+          <option value="all" className="bg-bg-2">All Types</option>
+          <option value="income" className="bg-bg-2">Income</option>
+          <option value="expense" className="bg-bg-2">Expenses</option>
+          <option value="debt" className="bg-bg-2">Debt</option>
         </select>
 
         <select 
@@ -54,9 +54,9 @@ export function TransactionFilterBar({
           onChange={(e) => setFilterStatus(e.target.value)}
           className="h-11 px-4 bg-white/5 border border-white/5 text-xs text-slate-300 font-bold rounded-xl outline-none focus:border-primary/20 cursor-pointer hover:bg-white/8 transition-all"
         >
-          <option value="all" className="bg-[#0b1329]">All Statuses</option>
-          <option value="cleared" className="bg-[#0b1329]">Cleared</option>
-          <option value="pending" className="bg-[#0b1329]">Pending</option>
+          <option value="all" className="bg-bg-2">All Statuses</option>
+          <option value="cleared" className="bg-bg-2">Cleared</option>
+          <option value="pending" className="bg-bg-2">Pending</option>
         </select>
       </div>
     </div>

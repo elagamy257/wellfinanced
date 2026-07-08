@@ -54,7 +54,7 @@ export function ChatWindow({
         </p>
         <button
           onClick={onRetry}
-          className="mt-5 px-5 h-10 text-xs font-black uppercase tracking-wider text-black bg-linear-to-tr from-[#8BFF7D] to-[#8FFFD2] rounded-xl hover:brightness-110 shadow-glow flex items-center gap-1.5 cursor-pointer"
+          className="mt-5 px-5 h-10 text-xs font-black uppercase tracking-wider text-black bg-gradient-green rounded-xl hover:brightness-110 shadow-glow flex items-center gap-1.5 cursor-pointer"
         >
           <RefreshCw className="w-3.5 h-3.5" />
           <span>Retry Connection</span>
@@ -125,7 +125,7 @@ export function ChatWindow({
 
                   {/* Nested Inline Recommendation Card (runway recommendations) */}
                   {isAI && msg.metrics?.postPurchaseBuffer && (
-                    <Card className="p-4.5 bg-[#0b1021]/80 border border-primary/25 relative overflow-hidden select-none space-y-4 shadow-neon">
+                    <Card className="p-4.5 bg-bg-3/80 border border-primary/25 relative overflow-hidden select-none space-y-4 shadow-neon">
                       <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-xl pointer-events-none" />
                       
                       <div className="grid grid-cols-2 gap-4">
@@ -183,7 +183,7 @@ export function ChatWindow({
 
                 {/* User Avatar */}
                 {!isAI && (
-                  <div className="w-9 h-9 rounded-xl bg-linear-to-tr from-[#8BFF7D] to-[#8FFFD2] flex items-center justify-center text-black font-black text-xs shrink-0 shadow-sm mt-0.5 select-none">
+                  <div className="w-9 h-9 rounded-xl bg-gradient-green flex items-center justify-center text-black font-black text-xs shrink-0 shadow-sm mt-0.5 select-none">
                     US
                   </div>
                 )}

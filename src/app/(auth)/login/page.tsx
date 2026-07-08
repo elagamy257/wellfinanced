@@ -59,7 +59,7 @@ export default function LoginPage() {
       <div className="absolute w-[600px] h-[600px] bg-success/5 rounded-full blur-[150px] -z-10 pointer-events-none" />
 
       {/* Login Card Panel (Centered Layout matching the design image) */}
-      <div className="w-full max-w-[440px] bg-[#0c142c]/40 border border-white/5 rounded-card backdrop-blur-xl shadow-neon p-8 sm:p-12 relative overflow-hidden">
+      <div className="w-full max-w-[440px] bg-bg-3/40 border border-white/5 rounded-card backdrop-blur-xl shadow-neon p-8 sm:p-12 relative overflow-hidden">
         {/* Subtle gradient border overlay */}
         <div className="absolute inset-0 bg-linear-to-br from-success/5 via-transparent to-primary/5 pointer-events-none -z-10" />
 
@@ -153,7 +153,7 @@ export default function LoginPage() {
             fullWidth
             disabled={isSubmitting || submitSuccess}
             isLoading={isSubmitting}
-            className="bg-[#10b981]! text-white! hover:brightness-110! font-bold tracking-wider uppercase h-14 rounded-input select-none flex items-center justify-center gap-2"
+            className="bg-success! text-white! hover:brightness-110! font-bold tracking-wider uppercase h-14 rounded-input select-none flex items-center justify-center gap-2"
           >
             <Zap className="w-4.5 h-4.5" />
             <span>Login</span>
@@ -166,7 +166,7 @@ export default function LoginPage() {
             <div className="w-full border-t border-white/5" />
           </div>
           <div className="relative flex justify-center text-[9px] uppercase tracking-widest">
-            <span className="bg-[#0b1329] border border-white/5 px-3.5 py-0.5 text-muted rounded-full">
+            <span className="bg-bg-2 border border-white/5 px-3.5 py-0.5 text-muted rounded-full">
               Gateway Options
             </span>
           </div>

@@ -66,12 +66,12 @@ export function RevenueMomentumChart() {
             >
               <defs>
                 <linearGradient id="colorActual" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#06B6D4" stopOpacity={0.2} />
-                  <stop offset="95%" stopColor="#06B6D4" stopOpacity={0} />
+                  <stop offset="5%" stopColor="var(--color-accent-cyan)" stopOpacity={0.2} />
+                  <stop offset="95%" stopColor="var(--color-accent-cyan)" stopOpacity={0} />
                 </linearGradient>
                 <linearGradient id="colorProjected" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#A855F7" stopOpacity={0.2} />
-                  <stop offset="95%" stopColor="#A855F7" stopOpacity={0} />
+                  <stop offset="5%" stopColor="var(--color-primary-purple)" stopOpacity={0.2} />
+                  <stop offset="95%" stopColor="var(--color-primary-purple)" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid
@@ -94,7 +94,7 @@ export function RevenueMomentumChart() {
                   if (active && payload && payload.length) {
                     const dataPoint = payload[0].payload;
                     return (
-                      <div className="bg-[#0b0f19] border border-white/10 px-3 py-1.5 rounded-xl shadow-2xl">
+                      <div className="bg-bg-3 border border-white/10 px-3 py-1.5 rounded-xl shadow-2xl">
                         <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">
                           {dataPoint.month}
                         </p>
@@ -118,24 +118,24 @@ export function RevenueMomentumChart() {
               <Area
                 type="monotone"
                 dataKey="actual"
-                stroke="#06B6D4"
+                stroke="var(--color-accent-cyan)"
                 strokeWidth={2.5}
                 fillOpacity={1}
                 fill="url(#colorActual)"
-                dot={{ r: 3.5, fill: '#060B1A', stroke: '#06B6D4', strokeWidth: 2 }}
-                activeDot={{ r: 5.5, fill: '#06B6D4', stroke: '#060B1A', strokeWidth: 2 }}
+                dot={{ r: 3.5, fill: 'var(--color-background)', stroke: 'var(--color-accent-cyan)', strokeWidth: 2 }}
+                activeDot={{ r: 5.5, fill: 'var(--color-accent-cyan)', stroke: 'var(--color-background)', strokeWidth: 2 }}
               />
               {/* Projected Line */}
               <Area
                 type="monotone"
                 dataKey="projected"
-                stroke="#A855F7"
+                stroke="var(--color-primary-purple)"
                 strokeWidth={2.5}
                 strokeDasharray="4 4"
                 fillOpacity={1}
                 fill="url(#colorProjected)"
-                dot={{ r: 3.5, fill: '#060B1A', stroke: '#A855F7', strokeWidth: 2 }}
-                activeDot={{ r: 5.5, fill: '#A855F7', stroke: '#060B1A', strokeWidth: 2 }}
+                dot={{ r: 3.5, fill: 'var(--color-background)', stroke: 'var(--color-primary-purple)', strokeWidth: 2 }}
+                activeDot={{ r: 5.5, fill: 'var(--color-primary-purple)', stroke: 'var(--color-background)', strokeWidth: 2 }}
               />
             </AreaChart>
           </ResponsiveContainer>

@@ -34,12 +34,12 @@ export function Toggle({ label, description, checked, onChange, id }: ToggleProp
         aria-checked={checked}
         aria-label={label}
         onClick={() => onChange(!checked)}
-        className={`w-10 h-6 rounded-full p-0.5 transition-colors cursor-pointer outline-none shrink-0 focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#060B1A] ${
-          checked ? 'bg-[#8BFF7D]' : 'bg-white/10'
+        className={`w-10 h-6 rounded-full p-0.5 transition-colors cursor-pointer outline-none shrink-0 focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-1 ${
+          checked ? 'bg-success shadow-glow' : 'bg-white/10'
         }`}
       >
         <div
-          className={`w-5 h-5 rounded-full bg-[#060B1A] transition-transform shadow-[0_2px_5px_rgba(0,0,0,0.3)] ${
+          className={`w-5 h-5 rounded-full bg-bg-1 transition-transform shadow-md ${
             checked ? 'translate-x-4' : 'translate-x-0'
           }`}
         />

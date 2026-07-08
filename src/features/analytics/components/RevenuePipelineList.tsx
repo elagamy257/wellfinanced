@@ -80,7 +80,7 @@ export function RevenuePipelineList() {
                 <div className="w-24 hidden md:block space-y-1 select-none">
                   <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden border border-white/5 relative">
                     <div 
-                      className="absolute left-0 top-0 h-full bg-[#8BFF7D] rounded-full shadow-[0_0_8px_rgba(139,255,125,0.4)]"
+                      className="absolute left-0 top-0 h-full bg-success rounded-full shadow-glow"
                       style={{ width: `${op.progressPercentage}%` }}
                     />
                   </div>

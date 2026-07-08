@@ -101,7 +101,7 @@ export default function AIAssistantPage() {
         />
 
         {/* Conversation Hub Panel Container */}
-        <Card variant="glass" className="relative p-6 md:p-8 flex flex-col justify-between border border-white/5 bg-[#060B1A]/40 min-h-[500px]">
+        <Card variant="glass" className="relative p-6 md:p-8 flex flex-col justify-between border border-white/5 bg-bg-1/40 min-h-[500px]">
           <div className="absolute top-0 left-[20%] w-[60%] h-[30%] bg-primary/2 rounded-full blur-[110px] pointer-events-none -z-10" />
 
           {/* Messages list scroll area */}

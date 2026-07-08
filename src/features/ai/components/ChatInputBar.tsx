@@ -61,7 +61,7 @@ export function ChatInputBar({ onSend }: ChatInputBarProps) {
 
           {/* Attachments UI Dropdown Menu */}
           {showAttachmentMenu && (
-            <div className="absolute bottom-14 left-0 bg-[#0c142c] border border-white/10 p-2 rounded-2xl w-48 shadow-2xl z-50 space-y-1 animate-scale-in">
+            <div className="absolute bottom-14 left-0 bg-bg-3 border border-white/10 p-2 rounded-2xl w-48 shadow-2xl z-50 space-y-1 animate-scale-in">
               <span className="text-[8px] font-black text-slate-500 uppercase tracking-widest block px-2.5 py-1 select-none">
                 Simulate Attachments
               </span>
@@ -98,7 +98,7 @@ export function ChatInputBar({ onSend }: ChatInputBarProps) {
         <button
           type="submit"
           disabled={!inputValue.trim() && !attachedFile}
-          className="p-3 bg-linear-to-tr from-[#8BFF7D] to-[#8FFFD2] text-black rounded-xl hover:brightness-110 shadow-glow disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer shrink-0"
+          className="p-3 bg-gradient-green text-black rounded-xl hover:brightness-110 shadow-glow disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer shrink-0"
           aria-label="Send Message"
         >
           <Send className="w-4 h-4" />

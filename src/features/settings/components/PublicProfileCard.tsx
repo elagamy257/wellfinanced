@@ -16,7 +16,7 @@ export function PublicProfileCard() {
   return (
     <Card 
       variant="default" 
-      className="p-6 md:p-8 bg-[#0c1328]/50 border border-white/5 shadow-2xl relative overflow-hidden"
+      className="p-6 md:p-8 bg-bg-3/50 border border-white/5 shadow-2xl relative overflow-hidden"
     >
       {/* Background glow decoration */}
       <div className="absolute top-0 right-0 w-48 h-48 bg-primary/5 rounded-full blur-[70px] pointer-events-none" />
@@ -67,7 +67,7 @@ export function PublicProfileCard() {
                   type="text"
                   value={profile.firstName}
                   onChange={(e) => setProfile({ ...profile, firstName: e.target.value })}
-                  className="w-full h-11 px-4 bg-[#070b16] border border-purple-950/60 focus:border-primary/45 text-xs font-bold text-white rounded-xl outline-none transition-all focus:ring-1 focus:ring-primary/30"
+                  className="w-full h-11 px-4 bg-bg-1 border border-white/10 focus:border-primary/45 text-xs font-bold text-white rounded-xl outline-none transition-all focus:ring-1 focus:ring-primary/30"
                   required
                 />
               </div>
@@ -80,7 +80,7 @@ export function PublicProfileCard() {
                   type="text"
                   value={profile.lastName}
                   onChange={(e) => setProfile({ ...profile, lastName: e.target.value })}
-                  className="w-full h-11 px-4 bg-[#070b16] border border-purple-950/60 focus:border-primary/45 text-xs font-bold text-white rounded-xl outline-none transition-all focus:ring-1 focus:ring-primary/30"
+                  className="w-full h-11 px-4 bg-bg-1 border border-white/10 focus:border-primary/45 text-xs font-bold text-white rounded-xl outline-none transition-all focus:ring-1 focus:ring-primary/30"
                   required
                 />
               </div>
@@ -96,11 +96,11 @@ export function PublicProfileCard() {
                 type="email"
                 value={profile.email}
                 onChange={(e) => setProfile({ ...profile, email: e.target.value })}
-                className="w-full h-11 px-4 bg-[#070b16] border border-purple-950/60 focus:border-primary/45 text-xs font-bold text-white rounded-xl outline-none transition-all focus:ring-1 focus:ring-primary/30"
+                className="w-full h-11 px-4 bg-bg-1 border border-white/10 focus:border-primary/45 text-xs font-bold text-white rounded-xl outline-none transition-all focus:ring-1 focus:ring-primary/30"
                 required
               />
             </div>
-
+ 
             {/* Professional Role */}
             <div className="space-y-2">
               <label htmlFor="role" className="text-[10px] font-bold text-slate-400 tracking-wider uppercase block select-none">
@@ -111,7 +111,7 @@ export function PublicProfileCard() {
                 type="text"
                 value={profile.role}
                 onChange={(e) => setProfile({ ...profile, role: e.target.value })}
-                className="w-full h-11 px-4 bg-[#070b16] border border-purple-950/60 focus:border-primary/45 text-xs font-bold text-white rounded-xl outline-none transition-all focus:ring-1 focus:ring-primary/30"
+                className="w-full h-11 px-4 bg-bg-1 border border-white/10 focus:border-primary/45 text-xs font-bold text-white rounded-xl outline-none transition-all focus:ring-1 focus:ring-primary/30"
                 required
               />
             </div>
@@ -120,7 +120,7 @@ export function PublicProfileCard() {
             <div className="flex justify-end pt-4 select-none">
               <button
                 type="submit"
-                className="px-6 h-11 text-xs font-black uppercase tracking-wider text-black bg-[#8BFF7D] rounded-xl hover:brightness-110 shadow-[0_4px_20px_rgba(139,255,125,0.25)] transition-all cursor-pointer"
+                className="px-6 h-11 text-xs font-black uppercase tracking-wider text-black bg-success rounded-xl hover:brightness-110 shadow-glow transition-all cursor-pointer"
               >
                 Save Changes
               </button>

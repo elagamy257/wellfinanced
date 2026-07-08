@@ -56,11 +56,11 @@ export function Sidebar() {
           <span
             className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-bold transition-all duration-200 relative group ${
               isActive
-                ? 'bg-[#8BFF7D]/8 text-[#8BFF7D] border-l-3 border-[#8BFF7D] shadow-[inset_0_0_12px_rgba(139,255,125,0.05)]'
+                ? 'bg-success/8 text-success border-l-3 border-success shadow-glow'
                 : 'text-slate-400 hover:bg-white/5 hover:text-white'
             }`}
           >
-            <Icon className={`w-5 h-5 shrink-0 ${isActive ? 'text-[#8BFF7D]' : 'text-slate-400 group-hover:text-white'}`} />
+            <Icon className={`w-5 h-5 shrink-0 ${isActive ? 'text-success' : 'text-slate-400 group-hover:text-white'}`} />
             
             {!isSidebarCollapsed && (
               <motion.span
@@ -76,7 +76,7 @@ export function Sidebar() {
 
             {/* Tooltip for collapsed state */}
             {isSidebarCollapsed && (
-              <div className="absolute left-full ml-2.5 px-2.5 py-1.5 bg-[#0b0f19] border border-white/10 text-white text-xs font-bold rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-200 z-50 whitespace-nowrap shadow-xl">
+              <div className="absolute left-full ml-2.5 px-2.5 py-1.5 bg-bg-3 border border-white/10 text-white text-xs font-bold rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-200 z-50 whitespace-nowrap shadow-xl">
                 {item.name}
               </div>
             )}
@@ -90,7 +90,7 @@ export function Sidebar() {
     <>
       {/* Desktop Sidebar */}
       <motion.aside
-        className={`hidden md:flex flex-col bg-[#060B1A]/95 backdrop-blur-xl border-r border-white/5 h-screen sticky top-0 z-45`}
+        className={`hidden md:flex flex-col bg-bg-1/95 backdrop-blur-xl border-r border-white/5 h-screen sticky top-0 z-45`}
         animate={{ width: isSidebarCollapsed ? 64 : 256 }}
         transition={{ duration: 0.25, ease: 'easeInOut' }}
       >
@@ -110,7 +110,7 @@ export function Sidebar() {
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="mx-2 p-3.5 rounded-2xl bg-linear-to-tr from-[#8BFF7D] to-[#8FFFD2] text-black shadow-[0_8px_25px_rgba(139,255,125,0.25)] select-none group relative overflow-hidden"
+                className="mx-2 p-3.5 rounded-2xl bg-gradient-green text-black shadow-glow select-none group relative overflow-hidden"
               >
                 <div className="relative z-10 flex items-center justify-center gap-2">
                   <Zap className="w-4 h-4 fill-black text-black" />
@@ -123,7 +123,7 @@ export function Sidebar() {
               </motion.div>
             ) : (
               <Link href="/dashboard" className="flex justify-center">
-                <div className="w-10 h-10 rounded-xl bg-linear-to-tr from-[#8BFF7D] to-[#8FFFD2] flex items-center justify-center text-black shadow-[0_0_15px_rgba(139,255,125,0.3)] hover:brightness-110 transition-all select-none">
+                <div className="w-10 h-10 rounded-xl bg-gradient-green flex items-center justify-center text-black shadow-glow hover:brightness-110 transition-all select-none">
                   <Zap className="w-4.5 h-4.5 fill-black" />
                 </div>
               </Link>
@@ -136,19 +136,19 @@ export function Sidebar() {
                   <HelpCircle className="w-5 h-5 text-slate-400 group-hover:text-white shrink-0" />
                   {!isSidebarCollapsed && <span>Help Center</span>}
                   {isSidebarCollapsed && (
-                    <div className="absolute left-full ml-2.5 px-2.5 py-1.5 bg-[#0b0f19] border border-white/10 text-white text-xs font-bold rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-200 z-50 whitespace-nowrap shadow-xl">
+                    <div className="absolute left-full ml-2.5 px-2.5 py-1.5 bg-bg-3 border border-white/10 text-white text-xs font-bold rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-200 z-50 whitespace-nowrap shadow-xl">
                       Help Center
                     </div>
                   )}
                 </span>
               </Link>
-
+ 
               <Link href="/login">
                 <span className="flex items-center gap-3 px-3.5 py-2 rounded-xl text-sm font-bold text-slate-400 hover:bg-red-500/10 hover:text-red-400 group relative">
                   <LogOut className="w-5 h-5 text-slate-400 group-hover:text-red-400 shrink-0" />
                   {!isSidebarCollapsed && <span>Sign Out</span>}
                   {isSidebarCollapsed && (
-                    <div className="absolute left-full ml-2.5 px-2.5 py-1.5 bg-[#0b0f19] border border-white/10 text-white text-xs font-bold rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-200 z-50 whitespace-nowrap shadow-xl">
+                    <div className="absolute left-full ml-2.5 px-2.5 py-1.5 bg-bg-3 border border-white/10 text-white text-xs font-bold rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-200 z-50 whitespace-nowrap shadow-xl">
                       Sign Out
                     </div>
                   )}
@@ -189,7 +189,7 @@ export function Sidebar() {
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-0 bottom-0 left-0 w-64 bg-[#060B1A] border-r border-white/5 z-50 flex flex-col md:hidden"
+              className="fixed top-0 bottom-0 left-0 w-64 bg-bg-1 border-r border-white/5 z-50 flex flex-col md:hidden"
             >
               <div className="h-16 flex items-center justify-between px-4 border-b border-white/5">
                 <Logo showText={true} onClick={closeMobileSidebar} />
@@ -206,7 +206,7 @@ export function Sidebar() {
                 <div className="space-y-1">{renderNavLinks()}</div>
 
                 <div className="space-y-4">
-                  <div className="p-3.5 rounded-2xl bg-linear-to-tr from-[#8BFF7D] to-[#8FFFD2] text-black shadow-[0_8px_25px_rgba(139,255,125,0.25)] select-none">
+                  <div className="p-3.5 rounded-2xl bg-gradient-green text-black shadow-glow select-none">
                     <div className="flex items-center justify-center gap-2">
                       <Zap className="w-4 h-4 fill-black text-black" />
                       <span className="text-xs font-black uppercase tracking-wider">

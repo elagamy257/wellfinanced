@@ -14,7 +14,7 @@ export function TopNavbar() {
   };
 
   return (
-    <header className="h-16 border-b border-white/5 bg-[#060B1A]/80 backdrop-blur-md sticky top-0 z-30 px-4 md:px-6 flex items-center justify-between select-none">
+    <header className="h-16 border-b border-white/5 bg-bg-1/80 backdrop-blur-md sticky top-0 z-30 px-4 md:px-6 flex items-center justify-between select-none">
       
       {/* Left side: Mobile Toggler & New Search Input */}
       <div className="flex items-center gap-4 flex-1 max-w-md">
@@ -34,7 +34,7 @@ export function TopNavbar() {
           <input
             type="text"
             placeholder="Search analytics or transactions..."
-            className="w-full h-10 pl-9 pr-4 bg-white/5 hover:bg-white/8 focus:bg-[#09152E] border border-white/5 focus:border-[#8BFF7D]/20 text-xs font-bold text-white placeholder-slate-400 rounded-xl outline-none transition-all"
+            className="w-full h-10 pl-9 pr-4 bg-white/5 hover:bg-white/8 focus:bg-bg-2 border border-white/5 focus:border-success/20 text-xs font-bold text-white placeholder-slate-400 rounded-xl outline-none transition-all"
           />
         </div>
       </div>
@@ -48,7 +48,7 @@ export function TopNavbar() {
         >
           <Bell className="w-5 h-5" />
           {/* Lime notification dot */}
-          <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-[#8BFF7D] shadow-[0_0_10px_rgba(139,255,125,0.7)]" />
+          <span className="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-success shadow-glow" />
         </button>
 
         {/* Theme Toggler */}
@@ -57,7 +57,7 @@ export function TopNavbar() {
           className="p-2 rounded-xl hover:bg-white/5 text-slate-400 hover:text-white transition-colors cursor-pointer"
           aria-label="Toggle Theme Mode"
         >
-          <Sun className="w-5 h-5 hidden dark:block text-[#FDE047]" />
+          <Sun className="w-5 h-5 hidden dark:block text-warning" />
           <Moon className="w-5 h-5 block dark:hidden text-slate-400" />
         </button>
 
@@ -76,7 +76,7 @@ export function TopNavbar() {
           </div>
 
           {/* Square Profile Picture with rounded corners */}
-          <div className="w-9 h-9 rounded-lg bg-linear-to-tr from-[#8BFF7D] to-[#8FFFD2] flex items-center justify-center font-black text-black text-xs shadow-[0_0_15px_rgba(139,255,125,0.25)] select-none">
+          <div className="w-9 h-9 rounded-lg bg-gradient-green flex items-center justify-center font-black text-black text-xs shadow-glow select-none">
             US
           </div>
         </div>

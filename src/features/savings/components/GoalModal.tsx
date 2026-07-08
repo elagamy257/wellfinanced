@@ -44,8 +44,8 @@ export function GoalModal({ isOpen, onClose, onSave }: GoalModalProps) {
   };
 
   return (
-    <div className="fixed inset-0 bg-[#020617]/85 backdrop-blur-md z-50 flex justify-center items-start overflow-y-auto p-4 md:p-6 animate-fade-in">
-      <div className="my-auto w-full max-w-[460px] bg-[#0c142c]/95 border border-white/10 rounded-card p-6 md:p-8 relative shadow-neon overflow-hidden animate-scale-in">
+    <div className="fixed inset-0 bg-bg-1/85 backdrop-blur-md z-50 flex justify-center items-start overflow-y-auto p-4 md:p-6 animate-fade-in">
+      <div className="my-auto w-full max-w-[460px] bg-bg-3/95 border border-white/10 rounded-card p-6 md:p-8 relative shadow-neon overflow-hidden animate-scale-in">
         {/* Glow */}
         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-[80px] pointer-events-none" />
 
@@ -91,7 +91,7 @@ export function GoalModal({ isOpen, onClose, onSave }: GoalModalProps) {
                 placeholder="10,000"
                 value={targetAmount}
                 onChange={(e) => setTargetAmount(e.target.value)}
-                className="w-full h-11 px-4 bg-white/5 hover:bg-white/8 focus:bg-[#09152E] border border-white/5 focus:border-primary/20 text-xs font-bold text-white rounded-xl outline-none transition-all"
+                className="w-full h-11 px-4 bg-white/5 hover:bg-white/8 focus:bg-bg-2 border border-white/5 focus:border-primary/20 text-xs font-bold text-white rounded-xl outline-none transition-all"
                 required
               />
             </div>
@@ -105,7 +105,7 @@ export function GoalModal({ isOpen, onClose, onSave }: GoalModalProps) {
                 placeholder="0"
                 value={savedAmount}
                 onChange={(e) => setSavedAmount(e.target.value)}
-                className="w-full h-11 px-4 bg-white/5 hover:bg-white/8 focus:bg-[#09152E] border border-white/5 focus:border-primary/20 text-xs font-bold text-white rounded-xl outline-none transition-all"
+                className="w-full h-11 px-4 bg-white/5 hover:bg-white/8 focus:bg-bg-2 border border-white/5 focus:border-primary/20 text-xs font-bold text-white rounded-xl outline-none transition-all"
               />
             </div>
           </div>
@@ -121,10 +121,10 @@ export function GoalModal({ isOpen, onClose, onSave }: GoalModalProps) {
                 onChange={(e) => setCategory(e.target.value)}
                 className="w-full h-11 px-4 bg-white/5 border border-white/5 text-xs text-slate-300 font-bold rounded-xl outline-none focus:border-primary/20 cursor-pointer hover:bg-white/8 transition-all"
               >
-                <option value="Emergency Fund" className="bg-[#0b1329]">Emergency Fund</option>
-                <option value="Taxes" className="bg-[#0b1329]">Taxes</option>
-                <option value="Hardware" className="bg-[#0b1329]">Hardware</option>
-                <option value="Business Expansion" className="bg-[#0b1329]">Business expansion</option>
+                <option value="Emergency Fund" className="bg-bg-2">Emergency Fund</option>
+                <option value="Taxes" className="bg-bg-2">Taxes</option>
+                <option value="Hardware" className="bg-bg-2">Hardware</option>
+                <option value="Business Expansion" className="bg-bg-2">Business expansion</option>
               </select>
             </div>
 
@@ -141,7 +141,7 @@ export function GoalModal({ isOpen, onClose, onSave }: GoalModalProps) {
                   placeholder="e.g., Oct 2024"
                   value={eta}
                   onChange={(e) => setEta(e.target.value)}
-                  className="w-full h-11 pl-10 pr-4 bg-white/5 hover:bg-white/8 focus:bg-[#09152E] border border-white/5 focus:border-primary/20 text-xs font-bold text-white rounded-xl outline-none transition-all"
+                  className="w-full h-11 pl-10 pr-4 bg-white/5 hover:bg-white/8 focus:bg-bg-2 border border-white/5 focus:border-primary/20 text-xs font-bold text-white rounded-xl outline-none transition-all"
                   required
                 />
               </div>

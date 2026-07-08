@@ -22,13 +22,13 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       danger: 'bg-danger text-background hover:bg-danger/90 font-extrabold',
       purple: 'bg-gradient-purple text-text hover:brightness-110 shadow-glow hover:shadow-glow-strong border-0',
       cyan: 'bg-gradient-cyan text-text hover:brightness-110 shadow-glow hover:shadow-glow-strong border-0',
-      mint: 'bg-gradient-to-r from-[#10b981] to-[#0d9488] text-white hover:brightness-110 shadow-[0_0_20px_rgba(16,185,129,0.35)] hover:shadow-[0_0_30px_rgba(16,185,129,0.55)] border-0',
+      mint: 'bg-gradient-green text-black hover:brightness-110 shadow-glow hover:shadow-glow-strong border-0',
     };
 
     const sizes = {
-      sm: 'h-11 px-4 text-xs rounded-xl',
-      md: 'h-14 px-6 text-sm rounded-[18px]',
-      lg: 'h-16 px-8 text-base rounded-[20px]',
+      sm: 'h-11 px-4 text-xs rounded-btn',
+      md: 'h-14 px-6 text-sm rounded-btn',
+      lg: 'h-16 px-8 text-base rounded-standard',
     };
 
     const widthStyle = fullWidth ? 'w-full' : '';

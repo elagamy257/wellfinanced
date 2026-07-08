@@ -19,7 +19,7 @@ export function StableSalaryBento() {
       <div className="space-y-6 md:space-y-8">
         
         {/* Recommended Monthly Payout Card */}
-        <Card variant="default" className="p-6 bg-[#0c1328]/50 border border-white/5 shadow-2xl relative overflow-hidden flex flex-col justify-between h-56">
+        <Card variant="default" className="p-6 bg-bg-3/50 border border-white/5 shadow-2xl relative overflow-hidden flex flex-col justify-between h-56">
           <div className="space-y-1">
             <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block">
               RECOMMENDED MONTHLY PAYOUT
@@ -28,11 +28,11 @@ export function StableSalaryBento() {
               <span className="text-4xl font-black text-white tracking-tighter">
                 ${salary.recommendedPayout.toLocaleString()}
               </span>
-              <span className="text-lg font-black text-[#8BFF7D]">.00</span>
+              <span className="text-lg font-black text-success">.00</span>
             </div>
             
-            <div className="flex items-center gap-1.5 text-[10px] text-[#8BFF7D] font-bold pt-1.5">
-              <CheckCircle className="w-3.5 h-3.5 fill-[#8BFF7D]/10 shrink-0" />
+            <div className="flex items-center gap-1.5 text-[10px] text-success font-bold pt-1.5">
+              <CheckCircle className="w-3.5 h-3.5 fill-success/10 shrink-0" />
               <span>Optimized for long-term stability</span>
             </div>
           </div>
@@ -40,14 +40,14 @@ export function StableSalaryBento() {
           <button
             type="button"
             onClick={handleUpdatePayout}
-            className="w-full h-11 text-xs font-black uppercase tracking-wider text-black bg-[#8BFF7D] rounded-xl hover:brightness-110 shadow-[0_4px_15px_rgba(139,255,125,0.15)] transition-all cursor-pointer select-none"
+            className="w-full h-11 text-xs font-black uppercase tracking-wider text-black bg-success rounded-xl hover:brightness-110 shadow-glow transition-all cursor-pointer select-none"
           >
             Update Payout
           </button>
         </Card>
 
         {/* Safety Buffer Card */}
-        <Card variant="default" className="p-6 bg-[#0c1328]/50 border border-white/5 shadow-2xl space-y-4">
+        <Card variant="default" className="p-6 bg-bg-3/50 border border-white/5 shadow-2xl space-y-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Shield className="w-4.5 h-4.5 text-accent-cyan shrink-0" />
@@ -63,7 +63,7 @@ export function StableSalaryBento() {
           {/* Progress bar */}
           <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden border border-white/5 relative">
             <div 
-              className="absolute left-0 top-0 h-full bg-accent-cyan rounded-full shadow-[0_0_8px_rgba(6,182,212,0.4)]"
+              className="absolute left-0 top-0 h-full bg-accent-cyan rounded-full shadow-glow"
               style={{ width: `${salary.safetyBufferPercent}%` }}
             />
           </div>
@@ -82,7 +82,7 @@ export function StableSalaryBento() {
               AI Insight
             </h4>
             <p className="text-[10px] text-slate-300 leading-relaxed font-semibold">
-              Your current &quot;Burn Rate&quot; is ${salary.burnRate.toLocaleString()}. Setting your salary to ${salary.recommendedPayout.toLocaleString()} leaves you with a healthy surplus of <span className="text-[#8BFF7D] font-bold">${salary.predictedSurplus.toLocaleString()}</span> for reinvestment and personal growth.
+              Your current &quot;Burn Rate&quot; is ${salary.burnRate.toLocaleString()}. Setting your salary to ${salary.recommendedPayout.toLocaleString()} leaves you with a healthy surplus of <span className="text-success font-bold">${salary.predictedSurplus.toLocaleString()}</span> for reinvestment and personal growth.
             </p>
           </div>
         </Card>
@@ -93,7 +93,7 @@ export function StableSalaryBento() {
       <div className="space-y-6 md:space-y-8">
         
         {/* Income Baseline Card */}
-        <Card variant="default" className="p-6 bg-[#0c1328]/50 border border-white/5 shadow-2xl space-y-4">
+        <Card variant="default" className="p-6 bg-bg-3/50 border border-white/5 shadow-2xl space-y-4">
           <div className="flex items-center gap-2">
             <Clock className="w-4.5 h-4.5 text-primary shrink-0" />
             <h4 className="text-xs font-extrabold text-white uppercase tracking-wider">
@@ -111,7 +111,7 @@ export function StableSalaryBento() {
                 <div 
                   className={`w-7 rounded-md transition-all shadow-sm ${
                     bar.active 
-                      ? 'bg-[#8BFF7D] shadow-[0_0_10px_rgba(139,255,125,0.3)]' 
+                      ? 'bg-success shadow-glow' 
                       : 'bg-white/5 hover:bg-white/8 border border-white/5'
                   }`}
                   style={{ height: `${bar.height}%`, minHeight: '15%' }}
@@ -126,7 +126,7 @@ export function StableSalaryBento() {
         </Card>
 
         {/* Salary Calculation Card */}
-        <Card variant="default" className="p-6 bg-[#0c1328]/50 border border-white/5 shadow-2xl space-y-4">
+        <Card variant="default" className="p-6 bg-bg-3/50 border border-white/5 shadow-2xl space-y-4">
           <div className="flex items-center gap-2 border-b border-white/5 pb-3">
             <Calculator className="w-4.5 h-4.5 text-accent-cyan shrink-0" />
             <h4 className="text-xs font-extrabold text-white uppercase tracking-wider">
@@ -147,26 +147,26 @@ export function StableSalaryBento() {
         </Card>
 
         {/* Target Net Salary Card */}
-        <Card variant="default" className="p-6 bg-[#0c1328]/50 border border-white/5 shadow-2xl flex items-center justify-between h-18">
+        <Card variant="default" className="p-6 bg-bg-3/50 border border-white/5 shadow-2xl flex items-center justify-between h-18">
           <div className="flex items-center gap-2">
-            <CheckCircle className="w-4.5 h-4.5 text-[#8BFF7D] fill-[#8BFF7D]/10 shrink-0" />
+            <CheckCircle className="w-4.5 h-4.5 text-success fill-success/10 shrink-0" />
             <h4 className="text-xs font-extrabold text-white uppercase tracking-wider">
               Target Net Salary
             </h4>
           </div>
-          <span className="text-2xl font-black text-[#8BFF7D] tracking-tight">
+          <span className="text-2xl font-black text-success tracking-tight">
             ${salary.targetNetSalary.toLocaleString(undefined, { minimumFractionDigits: 2 })}
           </span>
         </Card>
 
         {/* Stability Score Card */}
-        <Card variant="default" className="p-6 bg-[#0c1328]/50 border border-white/5 shadow-2xl space-y-4">
+        <Card variant="default" className="p-6 bg-bg-3/50 border border-white/5 shadow-2xl space-y-4">
           <div className="flex items-center justify-between">
             <h4 className="text-xs font-extrabold text-white uppercase tracking-wider">
               Stability Score
             </h4>
             <div className="flex items-baseline gap-0.5">
-              <span className="text-2xl font-black text-[#8BFF7D]">{salary.stabilityScore}</span>
+              <span className="text-2xl font-black text-success">{salary.stabilityScore}</span>
               <span className="text-[10px] text-slate-500 font-bold">/100</span>
             </div>
           </div>
@@ -174,7 +174,7 @@ export function StableSalaryBento() {
           {/* Progress bar */}
           <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden border border-white/5 relative">
             <div 
-              className="absolute left-0 top-0 h-full bg-[#8BFF7D] rounded-full shadow-[0_0_8px_rgba(139,255,125,0.4)]"
+              className="absolute left-0 top-0 h-full bg-success rounded-full shadow-glow"
               style={{ width: `${salary.stabilityScore}%` }}
             />
           </div>

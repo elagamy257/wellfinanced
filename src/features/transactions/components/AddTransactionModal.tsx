@@ -50,9 +50,9 @@ export function AddTransactionModal({ isOpen, onClose, onSave }: AddTransactionM
   };
 
   return (
-    <div className="fixed inset-0 bg-[#020617]/85 backdrop-blur-md z-50 flex justify-center items-start overflow-y-auto p-4 md:p-6 animate-fade-in">
+    <div className="fixed inset-0 bg-bg-1/85 backdrop-blur-md z-50 flex justify-center items-start overflow-y-auto p-4 md:p-6 animate-fade-in">
       {/* Card Modal Container */}
-      <div className="my-auto w-full max-w-[480px] bg-[#0c142c]/95 border border-white/10 rounded-card p-6 md:p-8 relative shadow-neon overflow-hidden animate-scale-in">
+      <div className="my-auto w-full max-w-[480px] bg-bg-3/95 border border-white/10 rounded-card p-6 md:p-8 relative shadow-neon overflow-hidden animate-scale-in">
         {/* Ambient inner glow */}
         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-[80px] pointer-events-none" />
 
@@ -115,7 +115,7 @@ export function AddTransactionModal({ isOpen, onClose, onSave }: AddTransactionM
                 placeholder="0.00"
                 value={txAmount}
                 onChange={(e) => setTxAmount(e.target.value)}
-                className="w-full h-14 pl-9 pr-4 bg-white/5 hover:bg-white/8 focus:bg-[#09152E] border border-white/5 focus:border-primary/20 text-lg font-black text-white placeholder-slate-500 rounded-xl outline-none transition-all"
+                className="w-full h-14 pl-9 pr-4 bg-white/5 hover:bg-white/8 focus:bg-bg-2 border border-white/5 focus:border-primary/20 text-lg font-black text-white placeholder-slate-500 rounded-xl outline-none transition-all"
                 required
               />
             </div>
@@ -151,7 +151,7 @@ export function AddTransactionModal({ isOpen, onClose, onSave }: AddTransactionM
                   type="date"
                   value={txDate}
                   onChange={(e) => setTxDate(e.target.value)}
-                  className="w-full h-11 pl-10 pr-4 bg-white/5 hover:bg-white/8 focus:bg-[#09152E] border border-white/5 focus:border-primary/20 text-xs font-bold text-white rounded-xl outline-none transition-all cursor-pointer"
+                  className="w-full h-11 pl-10 pr-4 bg-white/5 hover:bg-white/8 focus:bg-bg-2 border border-white/5 focus:border-primary/20 text-xs font-bold text-white rounded-xl outline-none transition-all cursor-pointer"
                   required
                 />
               </div>
@@ -166,8 +166,8 @@ export function AddTransactionModal({ isOpen, onClose, onSave }: AddTransactionM
                 onChange={(e) => setTxStatus(e.target.value as 'cleared' | 'pending')}
                 className="w-full h-11 px-4 bg-white/5 border border-white/5 text-xs text-slate-300 font-bold rounded-xl outline-none focus:border-primary/20 cursor-pointer hover:bg-white/8 transition-all"
               >
-                <option value="cleared" className="bg-[#0b1329]">Cleared</option>
-                <option value="pending" className="bg-[#0b1329]">Pending</option>
+                <option value="cleared" className="bg-bg-2">Cleared</option>
+                <option value="pending" className="bg-bg-2">Pending</option>
               </select>
             </div>
           </div>
@@ -211,7 +211,7 @@ export function AddTransactionModal({ isOpen, onClose, onSave }: AddTransactionM
               value={txNotes}
               onChange={(e) => setTxNotes(e.target.value)}
               rows={2}
-              className="w-full p-4 bg-white/5 hover:bg-white/8 focus:bg-[#09152E] border border-white/5 focus:border-primary/20 text-xs text-white placeholder-slate-500 rounded-xl outline-none transition-all resize-none font-medium"
+              className="w-full p-4 bg-white/5 hover:bg-white/8 focus:bg-bg-2 border border-white/5 focus:border-primary/20 text-xs text-white placeholder-slate-500 rounded-xl outline-none transition-all resize-none font-medium"
             />
           </div>
 

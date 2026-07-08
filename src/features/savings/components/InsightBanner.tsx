@@ -21,7 +21,7 @@ export function InsightBanner({ onOptimize }: InsightBannerProps) {
 
       <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="flex items-start gap-4">
-          <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0 shadow-[0_0_15px_rgba(168,85,247,0.2)]">
+          <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0 shadow-glow">
             <Sparkles className="w-5 h-5 animate-pulse" />
           </div>
           <div className="space-y-1">
@@ -36,7 +36,7 @@ export function InsightBanner({ onOptimize }: InsightBannerProps) {
 
         <button
           onClick={onOptimize}
-          className="shrink-0 flex items-center justify-center gap-2 px-5 h-11 text-xs font-black uppercase tracking-wider text-black bg-linear-to-tr from-[#8BFF7D] to-[#8FFFD2] rounded-xl hover:brightness-110 shadow-[0_4px_20px_rgba(139,255,125,0.25)] transition-all cursor-pointer select-none"
+          className="shrink-0 flex items-center justify-center gap-2 px-5 h-11 text-xs font-black uppercase tracking-wider text-black bg-gradient-green rounded-xl hover:brightness-110 shadow-glow transition-all cursor-pointer select-none"
         >
           <span>Optimize Now</span>
           <ArrowRight className="w-4 h-4" />

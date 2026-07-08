@@ -176,7 +176,7 @@ export default function OnboardingPage() {
                           height={500}
                           unoptimized
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#060B1A] via-transparent to-transparent opacity-60"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-bg-1 via-transparent to-transparent opacity-60"></div>
                       </div>
                     </div>
                   </div>
@@ -221,7 +221,7 @@ export default function OnboardingPage() {
                   <h3 className="text-2xl font-bold mb-4 text-text">Predictive Income</h3>
                   <p className="text-muted leading-relaxed mb-8 flex-grow">Our proprietary ML models analyze your work history to forecast next month&apos;s earnings with eerie accuracy. Never wonder what your next check looks like.</p>
                   <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
-                    <div className="h-full bg-primary w-2/3 shadow-[0_0_10px_#4F46E5]"></div>
+                    <div className="h-full bg-primary w-2/3 shadow-glow"></div>
                   </div>
                 </div>
                 
@@ -356,10 +356,10 @@ export default function OnboardingPage() {
                       className="w-full h-[58px] bg-white/8 backdrop-blur-[20px] border border-white/10 rounded-input px-5 text-sm text-text outline-none focus:border-primary focus:ring-2 focus:ring-primary/30 transition-all duration-200 appearance-none cursor-pointer"
                       {...registerWorkspace('industry')}
                     >
-                      <option value="engineering" className="bg-[#09152e] text-white">Software Engineering / IT</option>
-                      <option value="design" className="bg-[#09152e] text-white">Digital Design & Creative</option>
-                      <option value="marketing" className="bg-[#09152e] text-white">Marketing & Copywriting</option>
-                      <option value="consulting" className="bg-[#09152e] text-white">Business Consulting</option>
+                      <option value="engineering" className="bg-bg-2 text-white">Software Engineering / IT</option>
+                      <option value="design" className="bg-bg-2 text-white">Digital Design & Creative</option>
+                      <option value="marketing" className="bg-bg-2 text-white">Marketing & Copywriting</option>
+                      <option value="consulting" className="bg-bg-2 text-white">Business Consulting</option>
                     </select>
                     <div className="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-muted">
                       ▼

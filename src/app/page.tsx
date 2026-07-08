@@ -26,7 +26,7 @@ export default function LandingPage() {
   ];
 
   return (
-    <div className="relative min-h-screen w-full overflow-x-hidden flex flex-col font-sans text-white bg-[#020617] bg-[radial-gradient(at_0%_0%,rgba(99,102,241,0.12)_0px,transparent_50%),radial-gradient(at_100%_100%,rgba(168,85,247,0.08)_0px,transparent_50%),radial-gradient(at_50%_50%,rgba(2,6,23,1)_0px,transparent_80%)]">
+    <div className="relative min-h-screen w-full overflow-x-hidden flex flex-col font-sans text-white bg-transparent">
       
       {/* Navbar */}
       <AuthHeader showNav showActions />
@@ -41,7 +41,7 @@ export default function LandingPage() {
           <div className="flex flex-col items-start text-left max-w-xl">
             {/* Live Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/80 border border-white/5 text-[10px] font-bold tracking-widest uppercase text-slate-300 mb-6 select-none">
-              <span className="w-1.5 h-1.5 rounded-full bg-indigo-500 animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
               INTELLIGENCE V2.4 NOW LIVE
             </div>
 
@@ -142,7 +142,7 @@ export default function LandingPage() {
           {/* Header */}
           <div className="text-center max-w-xl">
             <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4 text-white">
-              Master Your <span className="bg-clip-text text-transparent bg-linear-to-r from-indigo-400 via-purple-400 to-pink-400">Capital Flow</span>
+              Master Your <span className="bg-clip-text text-transparent bg-gradient-purple">Capital Flow</span>
             </h2>
             <p className="text-slate-400 text-sm font-light leading-relaxed">
               Autonomous financial intelligence designed specifically for the unique volatility of freelance careers.
@@ -152,9 +152,9 @@ export default function LandingPage() {
           {/* Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
             {/* Predictive Income Card */}
-            <div className="bg-[#0f172a]/30 border border-white/5 rounded-2xl p-8 flex flex-col justify-between hover:bg-[#0f172a]/50 hover:border-indigo-500/20 transition-all duration-300 shadow-lg">
+            <div className="bg-bg-3/30 border border-white/5 rounded-card p-8 flex flex-col justify-between hover:bg-bg-3/50 hover:border-primary/20 transition-all duration-300 shadow-lg">
               <div>
-                <div className="w-11 h-11 rounded-xl bg-indigo-500/10 flex items-center justify-center text-indigo-400 mb-6">
+                <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-6">
                   <LineChart className="w-5.5 h-5.5" />
                 </div>
                 <h3 className="text-base font-extrabold mb-3 text-white">Predictive Income</h3>
@@ -165,18 +165,18 @@ export default function LandingPage() {
               <div className="mt-8 pt-4 border-t border-white/5">
                 <div className="flex justify-between text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">
                   <span>Confidence Score</span>
-                  <span className="text-[#818cf8]">96.4%</span>
+                  <span className="text-primary">96.4%</span>
                 </div>
-                <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                  <div className="w-[96.4%] h-full bg-linear-to-r from-indigo-500 to-violet-500 rounded-full" />
+                <div className="w-full h-1.5 bg-bg-3 rounded-full overflow-hidden">
+                  <div className="w-[96.4%] h-full bg-primary rounded-full" />
                 </div>
               </div>
             </div>
 
             {/* Cashflow Smoothing Card */}
-            <div className="bg-[#0f172a]/30 border border-white/5 rounded-2xl p-8 flex flex-col justify-between hover:bg-[#0f172a]/50 hover:border-indigo-500/20 transition-all duration-300 shadow-lg">
+            <div className="bg-bg-3/30 border border-white/5 rounded-card p-8 flex flex-col justify-between hover:bg-bg-3/50 hover:border-primary/20 transition-all duration-300 shadow-lg">
               <div>
-                <div className="w-11 h-11 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400 mb-6">
+                <div className="w-11 h-11 rounded-xl bg-secondary/10 flex items-center justify-center text-secondary mb-6">
                   <Layers className="w-5.5 h-5.5" />
                 </div>
                 <h3 className="text-base font-extrabold mb-3 text-white">Cashflow Smoothing</h3>
@@ -185,16 +185,16 @@ export default function LandingPage() {
                 </p>
               </div>
               <div className="mt-8 pt-4 border-t border-white/5 flex items-center gap-2">
-                <div className="h-6 px-3 rounded-full bg-slate-800 border border-white/5 text-[9px] font-bold text-slate-400 uppercase flex items-center">Stable</div>
-                <div className="h-6 px-3 rounded-full bg-slate-800 border border-white/5 text-[9px] font-bold text-slate-400 uppercase flex items-center">Buffer Active</div>
-                <div className="h-6 px-3 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-[9px] font-bold text-indigo-400 uppercase flex items-center">Optimized</div>
+                <div className="h-6 px-3 rounded-full bg-bg-3 border border-white/5 text-[9px] font-bold text-slate-400 uppercase flex items-center">Stable</div>
+                <div className="h-6 px-3 rounded-full bg-bg-3 border border-white/5 text-[9px] font-bold text-slate-400 uppercase flex items-center">Buffer Active</div>
+                <div className="h-6 px-3 rounded-full bg-primary/10 border border-primary/20 text-[9px] font-bold text-primary uppercase flex items-center">Optimized</div>
               </div>
             </div>
 
             {/* AI-Powered Prioritization Card */}
-            <div className="bg-[#0f172a]/30 border border-white/5 rounded-2xl p-8 flex flex-col justify-between hover:bg-[#0f172a]/50 hover:border-indigo-500/20 transition-all duration-300 shadow-lg">
+            <div className="bg-bg-3/30 border border-white/5 rounded-card p-8 flex flex-col justify-between hover:bg-bg-3/50 hover:border-primary/20 transition-all duration-300 shadow-lg">
               <div>
-                <div className="w-11 h-11 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-400 mb-6">
+                <div className="w-11 h-11 rounded-xl bg-warning/10 flex items-center justify-center text-warning mb-6">
                   <Cpu className="w-5.5 h-5.5" />
                 </div>
                 <h3 className="text-base font-extrabold mb-3 text-white">AI-Powered Prioritization</h3>
@@ -205,10 +205,10 @@ export default function LandingPage() {
               <div className="mt-8 pt-4 border-t border-white/5 space-y-2">
                 <div className="flex justify-between items-center text-[10px] text-slate-400">
                   <span className="font-bold uppercase tracking-wider">Tax Reserve</span>
-                  <span className="font-semibold text-emerald-400">30% Allocated</span>
+                  <span className="font-semibold text-success">30% Allocated</span>
                 </div>
-                <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                  <div className="w-[30%] h-full bg-emerald-500 rounded-full" />
+                <div className="w-full h-1.5 bg-bg-3 rounded-full overflow-hidden">
+                  <div className="w-[30%] h-full bg-success rounded-full" />
                 </div>
               </div>
             </div>
@@ -231,9 +231,9 @@ export default function LandingPage() {
 
         {/* CTA Card Section */}
         <section className="w-full">
-          <div className="relative w-full rounded-3xl bg-[#0c142c]/40 backdrop-blur-xl border border-white/5 p-8 md:p-14 overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl">
+          <div className="relative w-full rounded-card bg-bg-3/40 backdrop-blur-xl border border-white/5 p-8 md:p-14 overflow-hidden flex flex-col md:flex-row items-center justify-between gap-8 shadow-neon">
             {/* Ambient glow inside */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-indigo-500/10 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-primary/10 rounded-full blur-[100px] pointer-events-none" />
             
             <div className="flex-1 text-left relative z-10 max-w-xl select-none">
               <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4">
@@ -246,12 +246,12 @@ export default function LandingPage() {
             
             <div className="flex flex-col sm:flex-row gap-4 relative z-10 w-full md:w-auto shrink-0 select-none">
               <Link href="/register" className="w-full sm:w-auto">
-                <Button className="w-full bg-linear-to-r from-indigo-500 to-violet-500 hover:brightness-110 text-white font-bold h-12 px-8 rounded-xl flex items-center justify-center gap-2 border-0">
+                <Button className="w-full bg-gradient-button hover:brightness-110 text-black font-bold h-12 px-8 rounded-input flex items-center justify-center gap-2 border-0 shadow-glow">
                   Create Free Account
                 </Button>
               </Link>
               <Link href="#" className="w-full sm:w-auto">
-                <Button variant="outline" className="w-full text-slate-300 border-white/10 hover:bg-white/5 h-12 px-8 rounded-xl">
+                <Button variant="outline" className="w-full text-slate-300 border-white/10 hover:bg-white/5 h-12 px-8 rounded-input">
                   Talk to an Advisor
                 </Button>
               </Link>

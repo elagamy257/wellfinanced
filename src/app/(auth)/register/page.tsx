@@ -132,7 +132,7 @@ export default function RegisterPage() {
           {/* Multi-step progress bar */}
           <div className="flex items-center justify-between mb-8 select-none w-full">
             <div className="flex items-center gap-2 flex-1 max-w-[280px]">
-              <div className="flex-1 h-[3px] rounded-full bg-success shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
+              <div className="flex-1 h-[3px] rounded-full bg-success shadow-glow" />
               <div className="flex-1 h-[3px] rounded-full bg-white/10" />
               <div className="flex-1 h-[3px] rounded-full bg-white/10" />
             </div>
