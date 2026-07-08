@@ -10,8 +10,8 @@ import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 
 const loginSchema = z.object({
-  email: z.string().min(1, 'Identity node email is required').email('Please enter a valid node email'),
-  password: z.string().min(8, 'Access key must be at least 8 characters'),
+  email: z.string().min(1, 'Email address is required').email('Please enter a valid email address'),
+  password: z.string().min(8, 'Password must be at least 8 characters'),
   rememberMe: z.boolean().optional(),
 });
 
@@ -43,7 +43,7 @@ export default function LoginPage() {
     // Simulate API request delay
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
-    if (data.email === 'error@wellfinanced.com') {
+    if (data.email === 'error@dananirblanco.com') {
       setSubmitError('Authentication failed. Invalid identity node or access key.');
     } else {
       setSubmitSuccess(true);
@@ -85,45 +85,43 @@ export default function LoginPage() {
             </div>
           )}
 
-          {/* Email (Identity Node) Field */}
+          {/* Email Address Field */}
           <div className="space-y-2">
             <label className="text-[10px] font-bold text-success/80 tracking-[0.15em] uppercase px-1 select-none block">
-              Identity Node
+              Email Address
             </label>
             <Input
               id="email"
               type="email"
-              placeholder="freelancer@neural.ai"
+              placeholder="Email Address"
               disabled={isSubmitting || submitSuccess}
-              className="bg-[#f1f5f9]!  text-slate-900! placeholder-slate-400/80 font-medium"
-              leftIcon={<Mail className="w-4.5 h-4.5 text-slate-500" />}
+              leftIcon={<Mail className="w-4.5 h-4.5 text-slate-400" />}
               error={errors.email?.message}
               {...register('email')}
             />
           </div>
 
-          {/* Password (Access Key) Field */}
+          {/* Password Field */}
           <div className="space-y-2">
             <div className="flex justify-between items-center px-1 select-none">
               <label className="text-[10px] font-bold text-success/80 tracking-[0.15em] uppercase">
-                Access Key
+                Password
               </label>
               <span className="text-[10px] text-muted hover:text-success transition-colors font-bold tracking-wider uppercase cursor-pointer">
-                Lost Key?
+                Forgot Password?
               </span>
             </div>
             <Input
               id="password"
               type={showPassword ? 'text' : 'password'}
-              placeholder="••••••••••••"
+              placeholder="Password"
               disabled={isSubmitting || submitSuccess}
-              className="bg-[#f1f5f9]!  text-slate-900! placeholder-slate-400/80 font-medium"
-              leftIcon={<KeyRound className="w-4.5 h-4.5 text-slate-500" />}
+              leftIcon={<KeyRound className="w-4.5 h-4.5 text-slate-400" />}
               rightIcon={
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="text-slate-500 hover:text-slate-800 transition-colors flex items-center justify-center p-1"
+                  className="text-slate-500 hover:text-slate-350 transition-colors flex items-center justify-center p-1"
                   aria-label="Toggle password visibility"
                 >
                   {showPassword ? <EyeOff className="w-4.5 h-4.5" /> : <Eye className="w-4.5 h-4.5" />}

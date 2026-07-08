@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
-import { EyeOff, Eye, ShieldAlert, CheckCircle2, User as UserIcon, Shield, Fingerprint } from 'lucide-react';
+import { EyeOff, Eye, ShieldAlert, CheckCircle2, User as UserIcon, Shield, Fingerprint, AtSign } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/Button';
 const registerSchema = z.object({
   fullName: z.string().min(1, 'Full name is required').max(60, 'Name must be under 60 characters'),
   email: z.string().min(1, 'Email address is required').email('Please enter a valid email address'),
+  username: z.string().min(3, 'Username must be at least 3 characters').max(30, 'Username must be under 30 characters'),
   password: z.string().min(8, 'Password must be at least 8 characters'),
 });
 
@@ -44,6 +45,7 @@ export default function RegisterPage() {
     defaultValues: {
       fullName: '',
       email: '',
+      username: '',
       password: '',
     },
     mode: 'onTouched',
@@ -56,7 +58,7 @@ export default function RegisterPage() {
     // Simulate API registration delay
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
-    if (data.email === 'error@wellfinanced.com') {
+    if (data.email === 'error@dananirblanco.com') {
       setSubmitError('Registration failed. Identity node already registered.');
     } else {
       setSubmitSuccess(true);
@@ -161,7 +163,7 @@ export default function RegisterPage() {
             <Input
               id="fullName"
               type="text"
-              placeholder="Full Identity"
+              placeholder="Full Name"
               disabled={isSubmitting || submitSuccess}
               rightIcon={<UserIcon className="w-4 h-4 text-muted/65" />}
               error={errors.fullName?.message}
@@ -172,18 +174,29 @@ export default function RegisterPage() {
             <Input
               id="email"
               type="email"
-              placeholder="Network Address"
+              placeholder="Email Address"
               disabled={isSubmitting || submitSuccess}
               rightIcon={<span className="text-sm font-semibold text-muted/65 select-none">@</span>}
               error={errors.email?.message}
               {...register('email')}
             />
 
+            {/* Username Field (Right Icon) */}
+            <Input
+              id="username"
+              type="text"
+              placeholder="Username"
+              disabled={isSubmitting || submitSuccess}
+              rightIcon={<AtSign className="w-4 h-4 text-muted/65" />}
+              error={errors.username?.message}
+              {...register('username')}
+            />
+
             {/* Password Field (Right Icon Toggle) */}
             <Input
               id="password"
               type={showPassword ? 'text' : 'password'}
-              placeholder="Encryption Key"
+              placeholder="Password"
               disabled={isSubmitting || submitSuccess}
               rightIcon={
                 <button
