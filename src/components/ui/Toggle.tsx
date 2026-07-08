@@ -2,20 +2,23 @@
 
 import React from 'react';
 
-interface SettingsToggleProps {
+interface ToggleProps {
   label: string;
   description?: string;
   checked: boolean;
   onChange: (checked: boolean) => void;
+  id?: string;
 }
 
-export function SettingsToggle({ label, description, checked, onChange }: SettingsToggleProps) {
+export function Toggle({ label, description, checked, onChange, id }: ToggleProps) {
+  const switchId = id || `toggle-${label.toLowerCase().replace(/\s+/g, '-')}`;
+
   return (
     <div className="flex items-start justify-between gap-4 py-3 select-none">
       <div className="space-y-0.5">
-        <span className="text-xs font-bold text-white block">
+        <label htmlFor={switchId} className="text-xs font-bold text-white block cursor-pointer">
           {label}
-        </span>
+        </label>
         {description && (
           <span className="text-[10px] text-slate-400 font-medium leading-relaxed block">
             {description}
@@ -23,14 +26,17 @@ export function SettingsToggle({ label, description, checked, onChange }: Settin
         )}
       </div>
 
-      {/* Switch */}
+      {/* Switch Button */}
       <button
+        id={switchId}
         type="button"
+        role="switch"
+        aria-checked={checked}
+        aria-label={label}
         onClick={() => onChange(!checked)}
-        className={`w-10 h-6 rounded-full p-0.5 transition-colors cursor-pointer outline-none shrink-0 ${
+        className={`w-10 h-6 rounded-full p-0.5 transition-colors cursor-pointer outline-none shrink-0 focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#060B1A] ${
           checked ? 'bg-[#8BFF7D]' : 'bg-white/10'
         }`}
-        aria-label={`Toggle ${label}`}
       >
         <div
           className={`w-5 h-5 rounded-full bg-[#060B1A] transition-transform shadow-[0_2px_5px_rgba(0,0,0,0.3)] ${

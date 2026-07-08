@@ -11,7 +11,6 @@ interface ProfileHeaderProps {
 export function ProfileHeader({ initials, role, onChangeAvatar }: ProfileHeaderProps) {
   return (
     <div className="flex items-center gap-5 select-none">
-      {/* Square profile picture with rounded corners */}
       <div className="w-16 h-16 rounded-2xl bg-linear-to-tr from-[#8BFF7D] to-[#8FFFD2] flex items-center justify-center font-black text-black text-xl shadow-[0_0_20px_rgba(139,255,125,0.2)]">
         {initials}
       </div>

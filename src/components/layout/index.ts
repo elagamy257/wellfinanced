@@ -8,3 +8,4 @@ export * from './ContentWrapper';
 export * from './AuthHeader';
 export * from './AuthFooter';
 export * from './Breadcrumb';
+export * from './PreferenceGroup';

@@ -13,3 +13,6 @@ export * from './SectionTitle';
 export * from './StatCard';
 export * from './Table';
 export * from './ChartsTheme';
+export * from './Toggle';
+export * from './Select';
+export * from './SettingsSection';

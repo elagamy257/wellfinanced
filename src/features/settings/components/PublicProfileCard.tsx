@@ -59,26 +59,28 @@ export function PublicProfileCard() {
             {/* First & Last Name row */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <label className="text-[10px] font-bold text-slate-400 tracking-wider uppercase block select-none">
+                <label htmlFor="firstName" className="text-[10px] font-bold text-slate-400 tracking-wider uppercase block select-none">
                   First Name
                 </label>
                 <input
+                  id="firstName"
                   type="text"
                   value={profile.firstName}
                   onChange={(e) => setProfile({ ...profile, firstName: e.target.value })}
-                  className="w-full h-11 px-4 bg-[#070b16] border border-purple-950/60 focus:border-primary/45 text-xs font-bold text-white rounded-xl outline-none transition-all"
+                  className="w-full h-11 px-4 bg-[#070b16] border border-purple-950/60 focus:border-primary/45 text-xs font-bold text-white rounded-xl outline-none transition-all focus:ring-1 focus:ring-primary/30"
                   required
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-[10px] font-bold text-slate-400 tracking-wider uppercase block select-none">
+                <label htmlFor="lastName" className="text-[10px] font-bold text-slate-400 tracking-wider uppercase block select-none">
                   Last Name
                 </label>
                 <input
+                  id="lastName"
                   type="text"
                   value={profile.lastName}
                   onChange={(e) => setProfile({ ...profile, lastName: e.target.value })}
-                  className="w-full h-11 px-4 bg-[#070b16] border border-purple-950/60 focus:border-primary/45 text-xs font-bold text-white rounded-xl outline-none transition-all"
+                  className="w-full h-11 px-4 bg-[#070b16] border border-purple-950/60 focus:border-primary/45 text-xs font-bold text-white rounded-xl outline-none transition-all focus:ring-1 focus:ring-primary/30"
                   required
                 />
               </div>
@@ -86,28 +88,30 @@ export function PublicProfileCard() {
 
             {/* Email Address */}
             <div className="space-y-2">
-              <label className="text-[10px] font-bold text-slate-400 tracking-wider uppercase block select-none">
+              <label htmlFor="email" className="text-[10px] font-bold text-slate-400 tracking-wider uppercase block select-none">
                 Email Address
               </label>
               <input
+                id="email"
                 type="email"
                 value={profile.email}
                 onChange={(e) => setProfile({ ...profile, email: e.target.value })}
-                className="w-full h-11 px-4 bg-[#070b16] border border-purple-950/60 focus:border-primary/45 text-xs font-bold text-white rounded-xl outline-none transition-all"
+                className="w-full h-11 px-4 bg-[#070b16] border border-purple-950/60 focus:border-primary/45 text-xs font-bold text-white rounded-xl outline-none transition-all focus:ring-1 focus:ring-primary/30"
                 required
               />
             </div>
 
             {/* Professional Role */}
             <div className="space-y-2">
-              <label className="text-[10px] font-bold text-slate-400 tracking-wider uppercase block select-none">
+              <label htmlFor="role" className="text-[10px] font-bold text-slate-400 tracking-wider uppercase block select-none">
                 Professional Role
               </label>
               <input
+                id="role"
                 type="text"
                 value={profile.role}
                 onChange={(e) => setProfile({ ...profile, role: e.target.value })}
-                className="w-full h-11 px-4 bg-[#070b16] border border-purple-950/60 focus:border-primary/45 text-xs font-bold text-white rounded-xl outline-none transition-all"
+                className="w-full h-11 px-4 bg-[#070b16] border border-purple-950/60 focus:border-primary/45 text-xs font-bold text-white rounded-xl outline-none transition-all focus:ring-1 focus:ring-primary/30"
                 required
               />
             </div>
