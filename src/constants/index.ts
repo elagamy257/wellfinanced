@@ -1,6 +1,6 @@
 // Global System Constants
 
-export const APP_NAME = 'WellFinanced';
+export const APP_NAME = 'Dananir w Blanco';
 
 export const APP_DESCRIPTION = 'AI-powered financial stability workstation';
 
@@ -12,12 +12,8 @@ export const ROUTES = {
     HOME: '/dashboard',
     TRANSACTIONS: '/dashboard/transactions',
     ANALYTICS: '/dashboard/analytics',
-    SAVINGS: '/dashboard/savings',
     GOALS: '/dashboard/goals',
     AI: '/dashboard/ai',
-    TAXES: '/dashboard/taxes',
-    REPORTS: '/dashboard/reports',
-    PROFILE: '/dashboard/profile',
     SETTINGS: '/dashboard/settings',
   },
 } as const;
