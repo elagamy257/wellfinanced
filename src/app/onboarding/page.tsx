@@ -135,7 +135,7 @@ export default function OnboardingPage() {
                 </div>
                 <h1 className="text-5xl md:text-7xl font-extrabold leading-tight tracking-tight text-text">
                   Welcome to your <br />
-                  <span className="bg-gradient-to-r from-primary via-secondary to-pink bg-clip-text text-transparent">Financial Future</span>
+                  <span className="bg-linear-to-r from-primary via-secondary to-pink bg-clip-text text-transparent">Financial Future</span>
                 </h1>
                 <p className="text-lg text-muted max-w-xl mx-auto lg:mx-0 leading-relaxed">
                   The ultimate AI co-pilot for modern freelancers. Automate your cashflow, predict taxes, and optimize your income with precision engineering.
@@ -164,19 +164,19 @@ export default function OnboardingPage() {
               {/* AI Head Graphic / Visual */}
               <div className="relative flex justify-center items-center">
                 <div className="relative w-full max-w-[500px] aspect-square flex justify-center items-center">
-                  <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-full blur-[80px] animate-pulse"></div>
+                  <div className="absolute inset-0 bg-linear-to-br from-primary/20 to-secondary/20 rounded-full blur-[80px] animate-pulse"></div>
                   <div className="relative z-10 w-full h-full animate-[float_6s_ease-in-out_infinite]">
                     <div className="w-full h-full rounded-full border-2 border-white/5 p-4">
                       <div className="w-full h-full rounded-full border border-primary/20 overflow-hidden relative bg-surface backdrop-blur-xl shadow-neon group">
                         <Image 
-                          className="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-[2000ms]" 
+                          className="w-full h-full object-cover opacity-80 group-hover:scale-110 transition-transform duration-2000" 
                           alt="AI Core" 
                           src="https://lh3.googleusercontent.com/aida-public/AB6AXuDHKaV64uDFCUd39adHTGiEzuV_oU2zuSCOea4OFXzqDl4nOmT0fDm3IfK76Tb0imHwbgMYdiIE2O-AtwYC5_wd-lIfMB6O7k7sCuu4mfPKIRcA3oadWRDoNVbVQbw_WRRGHOujd5r4N-BxUgeJo384VMqNuSRQc4td3xlCwvV9IbtRarUkSCb7zFHmztGy7MTftTiwumyYuDK26t9zt08SEcxLvJ23TZnza1GQM6mW1MsBwaDn-zozrVUSrBy7Wi54TDyxCMQ9drw"
                           width={500}
                           height={500}
                           unoptimized
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-bg-1 via-transparent to-transparent opacity-60"></div>
+                        <div className="absolute inset-0 bg-linear-to-t from-bg-1 via-transparent to-transparent opacity-60"></div>
                       </div>
                     </div>
                   </div>
@@ -219,7 +219,7 @@ export default function OnboardingPage() {
                     <BarChart3 className="text-primary w-8 h-8" />
                   </div>
                   <h3 className="text-2xl font-bold mb-4 text-text">Predictive Income</h3>
-                  <p className="text-muted leading-relaxed mb-8 flex-grow">Our proprietary ML models analyze your work history to forecast next month&apos;s earnings with eerie accuracy. Never wonder what your next check looks like.</p>
+                  <p className="text-muted leading-relaxed mb-8 grow">Our proprietary ML models analyze your work history to forecast next month&apos;s earnings with eerie accuracy. Never wonder what your next check looks like.</p>
                   <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
                     <div className="h-full bg-primary w-2/3 shadow-glow"></div>
                   </div>
@@ -231,7 +231,7 @@ export default function OnboardingPage() {
                     <Activity className="text-secondary w-8 h-8" />
                   </div>
                   <h3 className="text-2xl font-bold mb-4 text-text">Cashflow Smoothing</h3>
-                  <p className="text-muted leading-relaxed mb-8 flex-grow">Eliminate the &quot;feast and famine&quot; cycle. Our AI reallocates surplus during peak months to ensure a consistent, stress-free salary all year round.</p>
+                  <p className="text-muted leading-relaxed mb-8 grow">Eliminate the &quot;feast and famine&quot; cycle. Our AI reallocates surplus during peak months to ensure a consistent, stress-free salary all year round.</p>
                   <div className="flex gap-2">
                     <div className="flex-1 h-12 bg-white/5 rounded-lg"></div>
                     <div className="flex-1 h-12 bg-white/5 rounded-lg"></div>
@@ -245,7 +245,7 @@ export default function OnboardingPage() {
                     <Brain className="text-pink w-8 h-8" />
                   </div>
                   <h3 className="text-2xl font-bold mb-4 text-text">AI Prioritization</h3>
-                  <p className="text-muted leading-relaxed mb-8 flex-grow">Automated bill pay and tax withholding that adapts in real-time. We prioritize high-interest debt and tax compliance so you don&apos;t have to.</p>
+                  <p className="text-muted leading-relaxed mb-8 grow">Automated bill pay and tax withholding that adapts in real-time. We prioritize high-interest debt and tax compliance so you don&apos;t have to.</p>
                   <div className="grid grid-cols-2 gap-4">
                     <div className="h-2 bg-pink/40 rounded-full"></div>
                     <div className="h-2 bg-pink/20 rounded-full"></div>
@@ -257,19 +257,19 @@ export default function OnboardingPage() {
             {/* Stats Section */}
             <section className="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center pt-16 border-t border-white/5 pb-8">
               <div>
-                <div className="text-4xl md:text-5xl font-mono font-bold bg-gradient-to-r from-primary to-cyan bg-clip-text text-transparent mb-2">$24M+</div>
+                <div className="text-4xl md:text-5xl font-mono font-bold bg-linear-to-r from-primary to-cyan bg-clip-text text-transparent mb-2">$24M+</div>
                 <div className="text-xs font-bold text-muted uppercase tracking-widest">Managed Annually</div>
               </div>
               <div>
-                <div className="text-4xl md:text-5xl font-mono font-bold bg-gradient-to-r from-primary to-cyan bg-clip-text text-transparent mb-2">12.4k</div>
+                <div className="text-4xl md:text-5xl font-mono font-bold bg-linear-to-r from-primary to-cyan bg-clip-text text-transparent mb-2">12.4k</div>
                 <div className="text-xs font-bold text-muted uppercase tracking-widest">Active Freelancers</div>
               </div>
               <div>
-                <div className="text-4xl md:text-5xl font-mono font-bold bg-gradient-to-r from-primary to-cyan bg-clip-text text-transparent mb-2">40%</div>
+                <div className="text-4xl md:text-5xl font-mono font-bold bg-linear-to-r from-primary to-cyan bg-clip-text text-transparent mb-2">40%</div>
                 <div className="text-xs font-bold text-muted uppercase tracking-widest">Avg. Savings Increase</div>
               </div>
               <div>
-                <div className="text-4xl md:text-5xl font-mono font-bold bg-gradient-to-r from-primary to-cyan bg-clip-text text-transparent mb-2">99.9%</div>
+                <div className="text-4xl md:text-5xl font-mono font-bold bg-linear-to-r from-primary to-cyan bg-clip-text text-transparent mb-2">99.9%</div>
                 <div className="text-xs font-bold text-muted uppercase tracking-widest">Uptime Precision</div>
               </div>
             </section>
@@ -282,8 +282,8 @@ export default function OnboardingPage() {
           {/* Steps Progress Indicator */}
           {step < 4 && (
             <div className="flex items-center gap-2 mb-6 select-none">
-              <div className="step-seg flex-1 h-[3px] rounded-full bg-gradient-to-r from-secondary to-cyan shadow-[0_0_10px_rgba(124,58,237,0.6)]" />
-              <div className={`step-seg flex-1 h-[3px] rounded-full transition-all duration-250 ${step >= 3 ? 'bg-gradient-to-r from-secondary to-cyan shadow-[0_0_10px_rgba(124,58,237,0.6)]' : 'bg-white/10'}`} />
+              <div className="step-seg flex-1 h-[3px] rounded-full bg-linear-to-r from-secondary to-cyan shadow-[0_0_10px_rgba(124,58,237,0.6)]" />
+              <div className={`step-seg flex-1 h-[3px] rounded-full transition-all duration-250 ${step >= 3 ? 'bg-linear-to-r from-secondary to-cyan shadow-[0_0_10px_rgba(124,58,237,0.6)]' : 'bg-white/10'}`} />
               <div className="step-seg flex-1 h-[3px] rounded-full bg-white/10" />
               <span className="text-[10px] font-bold text-muted uppercase tracking-widest whitespace-nowrap ml-2">
                 Step {step} / 3
