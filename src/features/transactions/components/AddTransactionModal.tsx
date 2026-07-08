@@ -50,9 +50,9 @@ export function AddTransactionModal({ isOpen, onClose, onSave }: AddTransactionM
   };
 
   return (
-    <div className="fixed inset-0 bg-[#020617]/85 backdrop-blur-md z-50 flex items-center justify-center p-4 overflow-y-auto animate-fade-in">
+    <div className="fixed inset-0 bg-[#020617]/85 backdrop-blur-md z-50 flex justify-center items-start overflow-y-auto p-4 md:p-6 animate-fade-in">
       {/* Card Modal Container */}
-      <div className="w-full max-w-[480px] bg-[#0c142c]/95 border border-white/10 rounded-card p-6 md:p-8 relative shadow-neon overflow-hidden animate-scale-in">
+      <div className="my-auto w-full max-w-[480px] bg-[#0c142c]/95 border border-white/10 rounded-card p-6 md:p-8 relative shadow-neon overflow-hidden animate-scale-in">
         {/* Ambient inner glow */}
         <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-[80px] pointer-events-none" />
 
