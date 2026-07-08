@@ -1,4 +1,4 @@
-// Type definitions for WellFinanced
+// Type definitions for Dananir & Blanco
 
 export interface User {
   id: string;

@@ -16,3 +16,4 @@ export * from './ChartsTheme';
 export * from './Toggle';
 export * from './Select';
 export * from './SettingsSection';
+export * from './Logo';

@@ -8,7 +8,7 @@ const inter = {
 };
 
 export const metadata: Metadata = {
-  title: 'WellFinanced | AI-Powered Financial Stability Platform',
+  title: 'Dananir w Blanco | AI-Powered Financial Stability Platform',
   description: 'A financial stability platform built for freelancers, creators, solopreneurs, and independent workers with irregular income.',
 };
 

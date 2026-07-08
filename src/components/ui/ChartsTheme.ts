@@ -1,6 +1,6 @@
 /**
  * Charts Theme Configuration
- * Grounded in the WellFinanced design system from style.txt
+ * Grounded in the Dananir & Blanco design system from style.txt
  */
 
 export const CHARTS_THEME = {

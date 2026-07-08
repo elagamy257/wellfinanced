@@ -19,6 +19,7 @@ import {
   Zap
 } from 'lucide-react';
 import { useUIStore } from '@/store/uiStore';
+import { Logo } from '@/components/ui/Logo';
 
 // Navigation Item Structure
 interface NavItem {
@@ -95,26 +96,7 @@ export function Sidebar() {
       >
         {/* Header/Logo */}
         <div className="h-16 flex items-center justify-between px-4 border-b border-white/5">
-          <Link href="/dashboard" className="flex items-center gap-3 overflow-hidden select-none">
-            {/* Lime green logo icon */}
-            <div className="w-8 h-8 rounded-lg bg-linear-to-tr from-[#8BFF7D] to-[#8FFFD2] flex items-center justify-center font-black text-black text-base shrink-0 shadow-[0_0_15px_rgba(139,255,125,0.45)]">
-              FF
-            </div>
-            {!isSidebarCollapsed && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="flex flex-col min-w-0"
-              >
-                <span className="font-extrabold text-sm text-white tracking-tight leading-none">
-                  FinFlow AI
-                </span>
-                <span className="text-[7px] font-black text-slate-500 tracking-widest uppercase mt-0.5">
-                  Intelligent Finance
-                </span>
-              </motion.div>
-            )}
-          </Link>
+          <Logo showText={!isSidebarCollapsed} className="overflow-hidden" />
         </div>
 
         {/* Navigation & Action Area */}
@@ -210,19 +192,7 @@ export function Sidebar() {
               className="fixed top-0 bottom-0 left-0 w-64 bg-[#060B1A] border-r border-white/5 z-50 flex flex-col md:hidden"
             >
               <div className="h-16 flex items-center justify-between px-4 border-b border-white/5">
-                <Link href="/dashboard" className="flex items-center gap-3" onClick={closeMobileSidebar}>
-                  <div className="w-8 h-8 rounded-lg bg-linear-to-tr from-[#8BFF7D] to-[#8FFFD2] flex items-center justify-center font-black text-black text-base shadow-[0_0_15px_rgba(139,255,125,0.45)]">
-                    FF
-                  </div>
-                  <div className="flex flex-col">
-                    <span className="font-extrabold text-sm text-white tracking-tight leading-none">
-                      FinFlow AI
-                    </span>
-                    <span className="text-[7px] font-black text-slate-500 tracking-widest uppercase mt-0.5">
-                      Intelligent Finance
-                    </span>
-                  </div>
-                </Link>
+                <Logo showText={true} onClick={closeMobileSidebar} />
                 <button
                   onClick={closeMobileSidebar}
                   className="p-1.5 rounded-lg hover:bg-white/5 text-slate-400 hover:text-white transition-colors cursor-pointer"
