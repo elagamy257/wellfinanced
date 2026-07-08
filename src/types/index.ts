@@ -1,4 +1,4 @@
-// Type definitions for Dananir & Blanco
+// Type definitions for Fintova
 
 export interface User {
   id: string;

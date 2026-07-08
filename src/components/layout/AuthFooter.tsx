@@ -10,7 +10,7 @@ export function AuthFooter() {
       <div className="flex items-center gap-2">
         <ShieldCheck className="w-3.5 h-3.5 text-success shrink-0" />
         <span className="text-slate-500 dark:text-slate-400">
-          © {new Date().getFullYear()} Dananir & Blanco. Secured by Neural Encryption.
+          © {new Date().getFullYear()} Fintova. Secured by Neural Encryption.
         </span>
       </div>
       <div className="hidden sm:flex items-center gap-8 text-slate-500 dark:text-slate-400">

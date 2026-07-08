@@ -58,7 +58,7 @@ export default function RegisterPage() {
     // Simulate API registration delay
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
-    if (data.email === 'error@dananirblanco.com') {
+    if (data.email === 'error@fintova.com') {
       setSubmitError('Registration failed. Identity node already registered.');
     } else {
       setSubmitSuccess(true);

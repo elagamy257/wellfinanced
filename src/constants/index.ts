@@ -1,6 +1,6 @@
 // Global System Constants
 
-export const APP_NAME = 'Dananir w Blanco';
+export const APP_NAME = 'Fintova';
 
 export const APP_DESCRIPTION = 'AI-powered financial stability workstation';
 

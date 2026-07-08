@@ -43,7 +43,7 @@ export default function LoginPage() {
     // Simulate API request delay
     await new Promise((resolve) => setTimeout(resolve, 1500));
 
-    if (data.email === 'error@dananirblanco.com') {
+    if (data.email === 'error@fintova.com') {
       setSubmitError('Authentication failed. Invalid identity node or access key.');
     } else {
       setSubmitSuccess(true);

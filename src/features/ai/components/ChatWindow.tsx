@@ -34,7 +34,7 @@ export function ChatWindow({
         <div className="w-14 h-14 rounded-2xl bg-primary/10 border border-primary/15 flex items-center justify-center text-primary shadow-[0_0_20px_rgba(168,85,247,0.2)] mb-4 animate-pulse">
           <Bot className="w-6 h-6" />
         </div>
-        <h3 className="text-base font-extrabold text-white tracking-tight">Dananir & Blanco Co-Pilot</h3>
+        <h3 className="text-base font-extrabold text-white tracking-tight">Fintova Co-Pilot</h3>
         <p className="text-xs text-slate-400 max-w-sm mt-1.5 leading-relaxed">
           Ask anything about your business finances. I can analyze liquidity, estimate taxes, and forecast cashflow runway.
         </p>

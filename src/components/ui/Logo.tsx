@@ -17,7 +17,7 @@ export function Logo({ className = '', showText = true, onClick }: LogoProps) {
       <div className="w-8 h-8 rounded-lg overflow-hidden shrink-0 relative bg-bg-1/80 border border-white/10 flex items-center justify-center shadow-glow">
         <Image 
           src="/logo.png" 
-          alt="Dananir & Blanco Logo"
+          alt="Fintova Logo"
           width={32}
           height={32}
           className="object-contain"
@@ -25,7 +25,7 @@ export function Logo({ className = '', showText = true, onClick }: LogoProps) {
       </div>
       {showText && (
         <span className="text-base font-extrabold tracking-tight text-white">
-          Dananir w Blanco
+          Fintova
         </span>
       )}
     </Link>

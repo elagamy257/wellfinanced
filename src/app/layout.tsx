@@ -8,7 +8,7 @@ const inter = {
 };
 
 export const metadata: Metadata = {
-  title: 'Dananir w Blanco | AI-Powered Financial Stability Platform',
+  title: 'Fintova | AI-Powered Financial Stability Platform',
   description: 'A financial stability platform built for freelancers, creators, solopreneurs, and independent workers with irregular income.',
   icons: {
     icon: "/logo.png",
