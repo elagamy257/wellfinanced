@@ -27,10 +27,10 @@ export default function DashboardPage() {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8 md:mb-10 animate-fade-in select-none">
         <div>
           <h1 className="text-3xl font-extrabold text-white tracking-tight">
-            Good Evening, Wafaa
+            Good Evening, Elagamy
           </h1>
           <p className="text-sm text-slate-400 mt-1">
-            Your financial ecosystem is performing optimally today.
+            Your financial well-being is in your hands.
           </p>
         </div>
         

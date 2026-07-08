@@ -10,7 +10,13 @@ const inter = {
 export const metadata: Metadata = {
   title: 'Dananir w Blanco | AI-Powered Financial Stability Platform',
   description: 'A financial stability platform built for freelancers, creators, solopreneurs, and independent workers with irregular income.',
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
 };
+
 
 export default function RootLayout({
   children,
