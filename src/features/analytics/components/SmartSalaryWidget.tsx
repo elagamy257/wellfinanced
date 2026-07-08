@@ -51,7 +51,7 @@ export function SmartSalaryWidget() {
         {/* Breakdown Stats */}
         <div className="grid grid-cols-2 gap-4 border-t border-white/5 pt-5">
           <div className="space-y-1">
-            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block flex items-center gap-1">
+            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider  flex items-center gap-1">
               <Landmark className="w-3.5 h-3.5 text-slate-500" />
               Emergency Fund
             </span>
@@ -61,7 +61,7 @@ export function SmartSalaryWidget() {
           </div>
           
           <div className="space-y-1">
-            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider block flex items-center gap-1">
+            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wider  flex items-center gap-1">
               <Percent className="w-3.5 h-3.5 text-slate-500" />
               Safety Margin
             </span>
