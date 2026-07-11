@@ -2,12 +2,14 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Mail, KeyRound, Eye, EyeOff, CheckCircle2, Zap, ShieldAlert } from 'lucide-react';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
+import { useLogin, normalizeError } from '@/features/auth';
 
 const loginSchema = z.object({
   email: z.string().min(1, 'Email address is required').email('Please enter a valid email address'),
@@ -21,11 +23,14 @@ export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const router = useRouter();
+  const loginMutation = useLogin();
+  const isLoading = loginMutation.isPending;
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -40,17 +45,24 @@ export default function LoginPage() {
     setSubmitError(null);
     setSubmitSuccess(false);
 
-    // Simulate API request delay
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    if (data.email === 'error@fintova.com') {
-      setSubmitError('Authentication failed. Invalid identity node or access key.');
-    } else {
-      setSubmitSuccess(true);
-      setTimeout(() => {
-        window.location.href = '/onboarding';
-      }, 1000);
-    }
+    loginMutation.mutate(
+      {
+        email: data.email,
+        password: data.password,
+      },
+      {
+        onSuccess: () => {
+          setSubmitSuccess(true);
+          setTimeout(() => {
+            router.push('/dashboard');
+          }, 1000);
+        },
+        onError: (err) => {
+          const authError = normalizeError(err);
+          setSubmitError(authError.message);
+        },
+      }
+    );
   };
 
   return (
@@ -94,7 +106,7 @@ export default function LoginPage() {
               id="email"
               type="email"
               placeholder="Email Address"
-              disabled={isSubmitting || submitSuccess}
+              disabled={isLoading || submitSuccess}
               leftIcon={<Mail className="w-4.5 h-4.5 text-slate-400" />}
               error={errors.email?.message}
               {...register('email')}
@@ -115,7 +127,7 @@ export default function LoginPage() {
               id="password"
               type={showPassword ? 'text' : 'password'}
               placeholder="Password"
-              disabled={isSubmitting || submitSuccess}
+              disabled={isLoading || submitSuccess}
               leftIcon={<KeyRound className="w-4.5 h-4.5 text-slate-400" />}
               rightIcon={
                 <button
@@ -137,7 +149,7 @@ export default function LoginPage() {
             <input
               id="remember"
               type="checkbox"
-              disabled={isSubmitting || submitSuccess}
+              disabled={isLoading || submitSuccess}
               className="w-4 h-4 rounded border-white/10 bg-white/5 text-success focus:ring-success/20 focus:ring-offset-0 cursor-pointer transition-colors"
               {...register('rememberMe')}
             />
@@ -151,8 +163,8 @@ export default function LoginPage() {
             type="submit"
             variant="primary"
             fullWidth
-            disabled={isSubmitting || submitSuccess}
-            isLoading={isSubmitting}
+            disabled={isLoading || submitSuccess}
+            isLoading={isLoading}
             className="bg-success! text-white! hover:brightness-110! font-bold tracking-wider uppercase h-14 rounded-input select-none flex items-center justify-center gap-2"
           >
             <Zap className="w-4.5 h-4.5" />
@@ -179,7 +191,7 @@ export default function LoginPage() {
             variant="secondary"
             size="sm"
             className="h-12 text-xs flex items-center justify-center gap-2 border border-white/5"
-            disabled={isSubmitting || submitSuccess}
+            disabled={isLoading || submitSuccess}
             onClick={() => {}}
           >
             <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -195,7 +207,7 @@ export default function LoginPage() {
             variant="secondary"
             size="sm"
             className="h-12 text-xs flex items-center justify-center gap-2 border border-white/5"
-            disabled={isSubmitting || submitSuccess}
+            disabled={isLoading || submitSuccess}
             onClick={() => {}}
           >
             <svg className="w-4 h-4 fill-current text-white/80 shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

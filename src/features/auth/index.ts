@@ -1,3 +1,8 @@
-// Auth Feature Module Entry Point
-// This barrel file acts as a public API boundary for auth-related concerns.
-export {};
+export * from './types';
+export * from './services/auth.service';
+export * from './hooks/useLogin';
+export * from './hooks/useRegister';
+export * from './hooks/useCurrentUser';
+export * from './hooks/queryKeys';
+export * from './utils/errorNormalizer';
+export * from './components/AuthProvider';

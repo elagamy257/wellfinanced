@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -9,6 +10,7 @@ import { EyeOff, Eye, ShieldAlert, CheckCircle2, User as UserIcon, Shield, Finge
 import { motion } from 'framer-motion';
 import { Input } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
+import { useRegister, normalizeError } from '@/features/auth';
 
 const registerSchema = z.object({
   fullName: z.string().min(1, 'Full name is required').max(60, 'Name must be under 60 characters'),
@@ -24,6 +26,9 @@ export default function RegisterPage() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const router = useRouter();
+  const registerMutation = useRegister();
+  const isLoading = registerMutation.isPending;
 
   React.useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -39,7 +44,7 @@ export default function RegisterPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -55,17 +60,25 @@ export default function RegisterPage() {
     setSubmitError(null);
     setSubmitSuccess(false);
 
-    // Simulate API registration delay
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    if (data.email === 'error@fintova.com') {
-      setSubmitError('Registration failed. Identity node already registered.');
-    } else {
-      setSubmitSuccess(true);
-      setTimeout(() => {
-        window.location.href = '/onboarding';
-      }, 1000);
-    }
+    registerMutation.mutate(
+      {
+        name: data.fullName,
+        email: data.email,
+        password: data.password,
+      },
+      {
+        onSuccess: () => {
+          setSubmitSuccess(true);
+          setTimeout(() => {
+            router.push('/login');
+          }, 1500);
+        },
+        onError: (err) => {
+          const authError = normalizeError(err);
+          setSubmitError(authError.message);
+        },
+      }
+    );
   };
 
   return (
@@ -108,8 +121,8 @@ export default function RegisterPage() {
           </span>
         </h2>
 
-        <p className="text-sm text-muted leading-relaxed max-w-[380px] mb-12">
-          Our decentralized intelligence layers ensure your financial identity remains encrypted and your freelance earnings are protected by autonomous AI audits.
+        <p className="text-xs text-slate-400 font-light leading-relaxed max-w-sm mb-8 select-none">
+          Fintova features zero-knowledge security models. Your financials are encrypted at rest with military-grade algorithms.
         </p>
 
         {/* Flat Stats Footer */}
@@ -126,23 +139,17 @@ export default function RegisterPage() {
       </div>
 
       {/* Right Column Panel (Forms flat layout) */}
-      <div className="flex-1 lg:w-1/2 flex items-center justify-center p-6 lg:p-14">
-        <div className="w-full max-w-[440px] flex flex-col">
-          
-          {/* Multi-step progress bar */}
-          <div className="flex items-center justify-between mb-8 select-none w-full">
-            <div className="flex items-center gap-2 flex-1 max-w-[280px]">
-              <div className="flex-1 h-[3px] rounded-full bg-success shadow-glow" />
-              <div className="flex-1 h-[3px] rounded-full bg-white/10" />
-              <div className="flex-1 h-[3px] rounded-full bg-white/10" />
-            </div>
-            <span className="text-[9px] font-bold text-muted uppercase tracking-widest whitespace-nowrap ml-4">
-              Step 1 / 3
-            </span>
-          </div>
+      <div className="w-full lg:w-1/2 flex flex-col justify-center p-8 sm:p-16 lg:p-24 relative overflow-hidden">
+        {/* Glow */}
+        <div className="absolute w-[500px] h-[500px] bg-success/5 rounded-full blur-[120px] -z-10 pointer-events-none" />
 
-          <h1 className="text-3xl font-extrabold tracking-tight mb-1 text-text">Initiate Protocol</h1>
-          <p className="text-xs text-muted mb-8">Join the elite network of AI-augmented freelancers.</p>
+        <div className="max-w-[400px] w-full mx-auto relative z-10">
+          <div className="mb-8 select-none text-center lg:text-left">
+            <h1 className="text-2xl font-bold tracking-tight mb-2 text-white">
+              Initialize Fintova Node
+            </h1>
+            <p className="text-muted text-xs font-light">Set up your secure sandbox profile.</p>
+          </div>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             {submitError && (
@@ -155,7 +162,7 @@ export default function RegisterPage() {
             {submitSuccess && (
               <div className="flex items-center gap-3 p-3.5 rounded-xl bg-success/15 border border-success/25 text-mint text-xs font-medium animate-fade-in">
                 <CheckCircle2 className="w-5 h-5 shrink-0" />
-                <span>Workspace registered! Loading step 2...</span>
+                <span>Workspace registered! Redirecting to login...</span>
               </div>
             )}
 
@@ -164,7 +171,7 @@ export default function RegisterPage() {
               id="fullName"
               type="text"
               placeholder="Full Name"
-              disabled={isSubmitting || submitSuccess}
+              disabled={isLoading || submitSuccess}
               rightIcon={<UserIcon className="w-4 h-4 text-muted/65" />}
               error={errors.fullName?.message}
               {...register('fullName')}
@@ -175,7 +182,7 @@ export default function RegisterPage() {
               id="email"
               type="email"
               placeholder="Email Address"
-              disabled={isSubmitting || submitSuccess}
+              disabled={isLoading || submitSuccess}
               rightIcon={<span className="text-sm font-semibold text-muted/65 select-none">@</span>}
               error={errors.email?.message}
               {...register('email')}
@@ -186,7 +193,7 @@ export default function RegisterPage() {
               id="username"
               type="text"
               placeholder="Username"
-              disabled={isSubmitting || submitSuccess}
+              disabled={isLoading || submitSuccess}
               rightIcon={<AtSign className="w-4 h-4 text-muted/65" />}
               error={errors.username?.message}
               {...register('username')}
@@ -197,7 +204,7 @@ export default function RegisterPage() {
               id="password"
               type={showPassword ? 'text' : 'password'}
               placeholder="Password"
-              disabled={isSubmitting || submitSuccess}
+              disabled={isLoading || submitSuccess}
               rightIcon={
                 <button
                   type="button"
@@ -212,28 +219,13 @@ export default function RegisterPage() {
               {...register('password')}
             />
 
-            {/* Verification Info Alert Box */}
-            <div className="flex items-center gap-3 p-3.5 rounded-xl bg-success/5 border border-success/15 mb-4 select-none w-full">
-              <div className="w-8 h-8 rounded-full bg-success/10 flex items-center justify-center shrink-0">
-                <CheckCircle2 className="w-4.5 h-4.5 text-success" />
-              </div>
-              <div>
-                <div className="text-[10px] font-bold text-success uppercase tracking-widest">
-                  Neural Verification Pending
-                </div>
-                <div className="text-[10px] text-muted mt-0.5 leading-tight">
-                  Identity will be validated via biometrics upon first login.
-                </div>
-              </div>
-            </div>
-
             {/* Submit CTA Button */}
             <Button
               type="submit"
               variant="primary"
               fullWidth
-              disabled={isSubmitting || submitSuccess}
-              isLoading={isSubmitting}
+              disabled={isLoading || submitSuccess}
+              isLoading={isLoading}
               className="group font-bold text-bg-1 tracking-wider uppercase h-14 rounded-input select-none"
             >
               <span>Create Account</span>
@@ -257,7 +249,7 @@ export default function RegisterPage() {
               variant="secondary"
               size="sm"
               className="h-12 text-xs flex items-center justify-center gap-2 border border-white/5 bg-white/5 hover:bg-white/10 hover:border-white/10"
-              disabled={isSubmitting || submitSuccess}
+              disabled={isLoading || submitSuccess}
               onClick={() => {}}
             >
               <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -273,7 +265,7 @@ export default function RegisterPage() {
               variant="secondary"
               size="sm"
               className="h-12 text-xs flex items-center justify-center gap-2 border border-white/5 bg-white/5 hover:bg-white/10 hover:border-white/10"
-              disabled={isSubmitting || submitSuccess}
+              disabled={isLoading || submitSuccess}
               onClick={() => {}}
             >
               <svg className="w-4 h-4 fill-current text-white/80 shrink-0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

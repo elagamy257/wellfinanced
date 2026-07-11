@@ -18,7 +18,11 @@ import {
   LogOut,
   Zap
 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { useQueryClient } from '@tanstack/react-query';
 import { useUIStore } from '@/store/uiStore';
+import { useAuthStore } from '@/store/authStore';
+import { tokenStorage } from '@/lib/auth/tokenStorage';
 import { Logo } from '@/components/ui/Logo';
 
 // Navigation Item Structure
@@ -39,12 +43,32 @@ const navItems: NavItem[] = [
 
 export function Sidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const queryClient = useQueryClient();
+  const { logout } = useAuthStore();
   const { 
     isSidebarCollapsed, 
     isMobileSidebarOpen, 
     toggleSidebar, 
     closeMobileSidebar 
   } = useUIStore();
+
+  const handleSignOut = (e: React.MouseEvent) => {
+    e.preventDefault();
+    closeMobileSidebar();
+
+    // 1. Clear tokens from tokenStorage
+    tokenStorage.clearTokens();
+
+    // 2. Clear React Query cache
+    queryClient.clear();
+
+    // 3. Reset Zustand auth store state
+    logout();
+
+    // 4. Redirect to login
+    router.replace('/login');
+  };
 
   const renderNavLinks = () => {
     return navItems.map((item) => {
@@ -143,7 +167,7 @@ export function Sidebar() {
                 </span>
               </Link>
  
-              <Link href="/login">
+              <button onClick={handleSignOut} className="w-full text-left cursor-pointer">
                 <span className="flex items-center gap-3 px-3.5 py-2 rounded-xl text-sm font-bold text-slate-400 hover:bg-red-500/10 hover:text-red-400 group relative">
                   <LogOut className="w-5 h-5 text-slate-400 group-hover:text-red-400 shrink-0" />
                   {!isSidebarCollapsed && <span>Sign Out</span>}
@@ -153,7 +177,7 @@ export function Sidebar() {
                     </div>
                   )}
                 </span>
-              </Link>
+              </button>
             </div>
           </div>
         </div>
@@ -223,12 +247,12 @@ export function Sidebar() {
                       </span>
                     </Link>
 
-                    <Link href="/login" onClick={closeMobileSidebar}>
+                    <button onClick={handleSignOut} className="w-full text-left cursor-pointer">
                       <span className="flex items-center gap-3 px-3.5 py-2 rounded-xl text-sm font-bold text-slate-400 hover:bg-red-500/10 hover:text-red-400">
                         <LogOut className="w-5 h-5 text-slate-400 shrink-0" />
                         <span>Sign Out</span>
                       </span>
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>

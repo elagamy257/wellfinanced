@@ -4,13 +4,25 @@ import React from 'react';
 import { Menu, Sun, Moon, Search, Bell } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useUIStore } from '@/store/uiStore';
+import { useAuthStore } from '@/store/authStore';
 
 export function TopNavbar() {
   const { theme, setTheme } = useTheme();
   const { toggleMobileSidebar } = useUIStore();
+  const { user } = useAuthStore();
 
   const toggleTheme = () => {
     setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
+
+  const getInitials = (name?: string) => {
+    if (!name) return 'US';
+    return name
+      .split(' ')
+      .map((n) => n[0])
+      .join('')
+      .substring(0, 2)
+      .toUpperCase();
   };
 
   return (
@@ -68,7 +80,7 @@ export function TopNavbar() {
         <div className="flex items-center gap-3">
           <div className="text-right hidden md:block select-none">
             <span className="text-xs font-black text-white leading-tight block">
-              User
+              {user?.name || 'User'}
             </span>
             <span className="text-[8px] font-black text-accent-cyan tracking-widest uppercase leading-none block mt-0.5">
               Active Account
@@ -77,7 +89,7 @@ export function TopNavbar() {
 
           {/* Square Profile Picture with rounded corners */}
           <div className="w-9 h-9 rounded-lg bg-gradient-green flex items-center justify-center font-black text-black text-xs shadow-glow select-none">
-            US
+            {user ? getInitials(user.name) : 'US'}
           </div>
         </div>
       </div>
