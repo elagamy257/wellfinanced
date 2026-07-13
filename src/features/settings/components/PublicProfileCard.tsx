@@ -3,14 +3,35 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Card } from '@/components/ui';
-import { initialProfileData } from '../mocks/mocks';
+
+import { useAuthStore } from '@/store/authStore';
 
 export function PublicProfileCard() {
-  const [profile, setProfile] = useState(initialProfileData);
+  const { user } = useAuthStore();
+  const [profile, setProfile] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    role: 'Freelancer',
+    avatarUrl: '',
+  });
+
+  React.useEffect(() => {
+    if (user) {
+      const [first = '', last = ''] = (user.name || '').split(' ');
+      setProfile({
+        firstName: first,
+        lastName: last,
+        email: user.email || '',
+        role: user.primary_skill || 'Freelancer',
+        avatarUrl: '',
+      });
+    }
+  }, [user]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Settings saved successfully!');
+    alert('Profile settings saved successfully!');
   };
 
   return (

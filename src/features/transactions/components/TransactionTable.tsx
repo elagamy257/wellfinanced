@@ -3,11 +3,12 @@
 import React from 'react';
 import { Badge } from '@/components/ui';
 import { Tag, Trash2 } from 'lucide-react';
+import { formatDate, formatCurrency } from '@/utils';
 import { TransactionItem } from '../mocks';
 
 interface TransactionTableProps {
   transactions: TransactionItem[];
-  onDelete: (id: string) => void;
+  onDelete: (id: string, type: 'income' | 'expense' | 'debt') => void;
 }
 
 export function TransactionTable({ transactions, onDelete }: TransactionTableProps) {
@@ -43,7 +44,7 @@ export function TransactionTable({ transactions, onDelete }: TransactionTablePro
                   )}
                 </td>
                 <td className="p-5 text-slate-300 font-medium whitespace-nowrap">
-                  {new Date(tx.date).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}
+                  {formatDate(tx.date)}
                 </td>
                 <td className="p-5 whitespace-nowrap">
                   <span className="inline-flex items-center gap-1.5 text-slate-300 font-bold">
@@ -54,7 +55,7 @@ export function TransactionTable({ transactions, onDelete }: TransactionTablePro
                 <td className={`p-5 text-right font-black text-sm whitespace-nowrap ${
                   tx.type === 'income' ? 'text-success' : 'text-white'
                 }`}>
-                  {tx.type === 'income' ? '+' : ''}${Math.abs(tx.amount).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                  {tx.type === 'income' ? '+' : '-'}{formatCurrency(Math.abs(tx.amount))}
                 </td>
                 <td className="p-5 text-center whitespace-nowrap">
                   <Badge 
@@ -66,7 +67,7 @@ export function TransactionTable({ transactions, onDelete }: TransactionTablePro
                 </td>
                 <td className="p-5 text-center">
                   <button
-                    onClick={() => onDelete(tx.id)}
+                    onClick={() => onDelete(tx.id, tx.type)}
                     className="p-1.5 rounded-lg hover:bg-danger/10 text-slate-400 hover:text-danger transition-colors cursor-pointer"
                     aria-label="Delete Transaction"
                   >
