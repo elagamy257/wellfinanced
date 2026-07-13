@@ -4,5 +4,5 @@ export * from './hooks/useLogin';
 export * from './hooks/useRegister';
 export * from './hooks/useCurrentUser';
 export * from './hooks/queryKeys';
-export * from './utils/errorNormalizer';
+export { normalizeError } from '@/utils/errorNormalizer';
 export * from './components/AuthProvider';

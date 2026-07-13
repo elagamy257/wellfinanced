@@ -1,4 +1,3 @@
-export const authKeys = {
-  all: ['auth'] as const,
-  currentUser: () => [...authKeys.all, 'currentUser'] as const,
-};
+import { queryKeys } from '@/constants/queryKeys';
+
+export const authKeys = queryKeys.auth;

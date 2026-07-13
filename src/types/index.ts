@@ -34,3 +34,5 @@ export interface FinancialGoal {
   targetDate?: string;
   isCompleted: boolean;
 }
+
+export * from './api';
