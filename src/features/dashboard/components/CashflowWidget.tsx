@@ -1,10 +1,10 @@
-'use client';
-
 import React, { useState } from 'react';
 import { Card } from '@/components/ui/Card';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, AlertCircle } from 'lucide-react';
+import { useDashboardSnapshot } from '../hooks/useDashboardSnapshot';
+import { formatCurrency, formatCompactNumber } from '@/utils';
 
 interface WidgetProps {
   isLoading?: boolean;
@@ -38,6 +38,40 @@ const data1Y = [
 
 export function CashflowWidget({ isLoading = false }: WidgetProps) {
   const [period, setPeriod] = useState<'1M' | '3M' | '1Y'>('3M');
+  const { data, isLoading: isQueryLoading, isError } = useDashboardSnapshot();
+  const loading = isLoading || isQueryLoading;
+
+  if (isError) {
+    return (
+      <Card variant="default" className="h-full relative overflow-hidden border-danger/20 bg-danger/5 select-none">
+        <div className="p-6 pb-2 flex items-center justify-between gap-4 border-b border-border/40">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-danger/10 border border-danger/20 flex items-center justify-center text-danger">
+              <AlertCircle className="w-5 h-5" />
+            </div>
+            <div>
+              <span className="text-[10px] font-bold text-danger/80 uppercase tracking-widest block">
+                Net Cashflow Balance
+              </span>
+              <span className="text-xs font-bold text-slate-400 mt-0.5 block">
+                Failed to load snapshot
+              </span>
+            </div>
+          </div>
+        </div>
+        <div className="p-6 h-[240px] flex items-center justify-center">
+          <span className="text-xs font-bold text-slate-400 text-center">
+            Failed to load balance snapshot.
+          </span>
+        </div>
+      </Card>
+    );
+  }
+
+  // Retrieve net worth or fallback to mock
+  const netWorth = data?.net_worth !== undefined ? data.net_worth : 12842.50;
+  const netWorthFormatted = formatCurrency(netWorth);
+  const netWorthK = formatCompactNumber(netWorth).toLowerCase();
 
   const getChartData = () => {
     switch (period) {
@@ -65,13 +99,19 @@ export function CashflowWidget({ isLoading = false }: WidgetProps) {
             Net Cashflow Balance
           </span>
           <div className="flex items-baseline gap-2.5">
-            <span className="text-3xl font-extrabold text-white tracking-tight">
-              $12,842.50
-            </span>
-            <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-accent-mint/10 text-accent-mint text-[10px] font-bold border border-accent-mint/15">
-              <ArrowUpRight className="w-3 h-3" />
-              <span>+12.4%</span>
-            </span>
+            {loading ? (
+              <Skeleton variant="text" className="w-40 h-8 mt-1" />
+            ) : (
+              <>
+                <span className="text-3xl font-extrabold text-white tracking-tight">
+                  {netWorthFormatted}
+                </span>
+                <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-accent-mint/10 text-accent-mint text-[10px] font-bold border border-accent-mint/15">
+                  <ArrowUpRight className="w-3 h-3" />
+                  <span>+12.4%</span>
+                </span>
+              </>
+            )}
           </div>
         </div>
 
@@ -95,7 +135,7 @@ export function CashflowWidget({ isLoading = false }: WidgetProps) {
 
       {/* Chart Content Area */}
       <div className="p-6 pt-2 h-[240px] relative z-10">
-        {isLoading ? (
+        {loading ? (
           <div className="h-full flex flex-col justify-end space-y-4">
             <Skeleton variant="text" className="w-1/4 h-6" />
             <Skeleton variant="rect" className="h-44" />
@@ -154,7 +194,7 @@ export function CashflowWidget({ isLoading = false }: WidgetProps) {
 
             {/* Static overlay tooltip for the current node */}
             <div className="absolute right-6 top-1 px-2.5 py-1 rounded-lg bg-accent-mint text-background text-[10px] font-black uppercase tracking-wider shadow-glow pointer-events-none">
-              Current: $12.8k
+              Current: ${netWorthK}
             </div>
           </div>
         )}

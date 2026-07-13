@@ -1,14 +1,16 @@
-'use client';
-
 import React from 'react';
 import { Card } from '@/components/ui/Card';
 import { Skeleton } from '@/components/ui/Skeleton';
+import { useAuthStore } from '@/store/authStore';
 
 interface WidgetProps {
   isLoading?: boolean;
 }
 
 export function CreditCardWidget({ isLoading = false }: WidgetProps) {
+  const { user } = useAuthStore();
+  const userName = user?.name || 'Current User';
+
   return (
     <Card 
       variant="default" 
@@ -71,7 +73,7 @@ export function CreditCardWidget({ isLoading = false }: WidgetProps) {
                 Card Holder
               </span>
               <span className="text-[10px] font-bold text-white uppercase tracking-wider block">
-                Current User
+                {userName}
               </span>
             </div>
             <div className="text-right space-y-0.5">
