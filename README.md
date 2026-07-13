@@ -1,14 +1,14 @@
-# 💰 WellFinanced
+# 💰 Fintova
 
 > **AI-Powered Financial Stability Engine for Freelancers & Independent Workers**
 
-WellFinanced helps freelancers and independent workers achieve financial predictability by organizing income, expenses, and debts — powered by an AI assistant that learns their patterns and recommends smart financial practices.
+Fintova helps freelancers and independent workers achieve financial predictability by organizing income, expenses, and debts — powered by an AI assistant that learns their patterns and recommends smart financial practices.
 
 ---
 
 ## 🎯 What It Does
 
-Freelancers face a unique financial challenge: irregular income vs. fixed monthly obligations. WellFinanced solves this through **5 AI-powered pillars**:
+Freelancers face a unique financial challenge: irregular income vs. fixed monthly obligations. Fintova solves this through **5 AI-powered pillars**:
 
 | Pillar | Feature | Description |
 |--------|---------|-------------|

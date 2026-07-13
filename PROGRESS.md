@@ -1,6 +1,6 @@
 # Project Progress
 
-This file tracks the progress of the WellFinanced project, detailing the steps completed so far. It serves as a handoff and reference document for any agent continuing the work.
+This file tracks the progress of the Fintova project, detailing the steps completed so far. It serves as a handoff and reference document for any agent continuing the work.
 
 ## Completed Tasks
 

@@ -1,8 +1,8 @@
-# WellFinanced AI Agent Rules
+# Fintova AI Agent Rules
 
 ## Project Overview
 
-WellFinanced is a production-grade Mobile-First AI Financial Assistant for Freelancers.
+Fintova is a production-grade Mobile-First AI Financial Assistant for Freelancers.
 
 Tech Stack
 
