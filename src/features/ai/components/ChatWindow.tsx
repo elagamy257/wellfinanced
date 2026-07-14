@@ -38,27 +38,27 @@ export function ChatWindow({
         <p className="text-xs text-slate-400 max-w-sm mt-1.5 leading-relaxed">
           Ask anything about your business finances. I can analyze liquidity, estimate taxes, and forecast cashflow runway.
         </p>
-      </div>
-    );
-  }
-
-  if (isError) {
-    return (
-      <div className="flex flex-col items-center justify-center py-20 px-6 text-center h-[450px] relative select-none">
-        <div className="w-14 h-14 rounded-2xl bg-danger/10 border border-danger/15 flex items-center justify-center text-danger shadow-[0_0_20px_rgba(239,68,68,0.2)] mb-4">
-          <AlertCircle className="w-6 h-6 animate-bounce" />
-        </div>
-        <h3 className="text-base font-extrabold text-white tracking-tight">Connectivity Interrupted</h3>
-        <p className="text-xs text-slate-400 max-w-sm mt-1.5 leading-relaxed">
-          We encountered an issue communicating with the intelligence service. Please check your credentials or retry.
-        </p>
-        <button
-          onClick={onRetry}
-          className="mt-5 px-5 h-10 text-xs font-black uppercase tracking-wider text-black bg-gradient-green rounded-xl hover:brightness-110 shadow-glow flex items-center gap-1.5 cursor-pointer"
-        >
-          <RefreshCw className="w-3.5 h-3.5" />
-          <span>Retry Connection</span>
-        </button>
+        
+        {isError && (
+          <div className="mt-6 max-w-sm p-4 rounded-xl bg-danger/10 border border-danger/15 text-slate-200">
+            <div className="flex items-center gap-2 justify-center text-danger font-bold text-xs">
+              <AlertCircle className="w-4 h-4" />
+              <span>AI Service Unavailable</span>
+            </div>
+            <p className="text-[10px] text-slate-400 mt-1 leading-relaxed">
+              We encountered a platform connection issue. Please check your credentials or retry.
+            </p>
+            {onRetry && (
+              <button
+                onClick={onRetry}
+                className="mt-3 mx-auto h-7 px-3 bg-danger/15 hover:bg-danger/20 border border-danger/25 text-[8px] font-black uppercase tracking-widest text-danger rounded-lg transition-all cursor-pointer flex items-center gap-1.5"
+              >
+                <RefreshCw className="w-2.5 h-2.5" />
+                <span>Retry Connection</span>
+              </button>
+            )}
+          </div>
+        )}
       </div>
     );
   }
@@ -201,6 +201,34 @@ export function ChatWindow({
                 <span className="w-1.5 h-1.5 bg-slate-500 rounded-full animate-bounce delay-75" />
                 <span className="w-1.5 h-1.5 bg-slate-500 rounded-full animate-bounce delay-150" />
                 <span className="w-1.5 h-1.5 bg-slate-500 rounded-full animate-bounce delay-300" />
+              </div>
+            </div>
+          )}
+
+          {/* Friendly inline error if AI fails */}
+          {isError && (
+            <div className="flex gap-4.5 justify-start">
+              <div className="w-9 h-9 rounded-xl bg-danger/10 border border-danger/15 flex items-center justify-center text-danger shrink-0 mt-0.5">
+                <AlertCircle className="w-4.5 h-4.5 animate-bounce" />
+              </div>
+              <div className="space-y-3 max-w-[85%] md:max-w-[70%]">
+                <div className="p-4 rounded-2xl bg-danger/10 border border-danger/15 text-slate-200">
+                  <p className="text-xs leading-relaxed font-bold text-white">
+                    AI Service Temporarily Unavailable
+                  </p>
+                  <p className="text-[11px] text-slate-400 mt-1">
+                    We encountered an issue communicating with the intelligence service (e.g. connection timeout or platform error). Your conversation has been preserved.
+                  </p>
+                  {onRetry && (
+                    <button
+                      onClick={onRetry}
+                      className="mt-3.5 h-8 px-4 bg-danger/15 hover:bg-danger/20 border border-danger/25 text-[9px] font-black uppercase tracking-widest text-danger rounded-xl transition-all cursor-pointer flex items-center gap-1.5"
+                    >
+                      <RefreshCw className="w-3 h-3" />
+                      <span>Retry Last Message</span>
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           )}

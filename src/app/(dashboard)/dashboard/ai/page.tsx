@@ -10,18 +10,25 @@ import {
   ChatWindow, 
   PromptSuggestions, 
   ChatInputBar, 
-  AIStateToggler 
+  useAdvisorChat,
+  useQuickAdvice,
+  mockPromptSuggestions
 } from '@/features/ai';
 
 export default function AIAssistantPage() {
   const [messages, setMessages] = useState<Message[]>(initialChatMessages);
-  
-  // Demo States: 'normal' | 'empty' | 'loading' | 'error'
-  const [demoState, setDemoState] = useState<'normal' | 'empty' | 'loading' | 'error'>('normal');
-  const [isTyping, setIsTyping] = useState(false);
+  const [chatError, setChatError] = useState(false);
 
-  // Send message simulation handler
+  const advisorChat = useAdvisorChat();
+  const quickAdvice = useQuickAdvice();
+
+  const isPending = advisorChat.isPending || quickAdvice.isPending;
+  const isError = chatError;
+
+  // Send message handler
   const handleSendMessage = (text: string, attachedFile?: string) => {
+    if (isPending) return;
+
     // Append User Message
     const userMsg: Message = {
       id: `msg-user-${Date.now()}`,
@@ -31,38 +38,134 @@ export default function AIAssistantPage() {
     };
     
     setMessages((prev) => [...prev, userMsg]);
-    setIsTyping(true);
+    setChatError(false);
 
-    // Simulate AI response after 1.5s
-    setTimeout(() => {
-      let aiText = "I've analyzed your cashflow pipeline and noticed you have a strong projected Q4 safety buffer. Is there any specific expense or invoice you'd like to audit?";
-      
-      if (text.toUpperCase().includes('SPENDING') || text.toUpperCase().includes('ANALYZE')) {
-        aiText = "Your operational expenses are down 8% this month, mostly driven by reduced SaaS tooling overhead. You're saving an average of $220/month compared to Q2.";
-      } else if (text.toUpperCase().includes('TAX') || text.toUpperCase().includes('DEBT')) {
-        aiText = "Based on your year-to-date freelance earnings, your Q3 estimated tax debt is projected at $6,420. Setting aside 25% of current client payments will cover this debt fully.";
-      } else if (text.toUpperCase().includes('REPORT') || text.toUpperCase().includes('Q3')) {
-        aiText = "Q3 financial aggregate report generated successfully. Summary: Total surplus of $12,842.50 with a projected runway exceeding 90 days. Would you like to export the PDF?";
+    const chatHistory = [
+      ...messages.map(msg => ({
+        role: msg.sender === 'ai' ? 'assistant' as const : 'user' as const,
+        content: msg.text
+      }))
+    ];
+
+    advisorChat.mutate({
+      message: text,
+      history: chatHistory
+    }, {
+      onSuccess: (data) => {
+        const aiMsg: Message = {
+          id: `msg-ai-${Date.now()}`,
+          sender: 'ai',
+          text: data.answer || 'No response received from assistant.',
+          timestamp: new Date().toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })
+        };
+        setMessages((prev) => [...prev, aiMsg]);
+      },
+      onError: (error) => {
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Advisor Chat Mutation Failed:', error);
+        }
+        setChatError(true);
       }
-
-      const aiMsg: Message = {
-        id: `msg-ai-${Date.now()}`,
-        sender: 'ai',
-        text: aiText,
-        timestamp: new Date().toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })
-      };
-      
-      setMessages((prev) => [...prev, aiMsg]);
-      setIsTyping(false);
-    }, 1500);
+    });
   };
 
   const handleSelectSuggestion = (prompt: string) => {
-    handleSendMessage(prompt);
+    if (isPending) return;
+
+    const userMsg: Message = {
+      id: `msg-user-${Date.now()}`,
+      sender: 'user',
+      text: prompt,
+      timestamp: new Date().toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })
+    };
+    
+    setMessages((prev) => [...prev, userMsg]);
+    setChatError(false);
+    
+    quickAdvice.mutate({
+      topic: prompt
+    }, {
+      onSuccess: (data) => {
+        const aiMsg: Message = {
+          id: `msg-ai-${Date.now()}`,
+          sender: 'ai',
+          text: data.advice || 'No advice returned for this topic.',
+          timestamp: new Date().toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })
+        };
+        setMessages((prev) => [...prev, aiMsg]);
+      },
+      onError: (error) => {
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Quick Advice Mutation Failed:', error);
+        }
+        setChatError(true);
+      }
+    });
+  };
+
+  const handleRetry = () => {
+    const lastUserMsg = [...messages].reverse().find(msg => msg.sender === 'user');
+    if (!lastUserMsg) return;
+    
+    setChatError(false);
+
+    const isSuggestion = mockPromptSuggestions.includes(lastUserMsg.text);
+
+    if (isSuggestion) {
+      quickAdvice.mutate({
+        topic: lastUserMsg.text
+      }, {
+        onSuccess: (data) => {
+          const aiMsg: Message = {
+            id: `msg-ai-${Date.now()}`,
+            sender: 'ai',
+            text: data.advice || 'No advice returned for this topic.',
+            timestamp: new Date().toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })
+          };
+          setMessages((prev) => [...prev, aiMsg]);
+        },
+        onError: (error) => {
+          if (process.env.NODE_ENV === 'development') {
+            console.error('Quick Advice Retry Mutation Failed:', error);
+          }
+          setChatError(true);
+        }
+      });
+    } else {
+      const lastUserIndex = messages.findIndex(m => m.id === lastUserMsg.id);
+      const priorMessages = lastUserIndex !== -1 ? messages.slice(0, lastUserIndex) : messages;
+      
+      const chatHistory = priorMessages.map(msg => ({
+        role: msg.sender === 'ai' ? 'assistant' as const : 'user' as const,
+        content: msg.text
+      }));
+
+      advisorChat.mutate({
+        message: lastUserMsg.text,
+        history: chatHistory
+      }, {
+        onSuccess: (data) => {
+          const aiMsg: Message = {
+            id: `msg-ai-${Date.now()}`,
+            sender: 'ai',
+            text: data.answer || 'No response received from assistant.',
+            timestamp: new Date().toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' })
+          };
+          setMessages((prev) => [...prev, aiMsg]);
+        },
+        onError: (error) => {
+          if (process.env.NODE_ENV === 'development') {
+            console.error('Advisor Chat Retry Mutation Failed:', error);
+          }
+          setChatError(true);
+        }
+      });
+    }
   };
 
   const handleClearChat = () => {
     setMessages([]);
+    setChatError(false);
   };
 
   return (
@@ -92,14 +195,6 @@ export default function AIAssistantPage() {
 
       <div className="space-y-6 md:space-y-8 pb-16">
         
-        {/* State Toggler Tool (Demo controls) */}
-        <AIStateToggler 
-          currentState={demoState}
-          setCurrentState={setDemoState}
-          isTyping={isTyping}
-          setIsTyping={setIsTyping}
-        />
-
         {/* Conversation Hub Panel Container */}
         <Card variant="glass" className="relative p-6 md:p-8 flex flex-col justify-between border border-white/5 bg-bg-1/40 min-h-[500px]">
           <div className="absolute top-0 left-[20%] w-[60%] h-[30%] bg-primary/2 rounded-full blur-[110px] pointer-events-none -z-10" />
@@ -107,20 +202,18 @@ export default function AIAssistantPage() {
           {/* Messages list scroll area */}
           <ChatWindow
             messages={messages}
-            isTyping={isTyping}
-            isLoading={demoState === 'loading'}
-            isError={demoState === 'error'}
-            isEmpty={demoState === 'empty' || messages.length === 0}
-            onRetry={() => setDemoState('normal')}
+            isTyping={isPending}
+            isLoading={false}
+            isError={isError}
+            isEmpty={messages.length === 0 && !isError}
+            onRetry={handleRetry}
           />
 
           {/* Quick suggestions & input bar */}
-          {demoState !== 'loading' && demoState !== 'error' && (
-            <div className="border-t border-white/5 pt-5 mt-6 space-y-4">
-              <PromptSuggestions onSelect={handleSelectSuggestion} />
-              <ChatInputBar onSend={handleSendMessage} />
-            </div>
-          )}
+          <div className="border-t border-white/5 pt-5 mt-6 space-y-4">
+            <PromptSuggestions onSelect={handleSelectSuggestion} disabled={isPending} />
+            <ChatInputBar onSend={handleSendMessage} disabled={isPending} />
+          </div>
         </Card>
 
       </div>

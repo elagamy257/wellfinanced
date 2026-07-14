@@ -5,15 +5,17 @@ import { Paperclip, Send, X, FileText } from 'lucide-react';
 
 interface ChatInputBarProps {
   onSend: (text: string, attachedFile?: string) => void;
+  disabled?: boolean;
 }
 
-export function ChatInputBar({ onSend }: ChatInputBarProps) {
+export function ChatInputBar({ onSend, disabled = false }: ChatInputBarProps) {
   const [inputValue, setInputValue] = useState('');
   const [attachedFile, setAttachedFile] = useState<string | null>(null);
   const [showAttachmentMenu, setShowAttachmentMenu] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (disabled) return;
     if (!inputValue.trim() && !attachedFile) return;
 
     onSend(inputValue, attachedFile || undefined);
@@ -51,7 +53,8 @@ export function ChatInputBar({ onSend }: ChatInputBarProps) {
           <button
             type="button"
             onClick={() => setShowAttachmentMenu(!showAttachmentMenu)}
-            className={`p-3 rounded-xl hover:bg-white/5 text-slate-400 hover:text-white transition-colors cursor-pointer shrink-0 ${
+            disabled={disabled}
+            className={`p-3 rounded-xl hover:bg-white/5 text-slate-400 hover:text-white transition-colors cursor-pointer shrink-0 disabled:opacity-40 disabled:cursor-not-allowed ${
               showAttachmentMenu ? 'text-white bg-white/5' : ''
             }`}
             aria-label="Attach File"
@@ -60,7 +63,7 @@ export function ChatInputBar({ onSend }: ChatInputBarProps) {
           </button>
 
           {/* Attachments UI Dropdown Menu */}
-          {showAttachmentMenu && (
+          {showAttachmentMenu && !disabled && (
             <div className="absolute bottom-14 left-0 bg-bg-3 border border-white/10 p-2 rounded-2xl w-48 shadow-2xl z-50 space-y-1 animate-scale-in">
               <span className="text-[8px] font-black text-slate-500 uppercase tracking-widest block px-2.5 py-1 select-none">
                 Simulate Attachments
@@ -88,16 +91,17 @@ export function ChatInputBar({ onSend }: ChatInputBarProps) {
         {/* Input element */}
         <input
           type="text"
-          placeholder="Type your financial question..."
+          placeholder={disabled ? "AI Assistant is formulating response..." : "Type your financial question..."}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          className="flex-1 bg-transparent px-3 text-xs text-white placeholder-slate-500 outline-none"
+          disabled={disabled}
+          className="flex-1 bg-transparent px-3 text-xs text-white placeholder-slate-500 outline-none disabled:opacity-40 disabled:cursor-not-allowed"
         />
 
         {/* Send Button */}
         <button
           type="submit"
-          disabled={!inputValue.trim() && !attachedFile}
+          disabled={disabled || (!inputValue.trim() && !attachedFile)}
           className="p-3 bg-gradient-green text-black rounded-xl hover:brightness-110 shadow-glow disabled:opacity-40 disabled:cursor-not-allowed transition-all cursor-pointer shrink-0"
           aria-label="Send Message"
         >

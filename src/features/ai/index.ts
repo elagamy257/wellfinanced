@@ -3,3 +3,7 @@ export * from './components/ChatWindow';
 export * from './components/PromptSuggestions';
 export * from './components/ChatInputBar';
 export * from './components/AIStateToggler';
+export * from './types';
+export * from './services/ai.service';
+export * from './hooks/mutations/useAdvisorChat';
+export * from './hooks/mutations/useQuickAdvice';
