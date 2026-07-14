@@ -2,6 +2,7 @@ export interface SavingsGoalCreate {
   goal_name: string;
   target_amount: number;
   saved_amount?: number;
+  deadline: string;
 }
 
 export interface SavingsGoalResponse {
@@ -10,6 +11,7 @@ export interface SavingsGoalResponse {
   goal_name: string;
   target_amount: number;
   saved_amount: number;
+  deadline: string;
   created_at: string;
   updated_at: string;
 }

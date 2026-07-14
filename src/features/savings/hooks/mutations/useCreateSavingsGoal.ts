@@ -21,6 +21,7 @@ export function useCreateSavingsGoal() {
         goal_name: newGoal.goal_name,
         target_amount: newGoal.target_amount,
         saved_amount: newGoal.saved_amount || 0,
+        deadline: newGoal.deadline,
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
       };

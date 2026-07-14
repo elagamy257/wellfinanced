@@ -15,7 +15,7 @@ export function GoalModal({ isOpen, onClose, onSave }: GoalModalProps) {
   const [goalName, setGoalName] = useState('');
   const [targetAmount, setTargetAmount] = useState('');
   const [savedAmount, setSavedAmount] = useState('');
-  const [eta, setEta] = useState('Oct 2024');
+  const [eta, setEta] = useState(new Date().toISOString().substring(0, 10));
   const [category, setCategory] = useState('Emergency Fund');
 
   if (!isOpen) return null;
@@ -39,7 +39,7 @@ export function GoalModal({ isOpen, onClose, onSave }: GoalModalProps) {
     setGoalName('');
     setTargetAmount('');
     setSavedAmount('');
-    setEta('Oct 2024');
+    setEta(new Date().toISOString().substring(0, 10));
     setCategory('Emergency Fund');
   };
 
@@ -137,11 +137,10 @@ export function GoalModal({ isOpen, onClose, onSave }: GoalModalProps) {
                   <Calendar className="w-4 h-4" />
                 </span>
                 <input
-                  type="text"
-                  placeholder="e.g., Oct 2024"
+                  type="date"
                   value={eta}
                   onChange={(e) => setEta(e.target.value)}
-                  className="w-full h-11 pl-10 pr-4 bg-white/5 hover:bg-white/8 focus:bg-bg-2 border border-white/5 focus:border-primary/20 text-xs font-bold text-white rounded-xl outline-none transition-all"
+                  className="w-full h-11 pl-10 pr-4 bg-white/5 hover:bg-white/8 focus:bg-bg-2 border border-white/5 focus:border-primary/20 text-xs font-bold text-white rounded-xl outline-none transition-all cursor-pointer"
                   required
                 />
               </div>

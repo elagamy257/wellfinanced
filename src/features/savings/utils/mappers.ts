@@ -12,7 +12,9 @@ export function mapSavingsGoalToModel(dto: SavingsGoalResponse): SavingsGoal {
     target,
     saved,
     percentage: Math.min(percentage, 100),
-    eta: '6 months', // Default fallback
+    eta: dto.deadline 
+      ? new Date(dto.deadline).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
+      : '6 months',
     timeLeftText: 'Active',
   };
 }

@@ -15,7 +15,7 @@ export function AddTransactionModal({ isOpen, onClose, onSave }: AddTransactionM
   const [txType, setTxType] = useState<'income' | 'expense' | 'debt'>('income');
   const [txAmount, setTxAmount] = useState('0.00');
   const [txSource, setTxSource] = useState('');
-  const [txDate, setTxDate] = useState('2023-10-27');
+  const [txDate, setTxDate] = useState(new Date().toISOString().substring(0, 10));
   const [txStatus, setTxStatus] = useState<'cleared' | 'pending'>('cleared');
   const [txCategory, setTxCategory] = useState('Development');
   const [txNotes, setTxNotes] = useState('');
@@ -43,7 +43,7 @@ export function AddTransactionModal({ isOpen, onClose, onSave }: AddTransactionM
     setTxType('income');
     setTxAmount('0.00');
     setTxSource('');
-    setTxDate('2023-10-27');
+    setTxDate(new Date().toISOString().substring(0, 10));
     setTxStatus('cleared');
     setTxCategory('Development');
     setTxNotes('');

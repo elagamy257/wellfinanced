@@ -15,8 +15,12 @@ import {
   CreditCardWidget
 } from '@/features/dashboard';
 
+import { useAuthStore } from '@/store/authStore';
+
 export default function DashboardPage() {
   const [isLoadingState, setIsLoadingState] = useState(false);
+  const { user } = useAuthStore();
+  const firstName = user?.name ? user.name.split(' ')[0] : 'Freelancer';
 
   return (
     <PageContainer>
@@ -27,7 +31,7 @@ export default function DashboardPage() {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8 md:mb-10 animate-fade-in select-none">
         <div>
           <h1 className="text-3xl font-extrabold text-white tracking-tight">
-            Good Evening, Elagamy
+            Good Evening, {firstName}
           </h1>
           <p className="text-sm text-slate-400 mt-1">
             Your financial well-being is in your hands.

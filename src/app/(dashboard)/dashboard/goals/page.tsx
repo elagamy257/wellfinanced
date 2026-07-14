@@ -38,11 +38,12 @@ export default function GoalsPage() {
   const burnRate = avgMonthlyExpenses > 0 ? avgMonthlyExpenses : 3000;
   const runway = totalSaved / burnRate;
 
-  const handleSaveGoal = (goal: { name: string; target: number; saved: number }) => {
+  const handleSaveGoal = (goal: { name: string; target: number; saved: number; eta: string }) => {
     createGoal.mutate({
       goal_name: goal.name,
       target_amount: goal.target,
       saved_amount: goal.saved,
+      deadline: goal.eta,
     });
     setIsModalOpen(false);
   };
