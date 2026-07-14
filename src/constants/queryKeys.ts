@@ -45,4 +45,10 @@ export const queryKeys = {
     lists: () => [...queryKeys.accounts.all, 'list'] as const,
     summary: () => [...queryKeys.accounts.all, 'summary'] as const,
   },
+  analytics: {
+    all: ['analytics'] as const,
+    forecastLatest: () => [...queryKeys.analytics.all, 'forecastLatest'] as const,
+    expenseAnalysis: () => [...queryKeys.analytics.all, 'expenseAnalysis'] as const,
+    salaryDeviation: () => [...queryKeys.analytics.all, 'salaryDeviation'] as const,
+  },
 };
