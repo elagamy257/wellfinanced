@@ -14,10 +14,17 @@ import {
   useQuickAdvice,
   mockPromptSuggestions
 } from '@/features/ai';
+import {
+  AffordabilityCard,
+  InstallmentImpactCard,
+  SavingsPlanCard,
+  DebtCalculatorPanel
+} from '@/features/advisor';
 
 export default function AIAssistantPage() {
   const [messages, setMessages] = useState<Message[]>(initialChatMessages);
   const [chatError, setChatError] = useState(false);
+  const [activeTab, setActiveTab] = useState<'chat' | 'intelligence'>('chat');
 
   const advisorChat = useAdvisorChat();
   const quickAdvice = useQuickAdvice();
@@ -195,26 +202,64 @@ export default function AIAssistantPage() {
 
       <div className="space-y-6 md:space-y-8 pb-16">
         
-        {/* Conversation Hub Panel Container */}
-        <Card variant="glass" className="relative p-6 md:p-8 flex flex-col justify-between border border-white/5 bg-bg-1/40 min-h-[500px]">
-          <div className="absolute top-0 left-[20%] w-[60%] h-[30%] bg-primary/2 rounded-full blur-[110px] pointer-events-none -z-10" />
+        {/* Neon Tab Switcher Bar */}
+        <div className="flex border-b border-white/5 mb-6">
+          <button
+            onClick={() => setActiveTab('chat')}
+            className={`px-6 py-3 text-xs font-black uppercase tracking-widest border-b-2 transition-all cursor-pointer ${
+              activeTab === 'chat'
+                ? 'border-success text-success shadow-glow-sm'
+                : 'border-transparent text-slate-400 hover:text-white hover:border-white/10'
+            }`}
+          >
+            AI Chat Co-Pilot
+          </button>
+          <button
+            onClick={() => setActiveTab('intelligence')}
+            className={`px-6 py-3 text-xs font-black uppercase tracking-widest border-b-2 transition-all cursor-pointer ${
+              activeTab === 'intelligence'
+                ? 'border-cyan text-cyan shadow-glow-sm'
+                : 'border-transparent text-slate-400 hover:text-white hover:border-white/10'
+            }`}
+          >
+            Financial Intelligence
+          </button>
+        </div>
 
-          {/* Messages list scroll area */}
-          <ChatWindow
-            messages={messages}
-            isTyping={isPending}
-            isLoading={false}
-            isError={isError}
-            isEmpty={messages.length === 0 && !isError}
-            onRetry={handleRetry}
-          />
+        {activeTab === 'chat' ? (
+          /* Conversation Hub Panel Container */
+          <Card variant="glass" className="relative p-6 md:p-8 flex flex-col justify-between border border-white/5 bg-bg-1/40 min-h-[500px]">
+            <div className="absolute top-0 left-[20%] w-[60%] h-[30%] bg-primary/2 rounded-full blur-[110px] pointer-events-none -z-10" />
 
-          {/* Quick suggestions & input bar */}
-          <div className="border-t border-white/5 pt-5 mt-6 space-y-4">
-            <PromptSuggestions onSelect={handleSelectSuggestion} disabled={isPending} />
-            <ChatInputBar onSend={handleSendMessage} disabled={isPending} />
+            {/* Messages list scroll area */}
+            <ChatWindow
+              messages={messages}
+              isTyping={isPending}
+              isLoading={false}
+              isError={isError}
+              isEmpty={messages.length === 0 && !isError}
+              onRetry={handleRetry}
+            />
+
+            {/* Quick suggestions & input bar */}
+            <div className="border-t border-white/5 pt-5 mt-6 space-y-4">
+              <PromptSuggestions onSelect={handleSelectSuggestion} disabled={isPending} />
+              <ChatInputBar onSend={handleSendMessage} disabled={isPending} />
+            </div>
+          </Card>
+        ) : (
+          /* Advanced AI Financial Calculators Bento Grid */
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 animate-scale-in">
+            <div className="space-y-8">
+              <AffordabilityCard />
+              <InstallmentImpactCard />
+            </div>
+            <div className="space-y-8">
+              <SavingsPlanCard />
+              <DebtCalculatorPanel />
+            </div>
           </div>
-        </Card>
+        )}
 
       </div>
     </PageContainer>
