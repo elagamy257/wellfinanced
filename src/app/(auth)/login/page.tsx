@@ -165,7 +165,7 @@ export default function LoginPage() {
             fullWidth
             disabled={isLoading || submitSuccess}
             isLoading={isLoading}
-            className="bg-success! text-white! hover:brightness-110! font-bold tracking-wider uppercase h-14 rounded-input select-none flex items-center justify-center gap-2"
+            className="bg-success! text-black! hover:brightness-110! font-bold tracking-wider uppercase h-14 rounded-input select-none flex items-center justify-center gap-2"
           >
             <Zap className="w-4.5 h-4.5" />
             <span>Login</span>

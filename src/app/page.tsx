@@ -61,7 +61,7 @@ export default function LandingPage() {
             {/* Actions */}
             <div className="flex flex-wrap gap-4 mb-10 w-full sm:w-auto">
               <Link href="/register" className="w-full sm:w-auto">
-                <Button className="w-full bg-linear-to-r from-indigo-600 to-violet-600 hover:brightness-110 text-white font-bold h-12 px-7 rounded-xl flex items-center justify-center gap-2 border-0 shadow-[0_0_20px_rgba(99,102,241,0.4)] transition-all active:scale-[0.98] select-none text-xs tracking-wider">
+                <Button className="w-full bg-linear-to-r from-indigo-600 to-violet-600 hover:brightness-110 text-black font-bold h-12 px-7 rounded-xl flex items-center justify-center gap-2 border-0 shadow-[0_0_20px_rgba(99,102,241,0.4)] transition-all active:scale-[0.98] select-none text-xs tracking-wider">
                   Initialize AI Partner 🚀
                 </Button>
               </Link>
