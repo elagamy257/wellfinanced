@@ -2,15 +2,16 @@
 
 import React from 'react';
 import { Card } from '@/components/ui';
-import { Target, Calendar, ArrowUpRight } from 'lucide-react';
+import { Target, Calendar, ArrowUpRight, Trash2 } from 'lucide-react';
 import { SavingsGoal } from '../mocks';
 
 interface SavingsGoalCardProps {
   goal: SavingsGoal;
+  onDelete?: (id: string) => void;
 }
 
-export function SavingsGoalCard({ goal }: SavingsGoalCardProps) {
-  const { name, target, saved, percentage, eta, timeLeftText } = goal;
+export function SavingsGoalCard({ goal, onDelete }: SavingsGoalCardProps) {
+  const { id, name, target, saved, percentage, eta, timeLeftText } = goal;
 
   // Determine theme colors based on progress or goal type
   const isHighProgress = percentage >= 80;
@@ -38,9 +39,20 @@ export function SavingsGoalCard({ goal }: SavingsGoalCardProps) {
               </span>
             </div>
           </div>
-          <span className={`text-lg font-black tracking-tighter ${textColor}`}>
-            {percentage}%
-          </span>
+          <div className="flex items-center gap-3">
+            <span className={`text-lg font-black tracking-tighter ${textColor}`}>
+              {percentage}%
+            </span>
+            {onDelete && (
+              <button
+                onClick={() => onDelete(id)}
+                className="p-1 rounded-lg hover:bg-white/5 text-slate-400 hover:text-accent-pink transition-colors cursor-pointer shrink-0"
+                title="Delete Goal"
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Middle: Progress Bar */}
