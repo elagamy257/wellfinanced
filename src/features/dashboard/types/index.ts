@@ -12,6 +12,7 @@ export interface IncomeStats {
   average?: number;
   total?: number;
   monthly_average?: number;
+  avg?: number;
   [key: string]: unknown;
 }
 
@@ -19,6 +20,7 @@ export interface ExpenseStats {
   average?: number;
   total?: number;
   monthly_average?: number;
+  avg?: number;
   [key: string]: unknown;
 }
 

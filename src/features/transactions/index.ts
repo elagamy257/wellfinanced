@@ -5,17 +5,21 @@ export * from './components/TransactionTable';
 export * from './components/AddTransactionModal';
 export * from './types';
 export * from './services/transactions.service';
-export * from './hooks/useIncomeList';
-export * from './hooks/useExpenseList';
-export * from './hooks/useDebtList';
-export * from './hooks/useDebtSummary';
-export * from './hooks/useCreateIncome';
-export * from './hooks/useUpdateIncome';
-export * from './hooks/useDeleteIncome';
-export * from './hooks/useCreateExpense';
-export * from './hooks/useUpdateExpense';
-export * from './hooks/useDeleteExpense';
-export * from './hooks/useCreateDebt';
-export * from './hooks/useUpdateDebt';
-export * from './hooks/useDeleteDebt';
-export * from './hooks/useUnifiedTransactions';
+
+// Reorganized Queries
+export * from './hooks/queries/useIncomeList';
+export * from './hooks/queries/useExpenseList';
+export * from './hooks/queries/useDebtList';
+export * from './hooks/queries/useDebtSummary';
+export * from './hooks/queries/useUnifiedTransactions';
+
+// Reorganized Mutations
+export * from './hooks/mutations/useCreateIncome';
+export * from './hooks/mutations/useUpdateIncome';
+export * from './hooks/mutations/useDeleteIncome';
+export * from './hooks/mutations/useCreateExpense';
+export * from './hooks/mutations/useUpdateExpense';
+export * from './hooks/mutations/useDeleteExpense';
+export * from './hooks/mutations/useCreateDebt';
+export * from './hooks/mutations/useUpdateDebt';
+export * from './hooks/mutations/useDeleteDebt';

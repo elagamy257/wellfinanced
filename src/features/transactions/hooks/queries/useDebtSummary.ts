@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { transactionsService } from '../services/transactions.service';
+import { transactionsService } from '../../services/transactions.service';
 import { queryKeys } from '@/constants/queryKeys';
 
 export function useDebtSummary() {
