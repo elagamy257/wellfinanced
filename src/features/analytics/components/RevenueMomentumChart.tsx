@@ -1,11 +1,26 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Card } from '@/components/ui';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { mockForecastData } from '../mocks';
+import { Card, Skeleton, EmptyState } from '@/components/ui';
+import {
+  AreaChart,
+  Area,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  ResponsiveContainer,
+} from 'recharts';
+import { TrendingUp } from 'lucide-react';
+import type { AnalyticsChartPoint } from '../types';
 
-export function RevenueMomentumChart() {
+export interface RevenueMomentumChartProps {
+  data: AnalyticsChartPoint[];
+  isLoading: boolean;
+  isError: boolean;
+}
+
+export function RevenueMomentumChart({ data, isLoading, isError }: RevenueMomentumChartProps) {
   const [period, setPeriod] = useState<'1M' | '6M' | '1Y'>('6M');
 
   return (
@@ -56,90 +71,130 @@ export function RevenueMomentumChart() {
         </div>
       </div>
 
-      {/* Recharts Double Area Graph */}
+      {/* Chart Area */}
       <div className="p-6 pt-4 h-[280px] relative z-10">
-        <div className="w-full h-full relative">
-          <ResponsiveContainer width="100%" height="100%">
-            <AreaChart
-              data={mockForecastData}
-              margin={{ top: 15, right: 10, left: 10, bottom: 5 }}
-            >
-              <defs>
-                <linearGradient id="colorActual" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="var(--color-accent-cyan)" stopOpacity={0.2} />
-                  <stop offset="95%" stopColor="var(--color-accent-cyan)" stopOpacity={0} />
-                </linearGradient>
-                <linearGradient id="colorProjected" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="var(--color-primary-purple)" stopOpacity={0.2} />
-                  <stop offset="95%" stopColor="var(--color-primary-purple)" stopOpacity={0} />
-                </linearGradient>
-              </defs>
-              <CartesianGrid
-                vertical={false}
-                stroke="rgba(255, 255, 255, 0.05)"
-                strokeDasharray="3 3"
-              />
-              <XAxis 
-                dataKey="month" 
-                stroke="rgba(255, 255, 255, 0.3)"
-                fontSize={9}
-                tickLine={false}
-                axisLine={false}
-                dy={10}
-              />
-              <YAxis hide domain={['dataMin - 3000', 'dataMax + 2000']} />
-              <Tooltip
-                cursor={{ stroke: 'rgba(255, 255, 255, 0.1)', strokeWidth: 1 }}
-                content={({ active, payload }) => {
-                  if (active && payload && payload.length) {
-                    const dataPoint = payload[0].payload;
-                    return (
-                      <div className="bg-bg-3 border border-white/10 px-3 py-1.5 rounded-xl shadow-2xl">
-                        <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-                          {dataPoint.month}
-                        </p>
-                        {dataPoint.actual !== undefined && (
-                          <p className="text-xs font-black text-accent-cyan">
-                            Actual: ${dataPoint.actual.toLocaleString()}
+        {isLoading ? (
+          <div className="space-y-3 h-full flex flex-col justify-end">
+            <Skeleton variant="rect" className="h-full rounded-xl" />
+          </div>
+        ) : isError || data.length === 0 ? (
+          <EmptyState
+            title="No Forecast Data"
+            description="Generate a forecast to see your revenue momentum chart."
+            icon={TrendingUp}
+          />
+        ) : (
+          <div className="w-full h-full relative">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart
+                data={data}
+                margin={{ top: 15, right: 10, left: 10, bottom: 5 }}
+              >
+                <defs>
+                  <linearGradient id="colorActual" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="var(--color-accent-cyan)" stopOpacity={0.2} />
+                    <stop offset="95%" stopColor="var(--color-accent-cyan)" stopOpacity={0} />
+                  </linearGradient>
+                  <linearGradient id="colorProjected" x1="0" y1="0" x2="0" y2="1">
+                    <stop
+                      offset="5%"
+                      stopColor="var(--color-primary-purple)"
+                      stopOpacity={0.2}
+                    />
+                    <stop
+                      offset="95%"
+                      stopColor="var(--color-primary-purple)"
+                      stopOpacity={0}
+                    />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid
+                  vertical={false}
+                  stroke="rgba(255, 255, 255, 0.05)"
+                  strokeDasharray="3 3"
+                />
+                <XAxis
+                  dataKey="month"
+                  stroke="rgba(255, 255, 255, 0.3)"
+                  fontSize={9}
+                  tickLine={false}
+                  axisLine={false}
+                  dy={10}
+                />
+                <YAxis hide domain={['dataMin - 3000', 'dataMax + 2000']} />
+                <Tooltip
+                  cursor={{ stroke: 'rgba(255, 255, 255, 0.1)', strokeWidth: 1 }}
+                  content={({ active, payload }) => {
+                    if (active && payload && payload.length) {
+                      const dataPoint = payload[0].payload as AnalyticsChartPoint;
+                      return (
+                        <div className="bg-bg-3 border border-white/10 px-3 py-1.5 rounded-xl shadow-2xl">
+                          <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+                            {dataPoint.month}
                           </p>
-                        )}
-                        {dataPoint.projected !== undefined && (
-                          <p className="text-xs font-black text-primary">
-                            Predicted: ${dataPoint.projected.toLocaleString()}
-                          </p>
-                        )}
-                      </div>
-                    );
-                  }
-                  return null;
-                }}
-              />
-              {/* Actual Line */}
-              <Area
-                type="monotone"
-                dataKey="actual"
-                stroke="var(--color-accent-cyan)"
-                strokeWidth={2.5}
-                fillOpacity={1}
-                fill="url(#colorActual)"
-                dot={{ r: 3.5, fill: 'var(--color-background)', stroke: 'var(--color-accent-cyan)', strokeWidth: 2 }}
-                activeDot={{ r: 5.5, fill: 'var(--color-accent-cyan)', stroke: 'var(--color-background)', strokeWidth: 2 }}
-              />
-              {/* Projected Line */}
-              <Area
-                type="monotone"
-                dataKey="projected"
-                stroke="var(--color-primary-purple)"
-                strokeWidth={2.5}
-                strokeDasharray="4 4"
-                fillOpacity={1}
-                fill="url(#colorProjected)"
-                dot={{ r: 3.5, fill: 'var(--color-background)', stroke: 'var(--color-primary-purple)', strokeWidth: 2 }}
-                activeDot={{ r: 5.5, fill: 'var(--color-primary-purple)', stroke: 'var(--color-background)', strokeWidth: 2 }}
-              />
-            </AreaChart>
-          </ResponsiveContainer>
-        </div>
+                          {dataPoint.actual !== undefined && (
+                            <p className="text-xs font-black text-accent-cyan">
+                              Actual: ${dataPoint.actual.toLocaleString()}
+                            </p>
+                          )}
+                          {dataPoint.projected !== undefined && (
+                            <p className="text-xs font-black text-primary">
+                              Predicted: ${dataPoint.projected.toLocaleString()}
+                            </p>
+                          )}
+                        </div>
+                      );
+                    }
+                    return null;
+                  }}
+                />
+                {/* Actual Line */}
+                <Area
+                  type="monotone"
+                  dataKey="actual"
+                  stroke="var(--color-accent-cyan)"
+                  strokeWidth={2.5}
+                  fillOpacity={1}
+                  fill="url(#colorActual)"
+                  dot={{
+                    r: 3.5,
+                    fill: 'var(--color-background)',
+                    stroke: 'var(--color-accent-cyan)',
+                    strokeWidth: 2,
+                  }}
+                  activeDot={{
+                    r: 5.5,
+                    fill: 'var(--color-accent-cyan)',
+                    stroke: 'var(--color-background)',
+                    strokeWidth: 2,
+                  }}
+                />
+                {/* Projected Line */}
+                <Area
+                  type="monotone"
+                  dataKey="projected"
+                  stroke="var(--color-primary-purple)"
+                  strokeWidth={2.5}
+                  strokeDasharray="4 4"
+                  fillOpacity={1}
+                  fill="url(#colorProjected)"
+                  dot={{
+                    r: 3.5,
+                    fill: 'var(--color-background)',
+                    stroke: 'var(--color-primary-purple)',
+                    strokeWidth: 2,
+                  }}
+                  activeDot={{
+                    r: 5.5,
+                    fill: 'var(--color-primary-purple)',
+                    stroke: 'var(--color-background)',
+                    strokeWidth: 2,
+                  }}
+                />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        )}
       </div>
     </Card>
   );

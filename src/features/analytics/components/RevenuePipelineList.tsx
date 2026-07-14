@@ -1,11 +1,17 @@
 'use client';
 
 import React from 'react';
-import { Card, Badge } from '@/components/ui';
-import { Globe, Palette, Box, ArrowRight } from 'lucide-react';
-import { mockPipelineOpportunities } from '../mocks';
+import { Card, Badge, Skeleton, EmptyState } from '@/components/ui';
+import { Globe, Palette, Box, ArrowRight, BarChart2 } from 'lucide-react';
+import type { AnalyticsPipelineItem } from '../types';
 
-export function RevenuePipelineList() {
+export interface RevenuePipelineListProps {
+  data: AnalyticsPipelineItem[];
+  isLoading: boolean;
+  isError: boolean;
+}
+
+export function RevenuePipelineList({ data, isLoading, isError }: RevenuePipelineListProps) {
   const getIcon = (iconName: string) => {
     switch (iconName) {
       case 'palette':
@@ -47,68 +53,97 @@ export function RevenuePipelineList() {
 
       {/* List content */}
       <div className="p-6 relative z-10 space-y-4">
-        {mockPipelineOpportunities.map((op) => (
-          <div 
-            key={op.id}
-            className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-3 rounded-xl hover:bg-white/2 border border-transparent hover:border-white/5 transition-all duration-150"
-          >
-            {/* Left: Icon and Project Details */}
-            <div className="flex items-center gap-4 min-w-0">
-              <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 shadow-sm ${getIconContainerClass(op.iconName)}`}>
-                {getIcon(op.iconName)}
-              </div>
-              <div className="min-w-0">
-                <div className="flex items-center gap-2">
-                  <h4 className="text-sm font-extrabold text-white truncate">{op.project}</h4>
-                  <Badge 
-                    variant={op.status === 'ACTIVE' ? 'mint' : 'purple'}
-                    className="font-bold text-[8px] tracking-widest uppercase shrink-0 py-0 h-4 flex items-center"
-                  >
-                    {op.status}
-                  </Badge>
+        {isLoading ? (
+          // Loading skeletons matching the list row layout
+          Array.from({ length: 3 }).map((_, i) => (
+            <div
+              key={i}
+              className="flex items-center justify-between gap-4 p-3"
+            >
+              <div className="flex items-center gap-4 min-w-0 grow">
+                <Skeleton variant="circle" className="w-11 h-11 shrink-0" />
+                <div className="space-y-2 grow">
+                  <Skeleton variant="text" className="w-40 h-3 rounded" />
+                  <Skeleton variant="text" className="w-24 h-2 rounded" />
                 </div>
-                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider truncate mt-0.5">
-                  {op.client}
-                </p>
               </div>
+              <Skeleton variant="text" className="w-20 h-5 rounded shrink-0" />
             </div>
-
-            {/* Right: Value & Progress */}
-            <div className="flex items-center justify-between sm:justify-end gap-6 shrink-0 sm:text-right">
-              {/* Progress Slider (only for items with progress percentage) */}
-              {op.progressPercentage !== undefined && (
-                <div className="w-24 hidden md:block space-y-1 select-none">
-                  <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden border border-white/5 relative">
-                    <div 
-                      className="absolute left-0 top-0 h-full bg-success rounded-full shadow-glow"
-                      style={{ width: `${op.progressPercentage}%` }}
-                    />
+          ))
+        ) : isError || data.length === 0 ? (
+          <EmptyState
+            title="No Expense Data"
+            description="Add expenses to see your spending pipeline breakdown."
+            icon={BarChart2}
+          />
+        ) : (
+          data.map((op) => (
+            <div
+              key={op.id}
+              className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-3 rounded-xl hover:bg-white/2 border border-transparent hover:border-white/5 transition-all duration-150"
+            >
+              {/* Left: Icon and Project Details */}
+              <div className="flex items-center gap-4 min-w-0">
+                <div
+                  className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 shadow-sm ${getIconContainerClass(
+                    op.iconName
+                  )}`}
+                >
+                  {getIcon(op.iconName)}
+                </div>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-2">
+                    <h4 className="text-sm font-extrabold text-white truncate">{op.project}</h4>
+                    <Badge
+                      variant={op.status === 'ACTIVE' ? 'mint' : 'purple'}
+                      className="font-bold text-[8px] tracking-widest uppercase shrink-0 py-0 h-4 flex items-center"
+                    >
+                      {op.status}
+                    </Badge>
                   </div>
-                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wide block">
+                  <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider truncate mt-0.5">
+                    {op.client}
+                  </p>
+                </div>
+              </div>
+
+              {/* Right: Value & Progress */}
+              <div className="flex items-center justify-between sm:justify-end gap-6 shrink-0 sm:text-right">
+                {/* Progress Slider */}
+                {op.progressPercentage !== undefined && (
+                  <div className="w-24 hidden md:block space-y-1 select-none">
+                    <div className="h-1.5 w-full bg-white/5 rounded-full overflow-hidden border border-white/5 relative">
+                      <div
+                        className="absolute left-0 top-0 h-full bg-success rounded-full shadow-glow"
+                        style={{ width: `${op.progressPercentage}%` }}
+                      />
+                    </div>
+                    <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wide block">
+                      {op.progressText}
+                    </span>
+                  </div>
+                )}
+
+                {/* Progress Text (for items without a percentage bar) */}
+                {op.progressPercentage === undefined && (
+                  <span className="text-[9px] font-black text-primary uppercase tracking-widest hidden md:block">
+                    {op.progressText}
+                  </span>
+                )}
+
+                {/* Amount value */}
+                <div className="space-y-0.5">
+                  <span className="text-sm font-black text-white block">
+                    ${op.value.toLocaleString()}
+                  </span>
+                  <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wide block md:hidden">
                     {op.progressText}
                   </span>
                 </div>
-              )}
-
-              {/* Progress Text (for AI Predicted items) */}
-              {op.progressPercentage === undefined && (
-                <span className="text-[9px] font-black text-primary uppercase tracking-widest hidden md:block">
-                  {op.progressText}
-                </span>
-              )}
-
-              {/* Amount value */}
-              <div className="space-y-0.5">
-                <span className="text-sm font-black text-white block">
-                  ${op.value.toLocaleString()}
-                </span>
-                <span className="text-[9px] font-bold text-slate-400 uppercase tracking-wide block md:hidden">
-                  {op.progressText}
-                </span>
               </div>
             </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </Card>
   );
