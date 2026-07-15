@@ -15,19 +15,19 @@ export function AuthFooter() {
       </div>
       <div className="hidden sm:flex items-center gap-8 text-slate-500 dark:text-slate-400">
         <Link 
-          href="/privacy" 
+          href="#" 
           className="hover:text-success transition-colors duration-200"
         >
           Privacy Policy
         </Link>
         <Link 
-          href="/terms" 
+          href="#" 
           className="hover:text-success transition-colors duration-200"
         >
           Terms of Service
         </Link>
         <Link 
-          href="/security" 
+          href="#" 
           className="hover:text-success transition-colors duration-200"
         >
           Security Status
