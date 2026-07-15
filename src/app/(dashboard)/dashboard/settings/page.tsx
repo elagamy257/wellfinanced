@@ -9,6 +9,7 @@ import {
   useSmoothedSalary, 
   useAcceptSmoothedSalary 
 } from '@/features/settings';
+import { ConnectedAccountsCard } from '@/features/accounts';
 import { toast } from 'sonner';
 
 export default function SettingsPage() {
@@ -41,6 +42,9 @@ export default function SettingsPage() {
         
         {/* Public Profile Form Panel */}
         <PublicProfileCard />
+
+        {/* Connected Bank Accounts Ledger Widget */}
+        <ConnectedAccountsCard />
 
         {/* Stable Salary Bento Title block */}
         <div className="pt-2 select-none">
