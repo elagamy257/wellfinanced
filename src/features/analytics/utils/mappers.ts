@@ -77,9 +77,14 @@ export function mapExpenseAnalysisToPipeline(
 
   type TaggedGroup = ExpenseCategoryGroup & { _group: 'ACTIVE' | 'HIGH PROBABILITY' };
 
-  const needs = (dto.needs as ExpenseCategoryGroup[] | undefined) ?? [];
-  const wants = (dto.wants as ExpenseCategoryGroup[] | undefined) ?? [];
+  let needs = (dto.needs as ExpenseCategoryGroup[] | undefined) ?? [];
+  let wants = (dto.wants as ExpenseCategoryGroup[] | undefined) ?? [];
   const categories = (dto.categories as ExpenseCategoryGroup[] | undefined) ?? [];
+
+  if (Array.isArray(dto.category_breakdown)) {
+    needs = dto.category_breakdown.filter((item) => item.type === 'Need');
+    wants = dto.category_breakdown.filter((item) => item.type === 'Want');
+  }
 
   let tagged: TaggedGroup[];
 

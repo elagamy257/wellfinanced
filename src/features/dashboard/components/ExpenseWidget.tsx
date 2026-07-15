@@ -33,8 +33,8 @@ export function ExpenseWidget({ isLoading = false }: WidgetProps) {
     );
   }
 
-  // Read monthly_average or fallback to 0
-  const monthlyAverage = data?.monthly_average ?? 0;
+  // Read avg, monthly_average, or fallback to 0
+  const monthlyAverage = data?.avg ?? data?.monthly_average ?? data?.average ?? 0;
 
   return (
     <Card variant="default" className="h-full relative overflow-hidden group">

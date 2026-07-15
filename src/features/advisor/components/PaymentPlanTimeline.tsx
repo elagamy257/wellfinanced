@@ -37,22 +37,31 @@ export function PaymentPlanTimeline({ timeline }: PaymentPlanTimelineProps) {
                   {item.date} (Month {item.month_num})
                 </span>
                 <div className="mt-2 space-y-1">
-                  {item.payments.map((pay, pIdx) => (
-                    <div key={pIdx} className="flex items-center gap-1.5 text-[10px] font-bold text-slate-400">
-                      <ChevronRight className="w-3.5 h-3.5 text-success shrink-0" />
-                      <span>
-                        Pay <span className="text-white">${pay.amount.toFixed(2)}</span> to <span className="text-white">{pay.debt}</span>
-                        <span className="text-[9px] text-slate-500"> (Remaining: ${pay.remaining.toFixed(2)})</span>
-                      </span>
-                    </div>
-                  ))}
+                  {Array.isArray(item.payments) && item.payments.map((pay, pIdx) => {
+                    const amountVal = typeof pay?.amount === 'number' ? pay.amount.toFixed(2) : '0.00';
+                    const remainingVal = typeof pay?.remaining === 'number' ? pay.remaining.toFixed(2) : '0.00';
+                    const debtLabel = pay?.debt || 'Debt';
+                    return (
+                      <div key={pIdx} className="flex items-center gap-1.5 text-[10px] font-bold text-slate-400">
+                        <ChevronRight className="w-3.5 h-3.5 text-success shrink-0" />
+                        <span>
+                          Pay <span className="text-white">${amountVal}</span> to <span className="text-white">{debtLabel}</span>
+                          <span className="text-[9px] text-slate-500"> (Remaining: ${remainingVal})</span>
+                        </span>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
 
               <div className="sm:text-right border-t sm:border-t-0 border-white/5 pt-2.5 sm:pt-0">
                 <span className="text-[9px] font-black uppercase tracking-widest text-slate-500 block">Monthly Outflow</span>
-                <span className="text-xs font-black text-white">${item.total_payment.toFixed(2)}</span>
-                <span className="text-[9px] font-black text-slate-400 block mt-0.5">Paid: ${item.cumulative_paid.toFixed(2)}</span>
+                <span className="text-xs font-black text-white">
+                  ${typeof item.total_payment === 'number' ? item.total_payment.toFixed(2) : '0.00'}
+                </span>
+                <span className="text-[9px] font-black text-slate-400 block mt-0.5">
+                  Paid: ${typeof item.cumulative_paid === 'number' ? item.cumulative_paid.toFixed(2) : '0.00'}
+                </span>
               </div>
             </Card>
           </div>

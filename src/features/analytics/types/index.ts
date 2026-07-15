@@ -41,6 +41,8 @@ export interface ExpenseAnalysisResponse {
   needs?: ExpenseCategoryGroup[];
   wants?: ExpenseCategoryGroup[];
   categories?: ExpenseCategoryGroup[];
+  category_breakdown?: ExpenseCategoryGroup[];
+  monthly_avg?: number;
   total_needs?: number;
   total_wants?: number;
   needs_percentage?: number;
