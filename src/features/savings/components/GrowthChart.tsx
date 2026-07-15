@@ -2,8 +2,7 @@
 
 import React from 'react';
 import { Card } from '@/components/ui';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { mockProjectedGrowthData, mockSavingsMetrics } from '../mocks';
+import { BarChart3 } from 'lucide-react';
 
 export function GrowthChart() {
   return (
@@ -19,85 +18,20 @@ export function GrowthChart() {
           <span className="text-[9px] text-slate-400 font-medium block">
             Aggregate across all goals
           </span>
-          
-          <div className="pt-2 flex items-baseline gap-2">
-            <span className="text-3xl font-black text-white tracking-tight">
-              ${mockSavingsMetrics.totalTargetReach.toLocaleString()}
-            </span>
-            <span className="px-2 py-0.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-[8px] font-bold uppercase tracking-widest">
-              Total Projected
-            </span>
+        </div>
+      </div>
+
+      {/* Empty state container */}
+      <div className="px-6 pb-6 pt-2 h-[220px] relative z-10 flex items-center justify-center">
+        <div className="flex flex-col items-center text-center">
+          <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/5 flex items-center justify-center mb-4">
+             <BarChart3 className="w-6 h-6 text-slate-500" />
           </div>
+          <h3 className="text-sm font-bold text-white mb-1">Growth Projections Unavailable</h3>
+          <p className="text-xs text-slate-400 max-w-[200px]">
+             The projection endpoint is currently not connected or returning timeseries data.
+          </p>
         </div>
-      </div>
-
-      {/* Chart container */}
-      <div className="px-6 pb-6 pt-2 h-[220px] relative z-10">
-        <div className="w-full h-full relative">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart
-                data={mockProjectedGrowthData}
-                margin={{ top: 15, right: 10, left: 10, bottom: 5 }}
-              >
-                <defs>
-                  <linearGradient id="colorGrowth" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="var(--color-primary-purple)" stopOpacity={0.25} />
-                    <stop offset="95%" stopColor="var(--color-primary-purple)" stopOpacity={0} />
-                  </linearGradient>
-                </defs>
-                <CartesianGrid
-                  vertical={false}
-                  stroke="rgba(255, 255, 255, 0.05)"
-                  strokeDasharray="3 3"
-                />
-                <XAxis 
-                  dataKey="month" 
-                  stroke="rgba(255, 255, 255, 0.3)"
-                  fontSize={9}
-                  tickLine={false}
-                  axisLine={false}
-                  dy={10}
-                />
-                <YAxis hide domain={['dataMin - 2000', 'dataMax + 1000']} />
-                <Tooltip
-                  cursor={{ stroke: 'rgba(168, 85, 247, 0.2)', strokeWidth: 1.5 }}
-                  content={({ active, payload }) => {
-                    if (active && payload && payload.length) {
-                      const isProj = payload[0].payload.isProjected;
-                      return (
-                        <div className="bg-bg-3 border border-white/10 px-3 py-1.5 rounded-xl shadow-2xl">
-                          <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">
-                            {payload[0].payload.month} {isProj ? '(Projected)' : ''}
-                          </p>
-                          <p className="text-xs font-black text-primary">
-                            Saved: ${Number(payload[0].value).toLocaleString()}
-                          </p>
-                        </div>
-                      );
-                    }
-                    return null;
-                  }}
-                />
-                <Area
-                  type="monotone"
-                  dataKey="value"
-                  stroke="var(--color-primary-purple)"
-                  strokeWidth={2.5}
-                  fillOpacity={1}
-                  fill="url(#colorGrowth)"
-                  dot={{ r: 3.5, fill: 'var(--color-background)', stroke: 'var(--color-primary-purple)', strokeWidth: 2 }}
-                  activeDot={{ r: 5.5, fill: 'var(--color-primary-purple)', stroke: 'var(--color-background)', strokeWidth: 2 }}
-                />
-              </AreaChart>
-            </ResponsiveContainer>
-        </div>
-      </div>
-
-      {/* Footer descriptor */}
-      <div className="p-6 pt-0 border-t border-white/5 bg-white/1 relative z-10">
-        <p className="text-[10px] text-slate-400 font-medium leading-relaxed mt-4">
-          Projected achievement by mid-October based on current trajectory.
-        </p>
       </div>
     </Card>
   );

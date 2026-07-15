@@ -1,18 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card } from '@/components/ui/Card';
 import { Skeleton } from '@/components/ui/Skeleton';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { ArrowUpRight, AlertCircle } from 'lucide-react';
+import { AlertCircle, BarChart3 } from 'lucide-react';
 import { useDashboardSnapshot } from '../hooks/useDashboardSnapshot';
-import { formatCurrency, formatCompactNumber } from '@/utils';
+import { formatCurrency } from '@/utils';
 
 interface WidgetProps {
   isLoading?: boolean;
 }
 
-
 export function CashflowWidget({ isLoading = false }: WidgetProps) {
-  const [period, setPeriod] = useState<'1M' | '3M' | '1Y'>('3M');
   const { data, isLoading: isQueryLoading, isError } = useDashboardSnapshot();
   const loading = isLoading || isQueryLoading;
 
@@ -43,13 +40,8 @@ export function CashflowWidget({ isLoading = false }: WidgetProps) {
     );
   }
 
-  // Retrieve net worth or fallback to mock
-  const netWorth = data?.net_worth !== undefined ? data.net_worth : 12842.50;
-  const netWorthFormatted = formatCurrency(netWorth);
-  const netWorthK = formatCompactNumber(netWorth).toLowerCase();
-
-  // History not provided by snapshot backend
-  const chartData: any[] = [];
+  // Use actual data if available, do not fallback to mock.
+  const netWorthFormatted = formatCurrency(data?.net_worth ?? 0);
 
   return (
     <Card variant="default" className="h-full relative overflow-hidden group">
@@ -66,38 +58,15 @@ export function CashflowWidget({ isLoading = false }: WidgetProps) {
             {loading ? (
               <Skeleton variant="text" className="w-40 h-8 mt-1" />
             ) : (
-              <>
-                <span className="text-3xl font-extrabold text-white tracking-tight">
-                  {netWorthFormatted}
-                </span>
-                <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-accent-mint/10 text-accent-mint text-[10px] font-bold border border-accent-mint/15">
-                  <ArrowUpRight className="w-3 h-3" />
-                  <span>+12.4%</span>
-                </span>
-              </>
+              <span className="text-3xl font-extrabold text-white tracking-tight">
+                {netWorthFormatted}
+              </span>
             )}
           </div>
         </div>
-
-        {/* Period Switching Tabs */}
-        <div className="flex bg-white/5 p-1 rounded-xl border border-white/5 self-start sm:self-center">
-          {(['1M', '3M', '1Y'] as const).map((p) => (
-            <button
-              key={p}
-              onClick={() => setPeriod(p)}
-              className={`px-3 py-1.5 text-xs font-bold rounded-lg transition-all cursor-pointer ${
-                period === p
-                  ? 'bg-accent-mint/15 text-accent-mint border border-accent-mint/20 shadow-md'
-                  : 'text-slate-400 hover:text-white border border-transparent'
-              }`}
-            >
-              {p}
-            </button>
-          ))}
-        </div>
       </div>
 
-      {/* Chart Content Area */}
+      {/* Chart Content Area (Empty State due to missing backend timeseries data) */}
       <div className="p-6 pt-2 h-[240px] relative z-10">
         {loading ? (
           <div className="h-full flex flex-col justify-end space-y-4">
@@ -105,19 +74,10 @@ export function CashflowWidget({ isLoading = false }: WidgetProps) {
             <Skeleton variant="rect" className="h-44" />
           </div>
         ) : (
-          <div className="w-full h-full relative flex items-center justify-center border-2 border-dashed border-white/10 rounded-xl bg-white/5">
-            <div className="text-center p-4">
-              <span className="text-sm font-bold text-slate-400 block mb-1">
-                No Historical Data
-              </span>
-              <span className="text-xs text-slate-500 max-w-[200px] mx-auto block">
-                Cashflow history is not yet available from the backend snapshot.
-              </span>
-            </div>
-            {/* Static overlay tooltip for the current node */}
-            <div className="absolute right-6 top-6 px-2.5 py-1 rounded-lg bg-accent-mint text-background text-[10px] font-black uppercase tracking-wider shadow-glow pointer-events-none">
-              Current: ${netWorthK}
-            </div>
+          <div className="w-full h-full flex flex-col items-center justify-center bg-white/5 border border-white/5 rounded-xl border-dashed">
+            <BarChart3 className="w-8 h-8 text-slate-500 mb-3" />
+            <p className="text-sm font-medium text-slate-400">No historical data available</p>
+            <p className="text-xs text-slate-500 mt-1 max-w-[200px] text-center">Connect timeseries endpoint to view cashflow trends over time.</p>
           </div>
         )}
       </div>

@@ -33,8 +33,8 @@ export function ExpenseWidget({ isLoading = false }: WidgetProps) {
     );
   }
 
-  // Read monthly_average or fallback to mock
-  const monthlyAverage = data?.monthly_average !== undefined ? data.monthly_average : 3120;
+  // Read monthly_average or fallback to 0
+  const monthlyAverage = data?.monthly_average ?? 0;
 
   return (
     <Card variant="default" className="h-full relative overflow-hidden group">

@@ -1,5 +1,4 @@
-import { IncomeResponse, ExpenseResponse, DebtResponse } from '../types';
-import { TransactionItem } from '../mocks';
+import { IncomeResponse, ExpenseResponse, DebtResponse, TransactionItem } from '../types';
 
 export function mapIncomeToTransactionItem(income: IncomeResponse): TransactionItem {
   return {

@@ -4,7 +4,14 @@ import React, { useState } from 'react';
 import { Card } from '@/components/ui';
 import { Skeleton } from '@/components/ui';
 import { Shield, Sparkles, Clock, Calculator, CheckCircle } from 'lucide-react';
-import { mockIncomeBaselineBars } from '../mocks/mocks';
+const INCOME_BASELINE_BARS = [
+  { month: '1', height: 40 },
+  { month: '2', height: 55 },
+  { month: '3', height: 100, active: true },
+  { month: '4', height: 50 },
+  { month: '5', height: 35 },
+  { month: '6', height: 65 }
+];
 import { SmoothedSalaryConfig } from '../types';
 
 interface StableSalaryBentoProps {
@@ -141,7 +148,7 @@ export function StableSalaryBento({ salary, isLoading, isAccepting, onAccept }: 
 
           {/* Mini Bar Chart */}
           <div className="flex items-end justify-between h-20 px-2 pt-2">
-            {mockIncomeBaselineBars.map((bar, idx) => (
+            {INCOME_BASELINE_BARS.map((bar, idx) => (
               <div 
                 key={idx}
                 className="flex flex-col items-center flex-1 gap-1"

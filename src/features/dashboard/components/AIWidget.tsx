@@ -38,12 +38,7 @@ export function AIWidget({ isLoading = false }: WidgetProps) {
     );
   }
 
-  // Retrieve values or fallback to mocks
-  const predictedValue = data?.predicted_value !== undefined ? data.predicted_value : 8525;
-  const confidence = data?.confidence !== undefined ? data.confidence : 74;
-  const minBound = data?.min_bound !== undefined ? data.min_bound : 7200;
-  const maxBound = data?.max_bound !== undefined ? data.max_bound : 9850;
-  const insight = data?.insight || "Your cloud hosting costs are projected to spike next week. Consider auditing your storage usage.";
+  const hasData = data && data.predicted_value !== undefined;
 
   return (
     <Card variant="default" className="h-full relative overflow-hidden group">
@@ -73,15 +68,21 @@ export function AIWidget({ isLoading = false }: WidgetProps) {
             <Skeleton variant="input" />
             <Skeleton variant="text" className="w-3/4" />
           </div>
+        ) : !hasData ? (
+          <div className="h-full flex items-center justify-center text-center px-4">
+            <span className="text-xs text-slate-400 font-medium">
+              Forecast engine is analyzing your transaction history. Predictions will appear here once sufficient data is gathered.
+            </span>
+          </div>
         ) : (
           <>
             {/* Center Predicted Value */}
             <div className="text-center py-2 select-none">
               <span className="text-4xl font-extrabold text-primary-purple tracking-tight drop-shadow-[0_0_15px_rgba(124,58,237,0.35)]">
-                {formatCurrencyNoDecimals(predictedValue)}
+                {formatCurrencyNoDecimals(data.predicted_value!)}
               </span>
               <span className="text-[9px] font-bold text-slate-500 tracking-wider text-center block mt-1.5 uppercase">
-                Medium Confidence Index ({formatPercentage(confidence)})
+                Medium Confidence Index ({formatPercentage(data.confidence ?? 0)})
               </span>
             </div>
 
@@ -98,17 +99,19 @@ export function AIWidget({ isLoading = false }: WidgetProps) {
 
               {/* Range Bounds */}
               <div className="flex justify-between items-center mt-2.5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                <span>{formatCurrencyNoDecimals(minBound)} Min</span>
-                <span>{formatCurrencyNoDecimals(maxBound)} Max</span>
+                <span>{formatCurrencyNoDecimals(data.min_bound ?? 0)} Min</span>
+                <span>{formatCurrencyNoDecimals(data.max_bound ?? 0)} Max</span>
               </div>
             </div>
 
             {/* Insight Alert Box */}
-            <div className="bg-primary-purple/5 border border-primary-purple/10 rounded-xl p-3.5 mt-2 shadow-sm">
-              <p className="text-xs text-slate-300 font-medium leading-relaxed">
-                &quot;{insight}&quot;
-              </p>
-            </div>
+            {data.insight && (
+              <div className="bg-primary-purple/5 border border-primary-purple/10 rounded-xl p-3.5 mt-2 shadow-sm">
+                <p className="text-xs text-slate-300 font-medium leading-relaxed">
+                  &quot;{data.insight}&quot;
+                </p>
+              </div>
+            )}
           </>
         )}
       </div>

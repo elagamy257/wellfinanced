@@ -104,3 +104,14 @@ export interface TransactionFilterParams {
   sortOrder?: 'asc' | 'desc';
   category?: string;
 }
+
+export interface TransactionItem {
+  id: string;
+  source: string;
+  date: string;
+  category: string;
+  amount: number;
+  type: 'income' | 'expense' | 'debt';
+  status: 'cleared' | 'pending';
+  notes?: string;
+}

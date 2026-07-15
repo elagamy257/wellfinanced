@@ -1,7 +1,13 @@
 'use client';
 
 import React from 'react';
-import { mockPromptSuggestions } from '../mocks/mocks';
+
+const DEFAULT_PROMPTS = [
+  "How can I save for a new laptop?",
+  "What is the best way to pay off my car loan?",
+  "Analyze my spending habits this month.",
+  "How much should I keep in my emergency fund?"
+];
 
 interface PromptSuggestionsProps {
   onSelect: (prompt: string) => void;
@@ -11,7 +17,7 @@ interface PromptSuggestionsProps {
 export function PromptSuggestions({ onSelect, disabled = false }: PromptSuggestionsProps) {
   return (
     <div className="flex flex-wrap gap-2.5 select-none pt-2.5">
-      {mockPromptSuggestions.map((prompt) => (
+      {DEFAULT_PROMPTS.map((prompt) => (
         <button
           key={prompt}
           type="button"

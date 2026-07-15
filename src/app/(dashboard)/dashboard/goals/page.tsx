@@ -11,8 +11,7 @@ import {
   GoalModal,
   useSavingsList,
   useCreateSavingsGoal,
-  useDeleteSavingsGoal,
-  mapSavingsGoalToModel
+  useDeleteSavingsGoal
 } from '@/features/savings';
 import { useExpenseStats } from '@/features/dashboard';
 
@@ -29,7 +28,7 @@ export default function GoalsPage() {
 
   // Computations
   const goalsList = savingsData?.items || [];
-  const mappedGoals = goalsList.map(mapSavingsGoalToModel);
+  const mappedGoals = goalsList;
 
   const totalSaved = goalsList.reduce((sum, g) => sum + (g.saved_amount || 0), 0);
   const avgMonthlyExpenses = expenseStats?.avg || 0;
@@ -38,7 +37,7 @@ export default function GoalsPage() {
   const burnRate = avgMonthlyExpenses > 0 ? avgMonthlyExpenses : 3000;
   const runway = totalSaved / burnRate;
 
-  const handleSaveGoal = (goal: { name: string; target: number; saved: number; eta: string }) => {
+  const handleSaveGoal = (goal: { name: string; target: number; saved: number; eta: string; category: string }) => {
     createGoal.mutate({
       goal_name: goal.name,
       target_amount: goal.target,

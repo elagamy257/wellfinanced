@@ -19,3 +19,20 @@ export interface QuickAdviceRequest {
 export interface QuickAdviceResponse {
   advice: string;
 }
+
+export interface Message {
+  id: string;
+  sender: 'ai' | 'user';
+  text: string;
+  timestamp: string;
+  metrics?: {
+    currentRevenue?: string;
+    revenueChange?: string;
+    postPurchaseBuffer?: string;
+    pendingIncome?: string;
+    projectedRunway?: string;
+    recommendedRunway?: string;
+    safetyBufferText?: string;
+    hasActions?: boolean;
+  };
+}

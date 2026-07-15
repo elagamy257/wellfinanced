@@ -4,7 +4,7 @@ import React from 'react';
 import { Badge } from '@/components/ui';
 import { Tag, Trash2 } from 'lucide-react';
 import { formatDate, formatCurrency } from '@/utils';
-import { TransactionItem } from '../mocks';
+import { TransactionItem } from '../types';
 
 interface TransactionTableProps {
   transactions: TransactionItem[];

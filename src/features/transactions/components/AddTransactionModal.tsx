@@ -3,7 +3,9 @@
 import React, { useState } from 'react';
 import { Button, Input } from '@/components/ui';
 import { X, Sparkles, Calendar as CalendarIcon } from 'lucide-react';
-import { mockSuggestedTags, TransactionItem } from '../mocks';
+import { TransactionItem } from '../types';
+
+const DEFAULT_SUGGESTED_TAGS = ['Development', 'UI Design', 'Consulting', 'Infrastructure', 'Office Hardware'];
 
 interface AddTransactionModalProps {
   isOpen: boolean;
@@ -181,7 +183,7 @@ export function AddTransactionModal({ isOpen, onClose, onSave }: AddTransactionM
               </span>
             </div>
             <div className="flex flex-wrap gap-2 pt-1">
-              {mockSuggestedTags.map((tag) => (
+              {DEFAULT_SUGGESTED_TAGS.map((tag) => (
                 <button
                   key={tag}
                   type="button"

@@ -2,14 +2,9 @@
 
 import React from 'react';
 import { Card } from '@/components/ui';
-import { Sparkles, ArrowRight } from 'lucide-react';
-import { mockSavingsMetrics } from '../mocks';
+import { Sparkles } from 'lucide-react';
 
-interface InsightBannerProps {
-  onOptimize?: () => void;
-}
-
-export function InsightBanner({ onOptimize }: InsightBannerProps) {
+export function InsightBanner() {
   return (
     <Card 
       variant="glass" 
@@ -22,24 +17,23 @@ export function InsightBanner({ onOptimize }: InsightBannerProps) {
       <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="flex items-start gap-4">
           <div className="w-10 h-10 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center text-primary shrink-0 shadow-glow">
-            <Sparkles className="w-5 h-5 animate-pulse" />
+            <Sparkles className="w-5 h-5 opacity-50" />
           </div>
           <div className="space-y-1">
             <h4 className="text-sm font-extrabold text-white tracking-wide uppercase">
-              {mockSavingsMetrics.insightTitle}
+              AI Insights Unavailable
             </h4>
-            <p className="text-xs text-slate-300 leading-relaxed font-medium max-w-2xl">
-              {mockSavingsMetrics.insightText}
+            <p className="text-xs text-slate-400 leading-relaxed font-medium max-w-2xl">
+              Connect the AI optimization endpoint to receive personalized savings recommendations based on your spending habits.
             </p>
           </div>
         </div>
 
         <button
-          onClick={onOptimize}
-          className="shrink-0 flex items-center justify-center gap-2 px-5 h-11 text-xs font-black uppercase tracking-wider text-black bg-gradient-green rounded-xl hover:brightness-110 shadow-glow transition-all cursor-pointer select-none"
+          disabled
+          className="shrink-0 flex items-center justify-center gap-2 px-5 h-11 text-xs font-black uppercase tracking-wider text-slate-500 bg-white/5 rounded-xl cursor-not-allowed select-none border border-white/5"
         >
-          <span>Optimize Now</span>
-          <ArrowRight className="w-4 h-4" />
+          <span>Offline</span>
         </button>
       </div>
     </Card>

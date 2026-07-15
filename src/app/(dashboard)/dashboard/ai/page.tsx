@@ -5,14 +5,12 @@ import { PageContainer } from '@/components/layout';
 import { SectionTitle, Card, Button } from '@/components/ui';
 import { Sparkles, Trash2 } from 'lucide-react';
 import { 
-  initialChatMessages, 
   Message, 
   ChatWindow, 
   PromptSuggestions, 
   ChatInputBar, 
   useAdvisorChat,
-  useQuickAdvice,
-  mockPromptSuggestions
+  useQuickAdvice
 } from '@/features/ai';
 import {
   AffordabilityCard,
@@ -22,7 +20,7 @@ import {
 } from '@/features/advisor';
 
 export default function AIAssistantPage() {
-  const [messages, setMessages] = useState<Message[]>(initialChatMessages);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [chatError, setChatError] = useState(false);
   const [activeTab, setActiveTab] = useState<'chat' | 'intelligence'>('chat');
 
@@ -116,7 +114,13 @@ export default function AIAssistantPage() {
     
     setChatError(false);
 
-    const isSuggestion = mockPromptSuggestions.includes(lastUserMsg.text);
+    const DEFAULT_PROMPTS = [
+      "How can I save for a new laptop?",
+      "What is the best way to pay off my car loan?",
+      "Analyze my spending habits this month.",
+      "How much should I keep in my emergency fund?"
+    ];
+    const isSuggestion = DEFAULT_PROMPTS.includes(lastUserMsg.text);
 
     if (isSuggestion) {
       quickAdvice.mutate({

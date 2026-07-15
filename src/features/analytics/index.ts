@@ -19,6 +19,3 @@ export * from './hooks/mutations/useGenerateForecast';
 
 // Mappers
 export * from './utils/mappers';
-
-// Mocks (kept as reference only — never imported in production rendering)
-export * from './mocks';

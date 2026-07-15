@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useIncomeList } from './useIncomeList';
 import { useExpenseList } from './useExpenseList';
 import { useDebtList } from './useDebtList';
-import { TransactionItem } from '../../mocks';
+import { TransactionItem } from '../../types';
 import {
   mapIncomeToTransactionItem,
   mapExpenseToTransactionItem,

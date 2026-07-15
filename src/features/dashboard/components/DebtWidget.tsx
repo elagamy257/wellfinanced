@@ -33,8 +33,8 @@ export function DebtWidget({ isLoading = false }: WidgetProps) {
     );
   }
 
-  // Read total_debt or fallback to mock
-  const totalDebt = data?.total_debt !== undefined ? data.total_debt : 1450;
+  // Read total_debt or fallback to 0
+  const totalDebt = data?.total_debt ?? 0;
 
   return (
     <Card variant="default" className="h-full relative overflow-hidden group">

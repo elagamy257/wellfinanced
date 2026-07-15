@@ -3,33 +3,14 @@ import { Card } from '@/components/ui/Card';
 import { Skeleton } from '@/components/ui/Skeleton';
 import { Landmark, Cloud, CreditCard } from 'lucide-react';
 import Link from 'next/link';
-import { useDashboardRecentTransactions, DashboardTransaction } from '../hooks/useDashboardRecentTransactions';
+import { useDashboardRecentTransactions } from '../hooks/useDashboardRecentTransactions';
 import { formatCurrency, formatDate } from '@/utils';
 
 interface WidgetProps {
   isLoading?: boolean;
 }
 
-const mockActivities: DashboardTransaction[] = [
-  {
-    id: 'mock-1',
-    source: 'Client Payment / Service Income',
-    date: '2023-10-24T00:00:00Z',
-    category: 'Service Revenue',
-    amount: 2400.00,
-    type: 'income',
-    status: 'Cleared',
-  },
-  {
-    id: 'mock-2',
-    source: 'Business Expense / Infrastructure Cost',
-    date: '2023-10-23T00:00:00Z',
-    category: 'Infrastructure Cost',
-    amount: -142.00,
-    type: 'expense',
-    status: 'Pending',
-  }
-];
+
 
 export function RecentActivityWidget({ isLoading = false }: WidgetProps) {
   const { data, isLoading: isQueryLoading, isError } = useDashboardRecentTransactions();
@@ -57,7 +38,7 @@ export function RecentActivityWidget({ isLoading = false }: WidgetProps) {
 
   // Handle empty state
   const hasTransactions = data && data.length > 0;
-  const activities = hasTransactions ? data.slice(0, 2) : (data ? [] : mockActivities);
+  const activities = hasTransactions ? data.slice(0, 2) : [];
 
   const getIcon = (type: string, category: string) => {
     if (type === 'income') {

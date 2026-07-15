@@ -3,18 +3,21 @@
 import React from 'react';
 import { Card } from '@/components/ui';
 import { Target, Calendar, ArrowUpRight, Trash2 } from 'lucide-react';
-import { SavingsGoal } from '../mocks';
+import { DashboardSavingsGoal } from '@/features/dashboard/types';
 
 interface SavingsGoalCardProps {
-  goal: SavingsGoal;
+  goal: DashboardSavingsGoal;
   onDelete?: (id: string) => void;
 }
 
 export function SavingsGoalCard({ goal, onDelete }: SavingsGoalCardProps) {
-  const { id, name, target, saved, percentage, eta, timeLeftText } = goal;
+  const { id, goal_name, target_amount, saved_amount } = goal;
+
+  const percentage = target_amount > 0 ? Math.round((saved_amount / target_amount) * 100) : 0;
+  const clampedPercentage = Math.min(percentage, 100);
 
   // Determine theme colors based on progress or goal type
-  const isHighProgress = percentage >= 80;
+  const isHighProgress = clampedPercentage >= 80;
   const glowColor = isHighProgress ? 'shadow-[0_0_12px_rgba(16,185,129,0.45)]' : 'shadow-[0_0_12px_rgba(6,182,212,0.45)]';
   const barColor = isHighProgress ? 'bg-success' : 'bg-accent-cyan';
   const textColor = isHighProgress ? 'text-success' : 'text-accent-cyan';
@@ -33,15 +36,15 @@ export function SavingsGoalCard({ goal, onDelete }: SavingsGoalCardProps) {
               <Target className="w-5 h-5" />
             </div>
             <div>
-              <h4 className="text-sm font-extrabold text-white tracking-tight">{name}</h4>
+              <h4 className="text-sm font-extrabold text-white tracking-tight">{goal_name}</h4>
               <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block mt-0.5">
-                Target: ${target.toLocaleString()}
+                Target: ${target_amount.toLocaleString()}
               </span>
             </div>
           </div>
           <div className="flex items-center gap-3">
             <span className={`text-lg font-black tracking-tighter ${textColor}`}>
-              {percentage}%
+              {clampedPercentage}%
             </span>
             {onDelete && (
               <button
@@ -60,23 +63,23 @@ export function SavingsGoalCard({ goal, onDelete }: SavingsGoalCardProps) {
           <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden border border-white/5 relative">
             <div 
               className={`absolute left-0 top-0 h-full ${barColor} ${glowColor} rounded-full transition-all duration-500`}
-              style={{ width: `${percentage}%` }}
+              style={{ width: `${clampedPercentage}%` }}
             />
           </div>
           
           <div className="flex justify-between items-center text-[10px] font-bold tracking-wide uppercase text-slate-400">
-            <span>${saved.toLocaleString()} saved</span>
+            <span>${saved_amount.toLocaleString()} saved</span>
             <span>
-              {timeLeftText ? timeLeftText : `$${(target - saved).toLocaleString()} remaining`}
+              ${Math.max(target_amount - saved_amount, 0).toLocaleString()} remaining
             </span>
           </div>
         </div>
 
-        {/* Bottom: ETA / Time Limit */}
+        {/* Bottom: Empty ETA for now as not in backend */}
         <div className="flex items-center justify-between pt-2 border-t border-white/5 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
           <div className="flex items-center gap-1.5">
-            <Calendar className="w-3.5 h-3.5 text-slate-500" />
-            <span>{eta}</span>
+            <Calendar className="w-3.5 h-3.5 text-slate-500 opacity-50" />
+            <span className="opacity-50">TBD</span>
           </div>
           <span className="inline-flex items-center gap-0.5 text-slate-400 hover:text-white transition-colors cursor-pointer">
             <span>Details</span>

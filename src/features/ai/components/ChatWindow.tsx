@@ -3,7 +3,7 @@
 import React, { useRef, useEffect } from 'react';
 import { Card, Badge } from '@/components/ui';
 import { Bot, Check, Bookmark, RefreshCw, AlertCircle } from 'lucide-react';
-import { Message } from '../mocks/mocks';
+import { Message } from '../types';
 
 interface ChatWindowProps {
   messages: Message[];

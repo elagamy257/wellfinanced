@@ -34,17 +34,8 @@ export function GoalsWidget({ isLoading = false }: WidgetProps) {
     );
   }
 
-  // Handle empty state
-  const hasGoals = data && data.length > 0;
+  const hasGoals = Array.isArray(data) && data.length > 0;
   const firstGoal = hasGoals ? data[0] : null;
-
-  // Retrieve the first goal or fallback to mock
-  const goalName = firstGoal ? `Goal: ${firstGoal.goal_name}` : 'Goal: Q4 Taxes';
-  const targetAmount = firstGoal ? firstGoal.target_amount : 15000;
-  const savedAmount = firstGoal ? firstGoal.saved_amount : 9750;
-  
-  const percentage = targetAmount > 0 ? Math.round((savedAmount / targetAmount) * 100) : 0;
-  const progressPercent = Math.min(percentage, 100);
 
   return (
     <Card variant="default" className="h-[185px] relative overflow-hidden group">
@@ -67,14 +58,14 @@ export function GoalsWidget({ isLoading = false }: WidgetProps) {
                 <Target className="w-4 h-4" />
               </div>
               <h3 className="text-sm font-bold text-white tracking-tight">
-                {goalName}
+                {firstGoal ? `Goal: ${firstGoal.goal_name}` : 'Savings Goals'}
               </h3>
             </div>
-            {!hasGoals && data ? (
+            {!hasGoals ? (
               <span className="text-[9px] font-bold text-slate-500 uppercase mt-1">Inactive</span>
             ) : (
               <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mt-1">
-                {formatCurrencyNoDecimals(targetAmount)} Target
+                {formatCurrencyNoDecimals(firstGoal?.target_amount || 0)} Target
               </span>
             )}
           </div>
@@ -83,14 +74,14 @@ export function GoalsWidget({ isLoading = false }: WidgetProps) {
         {/* Middle: Progress Bar */}
         {loading ? (
           <Skeleton variant="text" className="w-full h-3 rounded-full" />
-        ) : !hasGoals && data ? (
+        ) : !hasGoals ? (
           <span className="text-xs text-slate-400 py-1 font-medium">No savings goals created yet.</span>
         ) : (
           <div className="space-y-1.5 py-1">
             <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden border border-white/5 relative">
               <div 
                 className="absolute left-0 top-0 h-full bg-accent-cyan rounded-full shadow-[0_0_12px_rgba(6,182,212,0.45)]"
-                style={{ width: `${progressPercent}%` }}
+                style={{ width: `${Math.min(firstGoal!.target_amount > 0 ? Math.round((firstGoal!.saved_amount / firstGoal!.target_amount) * 100) : 0, 100)}%` }}
               />
             </div>
           </div>
@@ -102,17 +93,17 @@ export function GoalsWidget({ isLoading = false }: WidgetProps) {
             <Skeleton variant="text" className="w-1/4 h-4" />
             <Skeleton variant="text" className="w-10 h-4" />
           </div>
-        ) : !hasGoals && data ? (
+        ) : !hasGoals ? (
           <Link href="/dashboard/goals" className="text-xs font-black text-accent-cyan hover:underline uppercase tracking-wider">
             Create Goal &rarr;
           </Link>
         ) : (
           <div className="flex justify-between items-center text-xs">
             <span className="font-extrabold text-accent-cyan">
-              {formatCurrency(savedAmount)} saved
+              {formatCurrency(firstGoal?.saved_amount || 0)} saved
             </span>
             <span className="font-bold text-slate-400">
-              {percentage}% achieved
+              {firstGoal!.target_amount > 0 ? Math.round((firstGoal!.saved_amount / firstGoal!.target_amount) * 100) : 0}% achieved
             </span>
           </div>
         )}

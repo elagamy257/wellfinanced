@@ -3,12 +3,11 @@
 import React, { useState } from 'react';
 import { Button, Input } from '@/components/ui';
 import { X, Calendar, Sparkles } from 'lucide-react';
-import { SavingsGoal } from '../mocks';
 
 interface GoalModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (goal: Omit<SavingsGoal, 'id' | 'percentage'>) => void;
+  onSave: (goal: { name: string; target: number; saved: number; eta: string; category: string }) => void;
 }
 
 export function GoalModal({ isOpen, onClose, onSave }: GoalModalProps) {
