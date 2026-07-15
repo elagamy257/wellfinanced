@@ -1,15 +1,26 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card } from '@/components/ui';
+import { Skeleton } from '@/components/ui';
 import { Shield, Sparkles, Clock, Calculator, CheckCircle } from 'lucide-react';
-import { initialStableSalaryData, mockIncomeBaselineBars } from '../mocks/mocks';
+import { mockIncomeBaselineBars } from '../mocks/mocks';
+import { SmoothedSalaryConfig } from '../types';
 
-export function StableSalaryBento() {
-  const salary = initialStableSalaryData;
+interface StableSalaryBentoProps {
+  salary?: SmoothedSalaryConfig;
+  isLoading?: boolean;
+  isAccepting?: boolean;
+  onAccept?: (overrideAmount: number) => void;
+}
+
+export function StableSalaryBento({ salary, isLoading, isAccepting, onAccept }: StableSalaryBentoProps) {
+  const [overrideAmount, setOverrideAmount] = useState<string>('');
 
   const handleUpdatePayout = () => {
-    alert('Payout settings updated!');
+    if (onAccept && salary?.recommended_payout) {
+      onAccept(overrideAmount ? Number(overrideAmount) : salary.recommended_payout);
+    }
   };
 
   return (
@@ -25,10 +36,16 @@ export function StableSalaryBento() {
               RECOMMENDED MONTHLY PAYOUT
             </span>
             <div className="flex items-baseline pt-1">
-              <span className="text-4xl font-black text-white tracking-tighter">
-                ${salary.recommendedPayout.toLocaleString()}
-              </span>
-              <span className="text-lg font-black text-success">.00</span>
+              {isLoading ? (
+                <Skeleton variant="text" className="w-32 h-10" />
+              ) : (
+                <>
+                  <span className="text-4xl font-black text-white tracking-tighter">
+                    ${(salary?.recommended_payout ?? 0).toLocaleString()}
+                  </span>
+                  <span className="text-lg font-black text-success">.00</span>
+                </>
+              )}
             </div>
             
             <div className="flex items-center gap-1.5 text-[10px] text-success font-bold pt-1.5">
@@ -37,13 +54,23 @@ export function StableSalaryBento() {
             </div>
           </div>
 
-          <button
-            type="button"
-            onClick={handleUpdatePayout}
-            className="w-full h-11 text-xs font-black uppercase tracking-wider text-black bg-success rounded-xl hover:brightness-110 shadow-glow transition-all cursor-pointer select-none"
-          >
-            Update Payout
-          </button>
+          <div className="space-y-3">
+            <input
+              type="number"
+              placeholder="Override amount (optional)"
+              value={overrideAmount}
+              onChange={(e) => setOverrideAmount(e.target.value)}
+              className="w-full h-10 px-3 bg-white/5 border border-white/10 rounded-lg text-xs text-white placeholder-white/30 focus:outline-none focus:border-primary/50"
+            />
+            <button
+              type="button"
+              onClick={handleUpdatePayout}
+              disabled={isAccepting || isLoading}
+              className="w-full h-11 text-xs font-black uppercase tracking-wider text-black bg-success rounded-xl hover:brightness-110 shadow-glow transition-all cursor-pointer select-none disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isAccepting ? 'Updating...' : 'Update Payout'}
+            </button>
+          </div>
         </Card>
 
         {/* Safety Buffer Card */}
@@ -55,21 +82,25 @@ export function StableSalaryBento() {
                 Safety Buffer
               </h4>
             </div>
-            <span className="text-xs font-black text-accent-cyan tracking-wider">
-              {salary.safetyBufferPercent}%
-            </span>
+            {isLoading ? (
+              <Skeleton variant="text" className="w-8 h-4" />
+            ) : (
+              <span className="text-xs font-black text-accent-cyan tracking-wider">
+                {salary?.safety_buffer_percent ?? 0}%
+              </span>
+            )}
           </div>
 
           {/* Progress bar */}
           <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden border border-white/5 relative">
             <div 
-              className="absolute left-0 top-0 h-full bg-accent-cyan rounded-full shadow-glow"
-              style={{ width: `${salary.safetyBufferPercent}%` }}
+              className="absolute left-0 top-0 h-full bg-accent-cyan rounded-full shadow-glow transition-all duration-1000"
+              style={{ width: `${salary?.safety_buffer_percent ?? 0}%` }}
             />
           </div>
 
           <p className="text-[10px] text-slate-400 leading-relaxed font-semibold">
-            Allocating <span className="text-white font-bold">${salary.safetyBufferAmount}</span> monthly to your &quot;Dry Season&quot; reserve. This ensures {salary.drySeasonReserveMonths} months of stability if income drops to zero.
+            Allocating <span className="text-white font-bold">${salary?.safety_buffer_amount ?? 0}</span> monthly to your &quot;Dry Season&quot; reserve. This ensures {salary?.dry_season_reserve_months ?? 0} months of stability if income drops to zero.
           </p>
         </Card>
 
@@ -81,9 +112,16 @@ export function StableSalaryBento() {
             <h4 className="text-[10px] font-black text-primary uppercase tracking-widest">
               AI Insight
             </h4>
-            <p className="text-[10px] text-slate-300 leading-relaxed font-semibold">
-              Your current &quot;Burn Rate&quot; is ${salary.burnRate.toLocaleString()}. Setting your salary to ${salary.recommendedPayout.toLocaleString()} leaves you with a healthy surplus of <span className="text-success font-bold">${salary.predictedSurplus.toLocaleString()}</span> for reinvestment and personal growth.
-            </p>
+            {isLoading ? (
+              <div className="space-y-1.5 pt-1">
+                <Skeleton variant="text" className="w-full h-3" />
+                <Skeleton variant="text" className="w-3/4 h-3" />
+              </div>
+            ) : (
+              <p className="text-[10px] text-slate-300 leading-relaxed font-semibold">
+                Your current &quot;Burn Rate&quot; is ${(salary?.burn_rate ?? 0).toLocaleString()}. Setting your salary to ${(salary?.recommended_payout ?? 0).toLocaleString()} leaves you with a healthy surplus of <span className="text-success font-bold">${(salary?.predicted_surplus ?? 0).toLocaleString()}</span> for reinvestment and personal growth.
+              </p>
+            )}
           </div>
         </Card>
 
@@ -121,7 +159,7 @@ export function StableSalaryBento() {
           </div>
 
           <p className="text-[10px] text-slate-400 font-semibold text-center sm:text-left">
-            Based on your 12-month average of <span className="text-white font-bold">${salary.grossAverage.toLocaleString()}</span>.
+            Based on your 12-month average of <span className="text-white font-bold">${(salary?.gross_average ?? 0).toLocaleString()}</span>.
           </p>
         </Card>
 
@@ -137,11 +175,19 @@ export function StableSalaryBento() {
           <div className="space-y-3 text-[11px] font-bold text-slate-300">
             <div className="flex justify-between items-center">
               <span className="font-semibold text-slate-400">Gross Monthly Average</span>
-              <span className="font-black text-white">${salary.grossAverage.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
+              {isLoading ? (
+                <Skeleton variant="text" className="w-16 h-4" />
+              ) : (
+                <span className="font-black text-white">${(salary?.gross_average ?? 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
+              )}
             </div>
             <div className="flex justify-between items-center">
-              <span className="font-semibold text-slate-400">Safety Buffer (15%)</span>
-              <span className="font-black text-accent-pink">-${salary.safetyBufferAmount.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
+              <span className="font-semibold text-slate-400">Safety Buffer ({salary?.safety_buffer_percent ?? 0}%)</span>
+              {isLoading ? (
+                <Skeleton variant="text" className="w-16 h-4" />
+              ) : (
+                <span className="font-black text-accent-pink">-${(salary?.safety_buffer_amount ?? 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
+              )}
             </div>
           </div>
         </Card>
@@ -154,9 +200,13 @@ export function StableSalaryBento() {
               Target Net Salary
             </h4>
           </div>
-          <span className="text-2xl font-black text-success tracking-tight">
-            ${salary.targetNetSalary.toLocaleString(undefined, { minimumFractionDigits: 2 })}
-          </span>
+          {isLoading ? (
+            <Skeleton variant="text" className="w-24 h-8" />
+          ) : (
+            <span className="text-2xl font-black text-success tracking-tight">
+              ${(salary?.target_net_salary ?? 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}
+            </span>
+          )}
         </Card>
 
         {/* Stability Score Card */}
@@ -166,16 +216,22 @@ export function StableSalaryBento() {
               Stability Score
             </h4>
             <div className="flex items-baseline gap-0.5">
-              <span className="text-2xl font-black text-success">{salary.stabilityScore}</span>
-              <span className="text-[10px] text-slate-500 font-bold">/100</span>
+              {isLoading ? (
+                <Skeleton variant="text" className="w-12 h-8" />
+              ) : (
+                <>
+                  <span className="text-2xl font-black text-success">{salary?.stability_score ?? 0}</span>
+                  <span className="text-[10px] text-slate-500 font-bold">/100</span>
+                </>
+              )}
             </div>
           </div>
 
           {/* Progress bar */}
           <div className="h-2 w-full bg-white/5 rounded-full overflow-hidden border border-white/5 relative">
             <div 
-              className="absolute left-0 top-0 h-full bg-success rounded-full shadow-glow"
-              style={{ width: `${salary.stabilityScore}%` }}
+              className="absolute left-0 top-0 h-full bg-success rounded-full shadow-glow transition-all duration-1000"
+              style={{ width: `${salary?.stability_score ?? 0}%` }}
             />
           </div>
 

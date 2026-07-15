@@ -51,4 +51,8 @@ export const queryKeys = {
     expenseAnalysis: () => [...queryKeys.analytics.all, 'expenseAnalysis'] as const,
     salaryDeviation: () => [...queryKeys.analytics.all, 'salaryDeviation'] as const,
   },
+  settings: {
+    all: ['settings'] as const,
+    smoothedSalary: () => [...queryKeys.settings.all, 'smoothedSalary'] as const,
+  },
 };

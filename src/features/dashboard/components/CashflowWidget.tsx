@@ -10,31 +10,6 @@ interface WidgetProps {
   isLoading?: boolean;
 }
 
-const data1M = [
-  { name: 'Week 1', value: 10400 },
-  { name: 'Week 2', value: 11100 },
-  { name: 'Week 3', value: 11800 },
-  { name: 'Week 4', value: 12842.5 },
-];
-
-const data3M = [
-  { name: 'Aug Begin', value: 8500 },
-  { name: 'Aug Mid', value: 9200 },
-  { name: 'Aug End', value: 8900 },
-  { name: 'Sep Begin', value: 10400 },
-  { name: 'Sep Mid', value: 9800 },
-  { name: 'Sep End', value: 11200 },
-  { name: 'Oct Begin', value: 10800 },
-  { name: 'Oct Mid', value: 12500 },
-  { name: 'Oct End', value: 12842.5 },
-];
-
-const data1Y = [
-  { name: 'Jan-Mar', value: 6200 },
-  { name: 'Apr-Jun', value: 8900 },
-  { name: 'Jul-Sep', value: 11100 },
-  { name: 'Oct-Dec', value: 12842.5 },
-];
 
 export function CashflowWidget({ isLoading = false }: WidgetProps) {
   const [period, setPeriod] = useState<'1M' | '3M' | '1Y'>('3M');
@@ -73,19 +48,8 @@ export function CashflowWidget({ isLoading = false }: WidgetProps) {
   const netWorthFormatted = formatCurrency(netWorth);
   const netWorthK = formatCompactNumber(netWorth).toLowerCase();
 
-  const getChartData = () => {
-    switch (period) {
-      case '1M':
-        return data1M;
-      case '1Y':
-        return data1Y;
-      case '3M':
-      default:
-        return data3M;
-    }
-  };
-
-  const chartData = getChartData();
+  // History not provided by snapshot backend
+  const chartData: any[] = [];
 
   return (
     <Card variant="default" className="h-full relative overflow-hidden group">
@@ -141,59 +105,17 @@ export function CashflowWidget({ isLoading = false }: WidgetProps) {
             <Skeleton variant="rect" className="h-44" />
           </div>
         ) : (
-          <div className="w-full h-full relative">
-            {/* Custom Tooltip Positioned statically or inside the Chart */}
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart
-                data={chartData}
-                margin={{ top: 15, right: 10, left: 10, bottom: 5 }}
-              >
-                <defs>
-                  <linearGradient id="colorCashflow" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="var(--color-accent-mint)" stopOpacity={0.25} />
-                    <stop offset="95%" stopColor="var(--color-accent-mint)" stopOpacity={0} />
-                  </linearGradient>
-                </defs>
-                <CartesianGrid
-                  vertical={false}
-                  stroke="rgba(255, 255, 255, 0.05)"
-                  strokeDasharray="3 3"
-                />
-                <XAxis dataKey="name" hide />
-                <YAxis hide domain={['dataMin - 1000', 'dataMax + 1000']} />
-                <Tooltip
-                  cursor={{ stroke: 'rgba(124, 255, 178, 0.2)', strokeWidth: 1.5 }}
-                  content={({ active, payload }) => {
-                    if (active && payload && payload.length) {
-                      return (
-                        <div className="bg-bg-3 border border-white/10 px-3 py-1.5 rounded-xl shadow-2xl">
-                          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">
-                            {payload[0].payload.name}
-                          </p>
-                          <p className="text-xs font-black text-accent-mint">
-                            Value: ${Number(payload[0].value).toLocaleString()}
-                          </p>
-                        </div>
-                      );
-                    }
-                    return null;
-                  }}
-                />
-                <Area
-                  type="monotone"
-                  dataKey="value"
-                  stroke="var(--color-accent-mint)"
-                  strokeWidth={2.5}
-                  fillOpacity={1}
-                  fill="url(#colorCashflow)"
-                  dot={{ r: 3.5, fill: 'var(--color-background)', stroke: 'var(--color-accent-mint)', strokeWidth: 2 }}
-                  activeDot={{ r: 5.5, fill: 'var(--color-accent-mint)', stroke: 'var(--color-background)', strokeWidth: 2 }}
-                />
-              </AreaChart>
-            </ResponsiveContainer>
-
+          <div className="w-full h-full relative flex items-center justify-center border-2 border-dashed border-white/10 rounded-xl bg-white/5">
+            <div className="text-center p-4">
+              <span className="text-sm font-bold text-slate-400 block mb-1">
+                No Historical Data
+              </span>
+              <span className="text-xs text-slate-500 max-w-[200px] mx-auto block">
+                Cashflow history is not yet available from the backend snapshot.
+              </span>
+            </div>
             {/* Static overlay tooltip for the current node */}
-            <div className="absolute right-6 top-1 px-2.5 py-1 rounded-lg bg-accent-mint text-background text-[10px] font-black uppercase tracking-wider shadow-glow pointer-events-none">
+            <div className="absolute right-6 top-6 px-2.5 py-1 rounded-lg bg-accent-mint text-background text-[10px] font-black uppercase tracking-wider shadow-glow pointer-events-none">
               Current: ${netWorthK}
             </div>
           </div>
