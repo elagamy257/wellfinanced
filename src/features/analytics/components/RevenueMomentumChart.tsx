@@ -132,12 +132,12 @@ export function RevenueMomentumChart({ data, isLoading, isError }: RevenueMoment
                           <p className="text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1">
                             {dataPoint.month}
                           </p>
-                          {dataPoint.actual !== undefined && (
+                          {typeof dataPoint.actual === 'number' && (
                             <p className="text-xs font-black text-accent-cyan">
                               Actual: ${dataPoint.actual.toLocaleString()}
                             </p>
                           )}
-                          {dataPoint.projected !== undefined && (
+                          {typeof dataPoint.projected === 'number' && (
                             <p className="text-xs font-black text-primary">
                               Predicted: ${dataPoint.projected.toLocaleString()}
                             </p>

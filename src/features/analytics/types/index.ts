@@ -73,8 +73,8 @@ export interface SalaryDeviationResponse {
 /** Data point consumed by RevenueMomentumChart */
 export interface AnalyticsChartPoint {
   month: string;
-  actual?: number;
-  projected?: number;
+  actual?: number | null;
+  projected?: number | null;
   isCurrent?: boolean;
 }
 
